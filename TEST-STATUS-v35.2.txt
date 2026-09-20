@@ -1,0 +1,15 @@
+VALIDAÇÃO DA v35.2
+
+Correção validada estruturalmente:
+- petition_generation é criada em 20260919010000_petition_templates.
+- os campos finalContent, lastEditedAt, exportedAt, exportCount e updatedAt são adicionados em 20260919020000_petition_import_pdf.
+- portanto a migration de patch agora executa depois da criação da tabela.
+- migration canônica de Modelos permaneceu byte a byte inalterada em relação à v35.1.
+- SQL do patch permaneceu byte a byte inalterado; somente o nome/ordem da pasta foi corrigido.
+- package version: 0.15.2.
+
+Limitação deste ambiente:
+- não há conexão/configuração local equivalente ao Supabase do usuário para executar prisma migrate dev contra o mesmo banco.
+- a validação real do Prisma deve ser executada no ambiente do projeto do usuário.
+
+Se prisma migrate dev ainda reportar erro, não executar migrate reset nem migrate resolve automaticamente. Enviar a saída completa para análise.

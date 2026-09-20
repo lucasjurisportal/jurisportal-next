@@ -1,0 +1,32 @@
+VALIDAÇÃO DA v35.1
+
+Concluído neste ambiente:
+- revisão da correção exclusivamente sobre o pacote v35 derivado da v34 canônica
+- OAB obrigatória aplicada em schema, API, serviço e interface
+- validação simultânea de quota de usuários e OABs
+- desativação da OAB na remoção sem apagar histórico
+- RLS adicionado a team_member_profile
+- política separada de inatividade para funcionários e proprietário/administrador
+- sincronização de atividade entre abas
+- package.json validado como JSON
+- testes puros executados com compilador TypeScript global: política 10/30/60 min e normalização de OAB passaram
+- documentação e ADR atualizados
+
+Limitação deste ambiente:
+- o pacote não contém node_modules
+- nova tentativa de npm install confirmou falha DNS EAI_AGAIN ao acessar registry.npmjs.org
+- portanto Prisma generate, typecheck/build com dependências reais e testes via tsx precisam ser executados no ambiente local antes de promover esta revisão como canônica
+
+Validação obrigatória no ambiente local:
+1. npm install
+2. npx prisma generate
+3. npx prisma migrate dev
+4. npm run typecheck
+5. npm run test:petition-templates
+6. npm run test:team
+7. npm run build
+8. npm run dev
+
+Se a migration informar que existem auxiliares sem OAB, não force a migration. Isso significa que algum registro criado pela v35 anterior precisa receber uma OAB válida antes de endurecer a coluna.
+
+Não executar npm audit fix --force.

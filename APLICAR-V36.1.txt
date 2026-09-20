@@ -1,0 +1,23 @@
+JURISPORTAL NEXT v36.1 — COMO APLICAR
+
+1. NÃO apague a pasta atual do projeto.
+2. Extraia/copiar os arquivos da v36.1 POR CIMA da pasta atual:
+   C:\Users\Pichau\Desktop\Projeto Jurisportal Next
+3. Isso é obrigatório para preservar a migration criada localmente pelo Prisma:
+   prisma\migrations\20260917190411_team_oab_required
+4. A v36.1 NÃO cria migration nova.
+5. Não rode prisma migrate dev para este bloco.
+
+Validação:
+
+npm run typecheck
+npm run test:reports
+npm run test:team
+npm run build
+npm run dev
+
+Configuração do envio automático em produção:
+- RESEND_API_KEY e RESEND_FROM já pertencem à infraestrutura de e-mail do projeto.
+- Adicionar CRON_SECRET como segredo de ambiente.
+- Vercel Cron usa vercel.json e chama /api/cron/daily-owner-report às 23:00 UTC.
+- A regra de negócio usa America/Sao_Paulo e o relatório é destinado ao owner.

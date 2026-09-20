@@ -1,0 +1,22 @@
+JURISPORTAL NEXT v37 — COMO APLICAR
+
+IMPORTANTE
+- Esta versão NÃO possui migration nova.
+- NÃO apague sua pasta atual antes de extrair a v37.
+- Extraia/copiei a v37 POR CIMA da pasta atual do projeto.
+- Isso preserva a migration local 20260917190411_team_oab_required que o seu Prisma criou e já aplicou.
+- Preserve também o seu .env.local.
+
+A v37 adiciona a dependência read-excel-file para leitura de XLSX, então rode npm install.
+
+ORDEM:
+1. npm install
+2. npm run typecheck
+3. npm run test:settings
+4. npm run test:clients
+5. npm run test:processes
+6. npm run test:reports
+7. npm run build
+8. npm run dev
+
+NÃO é necessário rodar prisma migrate dev para a v37.

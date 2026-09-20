@@ -1,0 +1,25 @@
+Jurisportal Next v36 — Relatórios
+Data: 17/09/2026
+
+VALIDAÇÕES EXECUTADAS NESTE AMBIENTE
+- Parse sintático TypeScript/TSX dos novos arquivos: OK.
+- Testes puros de resolução de período: OK.
+- Testes puros de segurança/escape do CSV: OK.
+- Integridade estrutural do bloco: OK.
+
+LIMITAÇÃO DO AMBIENTE DE EMPACOTAMENTO
+O ZIP de origem não contém node_modules e o ambiente de empacotamento não possui todas as dependências npm em cache.
+Por isso, o typecheck/build completo deve ser executado no ambiente local do projeto, onde npm install já foi concluído.
+
+VALIDAÇÃO LOCAL OBRIGATÓRIA
+1. npm run typecheck
+2. npm run test:reports
+3. npm run build
+4. npm run dev
+5. abrir /app/relatorios
+6. testar período, CSV e impressão/salvar PDF
+
+MIGRATION LOCAL IMPORTANTE
+O ambiente do usuário possui a migration aplicada 20260917190411_team_oab_required, criada pelo Prisma durante a estabilização da v35.2.
+Ela não foi enviada ao ambiente de empacotamento. Não apagar nem substituir esse diretório local.
+A v36 não cria migration nova.

@@ -1,0 +1,23 @@
+VALIDAÇÃO DA v35
+
+Concluído neste ambiente:
+- inspeção da v34 canônica e continuidade somente sobre ela
+- validação estrutural dos novos arquivos e migrations
+- package.json validado como JSON
+- verificação de ausência do texto antigo que marcava importação/PDF como pendentes
+- TypeScript invocado com compilador global para procurar erros sintáticos; a execução completa não foi possível porque o ZIP não contém node_modules
+
+Bloqueio externo do ambiente:
+- npm install não conseguiu acessar https://registry.npmjs.org por falha DNS EAI_AGAIN
+- por isso Prisma generate, Next build/typecheck com tipos reais e testes via tsx não puderam ser executados aqui
+
+Validação obrigatória no ambiente local, antes de promover esta v35 para produção:
+1. npm install
+2. npx prisma generate
+3. npx prisma migrate dev
+4. npm run typecheck
+5. npm run test:petition-templates
+6. npm run build
+7. npm run dev
+
+Não executar npm audit fix --force.

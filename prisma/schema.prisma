@@ -1,0 +1,962 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// Usuário de autenticação. O formato é compatível com a base exigida pelo Better Auth.
+model User {
+  id            String    @id @default(uuid()) @db.Uuid
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions      Session[]
+  accounts      Account[]
+  memberships   Member[]
+  invitations   Invitation[] @relation("InvitationInviter")
+  auditEvents   AuditEvent[]  @relation("AuditActor")
+  profile       UserProfile?
+  lawyerOabs    LawyerOab[]
+  legalAcceptances LegalAcceptance[]
+  securityProfile UserSecurityProfile?
+  authChallenges AuthChallenge[]
+  trustedDevices TrustedDevice[]
+  platformAdmin PlatformAdmin?
+  securityEvents SecurityEvent[]
+  clientsCreated Client[] @relation("ClientCreatedBy")
+  clientsUpdated Client[] @relation("ClientUpdatedBy")
+  processesResponsible Process[] @relation("ProcessResponsible")
+  processesCreated Process[] @relation("ProcessCreatedBy")
+  processesUpdated Process[] @relation("ProcessUpdatedBy")
+  timelineEventsCreated ProcessTimelineEvent[] @relation("ProcessTimelineCreatedBy")
+  processWorkItemsResponsible ProcessWorkItem[] @relation("ProcessWorkItemResponsible")
+  processWorkItemsCreated ProcessWorkItem[] @relation("ProcessWorkItemCreatedBy")
+  processWorkItemsUpdated ProcessWorkItem[] @relation("ProcessWorkItemUpdatedBy")
+  processFeeAgreementsCreated ProcessFeeAgreement[] @relation("ProcessFeeAgreementCreatedBy")
+  processFeeAgreementsUpdated ProcessFeeAgreement[] @relation("ProcessFeeAgreementUpdatedBy")
+  processFinanceEntriesCreated ProcessFinanceEntry[] @relation("ProcessFinanceEntryCreatedBy")
+  agendaEventsResponsible AgendaEvent[] @relation("AgendaEventResponsible")
+  agendaEventsCreated AgendaEvent[] @relation("AgendaEventCreatedBy")
+  agendaEventsUpdated AgendaEvent[] @relation("AgendaEventUpdatedBy")
+  googleCalendarConnections GoogleCalendarConnection[]
+  externalCalendarEventLinks ExternalCalendarEventLink[]
+  publicationsRead Publication[] @relation("PublicationReadBy")
+  publicationsTreated Publication[] @relation("PublicationTreatedBy")
+  deadlineReviewsConfirmed DeadlineReview[] @relation("DeadlineReviewConfirmedBy")
+  deadlineReviewsDismissed DeadlineReview[] @relation("DeadlineReviewDismissedBy")
+  processCnjLocks Process[] @relation("ProcessCnjLockedBy")
+  petitionTemplatesCreated PetitionTemplate[] @relation("PetitionTemplateCreatedBy")
+  petitionTemplatesUpdated PetitionTemplate[] @relation("PetitionTemplateUpdatedBy")
+  petitionTemplateVersionsCreated PetitionTemplateVersion[] @relation("PetitionTemplateVersionCreatedBy")
+  petitionGenerationsCreated PetitionGeneration[] @relation("PetitionGenerationCreatedBy")
+  teamProfile TeamMemberProfile?
+
+  @@map("user")
+}
+
+/// Sessão de autenticação. activeOrganizationId será usado para manter o escritório ativo.
+model Session {
+  id                   String   @id @default(uuid()) @db.Uuid
+  userId               String   @db.Uuid
+  token                String   @unique
+  expiresAt            DateTime
+  ipAddress            String?
+  userAgent            String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  activeOrganizationId    String?  @db.Uuid
+  secondFactorVerifiedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([activeOrganizationId])
+  @@map("session")
+}
+
+/// Método de autenticação associado a um usuário.
+model Account {
+  id                    String    @id @default(uuid()) @db.Uuid
+  userId                String    @db.Uuid
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  idToken               String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("account")
+}
+
+/// Tokens temporários de verificação, redefinição de senha e fluxos equivalentes.
+model Verification {
+  id         String   @id @default(uuid()) @db.Uuid
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+/// Tenant principal do Jurisportal: cada escritório é uma organização isolada.
+model Organization {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  slug      String   @unique
+  logo      String?
+  metadata  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members       Member[]
+  invitations   Invitation[]
+  subscription  Subscription?
+  auditEvents   AuditEvent[]
+  profile       OrganizationProfile?
+  lawyerOabs    LawyerOab[]
+  legalAcceptances LegalAcceptance[]
+  clients Client[]
+  processes Process[]
+  processClients ProcessClient[]
+  processParties ProcessParty[]
+  processTimelineEvents ProcessTimelineEvent[]
+  processWorkItems ProcessWorkItem[]
+  processFeeAgreements ProcessFeeAgreement[]
+  processFinanceEntries ProcessFinanceEntry[]
+  agendaEvents AgendaEvent[]
+  googleCalendarConnections GoogleCalendarConnection[]
+  externalCalendarEventLinks ExternalCalendarEventLink[]
+  publications Publication[]
+  publicationRecipients PublicationRecipient[]
+  deadlineReviews DeadlineReview[]
+  processNumberSequences ProcessNumberSequence[]
+  petitionTemplates PetitionTemplate[]
+  petitionTemplateVersions PetitionTemplateVersion[]
+  petitionGenerations PetitionGeneration[]
+  teamMemberProfiles TeamMemberProfile[]
+
+  @@map("organization")
+}
+
+/// Vínculo entre usuário e escritório. O papel será validado pela camada de autorização.
+model Member {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  userId         String   @db.Uuid
+  role           String
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+  @@map("member")
+}
+
+/// Convites de novos usuários para um escritório.
+model Invitation {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  email          String
+  role           String?
+  status         String
+  expiresAt      DateTime
+  inviterId      String   @db.Uuid
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  inviter      User         @relation("InvitationInviter", fields: [inviterId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([email])
+  @@map("invitation")
+}
+
+
+/// Perfil operacional do usuário auxiliar dentro de um único escritório.
+/// Não representa conta compartilhada entre organizações.
+model TeamMemberProfile {
+  id                 String   @id @default(uuid()) @db.Uuid
+  organizationId     String   @db.Uuid
+  userId             String   @unique @db.Uuid
+  accessLevel        String
+  jobTitle           String?
+  oabState           String
+  oabNumber          String
+  mustChangePassword Boolean  @default(true)
+  status             String   @default("ACTIVE")
+  removedAt          DateTime?
+  removedByUserId    String?  @db.Uuid
+  lastActiveAt       DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, status])
+  @@index([organizationId, accessLevel])
+  @@map("team_member_profile")
+}
+
+/// Estado comercial da organização. A definição de limites continua no catálogo de planos em TypeScript.
+model Subscription {
+  id                 String   @id @default(uuid()) @db.Uuid
+  organizationId     String   @unique @db.Uuid
+  planSlug           String
+  billingCycle       String
+  commercialPeriod   String
+  status             String
+  startedAt          DateTime @default(now())
+  currentPeriodStart DateTime @default(now())
+  currentPeriodEnd   DateTime?
+  canceledAt         DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([planSlug])
+  @@index([status])
+  @@map("subscription")
+}
+
+/// Registro append-only de eventos sensíveis e operacionais relevantes.
+model AuditEvent {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  actorUserId    String?  @db.Uuid
+  category       String
+  action         String
+  entityType     String?
+  entityId       String?
+  metadata       Json?
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  actor        User?        @relation("AuditActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, createdAt])
+  @@index([actorUserId, createdAt])
+  @@index([entityType, entityId])
+  @@map("audit_event")
+}
+
+
+/// Dados pessoais operacionais que não pertencem ao núcleo de autenticação.
+model UserProfile {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @unique @db.Uuid
+  phone     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_profile")
+}
+
+/// Dados cadastrais do escritório separados da tabela do plugin de organização.
+model OrganizationProfile {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @unique @db.Uuid
+  postalCode     String
+  street         String
+  number         String
+  complement     String?
+  district       String
+  city           String
+  state          String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("organization_profile")
+}
+
+/// OAB vinculada a um usuário dentro de um escritório. Mantemos o valor original e normalizado.
+model LawyerOab {
+  id               String   @id @default(uuid()) @db.Uuid
+  organizationId   String   @db.Uuid
+  userId            String   @db.Uuid
+  rawNumber         String
+  normalizedNumber  String
+  state              String
+  isPrimary          Boolean  @default(false)
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  publicationRecipients PublicationRecipient[]
+
+  @@unique([organizationId, normalizedNumber, state])
+  @@index([userId])
+  @@index([organizationId, isActive])
+  @@map("lawyer_oab")
+}
+
+/// Evidência de aceite dos documentos legais. Nunca sobrescrevemos um aceite antigo.
+model LegalAcceptance {
+  id             String   @id @default(uuid()) @db.Uuid
+  userId         String   @db.Uuid
+  organizationId String   @db.Uuid
+  documentType   String
+  documentVersion String
+  userAgent      String?
+  ipAddress      String?
+  acceptedAt     DateTime @default(now())
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([userId, documentType, acceptedAt])
+  @@index([organizationId, documentType, acceptedAt])
+  @@map("legal_acceptance")
+}
+
+
+/// Estado de segurança do usuário separado do perfil operacional.
+/// Bloqueios de segundo fator nunca são inferidos apenas da interface.
+model UserSecurityProfile {
+  id                String    @id @default(uuid()) @db.Uuid
+  userId            String    @unique @db.Uuid
+  recoveryRequired  Boolean   @default(false)
+  twoFactorLockedAt DateTime?
+  lastRecoveryAt    DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_security_profile")
+}
+
+/// Desafio temporário de autenticação. O código nunca é salvo em texto puro.
+model AuthChallenge {
+  id                String    @id @default(uuid()) @db.Uuid
+  userId            String    @db.Uuid
+  sessionId         String?   @db.Uuid
+  purpose           String
+  channel           String
+  codeHash          String
+  destinationMasked String?
+  attempts          Int       @default(0)
+  maxAttempts       Int       @default(5)
+  expiresAt         DateTime
+  resendAvailableAt DateTime
+  consumedAt        DateTime?
+  blockedAt         DateTime?
+  deliveryId        String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, purpose, createdAt])
+  @@index([sessionId, purpose])
+  @@index([expiresAt])
+  @@map("auth_challenge")
+}
+
+/// Computador confiável. O navegador recebe o token bruto; o banco guarda apenas seu hash.
+model TrustedDevice {
+  id            String    @id @default(uuid()) @db.Uuid
+  userId        String    @db.Uuid
+  tokenHash     String    @unique
+  userAgentHash String?
+  expiresAt     DateTime
+  lastUsedAt    DateTime  @default(now())
+  revokedAt     DateTime?
+  createdAt     DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@map("trusted_device")
+}
+
+/// Papel administrativo global da plataforma. Não substitui Member/organization nas rotas de tenant.
+model PlatformAdmin {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @unique @db.Uuid
+  role      String   @default("PLATFORM_MASTER")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("platform_admin")
+}
+
+/// Log de segurança independente do tenant: login, OTP, recuperação e dispositivos confiáveis.
+model SecurityEvent {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String?  @db.Uuid
+  sessionId String?  @db.Uuid
+  type      String
+  success   Boolean
+  ipAddress String?
+  userAgent String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+  @@index([type, createdAt])
+  @@map("security_event")
+}
+
+
+/// Cliente do escritório. PF e PJ compartilham uma entidade para evitar duplicação de regras.
+model Client {
+  id                 String    @id @default(uuid()) @db.Uuid
+  organizationId     String    @db.Uuid
+  kind               String
+  name               String
+  tradeName          String?
+  taxIdRaw           String
+  taxIdNormalized    String
+  birthDate          DateTime?
+  primaryContactName String?
+  email              String
+  whatsapp           String
+  phone              String?
+  postalCode         String
+  street             String
+  number             String
+  complement         String?
+  district           String
+  city               String
+  state              String
+  notes              String?
+  status             String    @default("ACTIVE")
+  archivedAt         DateTime?
+  createdByUserId    String?   @db.Uuid
+  updatedByUserId    String?   @db.Uuid
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdBy    User?        @relation("ClientCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  updatedBy    User?        @relation("ClientUpdatedBy", fields: [updatedByUserId], references: [id], onDelete: SetNull)
+  processLinks ProcessClient[]
+  petitionGenerations PetitionGeneration[]
+
+  @@unique([organizationId, taxIdNormalized])
+  @@index([organizationId, status, name])
+  @@index([organizationId, kind])
+  @@index([organizationId, state])
+  @@index([organizationId, email])
+  @@map("client")
+}
+
+
+/// Processo jurídico pertencente a um único escritório.
+/// O limite comercial é aplicado sobre todos os registros criados, inclusive encerrados/arquivados.
+model Process {
+  id                 String    @id @default(uuid()) @db.Uuid
+  organizationId     String    @db.Uuid
+  cnjRaw             String
+  cnjNormalized      String
+  cnjFormatted       String
+  internalCode       String
+  internalYear       Int
+  internalSequence   Int
+  cnjLockedAt        DateTime
+  cnjLockedByUserId  String?   @db.Uuid
+  source             String    @default("MANUAL")
+  status             String    @default("ACTIVE")
+  court              String?
+  division           String?
+  district           String?
+  processClass       String?
+  subject            String?
+  caseValue          Decimal?  @db.Decimal(14, 2)
+  distributionDate   DateTime?
+  responsibleUserId  String?   @db.Uuid
+  notes              String?
+  archivedAt         DateTime?
+  closedAt           DateTime?
+  createdByUserId    String?   @db.Uuid
+  updatedByUserId    String?   @db.Uuid
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  responsible   User?        @relation("ProcessResponsible", fields: [responsibleUserId], references: [id], onDelete: SetNull)
+  createdBy     User?        @relation("ProcessCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  updatedBy     User?        @relation("ProcessUpdatedBy", fields: [updatedByUserId], references: [id], onDelete: SetNull)
+  cnjLockedBy   User?        @relation("ProcessCnjLockedBy", fields: [cnjLockedByUserId], references: [id], onDelete: SetNull)
+  clients       ProcessClient[]
+  parties       ProcessParty[]
+  timeline      ProcessTimelineEvent[]
+  workItems     ProcessWorkItem[]
+  feeAgreement  ProcessFeeAgreement?
+  financeEntries ProcessFinanceEntry[]
+  agendaEvents AgendaEvent[]
+  publications Publication[]
+  petitionGenerations PetitionGeneration[]
+
+  @@unique([organizationId, cnjNormalized])
+  @@unique([organizationId, internalCode])
+  @@unique([organizationId, internalYear, internalSequence])
+  @@index([organizationId, status, updatedAt])
+  @@index([organizationId, responsibleUserId])
+  @@index([organizationId, subject])
+  @@map("process")
+}
+
+/// Sequência anual da referência interna do processo por escritório.
+/// Evita colisões em cadastros simultâneos; não substitui o número CNJ.
+model ProcessNumberSequence {
+  organizationId String   @db.Uuid
+  year           Int
+  lastValue      Int      @default(0)
+  updatedAt      DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@id([organizationId, year])
+  @@map("process_number_sequence")
+}
+
+/// Relação N:N entre processo e clientes representados.
+model ProcessClient {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  processId      String   @db.Uuid
+  clientId       String   @db.Uuid
+  isPrimary      Boolean  @default(false)
+  partyRole      String?
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process      Process      @relation(fields: [processId], references: [id], onDelete: Cascade)
+  client       Client       @relation(fields: [clientId], references: [id], onDelete: Restrict)
+
+  @@unique([processId, clientId])
+  @@index([organizationId, clientId])
+  @@index([organizationId, processId])
+  @@map("process_client")
+}
+
+/// Outras partes do processo que não são necessariamente clientes do escritório.
+model ProcessParty {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  processId      String   @db.Uuid
+  name           String
+  role           String
+  document       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process      Process      @relation(fields: [processId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, processId])
+  @@index([organizationId, name])
+  @@map("process_party")
+}
+
+/// Linha do tempo unificada do processo. Nesta fase recebe criação, edição e mudanças de status.
+model ProcessTimelineEvent {
+  id              String   @id @default(uuid()) @db.Uuid
+  organizationId  String   @db.Uuid
+  processId       String   @db.Uuid
+  kind            String
+  title           String
+  description     String?
+  source          String   @default("SYSTEM")
+  eventDate       DateTime @default(now())
+  createdByUserId String?  @db.Uuid
+  createdAt       DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process      Process      @relation(fields: [processId], references: [id], onDelete: Cascade)
+  createdBy    User?        @relation("ProcessTimelineCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, processId, eventDate])
+  @@index([organizationId, kind, eventDate])
+  @@map("process_timeline_event")
+}
+
+
+/// Prazo ou tarefa operacional vinculada a um processo.
+/// Datas jurídicas permanecem pendentes até confirmação humana quando a origem for publicação/IA.
+model ProcessWorkItem {
+  id                String    @id @default(uuid()) @db.Uuid
+  organizationId    String    @db.Uuid
+  processId         String    @db.Uuid
+  kind              String
+  title             String
+  dueDate           DateTime? @db.Date
+  dueTime           String?
+  responsibleUserId String?   @db.Uuid
+  priority          String    @default("NORMAL")
+  isFatal           Boolean   @default(false)
+  status            String    @default("OPEN")
+  origin            String    @default("MANUAL")
+  notes             String?
+  completedAt       DateTime?
+  createdByUserId   String?   @db.Uuid
+  updatedByUserId   String?   @db.Uuid
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process      Process      @relation(fields: [processId], references: [id], onDelete: Cascade)
+  responsible User?        @relation("ProcessWorkItemResponsible", fields: [responsibleUserId], references: [id], onDelete: SetNull)
+  createdBy   User?        @relation("ProcessWorkItemCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  updatedBy   User?        @relation("ProcessWorkItemUpdatedBy", fields: [updatedByUserId], references: [id], onDelete: SetNull)
+  deadlineReview DeadlineReview?
+
+  @@index([organizationId, processId, status, dueDate])
+  @@index([organizationId, responsibleUserId, status, dueDate])
+  @@index([organizationId, kind, status])
+  @@map("process_work_item")
+}
+
+/// Contrato de honorários resumido do processo. Não substitui contabilidade.
+model ProcessFeeAgreement {
+  id                 String    @id @default(uuid()) @db.Uuid
+  organizationId     String    @db.Uuid
+  processId          String    @unique @db.Uuid
+  model              String    @default("FIXED")
+  fixedAmount        Decimal?  @db.Decimal(14, 2)
+  contractedAmount   Decimal?  @db.Decimal(14, 2)
+  successPercentage  Decimal?  @db.Decimal(5, 2)
+  percentageBase     String    @default("CASE_VALUE")
+  successBase        String?
+  notes              String?
+  createdByUserId    String?   @db.Uuid
+  updatedByUserId    String?   @db.Uuid
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process      Process      @relation(fields: [processId], references: [id], onDelete: Cascade)
+  createdBy    User?        @relation("ProcessFeeAgreementCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  updatedBy    User?        @relation("ProcessFeeAgreementUpdatedBy", fields: [updatedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, processId])
+  @@map("process_fee_agreement")
+}
+
+/// Lançamento financeiro diretamente relacionado ao processo.
+model ProcessFinanceEntry {
+  id              String   @id @default(uuid()) @db.Uuid
+  organizationId  String   @db.Uuid
+  processId       String   @db.Uuid
+  kind            String
+  description     String
+  amount          Decimal  @db.Decimal(14, 2)
+  entryDate       DateTime @db.Date
+  status          String   @default("PENDING")
+  paidBy          String?
+  reimbursable    Boolean  @default(false)
+  notes           String?
+  createdByUserId String?  @db.Uuid
+  createdAt       DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process      Process      @relation(fields: [processId], references: [id], onDelete: Cascade)
+  createdBy    User?        @relation("ProcessFinanceEntryCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, processId, entryDate])
+  @@index([organizationId, kind, status])
+  @@map("process_finance_entry")
+}
+
+
+/// Compromissos e audiências que pertencem à agenda do escritório.
+/// Prazos e tarefas NÃO são duplicados aqui: a Agenda os projeta a partir de ProcessWorkItem.
+model AgendaEvent {
+  id                String    @id @default(uuid()) @db.Uuid
+  organizationId    String    @db.Uuid
+  processId         String?   @db.Uuid
+  type              String
+  title             String
+  eventDate         DateTime  @db.Date
+  startTime         String?
+  endTime           String?
+  responsibleUserId String?   @db.Uuid
+  status            String    @default("OPEN")
+  notes             String?
+  createdByUserId   String?   @db.Uuid
+  updatedByUserId   String?   @db.Uuid
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process      Process?     @relation(fields: [processId], references: [id], onDelete: Cascade)
+  responsible User?        @relation("AgendaEventResponsible", fields: [responsibleUserId], references: [id], onDelete: SetNull)
+  createdBy   User?        @relation("AgendaEventCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  updatedBy   User?        @relation("AgendaEventUpdatedBy", fields: [updatedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, eventDate, startTime])
+  @@index([organizationId, responsibleUserId, eventDate])
+  @@index([organizationId, processId, eventDate])
+  @@map("agenda_event")
+}
+
+
+/// Comunicação processual capturada de uma fonte externa, inicialmente o DJeN.
+/// O conteúdo é armazenado como texto limpo; HTML externo nunca é renderizado diretamente.
+model Publication {
+  id                      String    @id @default(uuid()) @db.Uuid
+  organizationId          String    @db.Uuid
+  processId               String?   @db.Uuid
+  source                   String    @default("DJEN")
+  externalKey              String
+  externalId               String?
+  sourceHash               String?
+  kind                     String
+  communicationType        String
+  documentType             String?
+  court                    String?
+  judicialBody             String?
+  processNumberRaw         String?
+  processNumberNormalized  String?
+  processNumberFormatted   String?
+  publicationDate          DateTime  @db.Date
+  content                  String
+  parties                  Json?
+  explicitDates            Json?
+  sourceUrl                String?
+  sourceStatus             String    @default("ACTIVE")
+  cancellationReason       String?
+  capturedAt               DateTime  @default(now())
+  lastSeenAt               DateTime  @default(now())
+  readAt                   DateTime?
+  readByUserId             String?   @db.Uuid
+  treatedAt                DateTime?
+  treatedByUserId          String?   @db.Uuid
+  createdAt                DateTime  @default(now())
+  updatedAt                DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process      Process?      @relation(fields: [processId], references: [id], onDelete: SetNull)
+  readBy       User?         @relation("PublicationReadBy", fields: [readByUserId], references: [id], onDelete: SetNull)
+  treatedBy    User?         @relation("PublicationTreatedBy", fields: [treatedByUserId], references: [id], onDelete: SetNull)
+  recipients   PublicationRecipient[]
+  deadlineReview DeadlineReview?
+
+  @@unique([organizationId, source, externalKey])
+  @@index([organizationId, publicationDate])
+  @@index([organizationId, kind, publicationDate])
+  @@index([organizationId, treatedAt, readAt])
+  @@index([organizationId, processId, publicationDate])
+  @@map("publication")
+}
+
+/// OAB do escritório atingida por uma publicação. A mesma comunicação continua única
+/// mesmo quando alcança mais de uma OAB do mesmo escritório.
+model PublicationRecipient {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  publicationId  String   @db.Uuid
+  lawyerOabId    String   @db.Uuid
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  publication  Publication  @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  lawyerOab    LawyerOab    @relation(fields: [lawyerOabId], references: [id], onDelete: Cascade)
+
+  @@unique([publicationId, lawyerOabId])
+  @@index([organizationId, lawyerOabId])
+  @@map("publication_recipient")
+}
+
+/// Etapa humana entre uma publicação/intimação e um prazo jurídico definitivo.
+/// Nenhum prazo vindo de comunicação externa é confirmado automaticamente.
+model DeadlineReview {
+  id                  String    @id @default(uuid()) @db.Uuid
+  organizationId      String    @db.Uuid
+  publicationId       String    @unique @db.Uuid
+  status              String    @default("PENDING_REVIEW")
+  origin              String
+  title               String
+  suggestedDate       DateTime? @db.Date
+  sourceTextReference String?
+  confirmedDate       DateTime? @db.Date
+  confirmedByUserId   String?   @db.Uuid
+  confirmedAt         DateTime?
+  dismissedByUserId   String?   @db.Uuid
+  dismissedAt         DateTime?
+  workItemId          String?   @unique @db.Uuid
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  publication  Publication  @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  confirmedBy  User?        @relation("DeadlineReviewConfirmedBy", fields: [confirmedByUserId], references: [id], onDelete: SetNull)
+  dismissedBy  User?        @relation("DeadlineReviewDismissedBy", fields: [dismissedByUserId], references: [id], onDelete: SetNull)
+  workItem     ProcessWorkItem? @relation(fields: [workItemId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, status, createdAt])
+  @@map("deadline_review")
+}
+
+/// Conexão individual de um usuário com o Google Calendar dentro de uma organização.
+/// Tokens são cifrados pela aplicação antes de serem persistidos.
+model GoogleCalendarConnection {
+  id                     String    @id @default(uuid()) @db.Uuid
+  organizationId         String    @db.Uuid
+  userId                 String    @db.Uuid
+  provider               String    @default("GOOGLE")
+  calendarId             String    @default("primary")
+  encryptedAccessToken   String?
+  encryptedRefreshToken  String?
+  accessTokenExpiresAt   DateTime?
+  scope                   String?
+  status                  String    @default("CONNECTED")
+  connectedAt             DateTime  @default(now())
+  lastUsedAt              DateTime?
+  revokedAt               DateTime?
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([userId, status])
+  @@index([organizationId, status])
+  @@map("google_calendar_connection")
+}
+
+/// Ligação entre um item do Jurisportal e o evento criado no calendário externo.
+/// É propositalmente genérica para permitir Outlook ou outro provedor no futuro.
+model ExternalCalendarEventLink {
+  id                 String    @id @default(uuid()) @db.Uuid
+  organizationId     String    @db.Uuid
+  userId             String    @db.Uuid
+  provider           String    @default("GOOGLE")
+  sourceType         String
+  sourceId           String
+  externalCalendarId String    @default("primary")
+  externalEventId    String?
+  syncStatus         String    @default("SYNCED")
+  lastSyncedAt       DateTime?
+  lastError          String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, organizationId, sourceType, sourceId])
+  @@index([organizationId, userId, provider])
+  @@index([organizationId, syncStatus])
+  @@map("external_calendar_event_link")
+}
+
+
+/// Modelo próprio de petição pertencente a um escritório.
+/// Modelos oficiais do Jurisportal permanecem versionados em código e não são copiados para cada tenant.
+model PetitionTemplate {
+  id              String   @id @default(uuid()) @db.Uuid
+  organizationId  String   @db.Uuid
+  name            String
+  category        String
+  scope           String   @default("GENERAL")
+  content         String
+  status          String   @default("ACTIVE")
+  currentVersion  Int      @default(1)
+  createdByUserId String?  @db.Uuid
+  updatedByUserId String?  @db.Uuid
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdBy    User? @relation("PetitionTemplateCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  updatedBy    User? @relation("PetitionTemplateUpdatedBy", fields: [updatedByUserId], references: [id], onDelete: SetNull)
+  versions     PetitionTemplateVersion[]
+  generations  PetitionGeneration[]
+
+  @@index([organizationId, status, updatedAt])
+  @@index([organizationId, category])
+  @@index([organizationId, name])
+  @@map("petition_template")
+}
+
+/// Snapshot imutável de cada versão de um modelo do escritório.
+model PetitionTemplateVersion {
+  id              String   @id @default(uuid()) @db.Uuid
+  organizationId  String   @db.Uuid
+  templateId      String   @db.Uuid
+  version         Int
+  name            String
+  category        String
+  scope           String
+  content         String
+  createdByUserId String?  @db.Uuid
+  createdAt       DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  template     PetitionTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  createdBy    User? @relation("PetitionTemplateVersionCreatedBy", fields: [createdByUserId], references: [id], onDelete: SetNull)
+
+  @@unique([templateId, version])
+  @@index([organizationId, templateId, version])
+  @@map("petition_template_version")
+}
+
+/// Registro do conteúdo efetivamente gerado a partir de um modelo e de uma versão específicos.
+/// Nesta fase é um rascunho textual auditável; arquivo DOCX entra em bloco posterior.
+model PetitionGeneration {
+  id                  String   @id @default(uuid()) @db.Uuid
+  organizationId      String   @db.Uuid
+  templateId          String?  @db.Uuid
+  officialTemplateKey String?
+  templateSource      String
+  templateName        String
+  templateVersion     Int
+  processId           String?  @db.Uuid
+  clientId            String?  @db.Uuid
+  renderedContent     String
+  finalContent        String?
+  lastEditedAt        DateTime?
+  exportedAt          DateTime?
+  exportCount         Int      @default(0)
+  generatedByUserId   String?  @db.Uuid
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  template     PetitionTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  process      Process? @relation(fields: [processId], references: [id], onDelete: SetNull)
+  client       Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  generatedBy  User? @relation("PetitionGenerationCreatedBy", fields: [generatedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, createdAt])
+  @@index([organizationId, processId, createdAt])
+  @@index([organizationId, clientId, createdAt])
+  @@map("petition_generation")
+}

@@ -1,0 +1,22 @@
+JURISPORTAL NEXT v38
+
+IMPORTANTE
+Esta versão NÃO possui migration nova.
+Aplique os arquivos POR CIMA da sua pasta local atual para preservar a migration local:
+20260917190411_team_oab_required
+
+Também preserve seu .env.local.
+
+Nova variável necessária para o formulário de suporte:
+JURISPORTAL_SUPPORT_EMAIL="SEU_EMAIL_DE_SUPORTE"
+
+Sequência recomendada:
+1. npm run typecheck
+2. npm run test:ui-polish
+3. npm run test:settings
+4. npm run test:team
+5. npm run test:reports
+6. npm run build
+7. npm run dev
+
+Não rode prisma migrate dev para a v38. Não há alteração de schema.

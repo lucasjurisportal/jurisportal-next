@@ -1,0 +1,24 @@
+JURISPORTAL NEXT - v23 FUNDAÇÃO FUNCIONAL
+
+PRINCIPAIS MUDANÇAS
+- Planos e preços saíram da camada visual e ganharam módulo próprio.
+- Promoção até 30/06/2027 e preço regular automatizados por regra de data.
+- Desconto anual-base: equivalente a 10 meses pagos para 12 de uso.
+- Free reduzido.
+- IA somente Premium, Executivo e Alta Corte.
+- Limites internos de IA definidos: 500 / 2.500 / 10.000 unidades.
+- Criadas primeiras regras puras de CNJ, OAB e revisão de prazo.
+- Documentação de arquitetura modular e ADRs adicionada.
+- .env reforçado no gitignore; .env.example criado sem segredos.
+
+AINDA NÃO FOI CONECTADO
+- banco PostgreSQL;
+- autenticação real;
+- DJeN dentro deste repositório;
+- OpenAI;
+- Resend;
+- Asaas;
+- storage.
+
+MOTIVO DA PARADA NESTE PONTO
+O próximo marco é o banco em nuvem. A criação do projeto Supabase precisa ser feita na conta do proprietário. Antes de conectar qualquer código real, será fornecido o passo a passo.

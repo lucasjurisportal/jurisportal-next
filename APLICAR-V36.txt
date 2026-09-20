@@ -1,0 +1,21 @@
+JURISPORTAL NEXT v36 — COMO APLICAR NESTE AMBIENTE
+
+Esta v36 deve ser extraída POR CIMA da pasta de trabalho atual do Jurisportal Next.
+Não apague antes a pasta atual de prisma/migrations.
+
+Motivo:
+Durante a validação local da v35.2, o Prisma criou e aplicou a migration:
+20260917190411_team_oab_required
+
+Esse arquivo existe apenas no ambiente local do usuário e não foi enviado ao empacotamento.
+A v36 não cria migrations novas e não deve substituir essa migration.
+
+Após copiar os arquivos:
+1. npm run typecheck
+2. npm run test:reports
+3. npm run build
+4. npm run dev
+5. abrir http://localhost:3000/app/relatorios
+
+Não executar migrate reset.
+Não executar npm audit fix --force.

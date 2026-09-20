@@ -1,0 +1,19 @@
+JURISPORTAL NEXT - ATUALIZAÇÃO v27
+
+PRINCIPAIS MUDANÇAS:
+- confirmação de e-mail por código;
+- autenticação em duas etapas;
+- recuperação após bloqueio;
+- computador confiável por 15 dias;
+- integração de OTP por e-mail com Resend;
+- conta PLATFORM_MASTER e área /admin;
+- migration de segurança e administração;
+- documentação técnica correspondente.
+
+ATUALIZAÇÃO:
+1. NÃO apague seu .env.local.
+2. Extraia o ZIP.
+3. Copie o conteúdo para:
+   C:\Users\Pichau\Desktop\Projeto Jurisportal Next
+4. Escolha "Substituir os arquivos no destino".
+5. Rode os comandos descritos em START-HERE.md.

@@ -1,0 +1,28 @@
+JURISPORTAL NEXT v37 — STATUS DE VALIDAÇÃO
+
+VALIDADO NESTE AMBIENTE
+- sintaxe TypeScript/TSX dos arquivos novos/modificados com tsc --noCheck/noResolve: OK
+- testes puros de mapeamento de colunas: 2/2 OK
+- testes puros do parser CSV: 2/2 OK
+- modelos CSV: todos os campos obrigatórios são reconhecidos automaticamente
+- comparação de prisma/migrations com v36.1: nenhuma alteração
+- pacote sem node_modules, .next ou tsconfig.tsbuildinfo
+
+NÃO EXECUTADO NESTE AMBIENTE
+- npm install completo
+- npm run typecheck completo
+- npm run build completo
+
+Motivo: a cópia de trabalho do artefato não possui node_modules e o ambiente de geração não conseguiu concluir a instalação npm. A validação completa deve ser executada na pasta local já funcional do projeto.
+
+SEQUÊNCIA LOCAL
+1. npm install
+2. npm run typecheck
+3. npm run test:settings
+4. npm run test:clients
+5. npm run test:processes
+6. npm run test:reports
+7. npm run build
+8. npm run dev
+
+NÃO RODAR prisma migrate dev por causa da v37: não há migration nova.

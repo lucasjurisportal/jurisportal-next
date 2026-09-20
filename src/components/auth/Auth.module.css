@@ -1,0 +1,71 @@
+.page { min-height:100vh; display:grid; grid-template-columns:minmax(0,.82fr) minmax(560px,1.18fr); background:linear-gradient(145deg,#eff6ff,#fff 48%,#dbeafe); }
+.brandPanel { display:flex; flex-direction:column; justify-content:space-between; padding:46px; background:linear-gradient(145deg,#0f2f6b,#1d4ed8); color:#fff; }
+.authLogo { width:min(320px,72%); height:auto; object-fit:contain; filter:drop-shadow(0 10px 26px rgba(0,0,0,.12)); }
+.brandPanel h1 { max-width:520px; margin:120px 0 14px; font-size:52px; line-height:1; letter-spacing:-.05em; }
+.brandPanel p { max-width:500px; color:#dbeafe; line-height:1.7; }
+.brandPanel > span { color:#bfdbfe; font-weight:800; }
+.formPanel { display:flex; align-items:center; justify-content:center; padding:44px 24px; }
+.card { width:min(100%,690px); background:#fff; border:1px solid #dbe4f0; border-radius:26px; box-shadow:0 24px 70px rgba(15,47,107,.10); padding:32px; }
+.card h2 { margin:4px 0 0; font-size:32px; letter-spacing:-.04em; color:var(--brand-navy); }
+.authEyebrow { color:var(--brand-blue-dark); font-size:11px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.cardLead { margin:8px 0 24px; color:#667085; font-size:14px; line-height:1.6; }
+.form { display:grid; gap:17px; }
+.formSection { display:grid; gap:14px; padding:20px 0; border-top:1px solid #e8edf4; }
+.formSection:first-of-type { padding-top:0; border-top:0; }
+.sectionHeading { display:grid; gap:3px; }
+.sectionHeading strong { color:var(--brand-navy); font-size:14px; }
+.sectionHeading span { color:#667085; font-size:11px; line-height:1.5; }
+.field { display:grid; gap:7px; }
+.field label { font-size:12px; font-weight:800; color:#344054; }
+.optional { color:#98a2b3; font-size:10px; font-weight:600; }
+.field input,.field select { width:100%; min-height:47px; border:1px solid #d7dfeb; border-radius:11px; background:#fff; padding:0 12px; outline:none; color:#101828; }
+.field input:focus,.field select:focus { border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,.12); }
+.row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.rowCompact { display:grid; grid-template-columns:1.5fr .7fr; gap:12px; }
+.submit { min-height:50px; border:0; border-radius:12px; background:#1d4ed8; color:#fff; font-weight:900; cursor:pointer; box-shadow:0 12px 22px rgba(29,78,216,.18); }
+.helper { display:flex; justify-content:space-between; gap:12px; color:#667085; font-size:12px; }
+.helper a { color:#1d4ed8; font-weight:800; }
+.back { display:inline-flex; margin-bottom:20px; color:#667085; font-size:12px; font-weight:800; }
+.cepMessage { min-height:15px; color:#2563eb; font-size:10px; font-weight:650; }
+.errorText { color:#b42318; }
+.loginOptions { display:flex; justify-content:space-between; gap:14px; color:#667085; font-size:11px; }
+.loginOptions label { display:flex; align-items:center; gap:7px; }
+.loginOptions input { accent-color:#2563eb; }
+.loginOptions span { color:#1d4ed8; font-weight:750; }
+@media(max-width:940px){.page{grid-template-columns:1fr}.brandPanel{display:none}.formPanel{padding:24px 14px}.card{padding:24px}.row,.rowCompact{grid-template-columns:1fr}}
+
+.card { position:relative; }
+.closeButton { position:absolute; top:20px; right:20px; width:42px; height:42px; display:grid; place-items:center; border:1px solid #d7dfeb; border-radius:11px; background:#fff; color:var(--brand-navy); font-size:26px; line-height:1; cursor:pointer; }
+.closeButton:hover { background:#eff6ff; border-color:#bfdbfe; }
+.invalidField { border-color:#b42318 !important; box-shadow:0 0 0 3px rgba(180,35,24,.08) !important; }
+
+@media(max-width:720px){
+  .closeButton { top:14px; right:14px; width:40px; height:40px; }
+  .card h2 { padding-right:48px; }
+}
+
+/* Seleção de plano no cadastro */
+.billingToggle { display:flex; width:max-content; padding:4px; border:1px solid #d7dfeb; border-radius:11px; background:#f8fbff; }
+.billingToggle button { min-height:36px; padding:0 14px; border:0; border-radius:8px; background:transparent; color:#667085; font-size:11px; font-weight:800; cursor:pointer; }
+.billingToggle .activeBilling { background:#1d4ed8; color:#fff; }
+.planPicker { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+.planOption { min-width:0; display:grid; gap:6px; padding:12px; border:1px solid #d7dfeb; border-radius:12px; background:#fff; color:#101828; text-align:left; cursor:pointer; }
+.planOption:hover { border-color:#93b4f5; background:#f8fbff; }
+.selectedPlan { border:2px solid #1d4ed8; background:#eff6ff; }
+.planOptionTop { display:flex; align-items:center; justify-content:space-between; gap:6px; }
+.planOptionTop strong { color:#0f2f6b; font-size:12px; }
+.planOptionTop b { color:#1d4ed8; font-size:8px; text-transform:uppercase; letter-spacing:.05em; }
+.planOptionPrice { color:#0f2f6b; font-size:14px; font-weight:900; }
+.planOptionPrice small { color:#667085; font-size:9px; font-weight:600; }
+.planOptionMeta { color:#667085; font-size:9px; line-height:1.4; }
+
+/* Aceites jurídicos */
+.consentRow { display:flex; align-items:flex-start; gap:10px; padding:12px 13px; border:1px solid #e0e6ef; border-radius:11px; background:#fff; color:#475467; font-size:11px; line-height:1.5; }
+.consentRow input { width:16px; height:16px; margin-top:1px; flex:none; accent-color:#1d4ed8; }
+.consentRow a { color:#1d4ed8; font-weight:850; text-decoration:underline; text-underline-offset:2px; }
+.consentError { border-color:#fda29b; background:#fff5f4; }
+
+@media(max-width:1120px){.planPicker{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:720px){.billingToggle{width:100%}.billingToggle button{flex:1}.planPicker{grid-template-columns:1fr}}
+.formError{border:1px solid #f1b4ae;background:#fff3f2;color:#9f2d24;border-radius:10px;padding:10px 12px;font-size:11px;font-weight:700}.formSuccess{border:1px solid #a7d8bd;background:#f1fbf5;color:#24613f;border-radius:10px;padding:10px 12px;font-size:11px;font-weight:700}.mutedAction{color:#8a96a8}.submit:disabled{opacity:.62;cursor:wait}
+.secondaryButton{min-height:46px;border:1px solid #cfd8e6;border-radius:12px;background:#fff;color:#1d4ed8;font-weight:850;cursor:pointer}.secondaryButton:disabled{opacity:.55;cursor:not-allowed}.channelNote{padding:11px 12px;border:1px dashed #cbd5e1;border-radius:10px;color:#667085;font-size:11px;line-height:1.5;background:#f8fafc}

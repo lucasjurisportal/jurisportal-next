@@ -1,0 +1,21 @@
+Jurisportal Next v38 — status de validação
+
+VALIDADO NESTE AMBIENTE
+- sintaxe/transpilação dos arquivos TS/TSX modificados: OK
+- JSON do package.json: OK
+- nenhum arquivo novo em prisma/migrations: OK
+- tutorial/mapeamento: teste puro executado com 10 módulos, OK
+- rotas de suporte, notificações e perfil revisadas estruturalmente
+- Dashboard sem dados demonstrativos
+
+LIMITAÇÃO DESTE AMBIENTE
+O pacote canônico não inclui node_modules e a instalação de dependências não concluiu no ambiente de geração. Por isso typecheck/build completos devem ser executados no ambiente local do projeto, onde as dependências e o Prisma Client já estão instalados.
+
+VALIDAÇÃO LOCAL OBRIGATÓRIA
+npm run typecheck
+npm run test:ui-polish
+npm run test:settings
+npm run test:team
+npm run test:reports
+npm run build
+npm run dev

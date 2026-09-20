@@ -1,0 +1,27 @@
+Jurisportal Next v36.1 — status de validação no ambiente de empacotamento
+
+VALIDADO:
+- estrutura do ZIP/base v36 preservada;
+- nenhuma migration adicionada;
+- package.json válido;
+- vercel.json válido;
+- transpile/sintaxe TypeScript/TSX dos arquivos alterados: OK;
+- proteção owner-only aplicada na página, menu e exportação;
+- sessão de equipe usa Session.id + AuditEvent, sem tabela nova;
+- envio diário reutiliza getReportData e possui auditoria/idempotência de retry normal.
+
+NÃO FOI POSSÍVEL EXECUTAR AQUI:
+- npm run typecheck completo;
+- npm run test:reports;
+- npm run test:team;
+- npm run build.
+
+Motivo:
+O ZIP canônico não inclui node_modules e o cache npm deste ambiente não possui todas as dependências. O npm offline retorna ENOTCACHED para @better-auth/prisma-adapter.
+
+Executar no ambiente do projeto já instalado:
+1. npm run typecheck
+2. npm run test:reports
+3. npm run test:team
+4. npm run build
+5. npm run dev

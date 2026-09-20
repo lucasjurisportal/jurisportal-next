@@ -1,0 +1,47 @@
+{
+  "name": "jurisportal-next",
+  "version": "0.11.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "db:validate": "prisma validate",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "db:deploy": "prisma migrate deploy",
+    "db:status": "prisma migrate status",
+    "admin:promote": "tsx scripts/promote-platform-admin.ts",
+    "dev:reset-data": "tsx scripts/reset-dev-data.ts",
+    "test:clients": "tsx --test src/modules/clients/domain/tax-id.test.ts",
+    "test:processes": "tsx --test src/modules/processes/domain/process-policy.test.ts src/modules/processes/domain/process-delete-policy.test.ts",
+    "test:process-workspace": "tsx --test src/modules/processes/domain/process-workspace.schema.test.ts",
+    "test:work-management": "tsx --test src/modules/processes/domain/fee-calculation.test.ts src/modules/work-items/domain/work-item-date.test.ts"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "@prisma/adapter-pg": "7.10.0",
+    "@prisma/client": "7.10.0",
+    "dotenv": "17.4.2",
+    "pg": "8.17.2",
+    "better-auth": "1.7.5",
+    "@better-auth/prisma-adapter": "1.7.5",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "typescript": "latest",
+    "@types/pg": "8.23.1",
+    "prisma": "7.10.0",
+    "tsx": "4.20.6"
+  }
+}
