@@ -15,6 +15,8 @@ import styles from "@/components/processes/Processes.module.css";
 import pubStyles from "@/components/publications/Publications.module.css";
 import { buildProcessDisplayReference } from "@/modules/processes/domain/process-reference";
 import { auditActionLabel, auditCategoryLabel, operationalSourceLabel } from "@/shared/audit/audit-labels";
+import { listProcessDocuments } from "@/modules/documents/application/document-service";
+import { ProcessDocuments } from "@/components/documents/ProcessDocuments";
 
 const TABS = ["visao", "timeline", "publicacoes", "prazos", "documentos", "financeiro", "historico"] as const;
 type Tab = (typeof TABS)[number];
@@ -71,6 +73,10 @@ export default async function ProcessDetailPage({
     listProcessPublications(context.workspace.organizationId, id),
   ]);
   if (!process) notFound();
+  const documentsData = tab === "documentos" ? await listProcessDocuments({
+    organizationId: context.workspace.organizationId, processId: id,
+    planGb: context.workspace.plan.storageLimitGb,
+  }) : null;
 
   const canPermanentlyDelete =
     context.workspace.organizationSlug === "jurisportal-internal" &&
@@ -164,10 +170,38 @@ export default async function ProcessDetailPage({
         </article>)}</div>}
       </section> : null}
 
-      {tab === "documentos" ? <section className={styles.panel}>
-        <div className={styles.processPanelHead}><div><span className={styles.eyebrow}>Arquivos</span><h2>Documentos</h2><p>Documentos ficarão ligados ao processo, com origem e auditoria.</p></div></div>
-        <div className={styles.readinessBox}><strong>Documentos do processo</strong><span>O envio e a organização de arquivos serão disponibilizados em uma próxima atualização.</span></div>
-      </section> : null}
+            {tab === "documentos" ? (
+        <section className={styles.panel}>
+          <div className={styles.processPanelHead}>
+            <div>
+              <span className={styles.eyebrow}>Arquivos</span>
+              <h2>Documentos</h2>
+              <p>
+                PDFs privados vinculados ao processo, com quota e histórico
+                de alterações.
+              </p>
+            </div>
+          </div>
+
+          {documentsData ? (
+            <ProcessDocuments
+              processId={process.id}
+              canManage={context.workspace.role === "owner"}
+              initial={{
+                documents: documentsData.documents.map((doc) => ({
+                  ...doc,
+                  createdAt: doc.createdAt.toISOString(),
+                  deletedAt: doc.deletedAt?.toISOString() ?? null,
+                })),
+                storage: documentsData.storage,
+                permanentDeletionEnabled:
+                  documentsData.permanentDeletionEnabled,
+              }}
+            />
+          ) : null}
+        </section>
+      ) : null}
+
 
       {tab === "financeiro" ? <div className={styles.financeStack}>
         <section className={styles.legalFinanceMetrics}>

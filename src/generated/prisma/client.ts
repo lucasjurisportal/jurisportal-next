@@ -239,3 +239,13 @@ export type PetitionTemplateVersion = Prisma.PetitionTemplateVersionModel
  * Nesta fase é um rascunho textual auditável; arquivo DOCX entra em bloco posterior.
  */
 export type PetitionGeneration = Prisma.PetitionGenerationModel
+/**
+ * Model OrganizationStorageUsage
+ * Uso agregado de documentos por organização. A reserva impede que uploads simultâneos ultrapassem o plano.
+ */
+export type OrganizationStorageUsage = Prisma.OrganizationStorageUsageModel
+/**
+ * Model ProcessDocument
+ * PDF privado: o PostgreSQL guarda apenas metadados, nunca o conteúdo do arquivo.
+ */
+export type ProcessDocument = Prisma.ProcessDocumentModel

@@ -224,6 +224,8 @@ export type OrganizationWhereInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionListRelationFilter
   petitionGenerations?: Prisma.PetitionGenerationListRelationFilter
   teamMemberProfiles?: Prisma.TeamMemberProfileListRelationFilter
+  processDocuments?: Prisma.ProcessDocumentListRelationFilter
+  storageUsage?: Prisma.XOR<Prisma.OrganizationStorageUsageNullableScalarRelationFilter, Prisma.OrganizationStorageUsageWhereInput> | null
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -260,6 +262,8 @@ export type OrganizationOrderByWithRelationInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionOrderByRelationAggregateInput
   petitionGenerations?: Prisma.PetitionGenerationOrderByRelationAggregateInput
   teamMemberProfiles?: Prisma.TeamMemberProfileOrderByRelationAggregateInput
+  processDocuments?: Prisma.ProcessDocumentOrderByRelationAggregateInput
+  storageUsage?: Prisma.OrganizationStorageUsageOrderByWithRelationInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -299,6 +303,8 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionListRelationFilter
   petitionGenerations?: Prisma.PetitionGenerationListRelationFilter
   teamMemberProfiles?: Prisma.TeamMemberProfileListRelationFilter
+  processDocuments?: Prisma.ProcessDocumentListRelationFilter
+  storageUsage?: Prisma.XOR<Prisma.OrganizationStorageUsageNullableScalarRelationFilter, Prisma.OrganizationStorageUsageWhereInput> | null
 }, "id" | "slug">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -361,6 +367,8 @@ export type OrganizationCreateInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -397,6 +405,8 @@ export type OrganizationUncheckedCreateInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -433,6 +443,8 @@ export type OrganizationUpdateInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -469,6 +481,8 @@ export type OrganizationUncheckedUpdateInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -900,6 +914,34 @@ export type OrganizationUpdateOneRequiredWithoutPetitionGenerationsNestedInput =
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPetitionGenerationsInput, Prisma.OrganizationUpdateWithoutPetitionGenerationsInput>, Prisma.OrganizationUncheckedUpdateWithoutPetitionGenerationsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutStorageUsageInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutStorageUsageInput, Prisma.OrganizationUncheckedCreateWithoutStorageUsageInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutStorageUsageInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutStorageUsageNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutStorageUsageInput, Prisma.OrganizationUncheckedCreateWithoutStorageUsageInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutStorageUsageInput
+  upsert?: Prisma.OrganizationUpsertWithoutStorageUsageInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutStorageUsageInput, Prisma.OrganizationUpdateWithoutStorageUsageInput>, Prisma.OrganizationUncheckedUpdateWithoutStorageUsageInput>
+}
+
+export type OrganizationCreateNestedOneWithoutProcessDocumentsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutProcessDocumentsInput, Prisma.OrganizationUncheckedCreateWithoutProcessDocumentsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutProcessDocumentsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutProcessDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutProcessDocumentsInput, Prisma.OrganizationUncheckedCreateWithoutProcessDocumentsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutProcessDocumentsInput
+  upsert?: Prisma.OrganizationUpsertWithoutProcessDocumentsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutProcessDocumentsInput, Prisma.OrganizationUpdateWithoutProcessDocumentsInput>, Prisma.OrganizationUncheckedUpdateWithoutProcessDocumentsInput>
+}
+
 export type OrganizationCreateWithoutMembersInput = {
   id?: string
   name: string
@@ -933,6 +975,8 @@ export type OrganizationCreateWithoutMembersInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMembersInput = {
@@ -968,6 +1012,8 @@ export type OrganizationUncheckedCreateWithoutMembersInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMembersInput = {
@@ -1019,6 +1065,8 @@ export type OrganizationUpdateWithoutMembersInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMembersInput = {
@@ -1054,6 +1102,8 @@ export type OrganizationUncheckedUpdateWithoutMembersInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutInvitationsInput = {
@@ -1089,6 +1139,8 @@ export type OrganizationCreateWithoutInvitationsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutInvitationsInput = {
@@ -1124,6 +1176,8 @@ export type OrganizationUncheckedCreateWithoutInvitationsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutInvitationsInput = {
@@ -1175,6 +1229,8 @@ export type OrganizationUpdateWithoutInvitationsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
@@ -1210,6 +1266,8 @@ export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTeamMemberProfilesInput = {
@@ -1245,6 +1303,8 @@ export type OrganizationCreateWithoutTeamMemberProfilesInput = {
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTeamMemberProfilesInput = {
@@ -1280,6 +1340,8 @@ export type OrganizationUncheckedCreateWithoutTeamMemberProfilesInput = {
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTeamMemberProfilesInput = {
@@ -1331,6 +1393,8 @@ export type OrganizationUpdateWithoutTeamMemberProfilesInput = {
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTeamMemberProfilesInput = {
@@ -1366,6 +1430,8 @@ export type OrganizationUncheckedUpdateWithoutTeamMemberProfilesInput = {
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSubscriptionInput = {
@@ -1401,6 +1467,8 @@ export type OrganizationCreateWithoutSubscriptionInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSubscriptionInput = {
@@ -1436,6 +1504,8 @@ export type OrganizationUncheckedCreateWithoutSubscriptionInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSubscriptionInput = {
@@ -1487,6 +1557,8 @@ export type OrganizationUpdateWithoutSubscriptionInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSubscriptionInput = {
@@ -1522,6 +1594,8 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAuditEventsInput = {
@@ -1557,6 +1631,8 @@ export type OrganizationCreateWithoutAuditEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
@@ -1592,6 +1668,8 @@ export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAuditEventsInput = {
@@ -1643,6 +1721,8 @@ export type OrganizationUpdateWithoutAuditEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
@@ -1678,6 +1758,8 @@ export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProfileInput = {
@@ -1713,6 +1795,8 @@ export type OrganizationCreateWithoutProfileInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProfileInput = {
@@ -1748,6 +1832,8 @@ export type OrganizationUncheckedCreateWithoutProfileInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProfileInput = {
@@ -1799,6 +1885,8 @@ export type OrganizationUpdateWithoutProfileInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProfileInput = {
@@ -1834,6 +1922,8 @@ export type OrganizationUncheckedUpdateWithoutProfileInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLawyerOabsInput = {
@@ -1869,6 +1959,8 @@ export type OrganizationCreateWithoutLawyerOabsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLawyerOabsInput = {
@@ -1904,6 +1996,8 @@ export type OrganizationUncheckedCreateWithoutLawyerOabsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLawyerOabsInput = {
@@ -1955,6 +2049,8 @@ export type OrganizationUpdateWithoutLawyerOabsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLawyerOabsInput = {
@@ -1990,6 +2086,8 @@ export type OrganizationUncheckedUpdateWithoutLawyerOabsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLegalAcceptancesInput = {
@@ -2025,6 +2123,8 @@ export type OrganizationCreateWithoutLegalAcceptancesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLegalAcceptancesInput = {
@@ -2060,6 +2160,8 @@ export type OrganizationUncheckedCreateWithoutLegalAcceptancesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLegalAcceptancesInput = {
@@ -2111,6 +2213,8 @@ export type OrganizationUpdateWithoutLegalAcceptancesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLegalAcceptancesInput = {
@@ -2146,6 +2250,8 @@ export type OrganizationUncheckedUpdateWithoutLegalAcceptancesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutClientsInput = {
@@ -2181,6 +2287,8 @@ export type OrganizationCreateWithoutClientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutClientsInput = {
@@ -2216,6 +2324,8 @@ export type OrganizationUncheckedCreateWithoutClientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutClientsInput = {
@@ -2267,6 +2377,8 @@ export type OrganizationUpdateWithoutClientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutClientsInput = {
@@ -2302,6 +2414,8 @@ export type OrganizationUncheckedUpdateWithoutClientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessesInput = {
@@ -2337,6 +2451,8 @@ export type OrganizationCreateWithoutProcessesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessesInput = {
@@ -2372,6 +2488,8 @@ export type OrganizationUncheckedCreateWithoutProcessesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessesInput = {
@@ -2423,6 +2541,8 @@ export type OrganizationUpdateWithoutProcessesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessesInput = {
@@ -2458,6 +2578,8 @@ export type OrganizationUncheckedUpdateWithoutProcessesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessNumberSequencesInput = {
@@ -2493,6 +2615,8 @@ export type OrganizationCreateWithoutProcessNumberSequencesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessNumberSequencesInput = {
@@ -2528,6 +2652,8 @@ export type OrganizationUncheckedCreateWithoutProcessNumberSequencesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessNumberSequencesInput = {
@@ -2579,6 +2705,8 @@ export type OrganizationUpdateWithoutProcessNumberSequencesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessNumberSequencesInput = {
@@ -2614,6 +2742,8 @@ export type OrganizationUncheckedUpdateWithoutProcessNumberSequencesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessClientsInput = {
@@ -2649,6 +2779,8 @@ export type OrganizationCreateWithoutProcessClientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessClientsInput = {
@@ -2684,6 +2816,8 @@ export type OrganizationUncheckedCreateWithoutProcessClientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessClientsInput = {
@@ -2735,6 +2869,8 @@ export type OrganizationUpdateWithoutProcessClientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessClientsInput = {
@@ -2770,6 +2906,8 @@ export type OrganizationUncheckedUpdateWithoutProcessClientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessPartiesInput = {
@@ -2805,6 +2943,8 @@ export type OrganizationCreateWithoutProcessPartiesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessPartiesInput = {
@@ -2840,6 +2980,8 @@ export type OrganizationUncheckedCreateWithoutProcessPartiesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessPartiesInput = {
@@ -2891,6 +3033,8 @@ export type OrganizationUpdateWithoutProcessPartiesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessPartiesInput = {
@@ -2926,6 +3070,8 @@ export type OrganizationUncheckedUpdateWithoutProcessPartiesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessTimelineEventsInput = {
@@ -2961,6 +3107,8 @@ export type OrganizationCreateWithoutProcessTimelineEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessTimelineEventsInput = {
@@ -2996,6 +3144,8 @@ export type OrganizationUncheckedCreateWithoutProcessTimelineEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessTimelineEventsInput = {
@@ -3047,6 +3197,8 @@ export type OrganizationUpdateWithoutProcessTimelineEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessTimelineEventsInput = {
@@ -3082,6 +3234,8 @@ export type OrganizationUncheckedUpdateWithoutProcessTimelineEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessWorkItemsInput = {
@@ -3117,6 +3271,8 @@ export type OrganizationCreateWithoutProcessWorkItemsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessWorkItemsInput = {
@@ -3152,6 +3308,8 @@ export type OrganizationUncheckedCreateWithoutProcessWorkItemsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessWorkItemsInput = {
@@ -3203,6 +3361,8 @@ export type OrganizationUpdateWithoutProcessWorkItemsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessWorkItemsInput = {
@@ -3238,6 +3398,8 @@ export type OrganizationUncheckedUpdateWithoutProcessWorkItemsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessFeeAgreementsInput = {
@@ -3273,6 +3435,8 @@ export type OrganizationCreateWithoutProcessFeeAgreementsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessFeeAgreementsInput = {
@@ -3308,6 +3472,8 @@ export type OrganizationUncheckedCreateWithoutProcessFeeAgreementsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessFeeAgreementsInput = {
@@ -3359,6 +3525,8 @@ export type OrganizationUpdateWithoutProcessFeeAgreementsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessFeeAgreementsInput = {
@@ -3394,6 +3562,8 @@ export type OrganizationUncheckedUpdateWithoutProcessFeeAgreementsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessFinanceEntriesInput = {
@@ -3429,6 +3599,8 @@ export type OrganizationCreateWithoutProcessFinanceEntriesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessFinanceEntriesInput = {
@@ -3464,6 +3636,8 @@ export type OrganizationUncheckedCreateWithoutProcessFinanceEntriesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessFinanceEntriesInput = {
@@ -3515,6 +3689,8 @@ export type OrganizationUpdateWithoutProcessFinanceEntriesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessFinanceEntriesInput = {
@@ -3550,6 +3726,8 @@ export type OrganizationUncheckedUpdateWithoutProcessFinanceEntriesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAgendaEventsInput = {
@@ -3585,6 +3763,8 @@ export type OrganizationCreateWithoutAgendaEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAgendaEventsInput = {
@@ -3620,6 +3800,8 @@ export type OrganizationUncheckedCreateWithoutAgendaEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAgendaEventsInput = {
@@ -3671,6 +3853,8 @@ export type OrganizationUpdateWithoutAgendaEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAgendaEventsInput = {
@@ -3706,6 +3890,8 @@ export type OrganizationUncheckedUpdateWithoutAgendaEventsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPublicationsInput = {
@@ -3741,6 +3927,8 @@ export type OrganizationCreateWithoutPublicationsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPublicationsInput = {
@@ -3776,6 +3964,8 @@ export type OrganizationUncheckedCreateWithoutPublicationsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPublicationsInput = {
@@ -3827,6 +4017,8 @@ export type OrganizationUpdateWithoutPublicationsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPublicationsInput = {
@@ -3862,6 +4054,8 @@ export type OrganizationUncheckedUpdateWithoutPublicationsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPublicationRecipientsInput = {
@@ -3897,6 +4091,8 @@ export type OrganizationCreateWithoutPublicationRecipientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPublicationRecipientsInput = {
@@ -3932,6 +4128,8 @@ export type OrganizationUncheckedCreateWithoutPublicationRecipientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPublicationRecipientsInput = {
@@ -3983,6 +4181,8 @@ export type OrganizationUpdateWithoutPublicationRecipientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPublicationRecipientsInput = {
@@ -4018,6 +4218,8 @@ export type OrganizationUncheckedUpdateWithoutPublicationRecipientsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDeadlineReviewsInput = {
@@ -4053,6 +4255,8 @@ export type OrganizationCreateWithoutDeadlineReviewsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDeadlineReviewsInput = {
@@ -4088,6 +4292,8 @@ export type OrganizationUncheckedCreateWithoutDeadlineReviewsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDeadlineReviewsInput = {
@@ -4139,6 +4345,8 @@ export type OrganizationUpdateWithoutDeadlineReviewsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDeadlineReviewsInput = {
@@ -4174,6 +4382,8 @@ export type OrganizationUncheckedUpdateWithoutDeadlineReviewsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutGoogleCalendarConnectionsInput = {
@@ -4209,6 +4419,8 @@ export type OrganizationCreateWithoutGoogleCalendarConnectionsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
@@ -4244,6 +4456,8 @@ export type OrganizationUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutGoogleCalendarConnectionsInput = {
@@ -4295,6 +4509,8 @@ export type OrganizationUpdateWithoutGoogleCalendarConnectionsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
@@ -4330,6 +4546,8 @@ export type OrganizationUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutExternalCalendarEventLinksInput = {
@@ -4365,6 +4583,8 @@ export type OrganizationCreateWithoutExternalCalendarEventLinksInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutExternalCalendarEventLinksInput = {
@@ -4400,6 +4620,8 @@ export type OrganizationUncheckedCreateWithoutExternalCalendarEventLinksInput = 
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutExternalCalendarEventLinksInput = {
@@ -4451,6 +4673,8 @@ export type OrganizationUpdateWithoutExternalCalendarEventLinksInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutExternalCalendarEventLinksInput = {
@@ -4486,6 +4710,8 @@ export type OrganizationUncheckedUpdateWithoutExternalCalendarEventLinksInput = 
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPetitionTemplatesInput = {
@@ -4521,6 +4747,8 @@ export type OrganizationCreateWithoutPetitionTemplatesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPetitionTemplatesInput = {
@@ -4556,6 +4784,8 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplatesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPetitionTemplatesInput = {
@@ -4607,6 +4837,8 @@ export type OrganizationUpdateWithoutPetitionTemplatesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPetitionTemplatesInput = {
@@ -4642,6 +4874,8 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplatesInput = {
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPetitionTemplateVersionsInput = {
@@ -4677,6 +4911,8 @@ export type OrganizationCreateWithoutPetitionTemplateVersionsInput = {
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPetitionTemplateVersionsInput = {
@@ -4712,6 +4948,8 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplateVersionsInput = {
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPetitionTemplateVersionsInput = {
@@ -4763,6 +5001,8 @@ export type OrganizationUpdateWithoutPetitionTemplateVersionsInput = {
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPetitionTemplateVersionsInput = {
@@ -4798,6 +5038,8 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplateVersionsInput = {
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPetitionGenerationsInput = {
@@ -4833,6 +5075,8 @@ export type OrganizationCreateWithoutPetitionGenerationsInput = {
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPetitionGenerationsInput = {
@@ -4868,6 +5112,8 @@ export type OrganizationUncheckedCreateWithoutPetitionGenerationsInput = {
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPetitionGenerationsInput = {
@@ -4919,6 +5165,8 @@ export type OrganizationUpdateWithoutPetitionGenerationsInput = {
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPetitionGenerationsInput = {
@@ -4954,6 +5202,336 @@ export type OrganizationUncheckedUpdateWithoutPetitionGenerationsInput = {
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
   teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutStorageUsageInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutStorageUsageInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileUncheckedCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutStorageUsageInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutStorageUsageInput, Prisma.OrganizationUncheckedCreateWithoutStorageUsageInput>
+}
+
+export type OrganizationUpsertWithoutStorageUsageInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutStorageUsageInput, Prisma.OrganizationUncheckedUpdateWithoutStorageUsageInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutStorageUsageInput, Prisma.OrganizationUncheckedCreateWithoutStorageUsageInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutStorageUsageInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutStorageUsageInput, Prisma.OrganizationUncheckedUpdateWithoutStorageUsageInput>
+}
+
+export type OrganizationUpdateWithoutStorageUsageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutStorageUsageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUncheckedUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutProcessDocumentsInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutProcessDocumentsInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileUncheckedCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutProcessDocumentsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutProcessDocumentsInput, Prisma.OrganizationUncheckedCreateWithoutProcessDocumentsInput>
+}
+
+export type OrganizationUpsertWithoutProcessDocumentsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutProcessDocumentsInput, Prisma.OrganizationUncheckedUpdateWithoutProcessDocumentsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutProcessDocumentsInput, Prisma.OrganizationUncheckedCreateWithoutProcessDocumentsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutProcessDocumentsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutProcessDocumentsInput, Prisma.OrganizationUncheckedUpdateWithoutProcessDocumentsInput>
+}
+
+export type OrganizationUpdateWithoutProcessDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutProcessDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUncheckedUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
 }
 
 
@@ -4986,6 +5564,7 @@ export type OrganizationCountOutputType = {
   petitionTemplateVersions: number
   petitionGenerations: number
   teamMemberProfiles: number
+  processDocuments: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5013,6 +5592,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   petitionTemplateVersions?: boolean | OrganizationCountOutputTypeCountPetitionTemplateVersionsArgs
   petitionGenerations?: boolean | OrganizationCountOutputTypeCountPetitionGenerationsArgs
   teamMemberProfiles?: boolean | OrganizationCountOutputTypeCountTeamMemberProfilesArgs
+  processDocuments?: boolean | OrganizationCountOutputTypeCountProcessDocumentsArgs
 }
 
 /**
@@ -5193,6 +5773,13 @@ export type OrganizationCountOutputTypeCountTeamMemberProfilesArgs<ExtArgs exten
   where?: Prisma.TeamMemberProfileWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountProcessDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcessDocumentWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5228,6 +5815,8 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   petitionTemplateVersions?: boolean | Prisma.Organization$petitionTemplateVersionsArgs<ExtArgs>
   petitionGenerations?: boolean | Prisma.Organization$petitionGenerationsArgs<ExtArgs>
   teamMemberProfiles?: boolean | Prisma.Organization$teamMemberProfilesArgs<ExtArgs>
+  processDocuments?: boolean | Prisma.Organization$processDocumentsArgs<ExtArgs>
+  storageUsage?: boolean | Prisma.Organization$storageUsageArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -5289,6 +5878,8 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   petitionTemplateVersions?: boolean | Prisma.Organization$petitionTemplateVersionsArgs<ExtArgs>
   petitionGenerations?: boolean | Prisma.Organization$petitionGenerationsArgs<ExtArgs>
   teamMemberProfiles?: boolean | Prisma.Organization$teamMemberProfilesArgs<ExtArgs>
+  processDocuments?: boolean | Prisma.Organization$processDocumentsArgs<ExtArgs>
+  storageUsage?: boolean | Prisma.Organization$storageUsageArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -5323,6 +5914,8 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     petitionTemplateVersions: Prisma.$PetitionTemplateVersionPayload<ExtArgs>[]
     petitionGenerations: Prisma.$PetitionGenerationPayload<ExtArgs>[]
     teamMemberProfiles: Prisma.$TeamMemberProfilePayload<ExtArgs>[]
+    processDocuments: Prisma.$ProcessDocumentPayload<ExtArgs>[]
+    storageUsage: Prisma.$OrganizationStorageUsagePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5752,6 +6345,8 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   petitionTemplateVersions<T extends Prisma.Organization$petitionTemplateVersionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$petitionTemplateVersionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetitionTemplateVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   petitionGenerations<T extends Prisma.Organization$petitionGenerationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$petitionGenerationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetitionGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   teamMemberProfiles<T extends Prisma.Organization$teamMemberProfilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$teamMemberProfilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  processDocuments<T extends Prisma.Organization$processDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  storageUsage<T extends Prisma.Organization$storageUsageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$storageUsageArgs<ExtArgs>>): Prisma.Prisma__OrganizationStorageUsageClient<runtime.Types.Result.GetResult<Prisma.$OrganizationStorageUsagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6792,6 +7387,49 @@ export type Organization$teamMemberProfilesArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.TeamMemberProfileScalarFieldEnum | Prisma.TeamMemberProfileScalarFieldEnum[]
+}
+
+/**
+ * Organization.processDocuments
+ */
+export type Organization$processDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcessDocument
+   */
+  select?: Prisma.ProcessDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcessDocument
+   */
+  omit?: Prisma.ProcessDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcessDocumentInclude<ExtArgs> | null
+  where?: Prisma.ProcessDocumentWhereInput
+  orderBy?: Prisma.ProcessDocumentOrderByWithRelationInput | Prisma.ProcessDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.ProcessDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcessDocumentScalarFieldEnum | Prisma.ProcessDocumentScalarFieldEnum[]
+}
+
+/**
+ * Organization.storageUsage
+ */
+export type Organization$storageUsageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrganizationStorageUsage
+   */
+  select?: Prisma.OrganizationStorageUsageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrganizationStorageUsage
+   */
+  omit?: Prisma.OrganizationStorageUsageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrganizationStorageUsageInclude<ExtArgs> | null
+  where?: Prisma.OrganizationStorageUsageWhereInput
 }
 
 /**

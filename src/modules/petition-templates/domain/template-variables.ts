@@ -1,6 +1,13 @@
+import { replaceRichVariables } from "./rich-document";
 export const PETITION_TEMPLATE_VARIABLES = [
   ["{{CLIENTE_NOME}}", "Nome do cliente"],
   ["{{CLIENTE_CPF_CNPJ}}", "CPF ou CNPJ do cliente"],
+  ["{{CLIENTE_EMAIL}}", "E-mail cadastrado do cliente"],
+  ["{{CLIENTE_WHATSAPP}}", "WhatsApp cadastrado do cliente"],
+  ["{{CLIENTE_ENDERECO}}", "Endereço completo do cliente"],
+  ["{{CLIENTE_CIDADE}}", "Cidade do cliente"],
+  ["{{CLIENTE_ESTADO}}", "Estado do cliente"],
+  ["{{CLIENTE_CEP}}", "CEP do cliente"],
   ["{{PROCESSO_NUMERO}}", "Número CNJ"],
   ["{{PROCESSO_REFERENCIA}}", "Referência interna do processo"],
   ["{{PROCESSO_VARA}}", "Vara ou unidade"],
@@ -16,5 +23,5 @@ export const PETITION_TEMPLATE_VARIABLES = [
 ] as const;
 
 export function replacePetitionVariables(content: string, variables: Record<string, string>) {
-  return content.replace(/\{\{[A-Z0-9_]+\}\}/g, (token) => variables[token] ?? token);
+  return replaceRichVariables(content, variables);
 }

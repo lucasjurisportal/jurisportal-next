@@ -218,9 +218,26 @@ export async function createProcess(input: {
   await assertRelatedEntities({ organizationId: input.organizationId, data: input.data });
   const cnjNormalized = normalizeCnjDigits(input.data.cnj);
 
-  const [count, duplicate] = await Promise.all([
-    prisma.process.count({ where: { organizationId: input.organizationId } }),
-    prisma.process.findUnique({
+  const clientIds = distinctClientIds(input.data);
+
+  return prisma.$transaction(async (tx) => {
+    // Uma trava no registro do escritório serializa cadastros manuais e importações,
+    // inclusive quando chegam de servidores diferentes. FOR NO KEY UPDATE evita
+    // bloquear verificações normais de FK (KEY SHARE). A consulta retorna UUID,
+    // evitando o problema de desserialização do tipo void do Prisma.
+    // A contagem DEVE ocorrer depois da trava e DENTRO desta transação: caso dois
+    // usuários disputem a última vaga, o segundo enxergará o primeiro cadastro.
+    const lockedOrganization = await tx.$queryRaw<{ id: string }[]>`
+      SELECT "id" FROM "organization"
+      WHERE "id" = ${input.organizationId}::uuid
+      FOR NO KEY UPDATE
+    `;
+    if (lockedOrganization.length === 0) throw new Error("PROCESS_ORGANIZATION_NOT_FOUND");
+
+    const count = await tx.process.count({ where: { organizationId: input.organizationId } });
+    assertProcessCapacity(count, input.processLimit);
+
+    const duplicate = await tx.process.findUnique({
       where: {
         organizationId_cnjNormalized: {
           organizationId: input.organizationId,
@@ -228,14 +245,9 @@ export async function createProcess(input: {
         },
       },
       select: { id: true },
-    }),
-  ]);
-  assertProcessCapacity(count, input.processLimit);
-  if (duplicate) throw new Error("PROCESS_DUPLICATE_CNJ");
+    });
+    if (duplicate) throw new Error("PROCESS_DUPLICATE_CNJ");
 
-  const clientIds = distinctClientIds(input.data);
-
-  return prisma.$transaction(async (tx) => {
     const reference = await issueInternalProcessCode(tx, input.organizationId);
     const process = await tx.process.create({
       data: {
@@ -336,6 +348,12 @@ export async function createProcess(input: {
     });
 
     return process;
+  }, {
+    // PostgreSQL usa READ COMMITTED: a contagem executada após aguardar a trava
+    // observa os cadastros que já foram confirmados por outra transação.
+    isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted,
+    maxWait: 15_000,
+    timeout: 30_000,
   });
 }
 

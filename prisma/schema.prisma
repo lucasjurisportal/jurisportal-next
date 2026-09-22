@@ -56,6 +56,7 @@ model User {
   petitionTemplatesUpdated PetitionTemplate[] @relation("PetitionTemplateUpdatedBy")
   petitionTemplateVersionsCreated PetitionTemplateVersion[] @relation("PetitionTemplateVersionCreatedBy")
   petitionGenerationsCreated PetitionGeneration[] @relation("PetitionGenerationCreatedBy")
+  documentsUploaded ProcessDocument[] @relation("ProcessDocumentUploadedBy")
   teamProfile TeamMemberProfile?
 
   @@map("user")
@@ -153,6 +154,8 @@ model Organization {
   petitionTemplateVersions PetitionTemplateVersion[]
   petitionGenerations PetitionGeneration[]
   teamMemberProfiles TeamMemberProfile[]
+  processDocuments ProcessDocument[]
+  storageUsage OrganizationStorageUsage?
 
   @@map("organization")
 }
@@ -521,6 +524,7 @@ model Process {
   agendaEvents AgendaEvent[]
   publications Publication[]
   petitionGenerations PetitionGeneration[]
+  documents ProcessDocument[]
 
   @@unique([organizationId, cnjNormalized])
   @@unique([organizationId, internalCode])
@@ -959,4 +963,44 @@ model PetitionGeneration {
   @@index([organizationId, processId, createdAt])
   @@index([organizationId, clientId, createdAt])
   @@map("petition_generation")
+}
+
+/// Uso agregado de documentos por organização. A reserva impede que uploads simultâneos ultrapassem o plano.
+model OrganizationStorageUsage {
+  organizationId String @id @db.Uuid
+  usedBytes BigInt @default(0)
+  reservedBytes BigInt @default(0)
+  extraBytes BigInt @default(0)
+  updatedAt DateTime @updatedAt
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("organization_storage_usage")
+}
+
+/// PDF privado: o PostgreSQL guarda apenas metadados, nunca o conteúdo do arquivo.
+model ProcessDocument {
+  id String @id @default(uuid()) @db.Uuid
+  organizationId String @db.Uuid
+  processId String @db.Uuid
+  uploadedByUserId String? @db.Uuid
+  originalName String
+  displayName String
+  storageKey String @unique
+  mimeType String @default("application/pdf")
+  sizeBytes BigInt
+  status String @default("PENDING")
+  source String @default("UPLOAD")
+  uploadExpiresAt DateTime?
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process Process @relation(fields: [processId], references: [id], onDelete: Cascade)
+  uploadedBy User? @relation("ProcessDocumentUploadedBy", fields: [uploadedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, processId, status, createdAt])
+  @@index([status, uploadExpiresAt])
+  @@index([status, deletedAt])
+  @@map("process_document")
 }

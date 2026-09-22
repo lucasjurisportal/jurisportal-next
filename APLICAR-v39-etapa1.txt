@@ -1,0 +1,11 @@
+JURISPORTAL NEXT v39 — DOCUMENTOS / R2, ETAPA 1 (STAGING)
+
+1. Este arquivo não inclui .env.local, .git, node_modules ou .next.
+2. Faça backup/commit da sua pasta v38. Copie arquivos sobre uma CÓPIA do projeto.
+3. Leia docs/blocos/32-documentos-r2-v39-etapa1.md para CORS e sequência de comandos.
+4. Rode: npm ci; npm run db:validate; npm run db:generate; npm run typecheck; npm run build; npm run db:status.
+5. Se tudo estiver coerente, npm run db:deploy no BANCO DE DESENVOLVIMENTO, nunca reset.
+6. Teste upload e download de PDF FICTÍCIO no bucket jurisportal-staging.
+7. Retorne erros/logs sem enviar credenciais. Não entrar em produção ainda.
+
+ESCOPO NÃO INCLUÍDO: ZIP, backups, PDF de petições, IA, WhatsApp, cobrança.

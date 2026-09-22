@@ -87,7 +87,9 @@ export const ModelName = {
   ExternalCalendarEventLink: 'ExternalCalendarEventLink',
   PetitionTemplate: 'PetitionTemplate',
   PetitionTemplateVersion: 'PetitionTemplateVersion',
-  PetitionGeneration: 'PetitionGeneration'
+  PetitionGeneration: 'PetitionGeneration',
+  OrganizationStorageUsage: 'OrganizationStorageUsage',
+  ProcessDocument: 'ProcessDocument'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -757,6 +759,38 @@ export const PetitionGenerationScalarFieldEnum = {
 } as const
 
 export type PetitionGenerationScalarFieldEnum = (typeof PetitionGenerationScalarFieldEnum)[keyof typeof PetitionGenerationScalarFieldEnum]
+
+
+export const OrganizationStorageUsageScalarFieldEnum = {
+  organizationId: 'organizationId',
+  usedBytes: 'usedBytes',
+  reservedBytes: 'reservedBytes',
+  extraBytes: 'extraBytes',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationStorageUsageScalarFieldEnum = (typeof OrganizationStorageUsageScalarFieldEnum)[keyof typeof OrganizationStorageUsageScalarFieldEnum]
+
+
+export const ProcessDocumentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  processId: 'processId',
+  uploadedByUserId: 'uploadedByUserId',
+  originalName: 'originalName',
+  displayName: 'displayName',
+  storageKey: 'storageKey',
+  mimeType: 'mimeType',
+  sizeBytes: 'sizeBytes',
+  status: 'status',
+  source: 'source',
+  uploadExpiresAt: 'uploadExpiresAt',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProcessDocumentScalarFieldEnum = (typeof ProcessDocumentScalarFieldEnum)[keyof typeof ProcessDocumentScalarFieldEnum]
 
 
 export const SortOrder = {

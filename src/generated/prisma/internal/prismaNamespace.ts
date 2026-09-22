@@ -433,7 +433,9 @@ export const ModelName = {
   ExternalCalendarEventLink: 'ExternalCalendarEventLink',
   PetitionTemplate: 'PetitionTemplate',
   PetitionTemplateVersion: 'PetitionTemplateVersion',
-  PetitionGeneration: 'PetitionGeneration'
+  PetitionGeneration: 'PetitionGeneration',
+  OrganizationStorageUsage: 'OrganizationStorageUsage',
+  ProcessDocument: 'ProcessDocument'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -449,7 +451,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration"
+    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3191,6 +3193,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    OrganizationStorageUsage: {
+      payload: Prisma.$OrganizationStorageUsagePayload<ExtArgs>
+      fields: Prisma.OrganizationStorageUsageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OrganizationStorageUsageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OrganizationStorageUsageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload>
+        }
+        findFirst: {
+          args: Prisma.OrganizationStorageUsageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OrganizationStorageUsageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload>
+        }
+        findMany: {
+          args: Prisma.OrganizationStorageUsageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload>[]
+        }
+        create: {
+          args: Prisma.OrganizationStorageUsageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload>
+        }
+        createMany: {
+          args: Prisma.OrganizationStorageUsageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OrganizationStorageUsageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload>[]
+        }
+        delete: {
+          args: Prisma.OrganizationStorageUsageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload>
+        }
+        update: {
+          args: Prisma.OrganizationStorageUsageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload>
+        }
+        deleteMany: {
+          args: Prisma.OrganizationStorageUsageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OrganizationStorageUsageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OrganizationStorageUsageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload>[]
+        }
+        upsert: {
+          args: Prisma.OrganizationStorageUsageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OrganizationStorageUsagePayload>
+        }
+        aggregate: {
+          args: Prisma.OrganizationStorageUsageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOrganizationStorageUsage>
+        }
+        groupBy: {
+          args: Prisma.OrganizationStorageUsageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationStorageUsageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OrganizationStorageUsageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OrganizationStorageUsageCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProcessDocument: {
+      payload: Prisma.$ProcessDocumentPayload<ExtArgs>
+      fields: Prisma.ProcessDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProcessDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProcessDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.ProcessDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProcessDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.ProcessDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.ProcessDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.ProcessDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProcessDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.ProcessDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload>
+        }
+        update: {
+          args: Prisma.ProcessDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProcessDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProcessDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProcessDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProcessDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.ProcessDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProcessDocument>
+        }
+        groupBy: {
+          args: Prisma.ProcessDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProcessDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProcessDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProcessDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3883,6 +4033,38 @@ export const PetitionGenerationScalarFieldEnum = {
 export type PetitionGenerationScalarFieldEnum = (typeof PetitionGenerationScalarFieldEnum)[keyof typeof PetitionGenerationScalarFieldEnum]
 
 
+export const OrganizationStorageUsageScalarFieldEnum = {
+  organizationId: 'organizationId',
+  usedBytes: 'usedBytes',
+  reservedBytes: 'reservedBytes',
+  extraBytes: 'extraBytes',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrganizationStorageUsageScalarFieldEnum = (typeof OrganizationStorageUsageScalarFieldEnum)[keyof typeof OrganizationStorageUsageScalarFieldEnum]
+
+
+export const ProcessDocumentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  processId: 'processId',
+  uploadedByUserId: 'uploadedByUserId',
+  originalName: 'originalName',
+  displayName: 'displayName',
+  storageKey: 'storageKey',
+  mimeType: 'mimeType',
+  sizeBytes: 'sizeBytes',
+  status: 'status',
+  source: 'source',
+  uploadExpiresAt: 'uploadExpiresAt',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProcessDocumentScalarFieldEnum = (typeof ProcessDocumentScalarFieldEnum)[keyof typeof ProcessDocumentScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4004,6 +4186,20 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
     
 
 
@@ -4208,6 +4404,8 @@ export type GlobalOmitConfig = {
   petitionTemplate?: Prisma.PetitionTemplateOmit
   petitionTemplateVersion?: Prisma.PetitionTemplateVersionOmit
   petitionGeneration?: Prisma.PetitionGenerationOmit
+  organizationStorageUsage?: Prisma.OrganizationStorageUsageOmit
+  processDocument?: Prisma.ProcessDocumentOmit
 }
 
 /* Types for Logging */

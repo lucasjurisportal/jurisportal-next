@@ -415,6 +415,7 @@ export type ProcessWhereInput = {
   agendaEvents?: Prisma.AgendaEventListRelationFilter
   publications?: Prisma.PublicationListRelationFilter
   petitionGenerations?: Prisma.PetitionGenerationListRelationFilter
+  documents?: Prisma.ProcessDocumentListRelationFilter
 }
 
 export type ProcessOrderByWithRelationInput = {
@@ -459,6 +460,7 @@ export type ProcessOrderByWithRelationInput = {
   agendaEvents?: Prisma.AgendaEventOrderByRelationAggregateInput
   publications?: Prisma.PublicationOrderByRelationAggregateInput
   petitionGenerations?: Prisma.PetitionGenerationOrderByRelationAggregateInput
+  documents?: Prisma.ProcessDocumentOrderByRelationAggregateInput
 }
 
 export type ProcessWhereUniqueInput = Prisma.AtLeast<{
@@ -509,6 +511,7 @@ export type ProcessWhereUniqueInput = Prisma.AtLeast<{
   agendaEvents?: Prisma.AgendaEventListRelationFilter
   publications?: Prisma.PublicationListRelationFilter
   petitionGenerations?: Prisma.PetitionGenerationListRelationFilter
+  documents?: Prisma.ProcessDocumentListRelationFilter
 }, "id" | "organizationId_cnjNormalized" | "organizationId_internalCode" | "organizationId_internalYear_internalSequence">
 
 export type ProcessOrderByWithAggregationInput = {
@@ -616,6 +619,7 @@ export type ProcessCreateInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateInput = {
@@ -655,6 +659,7 @@ export type ProcessUncheckedCreateInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUpdateInput = {
@@ -694,6 +699,7 @@ export type ProcessUpdateInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateInput = {
@@ -733,6 +739,7 @@ export type ProcessUncheckedUpdateInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateManyInput = {
@@ -1308,6 +1315,20 @@ export type ProcessUpdateOneWithoutPetitionGenerationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProcessUpdateToOneWithWhereWithoutPetitionGenerationsInput, Prisma.ProcessUpdateWithoutPetitionGenerationsInput>, Prisma.ProcessUncheckedUpdateWithoutPetitionGenerationsInput>
 }
 
+export type ProcessCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.ProcessCreateWithoutDocumentsInput, Prisma.ProcessUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.ProcessCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.ProcessWhereUniqueInput
+}
+
+export type ProcessUpdateOneRequiredWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProcessCreateWithoutDocumentsInput, Prisma.ProcessUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.ProcessCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.ProcessUpsertWithoutDocumentsInput
+  connect?: Prisma.ProcessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProcessUpdateToOneWithWhereWithoutDocumentsInput, Prisma.ProcessUpdateWithoutDocumentsInput>, Prisma.ProcessUncheckedUpdateWithoutDocumentsInput>
+}
+
 export type ProcessCreateWithoutResponsibleInput = {
   id?: string
   cnjRaw: string
@@ -1344,6 +1365,7 @@ export type ProcessCreateWithoutResponsibleInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutResponsibleInput = {
@@ -1382,6 +1404,7 @@ export type ProcessUncheckedCreateWithoutResponsibleInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutResponsibleInput = {
@@ -1430,6 +1453,7 @@ export type ProcessCreateWithoutCreatedByInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutCreatedByInput = {
@@ -1468,6 +1492,7 @@ export type ProcessUncheckedCreateWithoutCreatedByInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutCreatedByInput = {
@@ -1516,6 +1541,7 @@ export type ProcessCreateWithoutUpdatedByInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutUpdatedByInput = {
@@ -1554,6 +1580,7 @@ export type ProcessUncheckedCreateWithoutUpdatedByInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutUpdatedByInput = {
@@ -1602,6 +1629,7 @@ export type ProcessCreateWithoutCnjLockedByInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutCnjLockedByInput = {
@@ -1640,6 +1668,7 @@ export type ProcessUncheckedCreateWithoutCnjLockedByInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutCnjLockedByInput = {
@@ -1785,6 +1814,7 @@ export type ProcessCreateWithoutOrganizationInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutOrganizationInput = {
@@ -1823,6 +1853,7 @@ export type ProcessUncheckedCreateWithoutOrganizationInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutOrganizationInput = {
@@ -1887,6 +1918,7 @@ export type ProcessCreateWithoutClientsInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutClientsInput = {
@@ -1925,6 +1957,7 @@ export type ProcessUncheckedCreateWithoutClientsInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutClientsInput = {
@@ -1979,6 +2012,7 @@ export type ProcessUpdateWithoutClientsInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutClientsInput = {
@@ -2017,6 +2051,7 @@ export type ProcessUncheckedUpdateWithoutClientsInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateWithoutPartiesInput = {
@@ -2055,6 +2090,7 @@ export type ProcessCreateWithoutPartiesInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutPartiesInput = {
@@ -2093,6 +2129,7 @@ export type ProcessUncheckedCreateWithoutPartiesInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutPartiesInput = {
@@ -2147,6 +2184,7 @@ export type ProcessUpdateWithoutPartiesInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutPartiesInput = {
@@ -2185,6 +2223,7 @@ export type ProcessUncheckedUpdateWithoutPartiesInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateWithoutTimelineInput = {
@@ -2223,6 +2262,7 @@ export type ProcessCreateWithoutTimelineInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutTimelineInput = {
@@ -2261,6 +2301,7 @@ export type ProcessUncheckedCreateWithoutTimelineInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutTimelineInput = {
@@ -2315,6 +2356,7 @@ export type ProcessUpdateWithoutTimelineInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutTimelineInput = {
@@ -2353,6 +2395,7 @@ export type ProcessUncheckedUpdateWithoutTimelineInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateWithoutWorkItemsInput = {
@@ -2391,6 +2434,7 @@ export type ProcessCreateWithoutWorkItemsInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutWorkItemsInput = {
@@ -2429,6 +2473,7 @@ export type ProcessUncheckedCreateWithoutWorkItemsInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutWorkItemsInput = {
@@ -2483,6 +2528,7 @@ export type ProcessUpdateWithoutWorkItemsInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutWorkItemsInput = {
@@ -2521,6 +2567,7 @@ export type ProcessUncheckedUpdateWithoutWorkItemsInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateWithoutFeeAgreementInput = {
@@ -2559,6 +2606,7 @@ export type ProcessCreateWithoutFeeAgreementInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutFeeAgreementInput = {
@@ -2597,6 +2645,7 @@ export type ProcessUncheckedCreateWithoutFeeAgreementInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutFeeAgreementInput = {
@@ -2651,6 +2700,7 @@ export type ProcessUpdateWithoutFeeAgreementInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutFeeAgreementInput = {
@@ -2689,6 +2739,7 @@ export type ProcessUncheckedUpdateWithoutFeeAgreementInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateWithoutFinanceEntriesInput = {
@@ -2727,6 +2778,7 @@ export type ProcessCreateWithoutFinanceEntriesInput = {
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutFinanceEntriesInput = {
@@ -2765,6 +2817,7 @@ export type ProcessUncheckedCreateWithoutFinanceEntriesInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutFinanceEntriesInput = {
@@ -2819,6 +2872,7 @@ export type ProcessUpdateWithoutFinanceEntriesInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutFinanceEntriesInput = {
@@ -2857,6 +2911,7 @@ export type ProcessUncheckedUpdateWithoutFinanceEntriesInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateWithoutAgendaEventsInput = {
@@ -2895,6 +2950,7 @@ export type ProcessCreateWithoutAgendaEventsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutAgendaEventsInput = {
@@ -2933,6 +2989,7 @@ export type ProcessUncheckedCreateWithoutAgendaEventsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutAgendaEventsInput = {
@@ -2987,6 +3044,7 @@ export type ProcessUpdateWithoutAgendaEventsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutAgendaEventsInput = {
@@ -3025,6 +3083,7 @@ export type ProcessUncheckedUpdateWithoutAgendaEventsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateWithoutPublicationsInput = {
@@ -3063,6 +3122,7 @@ export type ProcessCreateWithoutPublicationsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutPublicationsInput = {
@@ -3101,6 +3161,7 @@ export type ProcessUncheckedCreateWithoutPublicationsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutPublicationsInput = {
@@ -3155,6 +3216,7 @@ export type ProcessUpdateWithoutPublicationsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutPublicationsInput = {
@@ -3193,6 +3255,7 @@ export type ProcessUncheckedUpdateWithoutPublicationsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateWithoutPetitionGenerationsInput = {
@@ -3231,6 +3294,7 @@ export type ProcessCreateWithoutPetitionGenerationsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessUncheckedCreateWithoutPetitionGenerationsInput = {
@@ -3269,6 +3333,7 @@ export type ProcessUncheckedCreateWithoutPetitionGenerationsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type ProcessCreateOrConnectWithoutPetitionGenerationsInput = {
@@ -3323,6 +3388,7 @@ export type ProcessUpdateWithoutPetitionGenerationsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutPetitionGenerationsInput = {
@@ -3361,6 +3427,179 @@ export type ProcessUncheckedUpdateWithoutPetitionGenerationsInput = {
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
+}
+
+export type ProcessCreateWithoutDocumentsInput = {
+  id?: string
+  cnjRaw: string
+  cnjNormalized: string
+  cnjFormatted: string
+  internalCode: string
+  internalYear: number
+  internalSequence: number
+  cnjLockedAt: Date | string
+  source?: string
+  status?: string
+  court?: string | null
+  division?: string | null
+  district?: string | null
+  processClass?: string | null
+  subject?: string | null
+  caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distributionDate?: Date | string | null
+  notes?: string | null
+  archivedAt?: Date | string | null
+  closedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutProcessesInput
+  responsible?: Prisma.UserCreateNestedOneWithoutProcessesResponsibleInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutProcessesCreatedInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutProcessesUpdatedInput
+  cnjLockedBy?: Prisma.UserCreateNestedOneWithoutProcessCnjLocksInput
+  clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
+  parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
+  timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
+  feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
+  financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
+  agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
+  publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
+  petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+}
+
+export type ProcessUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  organizationId: string
+  cnjRaw: string
+  cnjNormalized: string
+  cnjFormatted: string
+  internalCode: string
+  internalYear: number
+  internalSequence: number
+  cnjLockedAt: Date | string
+  cnjLockedByUserId?: string | null
+  source?: string
+  status?: string
+  court?: string | null
+  division?: string | null
+  district?: string | null
+  processClass?: string | null
+  subject?: string | null
+  caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distributionDate?: Date | string | null
+  responsibleUserId?: string | null
+  notes?: string | null
+  archivedAt?: Date | string | null
+  closedAt?: Date | string | null
+  createdByUserId?: string | null
+  updatedByUserId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
+  parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
+  timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
+  feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
+  financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
+  agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
+  publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+}
+
+export type ProcessCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.ProcessWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProcessCreateWithoutDocumentsInput, Prisma.ProcessUncheckedCreateWithoutDocumentsInput>
+}
+
+export type ProcessUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.ProcessUpdateWithoutDocumentsInput, Prisma.ProcessUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.ProcessCreateWithoutDocumentsInput, Prisma.ProcessUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.ProcessWhereInput
+}
+
+export type ProcessUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.ProcessWhereInput
+  data: Prisma.XOR<Prisma.ProcessUpdateWithoutDocumentsInput, Prisma.ProcessUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type ProcessUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjRaw?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjNormalized?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjFormatted?: Prisma.StringFieldUpdateOperationsInput | string
+  internalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  internalYear?: Prisma.IntFieldUpdateOperationsInput | number
+  internalSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  cnjLockedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutProcessesNestedInput
+  responsible?: Prisma.UserUpdateOneWithoutProcessesResponsibleNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutProcessesCreatedNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutProcessesUpdatedNestedInput
+  cnjLockedBy?: Prisma.UserUpdateOneWithoutProcessCnjLocksNestedInput
+  clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
+  parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
+  timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
+  feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
+  financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
+  agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
+  publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+}
+
+export type ProcessUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjRaw?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjNormalized?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjFormatted?: Prisma.StringFieldUpdateOperationsInput | string
+  internalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  internalYear?: Prisma.IntFieldUpdateOperationsInput | number
+  internalSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  cnjLockedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cnjLockedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
+  parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
+  timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
+  feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
+  financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
+  agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
+  publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessCreateManyResponsibleInput = {
@@ -3515,6 +3754,7 @@ export type ProcessUpdateWithoutResponsibleInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutResponsibleInput = {
@@ -3553,6 +3793,7 @@ export type ProcessUncheckedUpdateWithoutResponsibleInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateManyWithoutResponsibleInput = {
@@ -3620,6 +3861,7 @@ export type ProcessUpdateWithoutCreatedByInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutCreatedByInput = {
@@ -3658,6 +3900,7 @@ export type ProcessUncheckedUpdateWithoutCreatedByInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateManyWithoutCreatedByInput = {
@@ -3725,6 +3968,7 @@ export type ProcessUpdateWithoutUpdatedByInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutUpdatedByInput = {
@@ -3763,6 +4007,7 @@ export type ProcessUncheckedUpdateWithoutUpdatedByInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -3830,6 +4075,7 @@ export type ProcessUpdateWithoutCnjLockedByInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutCnjLockedByInput = {
@@ -3868,6 +4114,7 @@ export type ProcessUncheckedUpdateWithoutCnjLockedByInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateManyWithoutCnjLockedByInput = {
@@ -3964,6 +4211,7 @@ export type ProcessUpdateWithoutOrganizationInput = {
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateWithoutOrganizationInput = {
@@ -4002,6 +4250,7 @@ export type ProcessUncheckedUpdateWithoutOrganizationInput = {
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
   petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type ProcessUncheckedUpdateManyWithoutOrganizationInput = {
@@ -4047,6 +4296,7 @@ export type ProcessCountOutputType = {
   agendaEvents: number
   publications: number
   petitionGenerations: number
+  documents: number
 }
 
 export type ProcessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4058,6 +4308,7 @@ export type ProcessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   agendaEvents?: boolean | ProcessCountOutputTypeCountAgendaEventsArgs
   publications?: boolean | ProcessCountOutputTypeCountPublicationsArgs
   petitionGenerations?: boolean | ProcessCountOutputTypeCountPetitionGenerationsArgs
+  documents?: boolean | ProcessCountOutputTypeCountDocumentsArgs
 }
 
 /**
@@ -4126,6 +4377,13 @@ export type ProcessCountOutputTypeCountPetitionGenerationsArgs<ExtArgs extends r
   where?: Prisma.PetitionGenerationWhereInput
 }
 
+/**
+ * ProcessCountOutputType without action
+ */
+export type ProcessCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcessDocumentWhereInput
+}
+
 
 export type ProcessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4169,6 +4427,7 @@ export type ProcessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   agendaEvents?: boolean | Prisma.Process$agendaEventsArgs<ExtArgs>
   publications?: boolean | Prisma.Process$publicationsArgs<ExtArgs>
   petitionGenerations?: boolean | Prisma.Process$petitionGenerationsArgs<ExtArgs>
+  documents?: boolean | Prisma.Process$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.ProcessCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["process"]>
 
@@ -4288,6 +4547,7 @@ export type ProcessInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   agendaEvents?: boolean | Prisma.Process$agendaEventsArgs<ExtArgs>
   publications?: boolean | Prisma.Process$publicationsArgs<ExtArgs>
   petitionGenerations?: boolean | Prisma.Process$petitionGenerationsArgs<ExtArgs>
+  documents?: boolean | Prisma.Process$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.ProcessCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProcessIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4322,6 +4582,7 @@ export type $ProcessPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     agendaEvents: Prisma.$AgendaEventPayload<ExtArgs>[]
     publications: Prisma.$PublicationPayload<ExtArgs>[]
     petitionGenerations: Prisma.$PetitionGenerationPayload<ExtArgs>[]
+    documents: Prisma.$ProcessDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4759,6 +5020,7 @@ export interface Prisma__ProcessClient<T, Null = never, ExtArgs extends runtime.
   agendaEvents<T extends Prisma.Process$agendaEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$agendaEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgendaEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   publications<T extends Prisma.Process$publicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$publicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PublicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   petitionGenerations<T extends Prisma.Process$petitionGenerationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$petitionGenerationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetitionGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.Process$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5500,6 +5762,30 @@ export type Process$petitionGenerationsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.PetitionGenerationScalarFieldEnum | Prisma.PetitionGenerationScalarFieldEnum[]
+}
+
+/**
+ * Process.documents
+ */
+export type Process$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcessDocument
+   */
+  select?: Prisma.ProcessDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcessDocument
+   */
+  omit?: Prisma.ProcessDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcessDocumentInclude<ExtArgs> | null
+  where?: Prisma.ProcessDocumentWhereInput
+  orderBy?: Prisma.ProcessDocumentOrderByWithRelationInput | Prisma.ProcessDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.ProcessDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcessDocumentScalarFieldEnum | Prisma.ProcessDocumentScalarFieldEnum[]
 }
 
 /**

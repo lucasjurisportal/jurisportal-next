@@ -2,6 +2,7 @@ import { prisma } from "@/infrastructure/database/prisma";
 import { OFFICIAL_PETITION_TEMPLATES, getOfficialPetitionTemplate } from "../domain/official-templates";
 import type { PetitionTemplateInput } from "../domain/petition-template.schema";
 import { replacePetitionVariables } from "../domain/template-variables";
+import { decodeRichDocument, richToPlain } from "../domain/rich-document";
 
 export async function listPetitionTemplates(input: {
   organizationId: string;
@@ -33,6 +34,7 @@ export async function listPetitionTemplates(input: {
       scope: true,
       status: true,
       currentVersion: true,
+      createdByUserId: true,
       updatedAt: true,
     },
   });
@@ -198,6 +200,74 @@ export async function setPetitionTemplateArchived(input: {
   });
 }
 
+
+/**
+ * Elimina apenas a base reutilizável do escritório. As peças já geradas são registros
+ * independentes e permanecem acessíveis, inclusive PDFs já anexados aos processos.
+ * Versões do modelo são excluídas junto com a base; eventos de auditoria permanecem.
+ */
+export async function deletePetitionTemplatePermanently(input: {
+  organizationId: string;
+  actorUserId: string;
+  actorRole: string;
+  templateId: string;
+}) {
+  // A interface não é uma barreira de segurança: a regra é aplicada dentro do serviço.
+  return prisma.$transaction(async (tx) => {
+    const template = await tx.petitionTemplate.findFirst({
+      where: { id: input.templateId, organizationId: input.organizationId },
+      select: {
+        id: true,
+        status: true,
+        createdByUserId: true,
+        _count: { select: { versions: true, generations: true } },
+      },
+    });
+    if (!template) throw new Error("PETITION_TEMPLATE_NOT_FOUND");
+    if (input.actorRole !== "owner" && template.createdByUserId !== input.actorUserId) {
+      throw new Error("PETITION_TEMPLATE_DELETE_FORBIDDEN");
+    }
+
+    // Preserva os rascunhos/peças já gerados e seus snapshots independentes.
+    // O schema também define onDelete: SetNull para esse relacionamento.
+    await tx.petitionGeneration.updateMany({
+      where: { organizationId: input.organizationId, templateId: template.id },
+      data: { templateId: null },
+    });
+
+    // O conteúdo do modelo e de todas as suas versões sai definitivamente do banco.
+    await tx.petitionTemplateVersion.deleteMany({
+      where: { organizationId: input.organizationId, templateId: template.id },
+    });
+    const deleted = await tx.petitionTemplate.deleteMany({
+      where: { id: template.id, organizationId: input.organizationId },
+    });
+    if (deleted.count !== 1) throw new Error("PETITION_TEMPLATE_NOT_FOUND");
+
+    // Evidência mínima de quem excluiu e quando, sem reter texto/nome do modelo apagado.
+    await tx.auditEvent.create({
+      data: {
+        organizationId: input.organizationId,
+        actorUserId: input.actorUserId,
+        category: "petition_templates",
+        action: "petition_template.deleted_permanently",
+        entityType: "petition_template",
+        entityId: template.id,
+        metadata: {
+          previousStatus: template.status,
+          versionsDeleted: template._count.versions,
+          generationsPreserved: template._count.generations,
+        },
+      },
+    });
+    return {
+      id: template.id,
+      versionsDeleted: template._count.versions,
+      generationsPreserved: template._count.generations,
+    };
+  });
+}
+
 export async function getPetitionGenerationOptions(organizationId: string) {
   const [processes, clients] = await Promise.all([
     prisma.process.findMany({
@@ -211,7 +281,6 @@ export async function getPetitionGenerationOptions(organizationId: string) {
         subject: true,
         clients: {
           orderBy: { isPrimary: "desc" },
-          take: 1,
           select: { client: { select: { id: true, name: true, tradeName: true } } },
         },
       },
@@ -307,6 +376,18 @@ export async function generatePetitionDraft(input: {
   if (client) {
     values["{{CLIENTE_NOME}}"] = client.tradeName || client.name;
     values["{{CLIENTE_CPF_CNPJ}}"] = client.taxIdRaw;
+    if (client.email) values["{{CLIENTE_EMAIL}}"] = client.email;
+    if (client.whatsapp) values["{{CLIENTE_WHATSAPP}}"] = client.whatsapp;
+    if (client.city) values["{{CLIENTE_CIDADE}}"] = client.city;
+    if (client.state) values["{{CLIENTE_ESTADO}}"] = client.state;
+    if (client.postalCode) values["{{CLIENTE_CEP}}"] = client.postalCode;
+    const address = [
+      [client.street, client.number].filter(Boolean).join(", "),
+      client.complement, client.district,
+      [client.city, client.state].filter(Boolean).join("/"),
+      client.postalCode ? `CEP ${client.postalCode}` : "",
+    ].filter(Boolean).join(" · ");
+    if (address) values["{{CLIENTE_ENDERECO}}"] = address;
   }
   if (process) {
     values["{{PROCESSO_NUMERO}}"] = process.cnjFormatted;
@@ -319,7 +400,7 @@ export async function generatePetitionDraft(input: {
   }
 
   const renderedContent = replacePetitionVariables(content, values);
-  const unresolvedVariables = Array.from(new Set(renderedContent.match(/\{\{[A-Z0-9_]+\}\}/g) ?? []));
+  const unresolvedVariables = Array.from(new Set(richToPlain(decodeRichDocument(renderedContent)).match(/\{\{[A-Z0-9_]+\}\}/g) ?? []));
 
   const generation = await prisma.$transaction(async (tx) => {
     const created = await tx.petitionGeneration.create({

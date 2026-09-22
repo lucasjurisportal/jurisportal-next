@@ -237,6 +237,7 @@ export type UserWhereInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateListRelationFilter
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionListRelationFilter
   petitionGenerationsCreated?: Prisma.PetitionGenerationListRelationFilter
+  documentsUploaded?: Prisma.ProcessDocumentListRelationFilter
   teamProfile?: Prisma.XOR<Prisma.TeamMemberProfileNullableScalarRelationFilter, Prisma.TeamMemberProfileWhereInput> | null
 }
 
@@ -287,6 +288,7 @@ export type UserOrderByWithRelationInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateOrderByRelationAggregateInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionOrderByRelationAggregateInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationOrderByRelationAggregateInput
+  documentsUploaded?: Prisma.ProcessDocumentOrderByRelationAggregateInput
   teamProfile?: Prisma.TeamMemberProfileOrderByWithRelationInput
 }
 
@@ -340,6 +342,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   petitionTemplatesUpdated?: Prisma.PetitionTemplateListRelationFilter
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionListRelationFilter
   petitionGenerationsCreated?: Prisma.PetitionGenerationListRelationFilter
+  documentsUploaded?: Prisma.ProcessDocumentListRelationFilter
   teamProfile?: Prisma.XOR<Prisma.TeamMemberProfileNullableScalarRelationFilter, Prisma.TeamMemberProfileWhereInput> | null
 }, "id" | "email">
 
@@ -416,6 +419,7 @@ export type UserCreateInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -466,6 +470,7 @@ export type UserUncheckedCreateInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -516,6 +521,7 @@ export type UserUpdateInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -566,6 +572,7 @@ export type UserUncheckedUpdateInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -1267,6 +1274,22 @@ export type UserUpdateOneWithoutPetitionGenerationsCreatedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPetitionGenerationsCreatedInput, Prisma.UserUpdateWithoutPetitionGenerationsCreatedInput>, Prisma.UserUncheckedUpdateWithoutPetitionGenerationsCreatedInput>
 }
 
+export type UserCreateNestedOneWithoutDocumentsUploadedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDocumentsUploadedInput, Prisma.UserUncheckedCreateWithoutDocumentsUploadedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDocumentsUploadedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutDocumentsUploadedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDocumentsUploadedInput, Prisma.UserUncheckedCreateWithoutDocumentsUploadedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDocumentsUploadedInput
+  upsert?: Prisma.UserUpsertWithoutDocumentsUploadedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDocumentsUploadedInput, Prisma.UserUpdateWithoutDocumentsUploadedInput>, Prisma.UserUncheckedUpdateWithoutDocumentsUploadedInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -1313,6 +1336,7 @@ export type UserCreateWithoutSessionsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -1362,6 +1386,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -1427,6 +1452,7 @@ export type UserUpdateWithoutSessionsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -1476,6 +1502,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -1525,6 +1552,7 @@ export type UserCreateWithoutAccountsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -1574,6 +1602,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -1639,6 +1668,7 @@ export type UserUpdateWithoutAccountsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -1688,6 +1718,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -1737,6 +1768,7 @@ export type UserCreateWithoutMembershipsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -1786,6 +1818,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -1851,6 +1884,7 @@ export type UserUpdateWithoutMembershipsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -1900,6 +1934,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -1949,6 +1984,7 @@ export type UserCreateWithoutInvitationsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -1998,6 +2034,7 @@ export type UserUncheckedCreateWithoutInvitationsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -2063,6 +2100,7 @@ export type UserUpdateWithoutInvitationsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -2112,6 +2150,7 @@ export type UserUncheckedUpdateWithoutInvitationsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -2162,6 +2201,7 @@ export type UserCreateWithoutTeamProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutTeamProfileInput = {
@@ -2211,6 +2251,7 @@ export type UserUncheckedCreateWithoutTeamProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutTeamProfileInput = {
@@ -2276,6 +2317,7 @@ export type UserUpdateWithoutTeamProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamProfileInput = {
@@ -2325,6 +2367,7 @@ export type UserUncheckedUpdateWithoutTeamProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateWithoutAuditEventsInput = {
@@ -2373,6 +2416,7 @@ export type UserCreateWithoutAuditEventsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -2422,6 +2466,7 @@ export type UserUncheckedCreateWithoutAuditEventsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -2487,6 +2532,7 @@ export type UserUpdateWithoutAuditEventsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -2536,6 +2582,7 @@ export type UserUncheckedUpdateWithoutAuditEventsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -2585,6 +2632,7 @@ export type UserCreateWithoutProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -2634,6 +2682,7 @@ export type UserUncheckedCreateWithoutProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -2699,6 +2748,7 @@ export type UserUpdateWithoutProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -2748,6 +2798,7 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -2797,6 +2848,7 @@ export type UserCreateWithoutLawyerOabsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -2846,6 +2898,7 @@ export type UserUncheckedCreateWithoutLawyerOabsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -2911,6 +2964,7 @@ export type UserUpdateWithoutLawyerOabsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -2960,6 +3014,7 @@ export type UserUncheckedUpdateWithoutLawyerOabsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -3009,6 +3064,7 @@ export type UserCreateWithoutLegalAcceptancesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -3058,6 +3114,7 @@ export type UserUncheckedCreateWithoutLegalAcceptancesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -3123,6 +3180,7 @@ export type UserUpdateWithoutLegalAcceptancesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -3172,6 +3230,7 @@ export type UserUncheckedUpdateWithoutLegalAcceptancesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -3221,6 +3280,7 @@ export type UserCreateWithoutSecurityProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -3270,6 +3330,7 @@ export type UserUncheckedCreateWithoutSecurityProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -3335,6 +3396,7 @@ export type UserUpdateWithoutSecurityProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -3384,6 +3446,7 @@ export type UserUncheckedUpdateWithoutSecurityProfileInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -3433,6 +3496,7 @@ export type UserCreateWithoutAuthChallengesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -3482,6 +3546,7 @@ export type UserUncheckedCreateWithoutAuthChallengesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -3547,6 +3612,7 @@ export type UserUpdateWithoutAuthChallengesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -3596,6 +3662,7 @@ export type UserUncheckedUpdateWithoutAuthChallengesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -3645,6 +3712,7 @@ export type UserCreateWithoutTrustedDevicesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -3694,6 +3762,7 @@ export type UserUncheckedCreateWithoutTrustedDevicesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -3759,6 +3828,7 @@ export type UserUpdateWithoutTrustedDevicesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -3808,6 +3878,7 @@ export type UserUncheckedUpdateWithoutTrustedDevicesInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -3857,6 +3928,7 @@ export type UserCreateWithoutPlatformAdminInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -3906,6 +3978,7 @@ export type UserUncheckedCreateWithoutPlatformAdminInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -3971,6 +4044,7 @@ export type UserUpdateWithoutPlatformAdminInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -4020,6 +4094,7 @@ export type UserUncheckedUpdateWithoutPlatformAdminInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -4069,6 +4144,7 @@ export type UserCreateWithoutSecurityEventsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -4118,6 +4194,7 @@ export type UserUncheckedCreateWithoutSecurityEventsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -4183,6 +4260,7 @@ export type UserUpdateWithoutSecurityEventsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -4232,6 +4310,7 @@ export type UserUncheckedUpdateWithoutSecurityEventsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -4281,6 +4360,7 @@ export type UserCreateWithoutClientsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -4330,6 +4410,7 @@ export type UserUncheckedCreateWithoutClientsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -4384,6 +4465,7 @@ export type UserCreateWithoutClientsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -4433,6 +4515,7 @@ export type UserUncheckedCreateWithoutClientsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -4498,6 +4581,7 @@ export type UserUpdateWithoutClientsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -4547,6 +4631,7 @@ export type UserUncheckedUpdateWithoutClientsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -4607,6 +4692,7 @@ export type UserUpdateWithoutClientsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -4656,6 +4742,7 @@ export type UserUncheckedUpdateWithoutClientsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -4705,6 +4792,7 @@ export type UserCreateWithoutProcessesResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -4754,6 +4842,7 @@ export type UserUncheckedCreateWithoutProcessesResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -4808,6 +4897,7 @@ export type UserCreateWithoutProcessesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -4857,6 +4947,7 @@ export type UserUncheckedCreateWithoutProcessesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -4911,6 +5002,7 @@ export type UserCreateWithoutProcessesUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -4960,6 +5052,7 @@ export type UserUncheckedCreateWithoutProcessesUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -5014,6 +5107,7 @@ export type UserCreateWithoutProcessCnjLocksInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -5063,6 +5157,7 @@ export type UserUncheckedCreateWithoutProcessCnjLocksInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -5128,6 +5223,7 @@ export type UserUpdateWithoutProcessesResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -5177,6 +5273,7 @@ export type UserUncheckedUpdateWithoutProcessesResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -5237,6 +5334,7 @@ export type UserUpdateWithoutProcessesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -5286,6 +5384,7 @@ export type UserUncheckedUpdateWithoutProcessesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -5346,6 +5445,7 @@ export type UserUpdateWithoutProcessesUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -5395,6 +5495,7 @@ export type UserUncheckedUpdateWithoutProcessesUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -5455,6 +5556,7 @@ export type UserUpdateWithoutProcessCnjLocksInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -5504,6 +5606,7 @@ export type UserUncheckedUpdateWithoutProcessCnjLocksInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -5553,6 +5656,7 @@ export type UserCreateWithoutTimelineEventsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -5602,6 +5706,7 @@ export type UserUncheckedCreateWithoutTimelineEventsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -5667,6 +5772,7 @@ export type UserUpdateWithoutTimelineEventsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -5716,6 +5822,7 @@ export type UserUncheckedUpdateWithoutTimelineEventsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -5765,6 +5872,7 @@ export type UserCreateWithoutProcessWorkItemsResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -5814,6 +5922,7 @@ export type UserUncheckedCreateWithoutProcessWorkItemsResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -5868,6 +5977,7 @@ export type UserCreateWithoutProcessWorkItemsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -5917,6 +6027,7 @@ export type UserUncheckedCreateWithoutProcessWorkItemsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -5971,6 +6082,7 @@ export type UserCreateWithoutProcessWorkItemsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -6020,6 +6132,7 @@ export type UserUncheckedCreateWithoutProcessWorkItemsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -6085,6 +6198,7 @@ export type UserUpdateWithoutProcessWorkItemsResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -6134,6 +6248,7 @@ export type UserUncheckedUpdateWithoutProcessWorkItemsResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -6194,6 +6309,7 @@ export type UserUpdateWithoutProcessWorkItemsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -6243,6 +6359,7 @@ export type UserUncheckedUpdateWithoutProcessWorkItemsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -6303,6 +6420,7 @@ export type UserUpdateWithoutProcessWorkItemsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -6352,6 +6470,7 @@ export type UserUncheckedUpdateWithoutProcessWorkItemsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -6401,6 +6520,7 @@ export type UserCreateWithoutProcessFeeAgreementsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -6450,6 +6570,7 @@ export type UserUncheckedCreateWithoutProcessFeeAgreementsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -6504,6 +6625,7 @@ export type UserCreateWithoutProcessFeeAgreementsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -6553,6 +6675,7 @@ export type UserUncheckedCreateWithoutProcessFeeAgreementsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -6618,6 +6741,7 @@ export type UserUpdateWithoutProcessFeeAgreementsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -6667,6 +6791,7 @@ export type UserUncheckedUpdateWithoutProcessFeeAgreementsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -6727,6 +6852,7 @@ export type UserUpdateWithoutProcessFeeAgreementsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -6776,6 +6902,7 @@ export type UserUncheckedUpdateWithoutProcessFeeAgreementsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -6825,6 +6952,7 @@ export type UserCreateWithoutProcessFinanceEntriesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -6874,6 +7002,7 @@ export type UserUncheckedCreateWithoutProcessFinanceEntriesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -6939,6 +7068,7 @@ export type UserUpdateWithoutProcessFinanceEntriesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -6988,6 +7118,7 @@ export type UserUncheckedUpdateWithoutProcessFinanceEntriesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -7037,6 +7168,7 @@ export type UserCreateWithoutAgendaEventsResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -7086,6 +7218,7 @@ export type UserUncheckedCreateWithoutAgendaEventsResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -7140,6 +7273,7 @@ export type UserCreateWithoutAgendaEventsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -7189,6 +7323,7 @@ export type UserUncheckedCreateWithoutAgendaEventsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -7243,6 +7378,7 @@ export type UserCreateWithoutAgendaEventsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -7292,6 +7428,7 @@ export type UserUncheckedCreateWithoutAgendaEventsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -7357,6 +7494,7 @@ export type UserUpdateWithoutAgendaEventsResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -7406,6 +7544,7 @@ export type UserUncheckedUpdateWithoutAgendaEventsResponsibleInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -7466,6 +7605,7 @@ export type UserUpdateWithoutAgendaEventsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -7515,6 +7655,7 @@ export type UserUncheckedUpdateWithoutAgendaEventsCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -7575,6 +7716,7 @@ export type UserUpdateWithoutAgendaEventsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -7624,6 +7766,7 @@ export type UserUncheckedUpdateWithoutAgendaEventsUpdatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -7673,6 +7816,7 @@ export type UserCreateWithoutPublicationsReadInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -7722,6 +7866,7 @@ export type UserUncheckedCreateWithoutPublicationsReadInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -7776,6 +7921,7 @@ export type UserCreateWithoutPublicationsTreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -7825,6 +7971,7 @@ export type UserUncheckedCreateWithoutPublicationsTreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -7890,6 +8037,7 @@ export type UserUpdateWithoutPublicationsReadInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -7939,6 +8087,7 @@ export type UserUncheckedUpdateWithoutPublicationsReadInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -7999,6 +8148,7 @@ export type UserUpdateWithoutPublicationsTreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -8048,6 +8198,7 @@ export type UserUncheckedUpdateWithoutPublicationsTreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -8097,6 +8248,7 @@ export type UserCreateWithoutDeadlineReviewsConfirmedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -8146,6 +8298,7 @@ export type UserUncheckedCreateWithoutDeadlineReviewsConfirmedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -8200,6 +8353,7 @@ export type UserCreateWithoutDeadlineReviewsDismissedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -8249,6 +8403,7 @@ export type UserUncheckedCreateWithoutDeadlineReviewsDismissedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -8314,6 +8469,7 @@ export type UserUpdateWithoutDeadlineReviewsConfirmedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -8363,6 +8519,7 @@ export type UserUncheckedUpdateWithoutDeadlineReviewsConfirmedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -8423,6 +8580,7 @@ export type UserUpdateWithoutDeadlineReviewsDismissedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -8472,6 +8630,7 @@ export type UserUncheckedUpdateWithoutDeadlineReviewsDismissedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -8521,6 +8680,7 @@ export type UserCreateWithoutGoogleCalendarConnectionsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -8570,6 +8730,7 @@ export type UserUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -8635,6 +8796,7 @@ export type UserUpdateWithoutGoogleCalendarConnectionsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -8684,6 +8846,7 @@ export type UserUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -8733,6 +8896,7 @@ export type UserCreateWithoutExternalCalendarEventLinksInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -8782,6 +8946,7 @@ export type UserUncheckedCreateWithoutExternalCalendarEventLinksInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -8847,6 +9012,7 @@ export type UserUpdateWithoutExternalCalendarEventLinksInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -8896,6 +9062,7 @@ export type UserUncheckedUpdateWithoutExternalCalendarEventLinksInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -8945,6 +9112,7 @@ export type UserCreateWithoutPetitionTemplatesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -8994,6 +9162,7 @@ export type UserUncheckedCreateWithoutPetitionTemplatesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -9048,6 +9217,7 @@ export type UserCreateWithoutPetitionTemplatesUpdatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateCreateNestedManyWithoutCreatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -9097,6 +9267,7 @@ export type UserUncheckedCreateWithoutPetitionTemplatesUpdatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -9162,6 +9333,7 @@ export type UserUpdateWithoutPetitionTemplatesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -9211,6 +9383,7 @@ export type UserUncheckedUpdateWithoutPetitionTemplatesCreatedInput = {
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -9271,6 +9444,7 @@ export type UserUpdateWithoutPetitionTemplatesUpdatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateUpdateManyWithoutCreatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -9320,6 +9494,7 @@ export type UserUncheckedUpdateWithoutPetitionTemplatesUpdatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -9369,6 +9544,7 @@ export type UserCreateWithoutPetitionTemplateVersionsCreatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateCreateNestedManyWithoutCreatedByInput
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -9418,6 +9594,7 @@ export type UserUncheckedCreateWithoutPetitionTemplateVersionsCreatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -9483,6 +9660,7 @@ export type UserUpdateWithoutPetitionTemplateVersionsCreatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateUpdateManyWithoutCreatedByNestedInput
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -9532,6 +9710,7 @@ export type UserUncheckedUpdateWithoutPetitionTemplateVersionsCreatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -9581,6 +9760,7 @@ export type UserCreateWithoutPetitionGenerationsCreatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateCreateNestedManyWithoutCreatedByInput
   petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
 }
 
@@ -9630,6 +9810,7 @@ export type UserUncheckedCreateWithoutPetitionGenerationsCreatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
 }
 
@@ -9695,6 +9876,7 @@ export type UserUpdateWithoutPetitionGenerationsCreatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateUpdateManyWithoutCreatedByNestedInput
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
 }
 
@@ -9744,6 +9926,223 @@ export type UserUncheckedUpdateWithoutPetitionGenerationsCreatedInput = {
   petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
   petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
   petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutDocumentsUploadedInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MemberCreateNestedManyWithoutUserInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutInviterInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutUserInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutUserInput
+  securityProfile?: Prisma.UserSecurityProfileCreateNestedOneWithoutUserInput
+  authChallenges?: Prisma.AuthChallengeCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+  platformAdmin?: Prisma.PlatformAdminCreateNestedOneWithoutUserInput
+  securityEvents?: Prisma.SecurityEventCreateNestedManyWithoutUserInput
+  clientsCreated?: Prisma.ClientCreateNestedManyWithoutCreatedByInput
+  clientsUpdated?: Prisma.ClientCreateNestedManyWithoutUpdatedByInput
+  processesResponsible?: Prisma.ProcessCreateNestedManyWithoutResponsibleInput
+  processesCreated?: Prisma.ProcessCreateNestedManyWithoutCreatedByInput
+  processesUpdated?: Prisma.ProcessCreateNestedManyWithoutUpdatedByInput
+  timelineEventsCreated?: Prisma.ProcessTimelineEventCreateNestedManyWithoutCreatedByInput
+  processWorkItemsResponsible?: Prisma.ProcessWorkItemCreateNestedManyWithoutResponsibleInput
+  processWorkItemsCreated?: Prisma.ProcessWorkItemCreateNestedManyWithoutCreatedByInput
+  processWorkItemsUpdated?: Prisma.ProcessWorkItemCreateNestedManyWithoutUpdatedByInput
+  processFeeAgreementsCreated?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutCreatedByInput
+  processFeeAgreementsUpdated?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutUpdatedByInput
+  processFinanceEntriesCreated?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutCreatedByInput
+  agendaEventsResponsible?: Prisma.AgendaEventCreateNestedManyWithoutResponsibleInput
+  agendaEventsCreated?: Prisma.AgendaEventCreateNestedManyWithoutCreatedByInput
+  agendaEventsUpdated?: Prisma.AgendaEventCreateNestedManyWithoutUpdatedByInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutUserInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutUserInput
+  publicationsRead?: Prisma.PublicationCreateNestedManyWithoutReadByInput
+  publicationsTreated?: Prisma.PublicationCreateNestedManyWithoutTreatedByInput
+  deadlineReviewsConfirmed?: Prisma.DeadlineReviewCreateNestedManyWithoutConfirmedByInput
+  deadlineReviewsDismissed?: Prisma.DeadlineReviewCreateNestedManyWithoutDismissedByInput
+  processCnjLocks?: Prisma.ProcessCreateNestedManyWithoutCnjLockedByInput
+  petitionTemplatesCreated?: Prisma.PetitionTemplateCreateNestedManyWithoutCreatedByInput
+  petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
+  petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
+  petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDocumentsUploadedInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MemberUncheckedCreateNestedManyWithoutUserInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutInviterInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutUserInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutUserInput
+  securityProfile?: Prisma.UserSecurityProfileUncheckedCreateNestedOneWithoutUserInput
+  authChallenges?: Prisma.AuthChallengeUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+  platformAdmin?: Prisma.PlatformAdminUncheckedCreateNestedOneWithoutUserInput
+  securityEvents?: Prisma.SecurityEventUncheckedCreateNestedManyWithoutUserInput
+  clientsCreated?: Prisma.ClientUncheckedCreateNestedManyWithoutCreatedByInput
+  clientsUpdated?: Prisma.ClientUncheckedCreateNestedManyWithoutUpdatedByInput
+  processesResponsible?: Prisma.ProcessUncheckedCreateNestedManyWithoutResponsibleInput
+  processesCreated?: Prisma.ProcessUncheckedCreateNestedManyWithoutCreatedByInput
+  processesUpdated?: Prisma.ProcessUncheckedCreateNestedManyWithoutUpdatedByInput
+  timelineEventsCreated?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutCreatedByInput
+  processWorkItemsResponsible?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutResponsibleInput
+  processWorkItemsCreated?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutCreatedByInput
+  processWorkItemsUpdated?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  processFeeAgreementsCreated?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutCreatedByInput
+  processFeeAgreementsUpdated?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutUpdatedByInput
+  processFinanceEntriesCreated?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutCreatedByInput
+  agendaEventsResponsible?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutResponsibleInput
+  agendaEventsCreated?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutCreatedByInput
+  agendaEventsUpdated?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutUpdatedByInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutUserInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutUserInput
+  publicationsRead?: Prisma.PublicationUncheckedCreateNestedManyWithoutReadByInput
+  publicationsTreated?: Prisma.PublicationUncheckedCreateNestedManyWithoutTreatedByInput
+  deadlineReviewsConfirmed?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutConfirmedByInput
+  deadlineReviewsDismissed?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutDismissedByInput
+  processCnjLocks?: Prisma.ProcessUncheckedCreateNestedManyWithoutCnjLockedByInput
+  petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
+  petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDocumentsUploadedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDocumentsUploadedInput, Prisma.UserUncheckedCreateWithoutDocumentsUploadedInput>
+}
+
+export type UserUpsertWithoutDocumentsUploadedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDocumentsUploadedInput, Prisma.UserUncheckedUpdateWithoutDocumentsUploadedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDocumentsUploadedInput, Prisma.UserUncheckedCreateWithoutDocumentsUploadedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDocumentsUploadedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDocumentsUploadedInput, Prisma.UserUncheckedUpdateWithoutDocumentsUploadedInput>
+}
+
+export type UserUpdateWithoutDocumentsUploadedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MemberUpdateManyWithoutUserNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutInviterNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutUserNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutUserNestedInput
+  securityProfile?: Prisma.UserSecurityProfileUpdateOneWithoutUserNestedInput
+  authChallenges?: Prisma.AuthChallengeUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+  platformAdmin?: Prisma.PlatformAdminUpdateOneWithoutUserNestedInput
+  securityEvents?: Prisma.SecurityEventUpdateManyWithoutUserNestedInput
+  clientsCreated?: Prisma.ClientUpdateManyWithoutCreatedByNestedInput
+  clientsUpdated?: Prisma.ClientUpdateManyWithoutUpdatedByNestedInput
+  processesResponsible?: Prisma.ProcessUpdateManyWithoutResponsibleNestedInput
+  processesCreated?: Prisma.ProcessUpdateManyWithoutCreatedByNestedInput
+  processesUpdated?: Prisma.ProcessUpdateManyWithoutUpdatedByNestedInput
+  timelineEventsCreated?: Prisma.ProcessTimelineEventUpdateManyWithoutCreatedByNestedInput
+  processWorkItemsResponsible?: Prisma.ProcessWorkItemUpdateManyWithoutResponsibleNestedInput
+  processWorkItemsCreated?: Prisma.ProcessWorkItemUpdateManyWithoutCreatedByNestedInput
+  processWorkItemsUpdated?: Prisma.ProcessWorkItemUpdateManyWithoutUpdatedByNestedInput
+  processFeeAgreementsCreated?: Prisma.ProcessFeeAgreementUpdateManyWithoutCreatedByNestedInput
+  processFeeAgreementsUpdated?: Prisma.ProcessFeeAgreementUpdateManyWithoutUpdatedByNestedInput
+  processFinanceEntriesCreated?: Prisma.ProcessFinanceEntryUpdateManyWithoutCreatedByNestedInput
+  agendaEventsResponsible?: Prisma.AgendaEventUpdateManyWithoutResponsibleNestedInput
+  agendaEventsCreated?: Prisma.AgendaEventUpdateManyWithoutCreatedByNestedInput
+  agendaEventsUpdated?: Prisma.AgendaEventUpdateManyWithoutUpdatedByNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutUserNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutUserNestedInput
+  publicationsRead?: Prisma.PublicationUpdateManyWithoutReadByNestedInput
+  publicationsTreated?: Prisma.PublicationUpdateManyWithoutTreatedByNestedInput
+  deadlineReviewsConfirmed?: Prisma.DeadlineReviewUpdateManyWithoutConfirmedByNestedInput
+  deadlineReviewsDismissed?: Prisma.DeadlineReviewUpdateManyWithoutDismissedByNestedInput
+  processCnjLocks?: Prisma.ProcessUpdateManyWithoutCnjLockedByNestedInput
+  petitionTemplatesCreated?: Prisma.PetitionTemplateUpdateManyWithoutCreatedByNestedInput
+  petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
+  petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
+  petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDocumentsUploadedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MemberUncheckedUpdateManyWithoutUserNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutInviterNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutUserNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutUserNestedInput
+  securityProfile?: Prisma.UserSecurityProfileUncheckedUpdateOneWithoutUserNestedInput
+  authChallenges?: Prisma.AuthChallengeUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+  platformAdmin?: Prisma.PlatformAdminUncheckedUpdateOneWithoutUserNestedInput
+  securityEvents?: Prisma.SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+  clientsCreated?: Prisma.ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientsUpdated?: Prisma.ClientUncheckedUpdateManyWithoutUpdatedByNestedInput
+  processesResponsible?: Prisma.ProcessUncheckedUpdateManyWithoutResponsibleNestedInput
+  processesCreated?: Prisma.ProcessUncheckedUpdateManyWithoutCreatedByNestedInput
+  processesUpdated?: Prisma.ProcessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  timelineEventsCreated?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  processWorkItemsResponsible?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutResponsibleNestedInput
+  processWorkItemsCreated?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  processWorkItemsUpdated?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  processFeeAgreementsCreated?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutCreatedByNestedInput
+  processFeeAgreementsUpdated?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutUpdatedByNestedInput
+  processFinanceEntriesCreated?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  agendaEventsResponsible?: Prisma.AgendaEventUncheckedUpdateManyWithoutResponsibleNestedInput
+  agendaEventsCreated?: Prisma.AgendaEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  agendaEventsUpdated?: Prisma.AgendaEventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutUserNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutUserNestedInput
+  publicationsRead?: Prisma.PublicationUncheckedUpdateManyWithoutReadByNestedInput
+  publicationsTreated?: Prisma.PublicationUncheckedUpdateManyWithoutTreatedByNestedInput
+  deadlineReviewsConfirmed?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutConfirmedByNestedInput
+  deadlineReviewsDismissed?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutDismissedByNestedInput
+  processCnjLocks?: Prisma.ProcessUncheckedUpdateManyWithoutCnjLockedByNestedInput
+  petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
   teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
@@ -9789,6 +10188,7 @@ export type UserCountOutputType = {
   petitionTemplatesUpdated: number
   petitionTemplateVersionsCreated: number
   petitionGenerationsCreated: number
+  documentsUploaded: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -9828,6 +10228,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   petitionTemplatesUpdated?: boolean | UserCountOutputTypeCountPetitionTemplatesUpdatedArgs
   petitionTemplateVersionsCreated?: boolean | UserCountOutputTypeCountPetitionTemplateVersionsCreatedArgs
   petitionGenerationsCreated?: boolean | UserCountOutputTypeCountPetitionGenerationsCreatedArgs
+  documentsUploaded?: boolean | UserCountOutputTypeCountDocumentsUploadedArgs
 }
 
 /**
@@ -10092,6 +10493,13 @@ export type UserCountOutputTypeCountPetitionGenerationsCreatedArgs<ExtArgs exten
   where?: Prisma.PetitionGenerationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDocumentsUploadedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcessDocumentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -10140,6 +10548,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   petitionTemplatesUpdated?: boolean | Prisma.User$petitionTemplatesUpdatedArgs<ExtArgs>
   petitionTemplateVersionsCreated?: boolean | Prisma.User$petitionTemplateVersionsCreatedArgs<ExtArgs>
   petitionGenerationsCreated?: boolean | Prisma.User$petitionGenerationsCreatedArgs<ExtArgs>
+  documentsUploaded?: boolean | Prisma.User$documentsUploadedArgs<ExtArgs>
   teamProfile?: boolean | Prisma.User$teamProfileArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -10215,6 +10624,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   petitionTemplatesUpdated?: boolean | Prisma.User$petitionTemplatesUpdatedArgs<ExtArgs>
   petitionTemplateVersionsCreated?: boolean | Prisma.User$petitionTemplateVersionsCreatedArgs<ExtArgs>
   petitionGenerationsCreated?: boolean | Prisma.User$petitionGenerationsCreatedArgs<ExtArgs>
+  documentsUploaded?: boolean | Prisma.User$documentsUploadedArgs<ExtArgs>
   teamProfile?: boolean | Prisma.User$teamProfileArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -10263,6 +10673,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     petitionTemplatesUpdated: Prisma.$PetitionTemplatePayload<ExtArgs>[]
     petitionTemplateVersionsCreated: Prisma.$PetitionTemplateVersionPayload<ExtArgs>[]
     petitionGenerationsCreated: Prisma.$PetitionGenerationPayload<ExtArgs>[]
+    documentsUploaded: Prisma.$ProcessDocumentPayload<ExtArgs>[]
     teamProfile: Prisma.$TeamMemberProfilePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -10706,6 +11117,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   petitionTemplatesUpdated<T extends Prisma.User$petitionTemplatesUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$petitionTemplatesUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetitionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   petitionTemplateVersionsCreated<T extends Prisma.User$petitionTemplateVersionsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$petitionTemplateVersionsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetitionTemplateVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   petitionGenerationsCreated<T extends Prisma.User$petitionGenerationsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$petitionGenerationsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetitionGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentsUploaded<T extends Prisma.User$documentsUploadedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$documentsUploadedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   teamProfile<T extends Prisma.User$teamProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$teamProfileArgs<ExtArgs>>): Prisma.Prisma__TeamMemberProfileClient<runtime.Types.Result.GetResult<Prisma.$TeamMemberProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -12054,6 +12466,30 @@ export type User$petitionGenerationsCreatedArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.PetitionGenerationScalarFieldEnum | Prisma.PetitionGenerationScalarFieldEnum[]
+}
+
+/**
+ * User.documentsUploaded
+ */
+export type User$documentsUploadedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcessDocument
+   */
+  select?: Prisma.ProcessDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcessDocument
+   */
+  omit?: Prisma.ProcessDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcessDocumentInclude<ExtArgs> | null
+  where?: Prisma.ProcessDocumentWhereInput
+  orderBy?: Prisma.ProcessDocumentOrderByWithRelationInput | Prisma.ProcessDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.ProcessDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcessDocumentScalarFieldEnum | Prisma.ProcessDocumentScalarFieldEnum[]
 }
 
 /**

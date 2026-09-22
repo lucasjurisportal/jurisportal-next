@@ -1,6 +1,8 @@
 "use client";
 
 import { FormEvent, useRef, useState } from "react";
+import { PetitionPaperEditor, type PetitionPaperHandle } from "./PetitionPaperEditor";
+import { decodeRichDocument, richToPlain } from "@/modules/petition-templates/domain/rich-document";
 import { useRouter } from "next/navigation";
 import { PETITION_TEMPLATE_VARIABLES } from "@/modules/petition-templates/domain/template-variables";
 import styles from "./PetitionTemplates.module.css";
@@ -9,7 +11,8 @@ type InitialValue = { id?: string; name: string; category: string; scope: "CLIEN
 
 export function PetitionTemplateForm({ initialValue }: { initialValue?: InitialValue }) {
   const router = useRouter();
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const paperRef = useRef<PetitionPaperHandle>(null);
+  const [paperReset, setPaperReset] = useState(0);
   const [value, setValue] = useState<InitialValue>(initialValue ?? { name: "", category: "", scope: "PROCESS", content: "" });
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -17,13 +20,7 @@ export function PetitionTemplateForm({ initialValue }: { initialValue?: InitialV
   const [importNotice, setImportNotice] = useState("");
 
   function insertVariable(token: string) {
-    const el = textareaRef.current;
-    if (!el) return setValue((current) => ({ ...current, content: `${current.content}${current.content ? " " : ""}${token}` }));
-    const start = el.selectionStart ?? value.content.length;
-    const end = el.selectionEnd ?? start;
-    const next = `${value.content.slice(0, start)}${token}${value.content.slice(end)}`;
-    setValue((current) => ({ ...current, content: next }));
-    requestAnimationFrame(() => { el.focus(); el.setSelectionRange(start + token.length, start + token.length); });
+    paperRef.current?.insertText(token);
   }
 
   async function importFile(file: File | null) {
@@ -40,11 +37,17 @@ export function PetitionTemplateForm({ initialValue }: { initialValue?: InitialV
       const baseName = (data.fileName ?? file.name).replace(/\.(docx|txt)$/i, "");
       setValue((current) => ({ ...current, name: current.name || baseName, content: data.content ?? current.content }));
       setImportNotice(["Conteúdo importado para revisão antes de salvar.", ...(data.warnings ?? [])].join(" "));
+      setPaperReset((number) => number + 1);
+    } catch {
+      setError("Falha de conexão ao importar o documento. Tente novamente.");
     } finally { setImportBusy(false); }
   }
 
   async function submit(event: FormEvent) {
     event.preventDefault();
+    if (richToPlain(decodeRichDocument(value.content)).trim().length < 20) {
+      setError("O modelo precisa de pelo menos 20 caracteres de conteúdo."); return;
+    }
     setError(""); setBusy(true);
     try {
       const response = await fetch(initialValue?.id ? `/api/petition-templates/${initialValue.id}` : "/api/petition-templates", {
@@ -60,6 +63,8 @@ export function PetitionTemplateForm({ initialValue }: { initialValue?: InitialV
       const id = data.template?.id ?? initialValue?.id;
       router.push(id ? `/app/modelos/${id}` : "/app/modelos");
       router.refresh();
+    } catch {
+      setError("Falha de conexão ao salvar o modelo. Revise sua conexão e tente novamente.");
     } finally { setBusy(false); }
   }
 
@@ -75,9 +80,13 @@ export function PetitionTemplateForm({ initialValue }: { initialValue?: InitialV
     <div className={styles.field}>
       <label>Variáveis disponíveis</label>
       <small>Clique para inserir no ponto atual do texto. Os dados só são preenchidos ao gerar o rascunho.</small>
-      <div className={styles.variables}>{PETITION_TEMPLATE_VARIABLES.map(([token, label]) => <button className={styles.variableButton} type="button" key={token} title={label} onClick={() => insertVariable(token)}>{token}</button>)}</div>
+      <div className={styles.variables}>{PETITION_TEMPLATE_VARIABLES.map(([token, label]) => <button className={styles.variableButton} type="button" key={token} title={label} onMouseDown={(e) => e.preventDefault()} onClick={() => insertVariable(token)}>{token}</button>)}</div>
     </div>
-    <div className={styles.field}><label>Conteúdo do modelo</label><textarea ref={textareaRef} value={value.content} onChange={(e) => setValue({ ...value, content: e.target.value })} placeholder="Escreva ou cole o conteúdo do modelo aqui..." /><small>O modelo é apenas uma base. O advogado continua responsável por revisar o documento antes de usar ou protocolar.</small></div>
+    <div className={styles.field}><label>Conteúdo do modelo, em folha A4 editável</label>
+      <PetitionPaperEditor ref={paperRef} content={value.content} resetKey={paperReset} label="Editar modelo reutilizável"
+        onChange={(content) => setValue((current) => ({ ...current, content }))} />
+      <small>Insira variáveis com os botões acima. Negrito, itálico, sublinhado, título e alinhamento são preservados na petição gerada e no PDF.</small>
+    </div>
     <div className={styles.actions}><button className={styles.primaryButton} disabled={busy}>{busy ? "Salvando..." : initialValue?.id ? "Salvar nova versão" : "Criar modelo"}</button></div>
   </form>;
 }
