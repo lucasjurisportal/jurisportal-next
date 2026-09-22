@@ -1,0 +1,57 @@
+name: Jurisportal - Backup diario PDFs (staging)
+
+on:
+  schedule:
+    # 01:00 da madrugada, horario de Sao Paulo. GitHub pode atrasar a execucao.
+    - cron: '0 1 * * *'
+      timezone: 'America/Sao_Paulo'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jurisportal-staging-documents-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+      # Prisma config exige DIRECT_URL, mas este job NAO executa migrations.
+      DIRECT_URL: ${{ secrets.STAGING_DATABASE_URL }}
+      R2_ACCOUNT_ID: ${{ secrets.STAGING_R2_ACCOUNT_ID }}
+      R2_ACCESS_KEY_ID: ${{ secrets.STAGING_R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.STAGING_R2_SECRET_ACCESS_KEY }}
+      R2_BUCKET: jurisportal-staging
+      R2_BACKUP_ACCOUNT_ID: ${{ secrets.STAGING_R2_ACCOUNT_ID }}
+      R2_BACKUP_ACCESS_KEY_ID: ${{ secrets.STAGING_R2_BACKUP_ACCESS_KEY_ID }}
+      R2_BACKUP_SECRET_ACCESS_KEY: ${{ secrets.STAGING_R2_BACKUP_SECRET_ACCESS_KEY }}
+      R2_BACKUP_BUCKET: jurisportal-backup
+      R2_BACKUP_PREFIX: staging
+    steps:
+      - name: Obter codigo da branch principal
+        uses: actions/checkout@v4
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Validar configuracao de backup sem exibir segredos
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DATABASE_URL DIRECT_URL R2_ACCOUNT_ID R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_BACKUP_ACCESS_KEY_ID R2_BACKUP_SECRET_ACCESS_KEY; do
+            test -n "${!name:-}" || { echo "Secret ausente: ${name}"; exit 1; }
+          done
+          test "$R2_BUCKET" = 'jurisportal-staging'
+          test "$R2_BACKUP_PREFIX" = 'staging'
+          test "$R2_BACKUP_BUCKET" = 'jurisportal-backup'
+      - name: Instalar dependencias travadas no lockfile
+        run: npm ci
+      - name: Gerar Prisma Client
+        run: npm run db:generate
+      - name: Copiar PDFs pendentes e confirmar integridade
+        run: npm run backup:documents -- --all
