@@ -1,0 +1,93 @@
+name: Jurisportal - Backup criptografado do PostgreSQL
+
+on:
+  schedule:
+    - cron: '30 1 * * *'
+      timezone: 'America/Sao_Paulo'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jurisportal-database-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      BACKUP_DATABASE_URL: ${{ secrets.BACKUP_DATABASE_URL }}
+      BACKUP_AGE_RECIPIENT: ${{ vars.BACKUP_AGE_RECIPIENT }}
+      R2_BACKUP_ACCOUNT_ID: ${{ secrets.R2_BACKUP_ACCOUNT_ID }}
+      R2_BACKUP_BUCKET: ${{ vars.R2_BACKUP_BUCKET }}
+      R2_BACKUP_PREFIX: ${{ vars.R2_BACKUP_PREFIX }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_BACKUP_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_BACKUP_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: auto
+      AWS_EC2_METADATA_DISABLED: 'true'
+    steps:
+      - name: Verificar configuracao sem exibir segredos
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in BACKUP_DATABASE_URL BACKUP_AGE_RECIPIENT R2_BACKUP_ACCOUNT_ID R2_BACKUP_BUCKET R2_BACKUP_PREFIX AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY; do
+            test -n "${!name:-}" || { echo "Configuracao ausente: $name"; exit 1; }
+          done
+          case "$R2_BACKUP_PREFIX" in staging|production) ;; *) echo 'R2_BACKUP_PREFIX deve ser staging ou production'; exit 1;; esac
+          command -v docker >/dev/null
+          command -v aws >/dev/null
+
+      - name: Instalar criptografia age
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y age
+
+      - name: Exportar, validar, criptografar e enviar o banco
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p .backup-work
+          trap 'rm -rf .backup-work' EXIT
+          stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+          key="${R2_BACKUP_PREFIX}/database/daily/${stamp}.dump.age"
+          endpoint="https://${R2_BACKUP_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          # O pg_dump usa uma conexao dedicada em modo sessao/direta; nao alterar DATABASE_URL da aplicacao.
+          # Imagem fixa o cliente PostgreSQL 18, compativel com instancias Supabase PG <=18.
+          docker run --rm --user "$(id -u):$(id -g)" \
+            -e BACKUP_DATABASE_URL -e PGSSLMODE=require \
+            -v "$PWD/.backup-work:/backup" \
+            postgres:18 \
+            sh -c 'pg_dump --schema=public --format=custom --no-owner --no-acl --file=/backup/database.dump "$BACKUP_DATABASE_URL" && pg_restore --list /backup/database.dump >/dev/null'
+          test -s .backup-work/database.dump || { echo 'Backup vazio'; exit 1; }
+          age -r "$BACKUP_AGE_RECIPIENT" -o .backup-work/database.dump.age .backup-work/database.dump
+          rm -f .backup-work/database.dump
+          sha256sum .backup-work/database.dump.age > .backup-work/database.dump.age.sha256
+          aws --endpoint-url "$endpoint" s3api put-object \
+            --bucket "$R2_BACKUP_BUCKET" --key "$key" \
+            --body .backup-work/database.dump.age --content-type application/octet-stream >/dev/null
+          local_size="$(stat -c%s .backup-work/database.dump.age)"
+          remote_size="$(aws --endpoint-url "$endpoint" s3api head-object --bucket "$R2_BACKUP_BUCKET" --key "$key" --query ContentLength --output text)"
+          test "$local_size" = "$remote_size" || { echo 'Tamanho remoto divergente'; exit 1; }
+          aws --endpoint-url "$endpoint" s3api put-object \
+            --bucket "$R2_BACKUP_BUCKET" --key "${key}.sha256" \
+            --body .backup-work/database.dump.age.sha256 --content-type text/plain >/dev/null
+          # Preservar pontos de recuperacao semanais e mensais, alem do dump diario.
+          weekday="$(date -u +%u)"
+          monthday="$(date -u +%d)"
+          for tier in $(if test "$weekday" = 7; then echo weekly; fi) $(if test "$monthday" = 01; then echo monthly; fi); do
+            tier_key="${R2_BACKUP_PREFIX}/database/${tier}/${stamp}.dump.age"
+            aws --endpoint-url "$endpoint" s3api put-object \
+              --bucket "$R2_BACKUP_BUCKET" --key "$tier_key" \
+              --body .backup-work/database.dump.age --content-type application/octet-stream >/dev/null
+            size="$(aws --endpoint-url "$endpoint" s3api head-object --bucket "$R2_BACKUP_BUCKET" --key "$tier_key" --query ContentLength --output text)"
+            test "$local_size" = "$size" || { echo 'Copia de retencao divergente'; exit 1; }
+            aws --endpoint-url "$endpoint" s3api put-object \
+              --bucket "$R2_BACKUP_BUCKET" --key "${tier_key}.sha256" \
+              --body .backup-work/database.dump.age.sha256 --content-type text/plain >/dev/null
+          done
+          echo "Backup criptografado enviado e conferido: ${key} (${local_size} bytes)"
