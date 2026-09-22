@@ -7,7 +7,7 @@ import styles from "./ProcessDocuments.module.css";
 
 type Doc = {
   id: string; displayName: string; sizeBytes: number; status: string; source: string;
-  createdAt: string; deletedAt: string | null; uploadedBy: { name: string } | null;
+  createdAt: string; deletedAt: string | null; uploadedBy: { name: string } | null; backupStatus: string;
 };
 type DocumentList = {
   documents: Doc[];
@@ -45,6 +45,7 @@ const reasons: Record<string, string> = {
   DOCUMENT_PURGE_DISABLED: "Exclusão definitiva será liberada após os backups serem testados.",
   DOCUMENT_PURGE_PENDING: "O documento foi marcado para eliminação. O armazenamento será atualizado após a limpeza automática.",
   DOCUMENT_PURGE_REQUIRES_DELETED: "Primeiro mova este documento para recuperação e atualize a lista.",
+  DOCUMENT_BACKUP_NOT_VERIFIED: "Aguarde a confirmação da cópia de segurança antes de excluir definitivamente.",
 };
 
 async function jsonOrFail(response: Response): Promise<Record<string, unknown>> {
@@ -438,6 +439,11 @@ export function ProcessDocuments({ processId, canManage, initial }: {
         <div className={styles.info}>
           <strong>{doc.displayName}</strong>
           <span>{mb(doc.sizeBytes)} · {new Date(doc.createdAt).toLocaleDateString("pt-BR")} · {doc.uploadedBy?.name || "Sistema"}</span>
+          <span title="A cópia de segurança é separada do arquivo usado no processo.">
+            {doc.backupStatus === "VERIFIED" ? "Cópia de segurança verificada" :
+              doc.backupStatus === "FAILED" ? "Cópia de segurança com falha; o Jurisportal tentará novamente" :
+              "Cópia de segurança aguardando confirmação"}
+          </span>
           {doc.status === "DELETED" ? <span>Em recuperação desde {doc.deletedAt
             ? new Date(doc.deletedAt).toLocaleDateString("pt-BR") : "data não disponível"}</span> : null}
         </div>

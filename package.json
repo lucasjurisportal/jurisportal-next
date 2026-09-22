@@ -27,7 +27,9 @@
     "test:reports": "tsx --test src/modules/reports/domain/report-period.test.ts src/modules/reports/infrastructure/report-csv.test.ts",
     "test:settings": "tsx --test src/modules/imports/domain/import-mapping.test.ts src/modules/imports/infrastructure/csv-parser.test.ts",
     "test:documents": "tsx --test src/modules/documents/domain/zip-policy.test.ts",
-    "test:ui-polish": "tsx --test src/modules/help/domain/help-content.test.ts"
+    "test:ui-polish": "tsx --test src/modules/help/domain/help-content.test.ts",
+    "backup:documents": "tsx scripts/backup/documents.ts",
+    "test:backup": "tsx --test src/modules/documents/domain/backup-key.test.ts"
   },
   "dependencies": {
     "next": "latest",

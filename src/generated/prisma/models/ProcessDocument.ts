@@ -28,10 +28,12 @@ export type AggregateProcessDocument = {
 
 export type ProcessDocumentAvgAggregateOutputType = {
   sizeBytes: number | null
+  backupAttempts: number | null
 }
 
 export type ProcessDocumentSumAggregateOutputType = {
   sizeBytes: bigint | null
+  backupAttempts: number | null
 }
 
 export type ProcessDocumentMinAggregateOutputType = {
@@ -48,6 +50,15 @@ export type ProcessDocumentMinAggregateOutputType = {
   source: string | null
   uploadExpiresAt: Date | null
   deletedAt: Date | null
+  backupStatus: string | null
+  backupObjectKey: string | null
+  backupSha256: string | null
+  backupVerifiedAt: Date | null
+  backupAttempts: number | null
+  backupLastError: string | null
+  backupNextAttemptAt: Date | null
+  backupLeaseUntil: Date | null
+  backupAttemptId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +77,15 @@ export type ProcessDocumentMaxAggregateOutputType = {
   source: string | null
   uploadExpiresAt: Date | null
   deletedAt: Date | null
+  backupStatus: string | null
+  backupObjectKey: string | null
+  backupSha256: string | null
+  backupVerifiedAt: Date | null
+  backupAttempts: number | null
+  backupLastError: string | null
+  backupNextAttemptAt: Date | null
+  backupLeaseUntil: Date | null
+  backupAttemptId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -84,6 +104,15 @@ export type ProcessDocumentCountAggregateOutputType = {
   source: number
   uploadExpiresAt: number
   deletedAt: number
+  backupStatus: number
+  backupObjectKey: number
+  backupSha256: number
+  backupVerifiedAt: number
+  backupAttempts: number
+  backupLastError: number
+  backupNextAttemptAt: number
+  backupLeaseUntil: number
+  backupAttemptId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -92,10 +121,12 @@ export type ProcessDocumentCountAggregateOutputType = {
 
 export type ProcessDocumentAvgAggregateInputType = {
   sizeBytes?: true
+  backupAttempts?: true
 }
 
 export type ProcessDocumentSumAggregateInputType = {
   sizeBytes?: true
+  backupAttempts?: true
 }
 
 export type ProcessDocumentMinAggregateInputType = {
@@ -112,6 +143,15 @@ export type ProcessDocumentMinAggregateInputType = {
   source?: true
   uploadExpiresAt?: true
   deletedAt?: true
+  backupStatus?: true
+  backupObjectKey?: true
+  backupSha256?: true
+  backupVerifiedAt?: true
+  backupAttempts?: true
+  backupLastError?: true
+  backupNextAttemptAt?: true
+  backupLeaseUntil?: true
+  backupAttemptId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -130,6 +170,15 @@ export type ProcessDocumentMaxAggregateInputType = {
   source?: true
   uploadExpiresAt?: true
   deletedAt?: true
+  backupStatus?: true
+  backupObjectKey?: true
+  backupSha256?: true
+  backupVerifiedAt?: true
+  backupAttempts?: true
+  backupLastError?: true
+  backupNextAttemptAt?: true
+  backupLeaseUntil?: true
+  backupAttemptId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -148,6 +197,15 @@ export type ProcessDocumentCountAggregateInputType = {
   source?: true
   uploadExpiresAt?: true
   deletedAt?: true
+  backupStatus?: true
+  backupObjectKey?: true
+  backupSha256?: true
+  backupVerifiedAt?: true
+  backupAttempts?: true
+  backupLastError?: true
+  backupNextAttemptAt?: true
+  backupLeaseUntil?: true
+  backupAttemptId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -253,6 +311,15 @@ export type ProcessDocumentGroupByOutputType = {
   source: string
   uploadExpiresAt: Date | null
   deletedAt: Date | null
+  backupStatus: string
+  backupObjectKey: string | null
+  backupSha256: string | null
+  backupVerifiedAt: Date | null
+  backupAttempts: number
+  backupLastError: string | null
+  backupNextAttemptAt: Date | null
+  backupLeaseUntil: Date | null
+  backupAttemptId: string | null
   createdAt: Date
   updatedAt: Date
   _count: ProcessDocumentCountAggregateOutputType | null
@@ -294,6 +361,15 @@ export type ProcessDocumentWhereInput = {
   source?: Prisma.StringFilter<"ProcessDocument"> | string
   uploadExpiresAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupStatus?: Prisma.StringFilter<"ProcessDocument"> | string
+  backupObjectKey?: Prisma.StringNullableFilter<"ProcessDocument"> | string | null
+  backupSha256?: Prisma.StringNullableFilter<"ProcessDocument"> | string | null
+  backupVerifiedAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupAttempts?: Prisma.IntFilter<"ProcessDocument"> | number
+  backupLastError?: Prisma.StringNullableFilter<"ProcessDocument"> | string | null
+  backupNextAttemptAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupLeaseUntil?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupAttemptId?: Prisma.UuidNullableFilter<"ProcessDocument"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProcessDocument"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProcessDocument"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -315,6 +391,15 @@ export type ProcessDocumentOrderByWithRelationInput = {
   source?: Prisma.SortOrder
   uploadExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupStatus?: Prisma.SortOrder
+  backupObjectKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupSha256?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupAttempts?: Prisma.SortOrder
+  backupLastError?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupNextAttemptAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupLeaseUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupAttemptId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
@@ -339,6 +424,15 @@ export type ProcessDocumentWhereUniqueInput = Prisma.AtLeast<{
   source?: Prisma.StringFilter<"ProcessDocument"> | string
   uploadExpiresAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupStatus?: Prisma.StringFilter<"ProcessDocument"> | string
+  backupObjectKey?: Prisma.StringNullableFilter<"ProcessDocument"> | string | null
+  backupSha256?: Prisma.StringNullableFilter<"ProcessDocument"> | string | null
+  backupVerifiedAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupAttempts?: Prisma.IntFilter<"ProcessDocument"> | number
+  backupLastError?: Prisma.StringNullableFilter<"ProcessDocument"> | string | null
+  backupNextAttemptAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupLeaseUntil?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupAttemptId?: Prisma.UuidNullableFilter<"ProcessDocument"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProcessDocument"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProcessDocument"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -360,6 +454,15 @@ export type ProcessDocumentOrderByWithAggregationInput = {
   source?: Prisma.SortOrder
   uploadExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupStatus?: Prisma.SortOrder
+  backupObjectKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupSha256?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupAttempts?: Prisma.SortOrder
+  backupLastError?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupNextAttemptAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupLeaseUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  backupAttemptId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ProcessDocumentCountOrderByAggregateInput
@@ -386,6 +489,15 @@ export type ProcessDocumentScalarWhereWithAggregatesInput = {
   source?: Prisma.StringWithAggregatesFilter<"ProcessDocument"> | string
   uploadExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ProcessDocument"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ProcessDocument"> | Date | string | null
+  backupStatus?: Prisma.StringWithAggregatesFilter<"ProcessDocument"> | string
+  backupObjectKey?: Prisma.StringNullableWithAggregatesFilter<"ProcessDocument"> | string | null
+  backupSha256?: Prisma.StringNullableWithAggregatesFilter<"ProcessDocument"> | string | null
+  backupVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ProcessDocument"> | Date | string | null
+  backupAttempts?: Prisma.IntWithAggregatesFilter<"ProcessDocument"> | number
+  backupLastError?: Prisma.StringNullableWithAggregatesFilter<"ProcessDocument"> | string | null
+  backupNextAttemptAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ProcessDocument"> | Date | string | null
+  backupLeaseUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"ProcessDocument"> | Date | string | null
+  backupAttemptId?: Prisma.UuidNullableWithAggregatesFilter<"ProcessDocument"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ProcessDocument"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ProcessDocument"> | Date | string
 }
@@ -401,6 +513,15 @@ export type ProcessDocumentCreateInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutProcessDocumentsInput
@@ -422,6 +543,15 @@ export type ProcessDocumentUncheckedCreateInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -437,6 +567,15 @@ export type ProcessDocumentUpdateInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutProcessDocumentsNestedInput
@@ -458,6 +597,15 @@ export type ProcessDocumentUncheckedUpdateInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -476,6 +624,15 @@ export type ProcessDocumentCreateManyInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -491,6 +648,15 @@ export type ProcessDocumentUpdateManyMutationInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -509,6 +675,15 @@ export type ProcessDocumentUncheckedUpdateManyInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -537,12 +712,22 @@ export type ProcessDocumentCountOrderByAggregateInput = {
   source?: Prisma.SortOrder
   uploadExpiresAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  backupStatus?: Prisma.SortOrder
+  backupObjectKey?: Prisma.SortOrder
+  backupSha256?: Prisma.SortOrder
+  backupVerifiedAt?: Prisma.SortOrder
+  backupAttempts?: Prisma.SortOrder
+  backupLastError?: Prisma.SortOrder
+  backupNextAttemptAt?: Prisma.SortOrder
+  backupLeaseUntil?: Prisma.SortOrder
+  backupAttemptId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ProcessDocumentAvgOrderByAggregateInput = {
   sizeBytes?: Prisma.SortOrder
+  backupAttempts?: Prisma.SortOrder
 }
 
 export type ProcessDocumentMaxOrderByAggregateInput = {
@@ -559,6 +744,15 @@ export type ProcessDocumentMaxOrderByAggregateInput = {
   source?: Prisma.SortOrder
   uploadExpiresAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  backupStatus?: Prisma.SortOrder
+  backupObjectKey?: Prisma.SortOrder
+  backupSha256?: Prisma.SortOrder
+  backupVerifiedAt?: Prisma.SortOrder
+  backupAttempts?: Prisma.SortOrder
+  backupLastError?: Prisma.SortOrder
+  backupNextAttemptAt?: Prisma.SortOrder
+  backupLeaseUntil?: Prisma.SortOrder
+  backupAttemptId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -577,12 +771,22 @@ export type ProcessDocumentMinOrderByAggregateInput = {
   source?: Prisma.SortOrder
   uploadExpiresAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  backupStatus?: Prisma.SortOrder
+  backupObjectKey?: Prisma.SortOrder
+  backupSha256?: Prisma.SortOrder
+  backupVerifiedAt?: Prisma.SortOrder
+  backupAttempts?: Prisma.SortOrder
+  backupLastError?: Prisma.SortOrder
+  backupNextAttemptAt?: Prisma.SortOrder
+  backupLeaseUntil?: Prisma.SortOrder
+  backupAttemptId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ProcessDocumentSumOrderByAggregateInput = {
   sizeBytes?: Prisma.SortOrder
+  backupAttempts?: Prisma.SortOrder
 }
 
 export type ProcessDocumentCreateNestedManyWithoutUploadedByInput = {
@@ -722,6 +926,15 @@ export type ProcessDocumentCreateWithoutUploadedByInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutProcessDocumentsInput
@@ -741,6 +954,15 @@ export type ProcessDocumentUncheckedCreateWithoutUploadedByInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -788,6 +1010,15 @@ export type ProcessDocumentScalarWhereInput = {
   source?: Prisma.StringFilter<"ProcessDocument"> | string
   uploadExpiresAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupStatus?: Prisma.StringFilter<"ProcessDocument"> | string
+  backupObjectKey?: Prisma.StringNullableFilter<"ProcessDocument"> | string | null
+  backupSha256?: Prisma.StringNullableFilter<"ProcessDocument"> | string | null
+  backupVerifiedAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupAttempts?: Prisma.IntFilter<"ProcessDocument"> | number
+  backupLastError?: Prisma.StringNullableFilter<"ProcessDocument"> | string | null
+  backupNextAttemptAt?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupLeaseUntil?: Prisma.DateTimeNullableFilter<"ProcessDocument"> | Date | string | null
+  backupAttemptId?: Prisma.UuidNullableFilter<"ProcessDocument"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProcessDocument"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProcessDocument"> | Date | string
 }
@@ -803,6 +1034,15 @@ export type ProcessDocumentCreateWithoutOrganizationInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   process: Prisma.ProcessCreateNestedOneWithoutDocumentsInput
@@ -822,6 +1062,15 @@ export type ProcessDocumentUncheckedCreateWithoutOrganizationInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -863,6 +1112,15 @@ export type ProcessDocumentCreateWithoutProcessInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutProcessDocumentsInput
@@ -882,6 +1140,15 @@ export type ProcessDocumentUncheckedCreateWithoutProcessInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -925,6 +1192,15 @@ export type ProcessDocumentCreateManyUploadedByInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -940,6 +1216,15 @@ export type ProcessDocumentUpdateWithoutUploadedByInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutProcessDocumentsNestedInput
@@ -959,6 +1244,15 @@ export type ProcessDocumentUncheckedUpdateWithoutUploadedByInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -976,6 +1270,15 @@ export type ProcessDocumentUncheckedUpdateManyWithoutUploadedByInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -993,6 +1296,15 @@ export type ProcessDocumentCreateManyOrganizationInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1008,6 +1320,15 @@ export type ProcessDocumentUpdateWithoutOrganizationInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   process?: Prisma.ProcessUpdateOneRequiredWithoutDocumentsNestedInput
@@ -1027,6 +1348,15 @@ export type ProcessDocumentUncheckedUpdateWithoutOrganizationInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1044,6 +1374,15 @@ export type ProcessDocumentUncheckedUpdateManyWithoutOrganizationInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1061,6 +1400,15 @@ export type ProcessDocumentCreateManyProcessInput = {
   source?: string
   uploadExpiresAt?: Date | string | null
   deletedAt?: Date | string | null
+  backupStatus?: string
+  backupObjectKey?: string | null
+  backupSha256?: string | null
+  backupVerifiedAt?: Date | string | null
+  backupAttempts?: number
+  backupLastError?: string | null
+  backupNextAttemptAt?: Date | string | null
+  backupLeaseUntil?: Date | string | null
+  backupAttemptId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1076,6 +1424,15 @@ export type ProcessDocumentUpdateWithoutProcessInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutProcessDocumentsNestedInput
@@ -1095,6 +1452,15 @@ export type ProcessDocumentUncheckedUpdateWithoutProcessInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1112,6 +1478,15 @@ export type ProcessDocumentUncheckedUpdateManyWithoutProcessInput = {
   source?: Prisma.StringFieldUpdateOperationsInput | string
   uploadExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  backupObjectKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  backupLastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backupNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  backupAttemptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1132,6 +1507,15 @@ export type ProcessDocumentSelect<ExtArgs extends runtime.Types.Extensions.Inter
   source?: boolean
   uploadExpiresAt?: boolean
   deletedAt?: boolean
+  backupStatus?: boolean
+  backupObjectKey?: boolean
+  backupSha256?: boolean
+  backupVerifiedAt?: boolean
+  backupAttempts?: boolean
+  backupLastError?: boolean
+  backupNextAttemptAt?: boolean
+  backupLeaseUntil?: boolean
+  backupAttemptId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -1153,6 +1537,15 @@ export type ProcessDocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   source?: boolean
   uploadExpiresAt?: boolean
   deletedAt?: boolean
+  backupStatus?: boolean
+  backupObjectKey?: boolean
+  backupSha256?: boolean
+  backupVerifiedAt?: boolean
+  backupAttempts?: boolean
+  backupLastError?: boolean
+  backupNextAttemptAt?: boolean
+  backupLeaseUntil?: boolean
+  backupAttemptId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -1174,6 +1567,15 @@ export type ProcessDocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   source?: boolean
   uploadExpiresAt?: boolean
   deletedAt?: boolean
+  backupStatus?: boolean
+  backupObjectKey?: boolean
+  backupSha256?: boolean
+  backupVerifiedAt?: boolean
+  backupAttempts?: boolean
+  backupLastError?: boolean
+  backupNextAttemptAt?: boolean
+  backupLeaseUntil?: boolean
+  backupAttemptId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -1195,11 +1597,20 @@ export type ProcessDocumentSelectScalar = {
   source?: boolean
   uploadExpiresAt?: boolean
   deletedAt?: boolean
+  backupStatus?: boolean
+  backupObjectKey?: boolean
+  backupSha256?: boolean
+  backupVerifiedAt?: boolean
+  backupAttempts?: boolean
+  backupLastError?: boolean
+  backupNextAttemptAt?: boolean
+  backupLeaseUntil?: boolean
+  backupAttemptId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProcessDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "processId" | "uploadedByUserId" | "originalName" | "displayName" | "storageKey" | "mimeType" | "sizeBytes" | "status" | "source" | "uploadExpiresAt" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["processDocument"]>
+export type ProcessDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "processId" | "uploadedByUserId" | "originalName" | "displayName" | "storageKey" | "mimeType" | "sizeBytes" | "status" | "source" | "uploadExpiresAt" | "deletedAt" | "backupStatus" | "backupObjectKey" | "backupSha256" | "backupVerifiedAt" | "backupAttempts" | "backupLastError" | "backupNextAttemptAt" | "backupLeaseUntil" | "backupAttemptId" | "createdAt" | "updatedAt", ExtArgs["result"]["processDocument"]>
 export type ProcessDocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   process?: boolean | Prisma.ProcessDefaultArgs<ExtArgs>
@@ -1237,6 +1648,18 @@ export type $ProcessDocumentPayload<ExtArgs extends runtime.Types.Extensions.Int
     source: string
     uploadExpiresAt: Date | null
     deletedAt: Date | null
+    /**
+     * PENDING | COPYING | VERIFIED | FAILED; o documento continua usável se a cópia falhar.
+     */
+    backupStatus: string
+    backupObjectKey: string | null
+    backupSha256: string | null
+    backupVerifiedAt: Date | null
+    backupAttempts: number
+    backupLastError: string | null
+    backupNextAttemptAt: Date | null
+    backupLeaseUntil: Date | null
+    backupAttemptId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["processDocument"]>
@@ -1678,6 +2101,15 @@ export interface ProcessDocumentFieldRefs {
   readonly source: Prisma.FieldRef<"ProcessDocument", 'String'>
   readonly uploadExpiresAt: Prisma.FieldRef<"ProcessDocument", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"ProcessDocument", 'DateTime'>
+  readonly backupStatus: Prisma.FieldRef<"ProcessDocument", 'String'>
+  readonly backupObjectKey: Prisma.FieldRef<"ProcessDocument", 'String'>
+  readonly backupSha256: Prisma.FieldRef<"ProcessDocument", 'String'>
+  readonly backupVerifiedAt: Prisma.FieldRef<"ProcessDocument", 'DateTime'>
+  readonly backupAttempts: Prisma.FieldRef<"ProcessDocument", 'Int'>
+  readonly backupLastError: Prisma.FieldRef<"ProcessDocument", 'String'>
+  readonly backupNextAttemptAt: Prisma.FieldRef<"ProcessDocument", 'DateTime'>
+  readonly backupLeaseUntil: Prisma.FieldRef<"ProcessDocument", 'DateTime'>
+  readonly backupAttemptId: Prisma.FieldRef<"ProcessDocument", 'String'>
   readonly createdAt: Prisma.FieldRef<"ProcessDocument", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ProcessDocument", 'DateTime'>
 }

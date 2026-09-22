@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { prisma } from "@/infrastructure/database/prisma";
 import type { Prisma } from "@/generated/prisma/client";
-import { deleteR2Object, inspectR2Pdf, presignR2 } from "../infrastructure/r2-storage";
+import { deleteR2Object, inspectR2Pdf, isR2BackupConfigured, presignR2 } from "../infrastructure/r2-storage";
 
 const MB = 1024 * 1024;
 export const MAX_PDF_BYTES = 50 * MB;
@@ -106,6 +106,16 @@ export async function finishPdfUpload(input: { organizationId: string; processId
       metadata: { processId: input.processId, sizeBytes: verified.sizeBytes },
     } });
   });
+  // Arquivos pequenos ganham tentativa imediata; os demais são copiados pelo worker.
+  // A falha do backup não transforma um upload já confirmado em "upload falhou".
+  if (isR2BackupConfigured() && verified.sizeBytes <= 8 * MB) {
+    try {
+      const { backupSingleDocument } = await import("./document-backup-service");
+      await backupSingleDocument(document.id);
+    } catch (error) {
+      console.error("[documents.backup.after-upload]", document.id, error instanceof Error ? error.message : "FAILED");
+    }
+  }
   return { id: document.id, status: "ACTIVE" };
 }
 
@@ -121,7 +131,7 @@ export async function listProcessDocuments(input: { organizationId: string; proc
       organizationId: input.organizationId, processId: input.processId, status: { in: ["ACTIVE", "DELETED"] },
     }, orderBy: { createdAt: "desc" }, select: {
       id: true, displayName: true, sizeBytes: true, status: true,
-      source: true, createdAt: true, deletedAt: true,
+      source: true, createdAt: true, deletedAt: true, backupStatus: true,
       uploadedBy: { select: { name: true } },
     } }),
     prisma.organizationStorageUsage.findUnique({ where: { organizationId: input.organizationId } }),
@@ -192,6 +202,7 @@ export async function permanentlyDeleteDocument(input: {
       id: input.documentId, processId: input.processId, organizationId: input.organizationId, status: "DELETED",
     } });
     if (!current) throw new DocumentError("DOCUMENT_PURGE_REQUIRES_DELETED", 409);
+    if (current.backupStatus !== "VERIFIED") throw new DocumentError("DOCUMENT_BACKUP_NOT_VERIFIED", 409);
     await tx.processDocument.update({ where: { id: current.id }, data: { status: "PURGING" } });
     await tx.auditEvent.create({ data: {
       organizationId: input.organizationId, actorUserId: input.userId,
@@ -235,7 +246,7 @@ export async function cleanupDocuments() {
   });
   const expired = await prisma.processDocument.findMany({
     where: { OR: [
-      { status: "DELETED", deletedAt: { lt: new Date(now.getTime() - 30 * 86_400_000) } },
+      { status: "DELETED", backupStatus: "VERIFIED", deletedAt: { lt: new Date(now.getTime() - 30 * 86_400_000) } },
       { status: "PURGING" },
     ] }, take: 30, orderBy: { deletedAt: "asc" },
   });

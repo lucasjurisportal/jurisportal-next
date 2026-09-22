@@ -992,6 +992,16 @@ model ProcessDocument {
   source String @default("UPLOAD")
   uploadExpiresAt DateTime?
   deletedAt DateTime?
+  /// PENDING | COPYING | VERIFIED | FAILED; o documento continua usável se a cópia falhar.
+  backupStatus String @default("PENDING")
+  backupObjectKey String?
+  backupSha256 String?
+  backupVerifiedAt DateTime?
+  backupAttempts Int @default(0)
+  backupLastError String?
+  backupNextAttemptAt DateTime?
+  backupLeaseUntil DateTime?
+  backupAttemptId String? @db.Uuid
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -1002,5 +1012,6 @@ model ProcessDocument {
   @@index([organizationId, processId, status, createdAt])
   @@index([status, uploadExpiresAt])
   @@index([status, deletedAt])
+  @@index([backupStatus, backupNextAttemptAt])
   @@map("process_document")
 }

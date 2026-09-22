@@ -5,13 +5,15 @@ import { createHmac, createHash } from "node:crypto";
  * A URL presignada é criada EXCLUSIVAMENTE no servidor. Nenhuma credencial chega ao navegador.
  * A assinatura para PUT vincula Content-Type=application/pdf e a chave aleatória.
  */
-function config() {
-  const accountId = process.env.R2_ACCOUNT_ID?.trim();
-  const accessKey = process.env.R2_ACCESS_KEY_ID?.trim();
-  const secret = process.env.R2_SECRET_ACCESS_KEY?.trim();
-  const bucket = process.env.R2_BUCKET?.trim();
-  const endpoint = process.env.R2_ENDPOINT?.trim() || (accountId ? `https://${accountId}.r2.cloudflarestorage.com` : "");
-  if (!accountId || !accessKey || !secret || !bucket || !endpoint) throw new Error("R2_NOT_CONFIGURED");
+function config(target: "main" | "backup" = "main") {
+  const backup = target === "backup";
+  const accountId = (backup ? (process.env.R2_BACKUP_ACCOUNT_ID || process.env.R2_ACCOUNT_ID) : process.env.R2_ACCOUNT_ID)?.trim();
+  const accessKey = (backup ? process.env.R2_BACKUP_ACCESS_KEY_ID : process.env.R2_ACCESS_KEY_ID)?.trim();
+  const secret = (backup ? process.env.R2_BACKUP_SECRET_ACCESS_KEY : process.env.R2_SECRET_ACCESS_KEY)?.trim();
+  const bucket = (backup ? process.env.R2_BACKUP_BUCKET : process.env.R2_BUCKET)?.trim();
+  const endpoint = (backup ? process.env.R2_BACKUP_ENDPOINT : process.env.R2_ENDPOINT)?.trim() || (accountId ? `https://${accountId}.r2.cloudflarestorage.com` : "");
+  if (!accountId || !accessKey || !secret || !bucket || !endpoint) throw new Error(backup ? "R2_BACKUP_NOT_CONFIGURED" : "R2_NOT_CONFIGURED");
+  if (backup && bucket === process.env.R2_BUCKET?.trim()) throw new Error("R2_BACKUP_MUST_USE_SEPARATE_BUCKET");
   const base = new URL(endpoint);
   if (base.protocol !== "https:" || base.username || base.password || base.search || base.hash || base.pathname !== "/") {
     throw new Error("R2_ENDPOINT_INVALID");
@@ -24,8 +26,8 @@ const hash = (data: string) => createHash("sha256").update(data).digest("hex");
 const hmac = (key: string | Buffer, value: string) => createHmac("sha256", key).update(value).digest();
 const encode = (text: string) => encodeURIComponent(text).replace(/[!'()*]/g, (value) => `%${value.charCodeAt(0).toString(16).toUpperCase()}`);
 
-export function presignR2(method: "PUT" | "GET" | "HEAD" | "DELETE", key: string, ttlSeconds = 120) {
-  const { base, accessKey, secret, bucket } = config();
+export function presignR2(method: "PUT" | "GET" | "HEAD" | "DELETE", key: string, ttlSeconds = 120, target: "main" | "backup" = "main") {
+  const { base, accessKey, secret, bucket } = config(target);
   if (!key || key.split("/").some((segment) => !segment || segment === "." || segment === "..")) throw new Error("R2_KEY_INVALID");
   const date = new Date();
   const stamp = date.toISOString().replace(/[:-]|\.\d{3}/g, "");
@@ -71,4 +73,24 @@ export async function inspectR2Pdf(key: string) {
 export async function deleteR2Object(key: string) {
   const result = await fetch(presignR2("DELETE", key, 30), { method: "DELETE", cache: "no-store" });
   if (!result.ok && result.status !== 404) throw new Error("R2_DELETE_FAILED");
+}
+
+/** Configuração do backup é independente da credencial de uso diário. */
+export function isR2BackupConfigured() {
+  return Boolean(process.env.R2_BACKUP_BUCKET?.trim() &&
+    process.env.R2_BACKUP_ACCESS_KEY_ID?.trim() &&
+    process.env.R2_BACKUP_SECRET_ACCESS_KEY?.trim());
+}
+
+/** O namespace evita colisões entre staging/produção e entre buckets de origem. */
+export function getR2BackupKey(sourceKey: string) {
+  const prefix = process.env.R2_BACKUP_PREFIX?.trim();
+  const sourceBucket = process.env.R2_BUCKET?.trim();
+  if (!prefix || !/^[a-z0-9][a-z0-9-]{0,31}$/.test(prefix) || !sourceBucket) {
+    throw new Error("R2_BACKUP_PREFIX_NOT_CONFIGURED");
+  }
+  if (!sourceKey.startsWith("organizations/") || sourceKey.split("/").some((part) => !part || part === "." || part === "..")) {
+    throw new Error("R2_BACKUP_INVALID_SOURCE_KEY");
+  }
+  return `${prefix}/${sourceBucket}/${sourceKey}`;
 }

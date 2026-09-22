@@ -786,6 +786,15 @@ export const ProcessDocumentScalarFieldEnum = {
   source: 'source',
   uploadExpiresAt: 'uploadExpiresAt',
   deletedAt: 'deletedAt',
+  backupStatus: 'backupStatus',
+  backupObjectKey: 'backupObjectKey',
+  backupSha256: 'backupSha256',
+  backupVerifiedAt: 'backupVerifiedAt',
+  backupAttempts: 'backupAttempts',
+  backupLastError: 'backupLastError',
+  backupNextAttemptAt: 'backupNextAttemptAt',
+  backupLeaseUntil: 'backupLeaseUntil',
+  backupAttemptId: 'backupAttemptId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

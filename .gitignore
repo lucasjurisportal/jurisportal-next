@@ -15,3 +15,10 @@ backups/
 *.sql.gz
 *.zip
 Thumbs.db
+
+# Backups criptografados, chaves de recuperacao e temporarios locais
+.backup-work/
+*.dump.age
+*age-key*.txt
+*.pem
+*.pfx
