@@ -108,15 +108,27 @@ export function normalizeOabForComparison(value: string): string {
   return normalizeOabNumber(value);
 }
 
-export function publicationTargetsOab(publication: NormalizedDjenPublication, oab: string, uf: string): boolean {
+/** Compara identidade completa; falta de nome ou sufixo divergente nunca vira match automático. */
+export function normalizeLawyerName(value: string): string {
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .toLocaleUpperCase("pt-BR").replace(/[^A-Z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+export function publicationTargetsOab(
+  publication: NormalizedDjenPublication,
+  oab: string,
+  uf: string,
+  registeredName: string,
+): boolean {
   const normalizedOab = normalizeOabForComparison(oab);
   const normalizedUf = uf.trim().toUpperCase();
+  const normalizedName = normalizeLawyerName(registeredName);
+  if (!normalizedOab || !normalizedName || normalizedName === "NAO INFORMADO") return false;
   return publication.lawyers.some((lawyer) => {
-    const lawyerOab = normalizeOabForComparison(lawyer.oab);
-    const sameNumber = /^\d+$/.test(normalizedOab)
-      ? lawyerOab.replace(/\D/g, "") === normalizedOab
-      : lawyerOab === normalizedOab;
-    return sameNumber && lawyer.state.trim().toUpperCase() === normalizedUf;
+    const sourceName = normalizeLawyerName(lawyer.name);
+    return normalizeOabForComparison(lawyer.oab) === normalizedOab
+      && lawyer.state.trim().toUpperCase() === normalizedUf
+      && sourceName === normalizedName;
   });
 }
 

@@ -98,12 +98,17 @@ export async function searchDjenAllPages(params: DjenSearchParams): Promise<unkn
       }
     }
 
-    if (result.items.length === 0) break;
+    if (result.items.length === 0) {
+      if (expectedCount > all.length) throw new Error("DJEN_INCOMPLETE_PAGE");
+      break;
+    }
     all.push(...result.items);
 
-    if (all.length >= (expectedCount ?? 0) || result.items.length < PAGE_SIZE) break;
+    if (all.length >= (expectedCount ?? 0)) break;
+    if (result.items.length < PAGE_SIZE) throw new Error("DJEN_INCOMPLETE_PAGE");
     await sleep(300);
   }
 
+  if (expectedCount !== null && all.length < expectedCount) throw new Error("DJEN_PAGE_LIMIT_REACHED");
   return all;
 }

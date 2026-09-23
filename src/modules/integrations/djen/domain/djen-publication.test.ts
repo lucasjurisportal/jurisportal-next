@@ -4,6 +4,7 @@ import {
   buildOabQueryVariants,
   extractExplicitDates,
   normalizeDjenItem,
+  normalizeLawyerName,
   publicationTargetsOab,
   sanitizeDjenContent,
 } from "./djen-publication";
@@ -32,7 +33,7 @@ test("normaliza item realista do DJeN e CNJ", () => {
   assert.equal(pub.kind, "INTIMATION");
   assert.equal(pub.processNumberNormalized, "10008790820148260462");
   assert.deepEqual(pub.explicitDates, ["2026-09-20"]);
-  assert.equal(publicationTargetsOab(pub, "123456A", "sp"), true);
+  assert.equal(publicationTargetsOab(pub, "123456A", "sp", "Advogado"), true);
 });
 
 test("gera variantes defensivas para OAB numérica", () => {
@@ -57,3 +58,22 @@ test("preserva cancelamento informado pela origem", () => {
   assert.equal(pub.cancellationReason, "Cancelada na origem");
 });
 
+
+test("OAB, UF e nome precisam coincidir para associação automática", () => {
+  const pub = normalizeDjenItem({
+    id: 99, datadisponibilizacao: "2026-09-15", texto: "Intimação",
+    destinatarioadvogados: [{ advogado: { nome: "João da Silva", numero_oab: "00123-A", uf_oab: "SP" } }],
+  });
+  assert.equal(normalizeLawyerName(" João  dá SILVA "), "JOAO DA SILVA");
+  assert.equal(publicationTargetsOab(pub, "00123-A", "SP", "Joao da Silva"), true);
+  assert.equal(publicationTargetsOab(pub, "00123", "SP", "João da Silva"), false);
+  assert.equal(publicationTargetsOab(pub, "00123-B", "SP", "João da Silva"), false);
+  assert.equal(publicationTargetsOab(pub, "00123-A", "RJ", "João da Silva"), false);
+  assert.equal(publicationTargetsOab(pub, "00123-A", "SP", "João Pereira"), false);
+  assert.equal(publicationTargetsOab(pub, "00123-A", "SP", ""), false);
+});
+
+test("registro sem advogados não comprova a inscrição do escritório", () => {
+  const pub = normalizeDjenItem({ id: 100, datadisponibilizacao: "2026-09-15", texto: "Publicação" });
+  assert.equal(publicationTargetsOab(pub, "12345", "SP", "João da Silva"), false);
+});

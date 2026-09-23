@@ -16,6 +16,7 @@ export type DjenCaptureResult = {
   newPublications: number;
   updatedPublications: number;
   linkedToProcesses: number;
+  unverifiedItems: number;
   errors: Array<{ oab: string; error: string }>;
   window: { startDate: string; endDate: string };
 };
@@ -254,6 +255,7 @@ export async function syncOrganizationDjen(input: {
     where: { organizationId: input.organizationId, isActive: true },
     orderBy: [{ isPrimary: "desc" }, { createdAt: "asc" }],
     take: plan.oabs,
+    include: { user: { select: { name: true } } },
   });
 
   const result: DjenCaptureResult = {
@@ -262,6 +264,7 @@ export async function syncOrganizationDjen(input: {
     newPublications: 0,
     updatedPublications: 0,
     linkedToProcesses: 0,
+    unverifiedItems: 0,
     errors: [],
     window,
   };
@@ -284,10 +287,14 @@ export async function syncOrganizationDjen(input: {
         for (const raw of rawItems) {
           try {
             const publication = normalizeDjenItem(raw);
-            if (publication.lawyers.length > 0 && !publicationTargetsOab(publication, oab.normalizedNumber, oab.state)) continue;
+            if (!publicationTargetsOab(publication, oab.normalizedNumber, oab.state, oab.user.name)) {
+              result.unverifiedItems += 1;
+              continue;
+            }
             normalizedByKey.set(publication.externalKey, publication);
           } catch (error) {
-            console.warn("[djen.normalize]", error);
+            // Uma página com formato inesperado não equivale a uma janela capturada com sucesso.
+            throw new Error("DJEN_NORMALIZATION_FAILED", { cause: error });
           }
         }
       }
