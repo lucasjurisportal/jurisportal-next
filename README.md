@@ -126,3 +126,7 @@ Leia `docs/blocos/relatorios.md` e `docs/decisoes/ADR-0012-relatorios-sem-snapsh
 A experiência principal foi ligada aos dados reais antes do bloco de Plano e Cobrança. O Dashboard não usa mais números de demonstração, o sino mostra avisos derivados dos módulos existentes e a Central de ajuda mantém os tutoriais do sistema.
 
 Leia `docs/blocos/31-acabamento-ajuda-notificacoes-dashboard.md` e `docs/decisoes/ADR-025-UX-AJUDA-NOTIFICACOES-DASHBOARD.md`.
+
+## v40 — Consolidação Documentos, Petições e Backup (staging)
+
+Leia `docs/blocos/40-consolidacao-documentos-peticoes-backup.md` antes de configurar armazenamento, recuperação ou novas integrações. O documento registra o estado real, operação, backups às 01h/01h30 (São Paulo), reconciliação auditada de PDF de teste ausente e riscos pendentes de recuperação integral/produção. A v40 é um **marco de documentação e correção pontual de staging**, não homologação de produção, IA, comunicação ou cobrança.

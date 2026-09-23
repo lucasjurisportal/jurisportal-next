@@ -29,7 +29,7 @@
     "test:documents": "tsx --test src/modules/documents/domain/zip-policy.test.ts",
     "test:ui-polish": "tsx --test src/modules/help/domain/help-content.test.ts",
     "backup:documents": "tsx scripts/backup/documents.ts",
-    "test:backup": "tsx --test src/modules/documents/domain/backup-key.test.ts"
+    "test:backup": "tsx --test src/modules/documents/domain/backup-key.test.ts src/modules/documents/domain/backup-reconciliation.test.ts"
   },
   "dependencies": {
     "next": "latest",

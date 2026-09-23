@@ -5,9 +5,18 @@ config({ path: [".env.local", ".env"], quiet: true });
 async function main() {
   const { prisma } = await import("../../src/infrastructure/database/prisma");
   try {
-    const { backupPendingDocuments, restoreDocumentFromBackup } = await import("../../src/modules/documents/application/document-backup-service");
+    const { backupPendingDocuments, restoreDocumentFromBackup, acknowledgeMissingDeletedStagingDocument } = await import("../../src/modules/documents/application/document-backup-service");
     const restore = process.argv.find((arg) => arg.startsWith("--restore="));
-    if (restore) {
+    const acknowledge = process.argv.find((arg) => arg.startsWith("--acknowledge-missing="));
+    if (restore && acknowledge) throw new Error("CHOOSE_ONE_BACKUP_OPERATION");
+    if (acknowledge) {
+      const id = acknowledge.split("=")[1];
+      if (!/^[a-f\d]{8}-[a-f\d-]{27,}$/i.test(id)) throw new Error("DOCUMENT_ID_INVALID");
+      if (!process.argv.includes("--confirm-acknowledge-missing")) {
+        throw new Error("PASS_--confirm-acknowledge-missing_TO_ACKNOWLEDGE_STAGING_LOSS");
+      }
+      console.log("[documents.backup.acknowledgement]", JSON.stringify(await acknowledgeMissingDeletedStagingDocument(id)));
+    } else if (restore) {
       const id = restore.split("=")[1];
       if (!/^[a-f\d]{8}-[a-f\d-]{27,}$/i.test(id)) throw new Error("DOCUMENT_ID_INVALID");
       if (!process.argv.includes("--confirm-restore")) throw new Error("PASS_--confirm-restore_TO_RESTORE");
@@ -26,7 +35,7 @@ async function main() {
       let attempted = 0;
       let verified = 0;
       let failed = 0;
-      let remaining = { pending: 0, copying: 0, failed: 0 };
+      let remaining = { pending: 0, copying: 0, failed: 0, acknowledgedMissing: 0 };
       for (let batch = 0; batch < maxBatches; batch++) {
         const result = await backupPendingDocuments(all ? 10 : limit);
         attempted += result.attempted;
@@ -36,7 +45,11 @@ async function main() {
         if (!all || result.attempted === 0 || (remaining.pending === 0 && remaining.copying === 0)) break;
       }
       console.log("[documents.backup.summary]", JSON.stringify({ attempted, verified, failed, remaining }));
-      // Não declarar backup bem-sucedido se algum objeto não foi protegido.
+      if (remaining.acknowledgedMissing > 0) {
+        // Aviso persistente, sem mascarar o fato de que esses PDFs NUNCA foram protegidos.
+        console.warn(`::warning::${remaining.acknowledgedMissing} PDF(s) DELETED de staging com perda reconhecida manualmente; metadados e quota preservados.`);
+      }
+      // Não declarar backup bem-sucedido se algum objeto recuperável não foi protegido.
       // SOURCE_PDF_MISSING deve permanecer visível no GitHub Actions até ser investigado.
       if (failed > 0 || remaining.pending > 0 || remaining.copying > 0 || remaining.failed > 0) {
         process.exitCode = 1;

@@ -39,6 +39,7 @@ const reasons: Record<string, string> = {
   PDF_SIGNATURE_UNVERIFIED: "Não foi possível verificar o PDF. Tente novamente.",
   PDF_SIZE_EXCEEDS_RESERVATION: "O arquivo recebido excedeu o tamanho autorizado. Selecione-o novamente.",
   DOCUMENT_RECOVERY_EXPIRED: "O período de recuperação de 30 dias terminou.",
+  DOCUMENT_SOURCE_MISSING: "O PDF não está disponível no armazenamento. O suporte deve verificar a recuperação antes de reativá-lo.",
   DOCUMENT_OPERATION_FAILED: "O servidor não conseguiu concluir a operação. Tente novamente em alguns instantes.",
   DOCUMENT_COMPLETION_FAILED: "Não foi possível confirmar o documento no sistema. Atualize a lista antes de tentar reenviar.",
   OWNER_REQUIRED: "Apenas o proprietário pode excluir definitivamente documentos.",
@@ -441,6 +442,7 @@ export function ProcessDocuments({ processId, canManage, initial }: {
           <span>{mb(doc.sizeBytes)} · {new Date(doc.createdAt).toLocaleDateString("pt-BR")} · {doc.uploadedBy?.name || "Sistema"}</span>
           <span title="A cópia de segurança é separada do arquivo usado no processo.">
             {doc.backupStatus === "VERIFIED" ? "Cópia de segurança verificada" :
+              doc.backupStatus === "ACKNOWLEDGED_MISSING" ? "Arquivo ausente nos dois buckets; perda reconhecida manualmente no ambiente de testes" :
               doc.backupStatus === "FAILED" ? "Cópia de segurança com falha; o Jurisportal tentará novamente" :
               "Cópia de segurança aguardando confirmação"}
           </span>

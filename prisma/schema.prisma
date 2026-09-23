@@ -992,7 +992,7 @@ model ProcessDocument {
   source String @default("UPLOAD")
   uploadExpiresAt DateTime?
   deletedAt DateTime?
-  /// PENDING | COPYING | VERIFIED | FAILED; o documento continua usável se a cópia falhar.
+  /// PENDING | COPYING | VERIFIED | FAILED | ACKNOWLEDGED_MISSING (apenas staging; perda auditada).
   backupStatus String @default("PENDING")
   backupObjectKey String?
   backupSha256 String?

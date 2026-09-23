@@ -1,6 +1,7 @@
 import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 import { prisma } from "@/infrastructure/database/prisma";
 import { getR2BackupKey, isR2BackupConfigured, presignR2 } from "../infrastructure/r2-storage";
+import { ACKNOWLEDGED_MISSING, canAcknowledgeDeletedMissing, isStagingMissingAcknowledgementAllowed } from "../domain/backup-reconciliation";
 
 const MB = 1024 * 1024;
 const MAX_BACKUP_PDF = 50 * MB;
@@ -15,6 +16,13 @@ const equalsHash = (left: string, right: string) => {
   const b = Buffer.from(right, "hex");
   return a.length === b.length && timingSafeEqual(a, b);
 };
+
+async function objectExists(key: string, target: "main" | "backup"): Promise<boolean> {
+  const response = await fetch(presignR2("HEAD", key, 30, target), { method: "HEAD", cache: "no-store" });
+  if (response.status === 404) return false;
+  if (!response.ok) throw new Error(`R2_${target.toUpperCase()}_HEAD_${response.status}`);
+  return true;
+}
 
 async function readObject(key: string, target: "main" | "backup"): Promise<ObjectData | null> {
   const response = await fetch(presignR2("GET", key, 600, target), { cache: "no-store" });
@@ -133,7 +141,12 @@ export async function backupPendingDocuments(limit = 2) {
     prisma.processDocument.count({ where: { status: { in: ELIGIBLE }, backupStatus: "COPYING" } }),
     prisma.processDocument.count({ where: { status: { in: ELIGIBLE }, backupStatus: "FAILED" } }),
   ]);
-  return { attempted: candidates.length, verified, failed, remaining: { pending, copying, failed: failures } };
+  const acknowledgedMissing = await prisma.processDocument.count({
+    where: { status: "DELETED", backupStatus: ACKNOWLEDGED_MISSING },
+  });
+  return { attempted: candidates.length, verified, failed,
+    remaining: { pending, copying, failed: failures, acknowledgedMissing } };
+
 }
 
 /** Recuperação manual: somente para objetos faltantes na origem, sem sobrescrever PDFs existentes. */
@@ -153,4 +166,59 @@ export async function restoreDocumentFromBackup(documentId: string) {
   await putImmutable(document.storageKey, backup.data, "main");
   await verifyCopy(document.storageKey, backup, "main");
   return { restored: true, documentId };
+}
+
+/**
+ * Reconciliação explícita para um PDF fictício de staging, já DELETED e ausente nos DOIS buckets.
+ * Nunca marca VERIFIED, nunca deleta um registro e nunca libera quota ou exclusão definitiva.
+ * Se o backup existe, o operador deve investigar a recuperação, não reconhecer perda.
+ */
+export async function acknowledgeMissingDeletedStagingDocument(documentId: string) {
+  if (!isStagingMissingAcknowledgementAllowed({
+    sourceBucket: process.env.R2_BUCKET?.trim(),
+    backupBucket: process.env.R2_BACKUP_BUCKET?.trim(),
+    backupPrefix: process.env.R2_BACKUP_PREFIX?.trim(),
+  })) throw new Error("MISSING_ACKNOWLEDGEMENT_STAGING_ONLY");
+  if (!isR2BackupConfigured()) throw new Error("R2_BACKUP_NOT_CONFIGURED");
+
+  const document = await prisma.processDocument.findUnique({ where: { id: documentId } });
+  if (!document || !canAcknowledgeDeletedMissing(document)) {
+    throw new Error("DOCUMENT_NOT_ELIGIBLE_FOR_MISSING_ACKNOWLEDGEMENT");
+  }
+  const backupKey = getR2BackupKey(document.storageKey);
+  if (await objectExists(document.storageKey, "main")) {
+    throw new Error("SOURCE_EXISTS_ACKNOWLEDGEMENT_ABORTED");
+  }
+  if (await objectExists(backupKey, "backup")) {
+    throw new Error("BACKUP_EXISTS_RECOVERY_REVIEW_REQUIRED");
+  }
+  return prisma.$transaction(async (tx) => {
+    const updated = await tx.processDocument.updateMany({
+      where: {
+        id: documentId, status: "DELETED", backupStatus: "FAILED",
+        backupLastError: "SOURCE_PDF_MISSING",
+      },
+      data: {
+        backupStatus: ACKNOWLEDGED_MISSING,
+        backupLastError: "SOURCE_PDF_MISSING_ACKNOWLEDGED_IN_STAGING",
+        backupNextAttemptAt: null,
+        backupLeaseUntil: null,
+        backupAttemptId: null,
+        backupObjectKey: null,
+        backupSha256: null,
+        backupVerifiedAt: null,
+      },
+    });
+    if (updated.count !== 1) throw new Error("MISSING_ACKNOWLEDGEMENT_STATE_CHANGED");
+    await tx.auditEvent.create({ data: {
+      organizationId: document.organizationId,
+      actorUserId: null,
+      category: "documents",
+      action: "document.backup_missing_acknowledged_staging",
+      entityType: "process_document",
+      entityId: document.id,
+      metadata: { processId: document.processId, originalError: "SOURCE_PDF_MISSING", source: "manual_staging_cli" },
+    } });
+    return { acknowledged: true, documentId, status: ACKNOWLEDGED_MISSING };
+  });
 }

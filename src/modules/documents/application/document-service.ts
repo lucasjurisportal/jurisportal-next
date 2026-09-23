@@ -175,6 +175,9 @@ export async function changeDocumentStatus(input: {
       status: expected,
     } });
     if (!found) throw new DocumentError("DOCUMENT_NOT_FOUND_OR_INVALID_STATUS", 404);
+    if (input.action === "restore" && found.backupStatus === "ACKNOWLEDGED_MISSING") {
+      throw new DocumentError("DOCUMENT_SOURCE_MISSING", 409);
+    }
     if (input.action === "restore" && (!found.deletedAt || found.deletedAt.getTime() + 30 * 86_400_000 < Date.now())) {
       throw new DocumentError("DOCUMENT_RECOVERY_EXPIRED", 409);
     }
