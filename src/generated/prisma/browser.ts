@@ -181,6 +181,13 @@ export type Publication = Prisma.PublicationModel
  */
 export type PublicationRecipient = Prisma.PublicationRecipientModel
 /**
+ * Model PublicationEmailDelivery
+ * Envios por comunicação e por OAB. Um advogado com duas OABs recebe um único
+ * e-mail por lote, mas cada destino fica auditado separadamente.
+ * REVIEW_REQUIRED não é usado para substituir conferência de identidade.
+ */
+export type PublicationEmailDelivery = Prisma.PublicationEmailDeliveryModel
+/**
  * Model DjenReviewCandidate
  * Resultado encontrado por OAB ou nome, mas sem identidade suficiente para associação automática.
  * NÃO aparece como publicação nem gera prazo/notificação até aceite explícito.

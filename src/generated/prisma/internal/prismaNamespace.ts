@@ -428,6 +428,7 @@ export const ModelName = {
   AgendaEvent: 'AgendaEvent',
   Publication: 'Publication',
   PublicationRecipient: 'PublicationRecipient',
+  PublicationEmailDelivery: 'PublicationEmailDelivery',
   DjenReviewCandidate: 'DjenReviewCandidate',
   DjenCaptureCursor: 'DjenCaptureCursor',
   DeadlineReview: 'DeadlineReview',
@@ -453,7 +454,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "djenReviewCandidate" | "djenCaptureCursor" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument"
+    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "publicationEmailDelivery" | "djenReviewCandidate" | "djenCaptureCursor" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2751,6 +2752,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PublicationEmailDelivery: {
+      payload: Prisma.$PublicationEmailDeliveryPayload<ExtArgs>
+      fields: Prisma.PublicationEmailDeliveryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PublicationEmailDeliveryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PublicationEmailDeliveryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload>
+        }
+        findFirst: {
+          args: Prisma.PublicationEmailDeliveryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PublicationEmailDeliveryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload>
+        }
+        findMany: {
+          args: Prisma.PublicationEmailDeliveryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload>[]
+        }
+        create: {
+          args: Prisma.PublicationEmailDeliveryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload>
+        }
+        createMany: {
+          args: Prisma.PublicationEmailDeliveryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PublicationEmailDeliveryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload>[]
+        }
+        delete: {
+          args: Prisma.PublicationEmailDeliveryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload>
+        }
+        update: {
+          args: Prisma.PublicationEmailDeliveryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload>
+        }
+        deleteMany: {
+          args: Prisma.PublicationEmailDeliveryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PublicationEmailDeliveryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PublicationEmailDeliveryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload>[]
+        }
+        upsert: {
+          args: Prisma.PublicationEmailDeliveryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PublicationEmailDeliveryPayload>
+        }
+        aggregate: {
+          args: Prisma.PublicationEmailDeliveryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePublicationEmailDelivery>
+        }
+        groupBy: {
+          args: Prisma.PublicationEmailDeliveryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PublicationEmailDeliveryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PublicationEmailDeliveryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PublicationEmailDeliveryCountAggregateOutputType> | number
+        }
+      }
+    }
     DjenReviewCandidate: {
       payload: Prisma.$DjenReviewCandidatePayload<ExtArgs>
       fields: Prisma.DjenReviewCandidateFieldRefs
@@ -3863,6 +3938,7 @@ export const ProcessScalarFieldEnum = {
   court: 'court',
   division: 'division',
   district: 'district',
+  forum: 'forum',
   processClass: 'processClass',
   subject: 'subject',
   caseValue: 'caseValue',
@@ -4034,6 +4110,7 @@ export const PublicationScalarFieldEnum = {
   processNumberNormalized: 'processNumberNormalized',
   processNumberFormatted: 'processNumberFormatted',
   publicationDate: 'publicationDate',
+  processMetadata: 'processMetadata',
   content: 'content',
   summary: 'summary',
   parties: 'parties',
@@ -4063,6 +4140,27 @@ export const PublicationRecipientScalarFieldEnum = {
 } as const
 
 export type PublicationRecipientScalarFieldEnum = (typeof PublicationRecipientScalarFieldEnum)[keyof typeof PublicationRecipientScalarFieldEnum]
+
+
+export const PublicationEmailDeliveryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  publicationId: 'publicationId',
+  lawyerOabId: 'lawyerOabId',
+  status: 'status',
+  batchKey: 'batchKey',
+  providerEmailId: 'providerEmailId',
+  recipientEmail: 'recipientEmail',
+  attempts: 'attempts',
+  firstAttemptAt: 'firstAttemptAt',
+  leaseUntil: 'leaseUntil',
+  sentAt: 'sentAt',
+  lastError: 'lastError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PublicationEmailDeliveryScalarFieldEnum = (typeof PublicationEmailDeliveryScalarFieldEnum)[keyof typeof PublicationEmailDeliveryScalarFieldEnum]
 
 
 export const DjenReviewCandidateScalarFieldEnum = {
@@ -4601,6 +4699,7 @@ export type GlobalOmitConfig = {
   agendaEvent?: Prisma.AgendaEventOmit
   publication?: Prisma.PublicationOmit
   publicationRecipient?: Prisma.PublicationRecipientOmit
+  publicationEmailDelivery?: Prisma.PublicationEmailDeliveryOmit
   djenReviewCandidate?: Prisma.DjenReviewCandidateOmit
   djenCaptureCursor?: Prisma.DjenCaptureCursorOmit
   deadlineReview?: Prisma.DeadlineReviewOmit

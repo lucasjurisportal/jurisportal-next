@@ -19,6 +19,6 @@ export default async function NewProcessPage({ searchParams }: { searchParams: P
     publication, context.user.id, options.members.map((member) => member.user.id),
   );
   return <div className={styles.page}><section className={styles.heading}><div><span className={styles.eyebrow}>Processos</span><h1>Novo processo</h1>
-    <p>{initialValue ? "Dados sugeridos a partir do DJeN. Confira o número, as partes e selecione o cliente antes de salvar. A publicação será vinculada automaticamente ao processo cadastrado." : "Cadastre o número CNJ, vincule o cliente e complemente os dados disponíveis."}</p>
+    <p>{initialValue ? "Dados disponíveis na comunicação foram sugeridos abaixo. Confira comarca, fórum, classe, assunto, data de distribuição e cliente antes de salvar. O DJeN não fornece necessariamente todos esses campos. A comunicação será vinculada pelo CNJ ao processo cadastrado." : "Cadastre o número CNJ, vincule o cliente e complemente os dados disponíveis."}</p>
   </div></section><ProcessForm clients={options.clients} members={options.members} currentUserId={context.user.id} initialValue={initialValue} /></div>;
 }

@@ -82,6 +82,7 @@ export const ModelName = {
   AgendaEvent: 'AgendaEvent',
   Publication: 'Publication',
   PublicationRecipient: 'PublicationRecipient',
+  PublicationEmailDelivery: 'PublicationEmailDelivery',
   DjenReviewCandidate: 'DjenReviewCandidate',
   DjenCaptureCursor: 'DjenCaptureCursor',
   DeadlineReview: 'DeadlineReview',
@@ -443,6 +444,7 @@ export const ProcessScalarFieldEnum = {
   court: 'court',
   division: 'division',
   district: 'district',
+  forum: 'forum',
   processClass: 'processClass',
   subject: 'subject',
   caseValue: 'caseValue',
@@ -614,6 +616,7 @@ export const PublicationScalarFieldEnum = {
   processNumberNormalized: 'processNumberNormalized',
   processNumberFormatted: 'processNumberFormatted',
   publicationDate: 'publicationDate',
+  processMetadata: 'processMetadata',
   content: 'content',
   summary: 'summary',
   parties: 'parties',
@@ -643,6 +646,27 @@ export const PublicationRecipientScalarFieldEnum = {
 } as const
 
 export type PublicationRecipientScalarFieldEnum = (typeof PublicationRecipientScalarFieldEnum)[keyof typeof PublicationRecipientScalarFieldEnum]
+
+
+export const PublicationEmailDeliveryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  publicationId: 'publicationId',
+  lawyerOabId: 'lawyerOabId',
+  status: 'status',
+  batchKey: 'batchKey',
+  providerEmailId: 'providerEmailId',
+  recipientEmail: 'recipientEmail',
+  attempts: 'attempts',
+  firstAttemptAt: 'firstAttemptAt',
+  leaseUntil: 'leaseUntil',
+  sentAt: 'sentAt',
+  lastError: 'lastError',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PublicationEmailDeliveryScalarFieldEnum = (typeof PublicationEmailDeliveryScalarFieldEnum)[keyof typeof PublicationEmailDeliveryScalarFieldEnum]
 
 
 export const DjenReviewCandidateScalarFieldEnum = {

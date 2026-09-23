@@ -17,6 +17,7 @@ export const processInputSchema = z.object({
   court: optionalText(120),
   division: optionalText(120),
   district: optionalText(120),
+  forum: optionalText(160),
   processClass: optionalText(120),
   subject: optionalText(300),
   caseValue: z.union([z.number().nonnegative("Valor da causa não pode ser negativo."), z.null()]).optional(),

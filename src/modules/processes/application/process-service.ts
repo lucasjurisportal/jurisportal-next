@@ -62,6 +62,7 @@ function processMutablePersistence(input: ProcessInput) {
     court: optional(input.court),
     division: optional(input.division),
     district: optional(input.district),
+    forum: optional(input.forum),
     processClass: optional(input.processClass),
     subject: optional(input.subject),
     caseValue: input.caseValue ?? null,

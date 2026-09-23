@@ -137,6 +137,7 @@ model Organization {
   legalAcceptances LegalAcceptance[]
   clients Client[]
   processes Process[]
+  publicationEmailDeliveries PublicationEmailDelivery[]
   processClients ProcessClient[]
   processParties ProcessParty[]
   processTimelineEvents ProcessTimelineEvent[]
@@ -318,6 +319,7 @@ model LawyerOab {
   publicationRecipients PublicationRecipient[]
   djenCandidates DjenReviewCandidate[]
   djenCursor DjenCaptureCursor?
+  publicationEmailDeliveries PublicationEmailDelivery[]
 
   @@unique([organizationId, normalizedNumber, state])
   @@index([userId])
@@ -501,6 +503,7 @@ model Process {
   court              String?
   division           String?
   district           String?
+  forum              String?
   processClass       String?
   subject            String?
   caseValue          Decimal?  @db.Decimal(14, 2)
@@ -753,6 +756,7 @@ model Publication {
   processNumberNormalized  String?
   processNumberFormatted   String?
   publicationDate          DateTime  @db.Date
+  processMetadata          Json?
   content                  String
   summary                  String?
   parties                  Json?
@@ -774,6 +778,7 @@ model Publication {
   readBy       User?         @relation("PublicationReadBy", fields: [readByUserId], references: [id], onDelete: SetNull)
   treatedBy    User?         @relation("PublicationTreatedBy", fields: [treatedByUserId], references: [id], onDelete: SetNull)
   recipients   PublicationRecipient[]
+  emailDeliveries PublicationEmailDelivery[]
   deadlineReview DeadlineReview?
 
   @@unique([organizationId, source, externalKey])
@@ -800,6 +805,36 @@ model PublicationRecipient {
   @@unique([publicationId, lawyerOabId])
   @@index([organizationId, lawyerOabId])
   @@map("publication_recipient")
+}
+
+
+/// Envios por comunicação e por OAB. Um advogado com duas OABs recebe um único
+/// e-mail por lote, mas cada destino fica auditado separadamente.
+/// REVIEW_REQUIRED não é usado para substituir conferência de identidade.
+model PublicationEmailDelivery {
+  id               String   @id @default(uuid()) @db.Uuid
+  organizationId   String   @db.Uuid
+  publicationId    String   @db.Uuid
+  lawyerOabId      String   @db.Uuid
+  status           String   @default("PENDING")
+  batchKey         String?
+  providerEmailId  String?
+  recipientEmail   String?
+  attempts         Int      @default(0)
+  firstAttemptAt   DateTime?
+  leaseUntil       DateTime?
+  sentAt           DateTime?
+  lastError        String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  publication Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  lawyerOab LawyerOab @relation(fields: [lawyerOabId], references: [id], onDelete: Cascade)
+
+  @@unique([publicationId, lawyerOabId])
+  @@index([organizationId, status, leaseUntil])
+  @@map("publication_email_delivery")
 }
 
 /// Resultado encontrado por OAB ou nome, mas sem identidade suficiente para associação automática.

@@ -29,3 +29,25 @@ test("não sugere cadastro automático para CNJ ausente ou incompleto", () => {
     judicialBody: null, parties: null,
   }, "id", []), undefined);
 });
+
+test("sugere classe, assunto, comarca, fórum e distribuição apenas se existirem na publicação", () => {
+  const result = buildPublicationProcessPrefill({
+    processNumberNormalized: "10008790820148260462", processNumberFormatted: null, court: "TJSP",
+    judicialBody: "Vara Cível", parties: [], processMetadata: {
+      district: "Poá", forum: "Fórum Cível de Poá", processClass: "Procedimento Comum Cível",
+      subject: "Contratos", distributionDate: "2024-05-21",
+    },
+  }, "u", ["u"]);
+  assert.equal(result?.district, "Poá");
+  assert.equal(result?.forum, "Fórum Cível de Poá");
+  assert.equal(result?.processClass, "Procedimento Comum Cível");
+  assert.equal(result?.subject, "Contratos");
+  assert.equal(result?.distributionDate, "2024-05-21");
+});
+
+test("sugere o titular da única OAB, nunca o proprietário por engano", () => {
+  const source = { processNumberNormalized: "10008790820148260462", processNumberFormatted: null,
+    court: "TJSP", judicialBody: null, parties: [], recipients: [{ lawyerOab: { userId: "auxiliar" } }] };
+  assert.equal(buildPublicationProcessPrefill(source, "dono", ["dono", "auxiliar"])?.responsibleUserId, "auxiliar");
+  assert.equal(buildPublicationProcessPrefill({ ...source, recipients: [...source.recipients, { lawyerOab: { userId: "dono" } }] }, "dono", ["dono", "auxiliar"])?.responsibleUserId, "");
+});

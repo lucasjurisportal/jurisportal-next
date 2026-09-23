@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { formatCnjNumber, normalizeCnjDigits } from "@/modules/processes/domain/cnj-number";
 import { normalizeOabNumber } from "@/modules/lawyers/domain/oab";
+import { extractDjenProcessMetadata, type DjenProcessMetadata } from "./djen-process-metadata";
 
 export type DjenLawyer = {
   name: string;
@@ -30,6 +31,7 @@ export type NormalizedDjenPublication = {
   summary: string;
   lawyers: DjenLawyer[];
   parties: DjenParty[];
+  processMetadata: DjenProcessMetadata;
   explicitDates: string[];
   sourceUrl: string | null;
   sourceStatus: "ACTIVE" | "CANCELLED";
@@ -177,10 +179,16 @@ function classifyCommunication(value: string): "PUBLICATION" | "INTIMATION" {
   return value.toLocaleLowerCase("pt-BR").includes("intima") ? "INTIMATION" : "PUBLICATION";
 }
 
-/** Resumo determinístico: não inventa ato, data nem vencimento. */
+/** Escolhe um trecho LITERAL que descreva providência quando disponível.
+ * Sem classificação jurídica inventada, sem prazo inferido, sem IA. */
 export function summarizeDjenContent(content: string): string {
   const compact = content.replace(/\s+/g, " ").trim();
-  return compact.length > 320 ? `${compact.slice(0, 319).trimEnd()}…` : compact;
+  if (!compact) return "Conteúdo não informado pela fonte.";
+  const fragments = compact.match(/[^.!?;]+[.!?;]?/g) ?? [compact];
+  const informative = fragments.find((fragment) => /\b(intimad[oa]s?|intim[ae]-?se|manifesta[çc][aã]o|apresent[ae]|junt[ae]-?se|determino|designad[ao]|cite-?se|cita[çc][aã]o|vista [àa]s?|decis[aã]o|despacho|audi[êe]ncia)\b/iu.test(fragment));
+  const selected = (informative ?? fragments.find((fragment) => fragment.trim().length >= 30) ?? compact).trim();
+  const summary = selected.length > 320 ? `${selected.slice(0, 319).trimEnd()}…` : selected;
+  return summary;
 }
 
 /** Links externos só são expostos se forem HTTPS e tiverem domínio do Judiciário. */
@@ -266,6 +274,7 @@ export function normalizeDjenItem(value: unknown): NormalizedDjenPublication {
     summary: summarizeDjenContent(content),
     lawyers,
     parties,
+    processMetadata: extractDjenProcessMetadata(item, stringValue(item.nomeOrgao, item.orgao)),
     explicitDates,
     sourceUrl,
     sourceStatus,

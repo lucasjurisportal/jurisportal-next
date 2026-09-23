@@ -45,13 +45,14 @@ export async function getNotifications(input: {
     ? {}
     : { OR: [{ responsibleUserId: input.userId }, { responsibleUserId: null }] };
 
-  const [publications, workItems, agendaEvents] = await Promise.all([
+  const [publications, workItems, agendaEvents, pendingIdentity] = await Promise.all([
     prisma.publication.findMany({
       where: {
         organizationId: input.organizationId,
         sourceStatus: "ACTIVE",
         treatedAt: null,
-        publicationDate: { gte: publicationSince },
+        capturedAt: { gte: publicationSince },
+        ...(input.role === "owner" ? {} : { recipients: { some: { lawyerOab: { userId: input.userId } } } }),
       },
       select: {
         id: true,
@@ -95,6 +96,12 @@ export async function getNotifications(input: {
       orderBy: [{ eventDate: "asc" }, { startTime: "asc" }],
       take: 6,
     }),
+    input.role === "owner" ? prisma.djenReviewCandidate.findMany({
+      where: { organizationId: input.organizationId, status: "PENDING" },
+      orderBy: { firstSeenAt: "desc" }, take: 5,
+      select: { id: true, firstSeenAt: true,
+        lawyerOab: { select: { user: { select: { name: true } }, rawNumber: true, state: true } } },
+    }) : Promise.resolve([]),
   ]);
 
   const candidates: Omit<AppNotification, "read">[] = [];
@@ -107,6 +114,15 @@ export async function getNotifications(input: {
       description: `${item.process?.internalCode || item.processNumberFormatted || "Comunicação sem processo vinculado"} · ${item.communicationType}`,
       href: `/app/publicacoes/${item.id}`,
       createdAt: item.capturedAt,
+    });
+  }
+
+  for (const item of pendingIdentity) {
+    candidates.push({
+      id: `review:${item.id}`, kind: "publication", title: "Publicação para confirmar",
+      description: `${item.lawyerOab.user.name} · ${item.lawyerOab.rawNumber}/${item.lawyerOab.state}`,
+      href: `/app/publicacoes/revisao#${item.id}`,
+      createdAt: item.firstSeenAt,
     });
   }
 
@@ -164,7 +180,7 @@ export async function markNotificationsRead(input: {
   userId: string;
   ids: string[];
 }) {
-  const ids = Array.from(new Set(input.ids.filter((id) => /^(publication|work|agenda):[0-9a-f-]{8,}$/i.test(id)))).slice(0, 30);
+  const ids = Array.from(new Set(input.ids.filter((id) => /^(publication|review|work|agenda):[0-9a-f-]{8,}$/i.test(id)))).slice(0, 30);
   if (!ids.length) return { marked: 0 };
 
   const existing = await prisma.auditEvent.findMany({

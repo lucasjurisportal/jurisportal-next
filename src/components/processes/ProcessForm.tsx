@@ -31,6 +31,7 @@ type ProcessFormValue = {
   court: string;
   division: string;
   district: string;
+  forum: string;
   processClass: string;
   subject: string;
   caseValue: string;
@@ -120,6 +121,7 @@ export function ProcessForm({
     court: "",
     division: "",
     district: "",
+    forum: "",
     processClass: "",
     subject: "",
     caseValue: "",
@@ -210,7 +212,7 @@ export function ProcessForm({
       }
       const data = await response.json() as { process?: { id?: string } };
       const processId = data.process?.id ?? initialValue?.id;
-      router.push(processId ? `/app/processos/${processId}` : "/app/processos");
+      router.push(processId ? `/app/processos/${processId}${!initialValue?.id && initialValue?.cnj ? "?tab=publicacoes" : ""}` : "/app/processos");
       router.refresh();
     } finally {
       setBusy(false);
@@ -250,8 +252,9 @@ export function ProcessForm({
           <small className={styles.muted}>A correção registra o número anterior, o novo número, o administrador e o motivo.</small>
         </div> : null}
         <div className={fieldClass("distributionDate")}>
-          <label htmlFor="process-distributionDate">Distribuição</label>
+          <label htmlFor="process-distributionDate">Data da distribuição</label>
           <input id="process-distributionDate" type="date" value={value.distributionDate} onChange={(e) => update("distributionDate", e.target.value)} />
+          <small className={styles.muted}>Não confundir com a data de disponibilização da publicação. Se não veio da fonte, preencha após conferir nos autos.</small>
           {fieldError("distributionDate")}
         </div>
         <div className={fieldClass("processClass")}>
@@ -276,12 +279,13 @@ export function ProcessForm({
       <div className={styles.grid3}>
         <div className={fieldClass("court")}><label htmlFor="process-court">Tribunal</label><input id="process-court" value={value.court} onChange={(e) => update("court", e.target.value)} placeholder="Ex.: TJSP" />{fieldError("court")}</div>
         <div className={fieldClass("division")}><label htmlFor="process-division">Vara / unidade</label><input id="process-division" value={value.division} onChange={(e) => update("division", e.target.value)} placeholder="Ex.: 2ª Vara Cível" />{fieldError("division")}</div>
-        <div className={fieldClass("district")}><label htmlFor="process-district">Comarca</label><input id="process-district" value={value.district} onChange={(e) => update("district", e.target.value)} placeholder="Ex.: Poá" />{fieldError("district")}</div>
+        <div className={fieldClass("district")}><label htmlFor="process-district">Comarca</label><input id="process-district" value={value.district} onChange={(e) => update("district", e.target.value)} placeholder="Ex.: Poá (confirme na fonte)" />{fieldError("district")}</div>
+        <div className={fieldClass("forum")}><label htmlFor="process-forum">Fórum</label><input id="process-forum" value={value.forum} onChange={(e) => update("forum", e.target.value)} placeholder="Ex.: Fórum Cível de Poá" /><small className={styles.muted}>Comarca não identifica o fórum. Confira a unidade judicial antes de salvar.</small>{fieldError("forum")}</div>
         <div className={fieldClass("responsibleUserId", styles.span3)}>
           <label htmlFor="process-responsibleUserId">Advogado responsável</label>
           <select id="process-responsibleUserId" value={value.responsibleUserId} onChange={(e) => update("responsibleUserId", e.target.value)}>
             <option value="">Sem responsável definido</option>
-            {members.map((member) => <option key={member.id} value={member.user.id}>{member.user.name} · {member.role}</option>)}
+            {members.map((member) => <option key={member.id} value={member.user.id}>{member.user.name}</option>)}
           </select>
           {fieldError("responsibleUserId")}
         </div>

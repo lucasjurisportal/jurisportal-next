@@ -2,6 +2,7 @@ import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { prisma } from "@/infrastructure/database/prisma";
 import { syncOrganizationDjen } from "@/modules/publications/application/djen-capture-service";
+import { dispatchPendingPublicationEmails } from "@/modules/publications/infrastructure/publication-email";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -40,10 +41,14 @@ export async function GET(request: Request) {
     `;
     if (!candidates.length) return NextResponse.json({ ok: true, organizationsChecked: 0 });
     const result = await syncOrganizationDjen({ organizationId: candidates[0].organizationId });
-    if (result.errors.length) {
+    // Só será utilizado quando o CRON for homologado e ativado posteriormente.
+    const mail = await dispatchPendingPublicationEmails(candidates[0].organizationId)
+      .catch(() => ({ disabled: false, sent: 0, errors: 1 }));
+    if (result.errors.length || mail.errors) {
       console.warn("[djen.cron] captura parcial", { failedOabs: result.errors.length });
       return NextResponse.json({ ok: false, failedOabs: result.errors.length,
-        oabsChecked: result.oabsChecked, reviewCandidates: result.reviewCandidates }, { status: 503 });
+        oabsChecked: result.oabsChecked, reviewCandidates: result.reviewCandidates,
+        emailErrors: mail.errors }, { status: 503 });
     }
     return NextResponse.json({ ok: true, organizationsChecked: 1,
       oabsChecked: result.oabsChecked, newPublications: result.newPublications,

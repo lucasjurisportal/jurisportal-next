@@ -138,6 +138,7 @@ export default async function ProcessDetailPage({
             <div className={styles.fact}><span>Assunto</span><strong>{process.subject || "Não informado"}</strong></div>
             <div className={styles.fact}><span>Distribuição</span><strong>{dateOnly(process.distributionDate)}</strong></div>
             <div className={styles.fact}><span>Comarca</span><strong>{process.district || "Não informada"}</strong></div>
+            <div className={styles.fact}><span>Fórum</span><strong>{process.forum || "Não informado"}</strong></div>
             <div className={styles.fact}><span>Valor da causa</span><strong>{process.caseValue ? money(Number(process.caseValue.toString())) : "Não informado"}</strong></div>
           </div>{process.notes ? <p className={styles.muted}>{process.notes}</p> : null}</section>
 
@@ -157,7 +158,7 @@ export default async function ProcessDetailPage({
       {tab === "publicacoes" ? <section className={styles.panel}>
         <div className={styles.processPanelHead}><div><span className={styles.eyebrow}>DJeN</span><h2>Publicações e intimações</h2><p>Comunicações reais vinculadas a este CNJ.</p></div><Link className={styles.secondaryButton} href="/app/publicacoes">Abrir central de publicações</Link></div>
         {processPublications.length === 0 ? <div className={styles.empty}><p>Nenhuma publicação ou intimação vinculada a este processo.</p></div> : <div className={styles.workItemList}>{processPublications.map((publication) => <article key={publication.id} className={styles.workItem}>
-          <div><span className={publication.kind === "INTIMATION" ? pubStyles.badgeIntimation : pubStyles.badgePublication}>{publication.kind === "INTIMATION" ? "Intimação" : "Publicação"}</span><strong>{publication.communicationType}</strong><p>{dateOnly(publication.publicationDate)} · {publication.court || "Tribunal não informado"}{publication.judicialBody ? ` · ${publication.judicialBody}` : ""}</p><small>{publication.content.slice(0, 220)}{publication.content.length > 220 ? "..." : ""}</small></div>
+          <div><span className={publication.kind === "INTIMATION" ? pubStyles.badgeIntimation : pubStyles.badgePublication}>{publication.kind === "INTIMATION" ? "Intimação" : "Publicação"}</span><strong>{publication.communicationType}</strong><p>{dateOnly(publication.publicationDate)} · {publication.court || "Tribunal não informado"}{publication.judicialBody ? ` · ${publication.judicialBody}` : ""}</p><small>{publication.summary || publication.content.slice(0, 220)}</small></div>
           <div className={styles.workItemRight}>{publication.deadlineReview?.status === "PENDING_REVIEW" ? <span className={pubStyles.badgeReview}>Revisar prazo</span> : null}<Link className={styles.secondaryButton} href={`/app/publicacoes/${publication.id}`}>Abrir</Link></div>
         </article>)}</div>}
       </section> : null}

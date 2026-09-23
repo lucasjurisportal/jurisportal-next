@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getAppContext } from "@/infrastructure/auth/app-context";
 import { prisma } from "@/infrastructure/database/prisma";
 import { syncOrganizationDjen } from "@/modules/publications/application/djen-capture-service";
+import { dispatchPendingPublicationEmails } from "@/modules/publications/infrastructure/publication-email";
 
 export async function POST() {
   const context = await getAppContext();
@@ -27,7 +28,10 @@ export async function POST() {
       where: { organizationId: context.workspace.organizationId, status: "ERROR" },
       data: { status: "MANUAL_ERROR" },
     });
-    return NextResponse.json({ ok: result.errors.length === 0, result });
+    // Falha do provedor não desfaz a captura. O envio fica auditado para retry.
+    const mail = await dispatchPendingPublicationEmails(context.workspace.organizationId)
+      .catch(() => ({ disabled: false, sent: 0, errors: 1 }));
+    return NextResponse.json({ ok: result.errors.length === 0, result, mail });
   } catch (error) {
     const message = error instanceof Error ? error.message : "DJEN_SYNC_FAILED";
     if (message === "DJEN_NOT_AVAILABLE_FOR_PLAN") {

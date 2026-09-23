@@ -14,12 +14,13 @@ function dateOnly(value: string) {
 }
 
 export async function getPublicationSummary(organizationId: string) {
+  const central = { organizationId, processId: null };
   const [total, unread, untreated, cancelled, pendingDeadlineReview] = await Promise.all([
-    prisma.publication.count({ where: { organizationId } }),
-    prisma.publication.count({ where: { organizationId, readAt: null } }),
-    prisma.publication.count({ where: { organizationId, treatedAt: null } }),
-    prisma.publication.count({ where: { organizationId, sourceStatus: "CANCELLED" } }),
-    prisma.deadlineReview.count({ where: { organizationId, status: "PENDING_REVIEW" } }),
+    prisma.publication.count({ where: central }),
+    prisma.publication.count({ where: { ...central, readAt: null } }),
+    prisma.publication.count({ where: { ...central, treatedAt: null } }),
+    prisma.publication.count({ where: { ...central, sourceStatus: "CANCELLED" } }),
+    prisma.deadlineReview.count({ where: { organizationId, publication: { is: { processId: null } }, status: "PENDING_REVIEW" } }),
   ]);
   return { total, unread, untreated, cancelled, pendingDeadlineReview };
 }
@@ -50,7 +51,9 @@ export async function listPublications(input: {
   page?: number;
 }) {
   const page = Math.max(1, input.page ?? 1);
-  const where: Prisma.PublicationWhereInput = { organizationId: input.organizationId };
+  // Caixa de entrada da central: ao vincular, a comunicação passa para a aba
+  // Publicações do processo. O prazo pendente continua ativo e notificado.
+  const where: Prisma.PublicationWhereInput = { organizationId: input.organizationId, processId: null };
 
   if (input.view === "new") where.readAt = null;
   if (input.view === "untreated") where.treatedAt = null;

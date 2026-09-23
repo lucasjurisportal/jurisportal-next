@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getAppContext } from "@/infrastructure/auth/app-context";
 import { hasCapability } from "@/modules/plans/application/plan-entitlements";
 import { decideDjenReview } from "@/modules/publications/application/djen-review-service";
+import { dispatchPendingPublicationEmails } from "@/modules/publications/infrastructure/publication-email";
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const context = await getAppContext();
@@ -22,6 +23,10 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
       organizationId: context.workspace.organizationId,
       actorUserId: context.user.id, candidateId: id, decision: body.decision,
     });
+    if (body.decision === "APPROVE") {
+      await dispatchPendingPublicationEmails(context.workspace.organizationId)
+        .catch(() => console.error("[djen.review.mail] EMAIL_DISPATCH_FAILED"));
+    }
     return NextResponse.json({ ok: true });
   } catch (error) {
     const code = error instanceof Error ? error.message : "DJEN_REVIEW_FAILED";

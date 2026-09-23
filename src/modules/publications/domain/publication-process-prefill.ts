@@ -5,6 +5,8 @@ export type ProcessPrefillSource = {
   court: string | null;
   judicialBody: string | null;
   parties: unknown;
+  processMetadata?: unknown;
+  recipients?: Array<{ lawyerOab: { userId: string } }>;
 };
 
 export function buildPublicationProcessPrefill(
@@ -22,15 +24,29 @@ export function buildPublicationProcessPrefill(
       if (name.length < 2 || name.length > 180 || role.length < 2 || role.length > 80) return [];
       return [{ name, role, document: "" }];
     }).slice(0, 30) : [];
+  const metadata = publication.processMetadata && typeof publication.processMetadata === "object"
+    && !Array.isArray(publication.processMetadata)
+    ? publication.processMetadata as Record<string, unknown> : {};
+  const suggested = (key: string, max: number) => typeof metadata[key] === "string"
+    ? (metadata[key] as string).slice(0, max) : "";
+  const eligibleLawyers = [...new Set((publication.recipients ?? [])
+    .map((recipient) => recipient.lawyerOab.userId)
+    .filter((id) => memberUserIds.includes(id)))];
+  // Uma única OAB responsável pode sugerir seu titular; não escolher arbitrariamente
+  // entre múltiplos destinatários e nunca confundir o proprietário com o titular.
+  const suggestedResponsible = eligibleLawyers.length === 1 ? eligibleLawyers[0]
+    : eligibleLawyers.length > 1 ? ""
+    : memberUserIds.includes(currentUserId) ? currentUserId : "";
   return {
     cnj: publication.processNumberFormatted || publication.processNumberNormalized!,
     // NUNCA atribuir automaticamente um cliente por ser o primeiro da lista.
     primaryClientId: "",
     additionalClientIds: [] as string[],
-    responsibleUserId: memberUserIds.includes(currentUserId) ? currentUserId : "",
+    responsibleUserId: suggestedResponsible,
     court: (publication.court ?? "").slice(0, 120),
     division: (publication.judicialBody ?? "").slice(0, 120),
-    district: "", processClass: "", subject: "", caseValue: "",
-    distributionDate: "", notes: "", parties,
+    district: suggested("district", 120), forum: suggested("forum", 160),
+    processClass: suggested("processClass", 120), subject: suggested("subject", 300), caseValue: "",
+    distributionDate: suggested("distributionDate", 10), notes: "", parties,
   };
 }

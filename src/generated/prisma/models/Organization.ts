@@ -207,6 +207,7 @@ export type OrganizationWhereInput = {
   legalAcceptances?: Prisma.LegalAcceptanceListRelationFilter
   clients?: Prisma.ClientListRelationFilter
   processes?: Prisma.ProcessListRelationFilter
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryListRelationFilter
   processClients?: Prisma.ProcessClientListRelationFilter
   processParties?: Prisma.ProcessPartyListRelationFilter
   processTimelineEvents?: Prisma.ProcessTimelineEventListRelationFilter
@@ -247,6 +248,7 @@ export type OrganizationOrderByWithRelationInput = {
   legalAcceptances?: Prisma.LegalAcceptanceOrderByRelationAggregateInput
   clients?: Prisma.ClientOrderByRelationAggregateInput
   processes?: Prisma.ProcessOrderByRelationAggregateInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryOrderByRelationAggregateInput
   processClients?: Prisma.ProcessClientOrderByRelationAggregateInput
   processParties?: Prisma.ProcessPartyOrderByRelationAggregateInput
   processTimelineEvents?: Prisma.ProcessTimelineEventOrderByRelationAggregateInput
@@ -290,6 +292,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   legalAcceptances?: Prisma.LegalAcceptanceListRelationFilter
   clients?: Prisma.ClientListRelationFilter
   processes?: Prisma.ProcessListRelationFilter
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryListRelationFilter
   processClients?: Prisma.ProcessClientListRelationFilter
   processParties?: Prisma.ProcessPartyListRelationFilter
   processTimelineEvents?: Prisma.ProcessTimelineEventListRelationFilter
@@ -356,6 +359,7 @@ export type OrganizationCreateInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -396,6 +400,7 @@ export type OrganizationUncheckedCreateInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -436,6 +441,7 @@ export type OrganizationUpdateInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -476,6 +482,7 @@ export type OrganizationUncheckedUpdateInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -844,6 +851,20 @@ export type OrganizationUpdateOneRequiredWithoutPublicationRecipientsNestedInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPublicationRecipientsInput, Prisma.OrganizationUpdateWithoutPublicationRecipientsInput>, Prisma.OrganizationUncheckedUpdateWithoutPublicationRecipientsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutPublicationEmailDeliveriesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutPublicationEmailDeliveriesInput, Prisma.OrganizationUncheckedCreateWithoutPublicationEmailDeliveriesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutPublicationEmailDeliveriesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutPublicationEmailDeliveriesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutPublicationEmailDeliveriesInput, Prisma.OrganizationUncheckedCreateWithoutPublicationEmailDeliveriesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutPublicationEmailDeliveriesInput
+  upsert?: Prisma.OrganizationUpsertWithoutPublicationEmailDeliveriesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPublicationEmailDeliveriesInput, Prisma.OrganizationUpdateWithoutPublicationEmailDeliveriesInput>, Prisma.OrganizationUncheckedUpdateWithoutPublicationEmailDeliveriesInput>
+}
+
 export type OrganizationCreateNestedOneWithoutDjenCandidatesInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDjenCandidatesInput, Prisma.OrganizationUncheckedCreateWithoutDjenCandidatesInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDjenCandidatesInput
@@ -1000,6 +1021,7 @@ export type OrganizationCreateWithoutMembersInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -1039,6 +1061,7 @@ export type OrganizationUncheckedCreateWithoutMembersInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1094,6 +1117,7 @@ export type OrganizationUpdateWithoutMembersInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -1133,6 +1157,7 @@ export type OrganizationUncheckedUpdateWithoutMembersInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1172,6 +1197,7 @@ export type OrganizationCreateWithoutInvitationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -1211,6 +1237,7 @@ export type OrganizationUncheckedCreateWithoutInvitationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1266,6 +1293,7 @@ export type OrganizationUpdateWithoutInvitationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -1305,6 +1333,7 @@ export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1345,6 +1374,7 @@ export type OrganizationCreateWithoutTeamMemberProfilesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -1384,6 +1414,7 @@ export type OrganizationUncheckedCreateWithoutTeamMemberProfilesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1439,6 +1470,7 @@ export type OrganizationUpdateWithoutTeamMemberProfilesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -1478,6 +1510,7 @@ export type OrganizationUncheckedUpdateWithoutTeamMemberProfilesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1516,6 +1549,7 @@ export type OrganizationCreateWithoutSubscriptionInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -1555,6 +1589,7 @@ export type OrganizationUncheckedCreateWithoutSubscriptionInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1610,6 +1645,7 @@ export type OrganizationUpdateWithoutSubscriptionInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -1649,6 +1685,7 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1688,6 +1725,7 @@ export type OrganizationCreateWithoutAuditEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -1727,6 +1765,7 @@ export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1782,6 +1821,7 @@ export type OrganizationUpdateWithoutAuditEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -1821,6 +1861,7 @@ export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1860,6 +1901,7 @@ export type OrganizationCreateWithoutProfileInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -1899,6 +1941,7 @@ export type OrganizationUncheckedCreateWithoutProfileInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1954,6 +1997,7 @@ export type OrganizationUpdateWithoutProfileInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -1993,6 +2037,7 @@ export type OrganizationUncheckedUpdateWithoutProfileInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2032,6 +2077,7 @@ export type OrganizationCreateWithoutLawyerOabsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -2071,6 +2117,7 @@ export type OrganizationUncheckedCreateWithoutLawyerOabsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2126,6 +2173,7 @@ export type OrganizationUpdateWithoutLawyerOabsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -2165,6 +2213,7 @@ export type OrganizationUncheckedUpdateWithoutLawyerOabsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2204,6 +2253,7 @@ export type OrganizationCreateWithoutLegalAcceptancesInput = {
   lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -2243,6 +2293,7 @@ export type OrganizationUncheckedCreateWithoutLegalAcceptancesInput = {
   lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2298,6 +2349,7 @@ export type OrganizationUpdateWithoutLegalAcceptancesInput = {
   lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -2337,6 +2389,7 @@ export type OrganizationUncheckedUpdateWithoutLegalAcceptancesInput = {
   lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2376,6 +2429,7 @@ export type OrganizationCreateWithoutClientsInput = {
   lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -2415,6 +2469,7 @@ export type OrganizationUncheckedCreateWithoutClientsInput = {
   lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2470,6 +2525,7 @@ export type OrganizationUpdateWithoutClientsInput = {
   lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -2509,6 +2565,7 @@ export type OrganizationUncheckedUpdateWithoutClientsInput = {
   lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2548,6 +2605,7 @@ export type OrganizationCreateWithoutProcessesInput = {
   lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -2587,6 +2645,7 @@ export type OrganizationUncheckedCreateWithoutProcessesInput = {
   lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2642,6 +2701,7 @@ export type OrganizationUpdateWithoutProcessesInput = {
   lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -2681,6 +2741,7 @@ export type OrganizationUncheckedUpdateWithoutProcessesInput = {
   lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2721,6 +2782,7 @@ export type OrganizationCreateWithoutProcessNumberSequencesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -2760,6 +2822,7 @@ export type OrganizationUncheckedCreateWithoutProcessNumberSequencesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2815,6 +2878,7 @@ export type OrganizationUpdateWithoutProcessNumberSequencesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -2854,6 +2918,7 @@ export type OrganizationUncheckedUpdateWithoutProcessNumberSequencesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2893,6 +2958,7 @@ export type OrganizationCreateWithoutProcessClientsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
@@ -2932,6 +2998,7 @@ export type OrganizationUncheckedCreateWithoutProcessClientsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2987,6 +3054,7 @@ export type OrganizationUpdateWithoutProcessClientsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
@@ -3026,6 +3094,7 @@ export type OrganizationUncheckedUpdateWithoutProcessClientsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3065,6 +3134,7 @@ export type OrganizationCreateWithoutProcessPartiesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
@@ -3104,6 +3174,7 @@ export type OrganizationUncheckedCreateWithoutProcessPartiesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3159,6 +3230,7 @@ export type OrganizationUpdateWithoutProcessPartiesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
@@ -3198,6 +3270,7 @@ export type OrganizationUncheckedUpdateWithoutProcessPartiesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3237,6 +3310,7 @@ export type OrganizationCreateWithoutProcessTimelineEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
@@ -3276,6 +3350,7 @@ export type OrganizationUncheckedCreateWithoutProcessTimelineEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3331,6 +3406,7 @@ export type OrganizationUpdateWithoutProcessTimelineEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
@@ -3370,6 +3446,7 @@ export type OrganizationUncheckedUpdateWithoutProcessTimelineEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3409,6 +3486,7 @@ export type OrganizationCreateWithoutProcessWorkItemsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -3448,6 +3526,7 @@ export type OrganizationUncheckedCreateWithoutProcessWorkItemsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3503,6 +3582,7 @@ export type OrganizationUpdateWithoutProcessWorkItemsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -3542,6 +3622,7 @@ export type OrganizationUncheckedUpdateWithoutProcessWorkItemsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3581,6 +3662,7 @@ export type OrganizationCreateWithoutProcessFeeAgreementsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -3620,6 +3702,7 @@ export type OrganizationUncheckedCreateWithoutProcessFeeAgreementsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3675,6 +3758,7 @@ export type OrganizationUpdateWithoutProcessFeeAgreementsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -3714,6 +3798,7 @@ export type OrganizationUncheckedUpdateWithoutProcessFeeAgreementsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3753,6 +3838,7 @@ export type OrganizationCreateWithoutProcessFinanceEntriesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -3792,6 +3878,7 @@ export type OrganizationUncheckedCreateWithoutProcessFinanceEntriesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3847,6 +3934,7 @@ export type OrganizationUpdateWithoutProcessFinanceEntriesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -3886,6 +3974,7 @@ export type OrganizationUncheckedUpdateWithoutProcessFinanceEntriesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3925,6 +4014,7 @@ export type OrganizationCreateWithoutAgendaEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -3964,6 +4054,7 @@ export type OrganizationUncheckedCreateWithoutAgendaEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4019,6 +4110,7 @@ export type OrganizationUpdateWithoutAgendaEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -4058,6 +4150,7 @@ export type OrganizationUncheckedUpdateWithoutAgendaEventsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4097,6 +4190,7 @@ export type OrganizationCreateWithoutPublicationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -4136,6 +4230,7 @@ export type OrganizationUncheckedCreateWithoutPublicationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4191,6 +4286,7 @@ export type OrganizationUpdateWithoutPublicationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -4230,6 +4326,7 @@ export type OrganizationUncheckedUpdateWithoutPublicationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4269,6 +4366,7 @@ export type OrganizationCreateWithoutPublicationRecipientsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -4308,6 +4406,7 @@ export type OrganizationUncheckedCreateWithoutPublicationRecipientsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4363,6 +4462,7 @@ export type OrganizationUpdateWithoutPublicationRecipientsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -4402,6 +4502,7 @@ export type OrganizationUncheckedUpdateWithoutPublicationRecipientsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4412,6 +4513,182 @@ export type OrganizationUncheckedUpdateWithoutPublicationRecipientsInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutPublicationEmailDeliveriesInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutPublicationEmailDeliveriesInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileUncheckedCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutPublicationEmailDeliveriesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutPublicationEmailDeliveriesInput, Prisma.OrganizationUncheckedCreateWithoutPublicationEmailDeliveriesInput>
+}
+
+export type OrganizationUpsertWithoutPublicationEmailDeliveriesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutPublicationEmailDeliveriesInput, Prisma.OrganizationUncheckedUpdateWithoutPublicationEmailDeliveriesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutPublicationEmailDeliveriesInput, Prisma.OrganizationUncheckedCreateWithoutPublicationEmailDeliveriesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutPublicationEmailDeliveriesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutPublicationEmailDeliveriesInput, Prisma.OrganizationUncheckedUpdateWithoutPublicationEmailDeliveriesInput>
+}
+
+export type OrganizationUpdateWithoutPublicationEmailDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutPublicationEmailDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUncheckedUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
   djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
   djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4441,6 +4718,7 @@ export type OrganizationCreateWithoutDjenCandidatesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -4480,6 +4758,7 @@ export type OrganizationUncheckedCreateWithoutDjenCandidatesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4535,6 +4814,7 @@ export type OrganizationUpdateWithoutDjenCandidatesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -4574,6 +4854,7 @@ export type OrganizationUncheckedUpdateWithoutDjenCandidatesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4613,6 +4894,7 @@ export type OrganizationCreateWithoutDjenCursorsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -4652,6 +4934,7 @@ export type OrganizationUncheckedCreateWithoutDjenCursorsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4707,6 +4990,7 @@ export type OrganizationUpdateWithoutDjenCursorsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -4746,6 +5030,7 @@ export type OrganizationUncheckedUpdateWithoutDjenCursorsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4785,6 +5070,7 @@ export type OrganizationCreateWithoutDeadlineReviewsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -4824,6 +5110,7 @@ export type OrganizationUncheckedCreateWithoutDeadlineReviewsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4879,6 +5166,7 @@ export type OrganizationUpdateWithoutDeadlineReviewsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -4918,6 +5206,7 @@ export type OrganizationUncheckedUpdateWithoutDeadlineReviewsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4957,6 +5246,7 @@ export type OrganizationCreateWithoutGoogleCalendarConnectionsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -4996,6 +5286,7 @@ export type OrganizationUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5051,6 +5342,7 @@ export type OrganizationUpdateWithoutGoogleCalendarConnectionsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -5090,6 +5382,7 @@ export type OrganizationUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5129,6 +5422,7 @@ export type OrganizationCreateWithoutExternalCalendarEventLinksInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -5168,6 +5462,7 @@ export type OrganizationUncheckedCreateWithoutExternalCalendarEventLinksInput = 
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5223,6 +5518,7 @@ export type OrganizationUpdateWithoutExternalCalendarEventLinksInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -5262,6 +5558,7 @@ export type OrganizationUncheckedUpdateWithoutExternalCalendarEventLinksInput = 
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5301,6 +5598,7 @@ export type OrganizationCreateWithoutPetitionTemplatesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -5340,6 +5638,7 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplatesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5395,6 +5694,7 @@ export type OrganizationUpdateWithoutPetitionTemplatesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -5434,6 +5734,7 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplatesInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5473,6 +5774,7 @@ export type OrganizationCreateWithoutPetitionTemplateVersionsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -5512,6 +5814,7 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplateVersionsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5567,6 +5870,7 @@ export type OrganizationUpdateWithoutPetitionTemplateVersionsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -5606,6 +5910,7 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplateVersionsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5645,6 +5950,7 @@ export type OrganizationCreateWithoutPetitionGenerationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -5684,6 +5990,7 @@ export type OrganizationUncheckedCreateWithoutPetitionGenerationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5739,6 +6046,7 @@ export type OrganizationUpdateWithoutPetitionGenerationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -5778,6 +6086,7 @@ export type OrganizationUncheckedUpdateWithoutPetitionGenerationsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5817,6 +6126,7 @@ export type OrganizationCreateWithoutStorageUsageInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -5856,6 +6166,7 @@ export type OrganizationUncheckedCreateWithoutStorageUsageInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5911,6 +6222,7 @@ export type OrganizationUpdateWithoutStorageUsageInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -5950,6 +6262,7 @@ export type OrganizationUncheckedUpdateWithoutStorageUsageInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5989,6 +6302,7 @@ export type OrganizationCreateWithoutProcessDocumentsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
@@ -6028,6 +6342,7 @@ export type OrganizationUncheckedCreateWithoutProcessDocumentsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
   processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -6083,6 +6398,7 @@ export type OrganizationUpdateWithoutProcessDocumentsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
@@ -6122,6 +6438,7 @@ export type OrganizationUncheckedUpdateWithoutProcessDocumentsInput = {
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -6157,6 +6474,7 @@ export type OrganizationCountOutputType = {
   legalAcceptances: number
   clients: number
   processes: number
+  publicationEmailDeliveries: number
   processClients: number
   processParties: number
   processTimelineEvents: number
@@ -6187,6 +6505,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   legalAcceptances?: boolean | OrganizationCountOutputTypeCountLegalAcceptancesArgs
   clients?: boolean | OrganizationCountOutputTypeCountClientsArgs
   processes?: boolean | OrganizationCountOutputTypeCountProcessesArgs
+  publicationEmailDeliveries?: boolean | OrganizationCountOutputTypeCountPublicationEmailDeliveriesArgs
   processClients?: boolean | OrganizationCountOutputTypeCountProcessClientsArgs
   processParties?: boolean | OrganizationCountOutputTypeCountProcessPartiesArgs
   processTimelineEvents?: boolean | OrganizationCountOutputTypeCountProcessTimelineEventsArgs
@@ -6266,6 +6585,13 @@ export type OrganizationCountOutputTypeCountClientsArgs<ExtArgs extends runtime.
  */
 export type OrganizationCountOutputTypeCountProcessesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProcessWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountPublicationEmailDeliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PublicationEmailDeliveryWhereInput
 }
 
 /**
@@ -6426,6 +6752,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   legalAcceptances?: boolean | Prisma.Organization$legalAcceptancesArgs<ExtArgs>
   clients?: boolean | Prisma.Organization$clientsArgs<ExtArgs>
   processes?: boolean | Prisma.Organization$processesArgs<ExtArgs>
+  publicationEmailDeliveries?: boolean | Prisma.Organization$publicationEmailDeliveriesArgs<ExtArgs>
   processClients?: boolean | Prisma.Organization$processClientsArgs<ExtArgs>
   processParties?: boolean | Prisma.Organization$processPartiesArgs<ExtArgs>
   processTimelineEvents?: boolean | Prisma.Organization$processTimelineEventsArgs<ExtArgs>
@@ -6491,6 +6818,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   legalAcceptances?: boolean | Prisma.Organization$legalAcceptancesArgs<ExtArgs>
   clients?: boolean | Prisma.Organization$clientsArgs<ExtArgs>
   processes?: boolean | Prisma.Organization$processesArgs<ExtArgs>
+  publicationEmailDeliveries?: boolean | Prisma.Organization$publicationEmailDeliveriesArgs<ExtArgs>
   processClients?: boolean | Prisma.Organization$processClientsArgs<ExtArgs>
   processParties?: boolean | Prisma.Organization$processPartiesArgs<ExtArgs>
   processTimelineEvents?: boolean | Prisma.Organization$processTimelineEventsArgs<ExtArgs>
@@ -6529,6 +6857,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     legalAcceptances: Prisma.$LegalAcceptancePayload<ExtArgs>[]
     clients: Prisma.$ClientPayload<ExtArgs>[]
     processes: Prisma.$ProcessPayload<ExtArgs>[]
+    publicationEmailDeliveries: Prisma.$PublicationEmailDeliveryPayload<ExtArgs>[]
     processClients: Prisma.$ProcessClientPayload<ExtArgs>[]
     processParties: Prisma.$ProcessPartyPayload<ExtArgs>[]
     processTimelineEvents: Prisma.$ProcessTimelineEventPayload<ExtArgs>[]
@@ -6962,6 +7291,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   legalAcceptances<T extends Prisma.Organization$legalAcceptancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$legalAcceptancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LegalAcceptancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clients<T extends Prisma.Organization$clientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processes<T extends Prisma.Organization$processesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  publicationEmailDeliveries<T extends Prisma.Organization$publicationEmailDeliveriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$publicationEmailDeliveriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PublicationEmailDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processClients<T extends Prisma.Organization$processClientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processClientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processParties<T extends Prisma.Organization$processPartiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processPartiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessPartyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processTimelineEvents<T extends Prisma.Organization$processTimelineEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processTimelineEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessTimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7615,6 +7945,30 @@ export type Organization$processesArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ProcessScalarFieldEnum | Prisma.ProcessScalarFieldEnum[]
+}
+
+/**
+ * Organization.publicationEmailDeliveries
+ */
+export type Organization$publicationEmailDeliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PublicationEmailDelivery
+   */
+  select?: Prisma.PublicationEmailDeliverySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PublicationEmailDelivery
+   */
+  omit?: Prisma.PublicationEmailDeliveryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PublicationEmailDeliveryInclude<ExtArgs> | null
+  where?: Prisma.PublicationEmailDeliveryWhereInput
+  orderBy?: Prisma.PublicationEmailDeliveryOrderByWithRelationInput | Prisma.PublicationEmailDeliveryOrderByWithRelationInput[]
+  cursor?: Prisma.PublicationEmailDeliveryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PublicationEmailDeliveryScalarFieldEnum | Prisma.PublicationEmailDeliveryScalarFieldEnum[]
 }
 
 /**

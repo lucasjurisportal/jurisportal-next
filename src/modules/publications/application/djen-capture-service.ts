@@ -134,6 +134,7 @@ export async function persistPublication(input: {
             processNumberFormatted: input.publication.processNumberFormatted,
             publicationDate: dateOnly(input.publication.publicationDate),
             content: input.publication.content,
+            processMetadata: jsonValue(input.publication.processMetadata),
             summary: input.publication.summary,
             parties: jsonValue(input.publication.parties),
             explicitDates: jsonValue(input.publication.explicitDates),
@@ -161,6 +162,7 @@ export async function persistPublication(input: {
             processNumberFormatted: input.publication.processNumberFormatted,
             publicationDate: dateOnly(input.publication.publicationDate),
             content: input.publication.content,
+            processMetadata: jsonValue(input.publication.processMetadata),
             summary: input.publication.summary,
             parties: jsonValue(input.publication.parties),
             explicitDates: jsonValue(input.publication.explicitDates),
@@ -170,11 +172,21 @@ export async function persistPublication(input: {
           },
         });
 
-    await tx.publicationRecipient.upsert({
+    const recipient = await tx.publicationRecipient.upsert({
       where: { publicationId_lawyerOabId: { publicationId: publication.id, lawyerOabId: input.lawyerOabId } },
       create: { organizationId: input.organizationId, publicationId: publication.id, lawyerOabId: input.lawyerOabId },
       update: {},
     });
+    if (input.publication.sourceStatus === "ACTIVE") {
+      await tx.publicationEmailDelivery.upsert({
+        where: { publicationId_lawyerOabId: { publicationId: publication.id, lawyerOabId: input.lawyerOabId } },
+        create: {
+          organizationId: input.organizationId, publicationId: publication.id,
+          lawyerOabId: recipient.lawyerOabId,
+        },
+        update: {},
+      });
+    }
 
     const sourceCancelled = input.publication.sourceStatus === "CANCELLED";
     await tx.deadlineReview.upsert({

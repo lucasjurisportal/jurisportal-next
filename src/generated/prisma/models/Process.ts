@@ -55,6 +55,7 @@ export type ProcessMinAggregateOutputType = {
   court: string | null
   division: string | null
   district: string | null
+  forum: string | null
   processClass: string | null
   subject: string | null
   caseValue: runtime.Decimal | null
@@ -85,6 +86,7 @@ export type ProcessMaxAggregateOutputType = {
   court: string | null
   division: string | null
   district: string | null
+  forum: string | null
   processClass: string | null
   subject: string | null
   caseValue: runtime.Decimal | null
@@ -115,6 +117,7 @@ export type ProcessCountAggregateOutputType = {
   court: number
   division: number
   district: number
+  forum: number
   processClass: number
   subject: number
   caseValue: number
@@ -159,6 +162,7 @@ export type ProcessMinAggregateInputType = {
   court?: true
   division?: true
   district?: true
+  forum?: true
   processClass?: true
   subject?: true
   caseValue?: true
@@ -189,6 +193,7 @@ export type ProcessMaxAggregateInputType = {
   court?: true
   division?: true
   district?: true
+  forum?: true
   processClass?: true
   subject?: true
   caseValue?: true
@@ -219,6 +224,7 @@ export type ProcessCountAggregateInputType = {
   court?: true
   division?: true
   district?: true
+  forum?: true
   processClass?: true
   subject?: true
   caseValue?: true
@@ -336,6 +342,7 @@ export type ProcessGroupByOutputType = {
   court: string | null
   division: string | null
   district: string | null
+  forum: string | null
   processClass: string | null
   subject: string | null
   caseValue: runtime.Decimal | null
@@ -389,6 +396,7 @@ export type ProcessWhereInput = {
   court?: Prisma.StringNullableFilter<"Process"> | string | null
   division?: Prisma.StringNullableFilter<"Process"> | string | null
   district?: Prisma.StringNullableFilter<"Process"> | string | null
+  forum?: Prisma.StringNullableFilter<"Process"> | string | null
   processClass?: Prisma.StringNullableFilter<"Process"> | string | null
   subject?: Prisma.StringNullableFilter<"Process"> | string | null
   caseValue?: Prisma.DecimalNullableFilter<"Process"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -434,6 +442,7 @@ export type ProcessOrderByWithRelationInput = {
   court?: Prisma.SortOrderInput | Prisma.SortOrder
   division?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
+  forum?: Prisma.SortOrderInput | Prisma.SortOrder
   processClass?: Prisma.SortOrderInput | Prisma.SortOrder
   subject?: Prisma.SortOrderInput | Prisma.SortOrder
   caseValue?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -485,6 +494,7 @@ export type ProcessWhereUniqueInput = Prisma.AtLeast<{
   court?: Prisma.StringNullableFilter<"Process"> | string | null
   division?: Prisma.StringNullableFilter<"Process"> | string | null
   district?: Prisma.StringNullableFilter<"Process"> | string | null
+  forum?: Prisma.StringNullableFilter<"Process"> | string | null
   processClass?: Prisma.StringNullableFilter<"Process"> | string | null
   subject?: Prisma.StringNullableFilter<"Process"> | string | null
   caseValue?: Prisma.DecimalNullableFilter<"Process"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -530,6 +540,7 @@ export type ProcessOrderByWithAggregationInput = {
   court?: Prisma.SortOrderInput | Prisma.SortOrder
   division?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
+  forum?: Prisma.SortOrderInput | Prisma.SortOrder
   processClass?: Prisma.SortOrderInput | Prisma.SortOrder
   subject?: Prisma.SortOrderInput | Prisma.SortOrder
   caseValue?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -568,6 +579,7 @@ export type ProcessScalarWhereWithAggregatesInput = {
   court?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   division?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   district?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
+  forum?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   processClass?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   subject?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   caseValue?: Prisma.DecimalNullableWithAggregatesFilter<"Process"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -596,6 +608,7 @@ export type ProcessCreateInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -638,6 +651,7 @@ export type ProcessUncheckedCreateInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -676,6 +690,7 @@ export type ProcessUpdateInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -718,6 +733,7 @@ export type ProcessUncheckedUpdateInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -758,6 +774,7 @@ export type ProcessCreateManyInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -786,6 +803,7 @@ export type ProcessUpdateManyMutationInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -813,6 +831,7 @@ export type ProcessUncheckedUpdateManyInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -869,6 +888,7 @@ export type ProcessCountOrderByAggregateInput = {
   court?: Prisma.SortOrder
   division?: Prisma.SortOrder
   district?: Prisma.SortOrder
+  forum?: Prisma.SortOrder
   processClass?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   caseValue?: Prisma.SortOrder
@@ -905,6 +925,7 @@ export type ProcessMaxOrderByAggregateInput = {
   court?: Prisma.SortOrder
   division?: Prisma.SortOrder
   district?: Prisma.SortOrder
+  forum?: Prisma.SortOrder
   processClass?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   caseValue?: Prisma.SortOrder
@@ -935,6 +956,7 @@ export type ProcessMinOrderByAggregateInput = {
   court?: Prisma.SortOrder
   division?: Prisma.SortOrder
   district?: Prisma.SortOrder
+  forum?: Prisma.SortOrder
   processClass?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   caseValue?: Prisma.SortOrder
@@ -1343,6 +1365,7 @@ export type ProcessCreateWithoutResponsibleInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1384,6 +1407,7 @@ export type ProcessUncheckedCreateWithoutResponsibleInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1431,6 +1455,7 @@ export type ProcessCreateWithoutCreatedByInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1472,6 +1497,7 @@ export type ProcessUncheckedCreateWithoutCreatedByInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1519,6 +1545,7 @@ export type ProcessCreateWithoutUpdatedByInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1560,6 +1587,7 @@ export type ProcessUncheckedCreateWithoutUpdatedByInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1607,6 +1635,7 @@ export type ProcessCreateWithoutCnjLockedByInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1647,6 +1676,7 @@ export type ProcessUncheckedCreateWithoutCnjLockedByInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1716,6 +1746,7 @@ export type ProcessScalarWhereInput = {
   court?: Prisma.StringNullableFilter<"Process"> | string | null
   division?: Prisma.StringNullableFilter<"Process"> | string | null
   district?: Prisma.StringNullableFilter<"Process"> | string | null
+  forum?: Prisma.StringNullableFilter<"Process"> | string | null
   processClass?: Prisma.StringNullableFilter<"Process"> | string | null
   subject?: Prisma.StringNullableFilter<"Process"> | string | null
   caseValue?: Prisma.DecimalNullableFilter<"Process"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1792,6 +1823,7 @@ export type ProcessCreateWithoutOrganizationInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1832,6 +1864,7 @@ export type ProcessUncheckedCreateWithoutOrganizationInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1896,6 +1929,7 @@ export type ProcessCreateWithoutClientsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1937,6 +1971,7 @@ export type ProcessUncheckedCreateWithoutClientsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1990,6 +2025,7 @@ export type ProcessUpdateWithoutClientsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2031,6 +2067,7 @@ export type ProcessUncheckedUpdateWithoutClientsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2068,6 +2105,7 @@ export type ProcessCreateWithoutPartiesInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2109,6 +2147,7 @@ export type ProcessUncheckedCreateWithoutPartiesInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2162,6 +2201,7 @@ export type ProcessUpdateWithoutPartiesInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2203,6 +2243,7 @@ export type ProcessUncheckedUpdateWithoutPartiesInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2240,6 +2281,7 @@ export type ProcessCreateWithoutTimelineInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2281,6 +2323,7 @@ export type ProcessUncheckedCreateWithoutTimelineInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2334,6 +2377,7 @@ export type ProcessUpdateWithoutTimelineInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2375,6 +2419,7 @@ export type ProcessUncheckedUpdateWithoutTimelineInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2412,6 +2457,7 @@ export type ProcessCreateWithoutWorkItemsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2453,6 +2499,7 @@ export type ProcessUncheckedCreateWithoutWorkItemsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2506,6 +2553,7 @@ export type ProcessUpdateWithoutWorkItemsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2547,6 +2595,7 @@ export type ProcessUncheckedUpdateWithoutWorkItemsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2584,6 +2633,7 @@ export type ProcessCreateWithoutFeeAgreementInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2625,6 +2675,7 @@ export type ProcessUncheckedCreateWithoutFeeAgreementInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2678,6 +2729,7 @@ export type ProcessUpdateWithoutFeeAgreementInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2719,6 +2771,7 @@ export type ProcessUncheckedUpdateWithoutFeeAgreementInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2756,6 +2809,7 @@ export type ProcessCreateWithoutFinanceEntriesInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2797,6 +2851,7 @@ export type ProcessUncheckedCreateWithoutFinanceEntriesInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2850,6 +2905,7 @@ export type ProcessUpdateWithoutFinanceEntriesInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2891,6 +2947,7 @@ export type ProcessUncheckedUpdateWithoutFinanceEntriesInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2928,6 +2985,7 @@ export type ProcessCreateWithoutAgendaEventsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2969,6 +3027,7 @@ export type ProcessUncheckedCreateWithoutAgendaEventsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3022,6 +3081,7 @@ export type ProcessUpdateWithoutAgendaEventsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3063,6 +3123,7 @@ export type ProcessUncheckedUpdateWithoutAgendaEventsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3100,6 +3161,7 @@ export type ProcessCreateWithoutPublicationsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3141,6 +3203,7 @@ export type ProcessUncheckedCreateWithoutPublicationsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3194,6 +3257,7 @@ export type ProcessUpdateWithoutPublicationsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3235,6 +3299,7 @@ export type ProcessUncheckedUpdateWithoutPublicationsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3272,6 +3337,7 @@ export type ProcessCreateWithoutPetitionGenerationsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3313,6 +3379,7 @@ export type ProcessUncheckedCreateWithoutPetitionGenerationsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3366,6 +3433,7 @@ export type ProcessUpdateWithoutPetitionGenerationsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3407,6 +3475,7 @@ export type ProcessUncheckedUpdateWithoutPetitionGenerationsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3444,6 +3513,7 @@ export type ProcessCreateWithoutDocumentsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3485,6 +3555,7 @@ export type ProcessUncheckedCreateWithoutDocumentsInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3538,6 +3609,7 @@ export type ProcessUpdateWithoutDocumentsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3579,6 +3651,7 @@ export type ProcessUncheckedUpdateWithoutDocumentsInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3618,6 +3691,7 @@ export type ProcessCreateManyResponsibleInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3647,6 +3721,7 @@ export type ProcessCreateManyCreatedByInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3676,6 +3751,7 @@ export type ProcessCreateManyUpdatedByInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3704,6 +3780,7 @@ export type ProcessCreateManyCnjLockedByInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3732,6 +3809,7 @@ export type ProcessUpdateWithoutResponsibleInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3773,6 +3851,7 @@ export type ProcessUncheckedUpdateWithoutResponsibleInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3812,6 +3891,7 @@ export type ProcessUncheckedUpdateManyWithoutResponsibleInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3839,6 +3919,7 @@ export type ProcessUpdateWithoutCreatedByInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3880,6 +3961,7 @@ export type ProcessUncheckedUpdateWithoutCreatedByInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3919,6 +4001,7 @@ export type ProcessUncheckedUpdateManyWithoutCreatedByInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3946,6 +4029,7 @@ export type ProcessUpdateWithoutUpdatedByInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3987,6 +4071,7 @@ export type ProcessUncheckedUpdateWithoutUpdatedByInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4026,6 +4111,7 @@ export type ProcessUncheckedUpdateManyWithoutUpdatedByInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4053,6 +4139,7 @@ export type ProcessUpdateWithoutCnjLockedByInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4093,6 +4180,7 @@ export type ProcessUncheckedUpdateWithoutCnjLockedByInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4132,6 +4220,7 @@ export type ProcessUncheckedUpdateManyWithoutCnjLockedByInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4161,6 +4250,7 @@ export type ProcessCreateManyOrganizationInput = {
   court?: string | null
   division?: string | null
   district?: string | null
+  forum?: string | null
   processClass?: string | null
   subject?: string | null
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4189,6 +4279,7 @@ export type ProcessUpdateWithoutOrganizationInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4229,6 +4320,7 @@ export type ProcessUncheckedUpdateWithoutOrganizationInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4268,6 +4360,7 @@ export type ProcessUncheckedUpdateManyWithoutOrganizationInput = {
   court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4401,6 +4494,7 @@ export type ProcessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   court?: boolean
   division?: boolean
   district?: boolean
+  forum?: boolean
   processClass?: boolean
   subject?: boolean
   caseValue?: boolean
@@ -4447,6 +4541,7 @@ export type ProcessSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   court?: boolean
   division?: boolean
   district?: boolean
+  forum?: boolean
   processClass?: boolean
   subject?: boolean
   caseValue?: boolean
@@ -4482,6 +4577,7 @@ export type ProcessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   court?: boolean
   division?: boolean
   district?: boolean
+  forum?: boolean
   processClass?: boolean
   subject?: boolean
   caseValue?: boolean
@@ -4517,6 +4613,7 @@ export type ProcessSelectScalar = {
   court?: boolean
   division?: boolean
   district?: boolean
+  forum?: boolean
   processClass?: boolean
   subject?: boolean
   caseValue?: boolean
@@ -4531,7 +4628,7 @@ export type ProcessSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProcessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "cnjRaw" | "cnjNormalized" | "cnjFormatted" | "internalCode" | "internalYear" | "internalSequence" | "cnjLockedAt" | "cnjLockedByUserId" | "source" | "status" | "court" | "division" | "district" | "processClass" | "subject" | "caseValue" | "distributionDate" | "responsibleUserId" | "notes" | "archivedAt" | "closedAt" | "createdByUserId" | "updatedByUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["process"]>
+export type ProcessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "cnjRaw" | "cnjNormalized" | "cnjFormatted" | "internalCode" | "internalYear" | "internalSequence" | "cnjLockedAt" | "cnjLockedByUserId" | "source" | "status" | "court" | "division" | "district" | "forum" | "processClass" | "subject" | "caseValue" | "distributionDate" | "responsibleUserId" | "notes" | "archivedAt" | "closedAt" | "createdByUserId" | "updatedByUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["process"]>
 export type ProcessInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   responsible?: boolean | Prisma.Process$responsibleArgs<ExtArgs>
@@ -4600,6 +4697,7 @@ export type $ProcessPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     court: string | null
     division: string | null
     district: string | null
+    forum: string | null
     processClass: string | null
     subject: string | null
     caseValue: runtime.Decimal | null
@@ -5065,6 +5163,7 @@ export interface ProcessFieldRefs {
   readonly court: Prisma.FieldRef<"Process", 'String'>
   readonly division: Prisma.FieldRef<"Process", 'String'>
   readonly district: Prisma.FieldRef<"Process", 'String'>
+  readonly forum: Prisma.FieldRef<"Process", 'String'>
   readonly processClass: Prisma.FieldRef<"Process", 'String'>
   readonly subject: Prisma.FieldRef<"Process", 'String'>
   readonly caseValue: Prisma.FieldRef<"Process", 'Decimal'>
