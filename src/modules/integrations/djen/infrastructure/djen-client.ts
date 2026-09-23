@@ -1,114 +1,106 @@
+/** Contrato público GET /api/v1/comunicacao, Swagger CNJ 1.0.4 (04/03/2026).
+ * nomeAdvogado é uma BUSCA INDEPENDENTE, não filtro local da busca OAB.
+ * A documentação indica paginação com 5 ou 100 itens e limite 10.000 para texto/OAB.
+ */
 const DJEN_API_URL = "https://comunicaapi.pje.jus.br/api/v1/comunicacao";
-const PAGE_SIZE = 50;
-const MAX_PAGES = 200;
-const EMPTY_PAGE_RETRIES = 2;
+const PAGE_SIZE = 100;
+const MAX_RESULTS = 10_000;
 const HTTP_RETRIES = 2;
 
 export type DjenSearchParams = {
-  oab: string;
-  uf: string;
   startDate: string;
   endDate: string;
-};
+} & ({ mode: "OAB"; oab: string; uf: string } | { mode: "NAME"; name: string });
 
-type DjenPage = {
-  count: number;
-  items: unknown[];
-};
+type DjenPage = { count: number; items: unknown[] };
 
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+function sleep(ms: number) { return new Promise((resolve) => setTimeout(resolve, ms)); }
 
 function normalizePage(value: unknown): DjenPage {
   const record = value && typeof value === "object" ? value as Record<string, unknown> : {};
-  return {
-    count: typeof record.count === "number" ? record.count : Number(record.count ?? 0) || 0,
-    items: Array.isArray(record.items) ? record.items : [],
-  };
+  if (typeof record.count !== "number" || !Number.isSafeInteger(record.count)
+    || record.count < 0 || !Array.isArray(record.items)) {
+    throw new Error("DJEN_INVALID_PAGE");
+  }
+  return { count: record.count as number, items: record.items as unknown[] };
 }
 
 async function requestDjenPage(params: DjenSearchParams, page: number): Promise<DjenPage> {
   const query = new URLSearchParams({
-    numeroOab: params.oab.trim(),
-    ufOab: params.uf.trim().toUpperCase(),
     dataDisponibilizacaoInicio: params.startDate,
     dataDisponibilizacaoFim: params.endDate,
     pagina: String(page),
     itensPorPagina: String(PAGE_SIZE),
+    meio: "D", // somente Diário, não editais da plataforma
   });
-
+  if (params.mode === "OAB") {
+    query.set("numeroOab", params.oab.trim());
+    query.set("ufOab", params.uf.trim().toUpperCase());
+  } else {
+    query.set("nomeAdvogado", params.name.trim());
+  }
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 20_000);
   try {
     const response = await fetch(`${DJEN_API_URL}?${query}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "User-Agent": "Jurisportal-Next/1.0",
-      },
+      headers: { Accept: "application/json", "User-Agent": "Jurisportal-Next/1.0" },
       cache: "no-store",
       signal: controller.signal,
     });
-
     if (!response.ok) {
-      const body = await response.text().catch(() => "");
-      if (response.status === 403) throw new Error("DJEN_HTTP_403");
-      const error = new Error(`DJEN_HTTP_${response.status}:${body.slice(0, 200)}`);
+      // Nunca despejar body de terceiros nos logs: pode conter dados pessoais.
+      const error = new Error(`DJEN_HTTP_${response.status}`);
       (error as Error & { status?: number }).status = response.status;
       throw error;
     }
     return normalizePage(await response.json());
-  } finally {
-    clearTimeout(timeout);
-  }
+  } finally { clearTimeout(timeout); }
 }
 
 async function fetchDjenPage(params: DjenSearchParams, page: number): Promise<DjenPage> {
-  let lastError: unknown;
-  for (let attempt = 0; attempt <= HTTP_RETRIES; attempt += 1) {
-    try {
-      return await requestDjenPage(params, page);
-    } catch (error) {
-      lastError = error;
+  for (let attempt = 0; ; attempt += 1) {
+    try { return await requestDjenPage(params, page); }
+    catch (error) {
       const status = (error as Error & { status?: number }).status;
-      const retryable = error instanceof DOMException && error.name === "AbortError"
-        || status === 429
+      // CNJ orienta aguardar 1 minuto após 429; devolver ao scheduler, sem loop de abuso.
+      if (status === 429) throw error;
+      const retryable = (error instanceof Error && error.name === "AbortError")
         || (typeof status === "number" && status >= 500);
-      if (!retryable || attempt === HTTP_RETRIES) throw error;
-      await sleep(500 * (attempt + 1));
+      if (!retryable || attempt >= HTTP_RETRIES) throw error;
+      await sleep(600 * (attempt + 1));
     }
   }
-  throw lastError;
 }
 
-/** Busca todas as páginas de uma combinação OAB/UF no intervalo solicitado. */
+/** Um dia por consulta; não aceitar resultados cortados como janela concluída. */
 export async function searchDjenAllPages(params: DjenSearchParams): Promise<unknown[]> {
+  if (params.startDate !== params.endDate || !/^\d{4}-\d{2}-\d{2}$/.test(params.startDate)
+    || Number.isNaN(Date.parse(`${params.startDate}T00:00:00Z`))) {
+    throw new Error("DJEN_EXPECTS_SINGLE_DAY");
+  }
+  if (params.mode === "NAME" && !params.name.trim()) throw new Error("DJEN_NAME_REQUIRED");
   const all: unknown[] = [];
-  let expectedCount: number | null = null;
-
-  for (let page = 1; page <= MAX_PAGES; page += 1) {
+  let count: number | null = null;
+  for (let page = 1; page <= Math.ceil(MAX_RESULTS / PAGE_SIZE); page += 1) {
     let result = await fetchDjenPage(params, page);
-    expectedCount ??= result.count;
-
-    if (result.items.length === 0 && expectedCount > all.length) {
-      for (let retry = 1; retry <= EMPTY_PAGE_RETRIES && result.items.length === 0; retry += 1) {
-        await sleep(350 * retry);
-        result = await fetchDjenPage(params, page);
-      }
+    count ??= result.count;
+    if (result.count !== count) throw new Error("DJEN_COUNT_CHANGED_RETRY_WINDOW");
+    if (count >= MAX_RESULTS) throw new Error("DJEN_RESULT_LIMIT_REACHED");
+    if (result.items.length === 0 && all.length < count) {
+      // Eventual indexação atrasada do DJeN: repetir página antes de falhar.
+      await sleep(400);
+      result = await fetchDjenPage(params, page);
     }
-
-    if (result.items.length === 0) {
-      if (expectedCount > all.length) throw new Error("DJEN_INCOMPLETE_PAGE");
-      break;
+    if (result.count !== count || result.items.length === 0 && all.length < count) {
+      throw new Error("DJEN_INCOMPLETE_PAGE");
+    }
+    if (result.items.length > PAGE_SIZE || all.length + result.items.length > count) {
+      throw new Error("DJEN_INVALID_PAGE_SIZE");
     }
     all.push(...result.items);
-
-    if (all.length >= (expectedCount ?? 0)) break;
-    if (result.items.length < PAGE_SIZE) throw new Error("DJEN_INCOMPLETE_PAGE");
-    await sleep(300);
+    if (all.length === count) return all;
+    if (result.items.length !== PAGE_SIZE) throw new Error("DJEN_INCOMPLETE_PAGE");
+    await sleep(250);
   }
-
-  if (expectedCount !== null && all.length < expectedCount) throw new Error("DJEN_PAGE_LIMIT_REACHED");
-  return all;
+  throw new Error("DJEN_PAGE_LIMIT_REACHED");
 }

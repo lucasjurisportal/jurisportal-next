@@ -27,6 +27,7 @@ export type NormalizedDjenPublication = {
   judicialBody: string | null;
   publicationDate: string;
   content: string;
+  summary: string;
   lawyers: DjenLawyer[];
   parties: DjenParty[];
   explicitDates: string[];
@@ -146,9 +147,8 @@ export function buildOabQueryVariants(rawNumber: string, normalizedNumber: strin
   const suffixMatch = normalized.match(/^(\d+)([A-Z])$/);
   if (suffixMatch) values.add(`${suffixMatch[1]}-${suffixMatch[2]}`);
 
-  if (/^\d+$/.test(normalized)) {
-    for (const suffix of ["O", "A", "N", "B", "S", "E"]) values.add(`${normalized}-${suffix}`);
-  }
+  // Não fabricar inscrições com sufixos não cadastrados: gera busca excessiva e
+  // risco de sugerir publicações de advogados com modalidade distinta.
 
   return [...values];
 }
@@ -171,6 +171,24 @@ function classifyCommunication(value: string): "PUBLICATION" | "INTIMATION" {
   return value.toLocaleLowerCase("pt-BR").includes("intima") ? "INTIMATION" : "PUBLICATION";
 }
 
+/** Resumo determinístico: não inventa ato, data nem vencimento. */
+export function summarizeDjenContent(content: string): string {
+  const compact = content.replace(/\s+/g, " ").trim();
+  return compact.length > 320 ? `${compact.slice(0, 319).trimEnd()}…` : compact;
+}
+
+/** Links externos só são expostos se forem HTTPS e tiverem domínio do Judiciário. */
+export function officialDjenUrl(value: string | null): string | null {
+  if (!value) return null;
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "https:" || url.username || url.password || url.port) return null;
+    const host = url.hostname.toLowerCase();
+    if (host !== "jus.br" && !host.endsWith(".jus.br")) return null;
+    return url.toString();
+  } catch { return null; }
+}
+
 function makeExternalKey(input: {
   hash: string | null;
   externalId: string | null;
@@ -179,8 +197,9 @@ function makeExternalKey(input: {
   type: string;
   content: string;
 }) {
-  if (input.hash) return `hash:${input.hash}`;
+  // ID da comunicação permanece estável mesmo se o hash mudar em retificação/cancelamento.
   if (input.externalId) return `id:${input.externalId}`;
+  if (input.hash) return `hash:${input.hash}`;
   return `sha256:${createHash("sha256")
     .update([input.process, input.date, input.type, input.content].join("|"))
     .digest("hex")}`;
@@ -221,7 +240,7 @@ export function normalizeDjenItem(value: unknown): NormalizedDjenPublication {
   const cancellationReason = stringValue(item.motivo_cancelamento, item.motivoCancelamento);
   const active = booleanValue(item.ativo, item.active);
   const sourceStatus = cancellationReason || active === false ? "CANCELLED" as const : "ACTIVE" as const;
-  const sourceUrl = stringValue(item.link, item.url);
+  const sourceUrl = officialDjenUrl(stringValue(item.link, item.url));
   const explicitDates = extractExplicitDates(content);
 
   return {
@@ -238,6 +257,7 @@ export function normalizeDjenItem(value: unknown): NormalizedDjenPublication {
     judicialBody: stringValue(item.nomeOrgao, item.orgao),
     publicationDate,
     content,
+    summary: summarizeDjenContent(content),
     lawyers,
     parties,
     explicitDates,

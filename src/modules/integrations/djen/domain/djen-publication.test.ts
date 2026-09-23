@@ -7,6 +7,8 @@ import {
   normalizeLawyerName,
   publicationTargetsOab,
   sanitizeDjenContent,
+  officialDjenUrl,
+  summarizeDjenContent,
 } from "./djen-publication";
 
 test("sanitiza HTML externo e preserva texto", () => {
@@ -36,11 +38,13 @@ test("normaliza item realista do DJeN e CNJ", () => {
   assert.equal(publicationTargetsOab(pub, "123456A", "sp", "Advogado"), true);
 });
 
-test("gera variantes defensivas para OAB numérica", () => {
+test("consulta somente variantes da inscrição efetivamente cadastrada", () => {
   const values = buildOabQueryVariants("123456", "123456");
-  assert.ok(values.includes("123456"));
-  assert.ok(values.includes("123456-A"));
-  assert.ok(values.includes("123456-O"));
+  assert.deepEqual(values, ["123456"]);
+  const withSuffix = buildOabQueryVariants("123456-A", "123456A");
+  assert.ok(withSuffix.includes("123456-A"));
+  assert.ok(withSuffix.includes("123456A"));
+  assert.equal(withSuffix.includes("123456-B"), false);
 });
 
 test("preserva cancelamento informado pela origem", () => {
@@ -76,4 +80,29 @@ test("OAB, UF e nome precisam coincidir para associação automática", () => {
 test("registro sem advogados não comprova a inscrição do escritório", () => {
   const pub = normalizeDjenItem({ id: 100, datadisponibilizacao: "2026-09-15", texto: "Publicação" });
   assert.equal(publicationTargetsOab(pub, "12345", "SP", "João da Silva"), false);
+});
+
+
+test("IDs oficiais estáveis entre consulta OAB e nome e cancela sem duplicar CNJ", () => {
+  const base = { id: 777, hash: "hash-1", datadisponibilizacao: "2026-09-15",
+    numero_processo: "10008790820148260462", texto: "<p>Intimação</p>" };
+  const first = normalizeDjenItem(base);
+  const updated = normalizeDjenItem({ ...base, hash: "hash-novo", ativo: false });
+  const another = normalizeDjenItem({ ...base, id: 778 });
+  assert.equal(first.externalKey, "id:777");
+  assert.equal(updated.externalKey, first.externalKey);
+  assert.notEqual(another.externalKey, first.externalKey);
+  assert.equal(updated.sourceStatus, "CANCELLED");
+});
+
+test("origem oficial: URL externa não vira link clicável", () => {
+  assert.equal(officialDjenUrl("javascript:alert(1)"), null);
+  assert.equal(officialDjenUrl("https://jus.br.evil.example/"), null);
+  assert.equal(officialDjenUrl("http://tj.sp.jus.br/ato"), null);
+  assert.equal(officialDjenUrl("https://tj.sp.jus.br/ato"), "https://tj.sp.jus.br/ato");
+});
+
+test("resumo fiel limitado e sem interpretação de prazo", () => {
+  assert.equal(summarizeDjenContent("  Ato  publicado   hoje  "), "Ato publicado hoje");
+  assert.ok(summarizeDjenContent("texto ".repeat(100)).length <= 320);
 });

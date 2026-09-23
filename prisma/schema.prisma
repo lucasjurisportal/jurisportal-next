@@ -148,6 +148,8 @@ model Organization {
   externalCalendarEventLinks ExternalCalendarEventLink[]
   publications Publication[]
   publicationRecipients PublicationRecipient[]
+  djenCandidates DjenReviewCandidate[]
+  djenCursors DjenCaptureCursor[]
   deadlineReviews DeadlineReview[]
   processNumberSequences ProcessNumberSequence[]
   petitionTemplates PetitionTemplate[]
@@ -314,6 +316,8 @@ model LawyerOab {
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   publicationRecipients PublicationRecipient[]
+  djenCandidates DjenReviewCandidate[]
+  djenCursor DjenCaptureCursor?
 
   @@unique([organizationId, normalizedNumber, state])
   @@index([userId])
@@ -750,6 +754,7 @@ model Publication {
   processNumberFormatted   String?
   publicationDate          DateTime  @db.Date
   content                  String
+  summary                  String?
   parties                  Json?
   explicitDates            Json?
   sourceUrl                String?
@@ -795,6 +800,52 @@ model PublicationRecipient {
   @@unique([publicationId, lawyerOabId])
   @@index([organizationId, lawyerOabId])
   @@map("publication_recipient")
+}
+
+/// Resultado encontrado por OAB ou nome, mas sem identidade suficiente para associação automática.
+/// NÃO aparece como publicação nem gera prazo/notificação até aceite explícito.
+model DjenReviewCandidate {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  lawyerOabId    String   @db.Uuid
+  source         String   @default("DJEN")
+  externalKey    String
+  searchMethod   String
+  reason         String
+  payload        Json
+  status         String   @default("PENDING")
+  decidedByUserId String? @db.Uuid
+  decidedAt      DateTime?
+  firstSeenAt    DateTime @default(now())
+  lastSeenAt     DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  lawyerOab LawyerOab @relation(fields: [lawyerOabId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, lawyerOabId, source, externalKey], map: "djen_candidate_org_oab_source_key")
+  @@index([organizationId, status, lastSeenAt])
+  @@map("djen_review_candidate")
+}
+
+/// Cursor por OAB: avança apenas depois de ambas as buscas e de TODOS os dias terem sucesso.
+model DjenCaptureCursor {
+  id                String    @id @default(uuid()) @db.Uuid
+  organizationId    String    @db.Uuid
+  lawyerOabId       String    @unique @db.Uuid
+  completedThrough  DateTime? @db.Date
+  lastAttemptAt     DateTime?
+  lastSuccessAt     DateTime?
+  lastError         String?
+  status            String    @default("IDLE")
+  leaseToken        String?
+  leaseUntil        DateTime?
+  updatedAt         DateTime  @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  lawyerOab LawyerOab @relation(fields: [lawyerOabId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, status])
+  @@map("djen_capture_cursor")
 }
 
 /// Etapa humana entre uma publicação/intimação e um prazo jurídico definitivo.

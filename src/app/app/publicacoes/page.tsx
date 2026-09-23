@@ -9,6 +9,7 @@ import {
   jsonStringArray,
   listPublications,
 } from "@/modules/publications/application/publication-service";
+import { getDjenCaptureStatus, getDjenReviewCount } from "@/modules/publications/application/djen-review-service";
 import { DjenSyncButton } from "@/components/publications/DjenSyncButton";
 import styles from "@/components/publications/Publications.module.css";
 
@@ -56,7 +57,7 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
   const responsibleUserId = str("responsibleUserId") || "";
   const page = Math.max(1, Number(str("page") || "1") || 1);
 
-  const [result, summary, filters, platformMaster] = await Promise.all([
+  const [result, summary, filters, platformMaster, reviewCount, captureStatus] = await Promise.all([
     listPublications({
       organizationId: context.workspace.organizationId,
       view,
@@ -69,6 +70,8 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
     getPublicationSummary(context.workspace.organizationId),
     getPublicationFilters(context.workspace.organizationId),
     isPlatformMaster(context.user.id),
+    context.workspace.role === "owner" ? getDjenReviewCount(context.workspace.organizationId) : Promise.resolve(0),
+    context.workspace.role === "owner" ? getDjenCaptureStatus(context.workspace.organizationId) : Promise.resolve([]),
   ]);
 
   const current = {
@@ -84,6 +87,20 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
     <section className={styles.heading}>
       <div><span className={styles.eyebrow}>DJeN</span><h1>Publicações e intimações</h1><p>Comunicações reais das OABs monitoradas, vinculadas ao processo quando o número CNJ já existe no Jurisportal.</p></div>
     </section>
+
+    {context.workspace.role === "owner" ? <section className={styles.panel}>
+      <Link href="/app/publicacoes/revisao">Revisar identidade de destinatários · {reviewCount} pendente(s)</Link>
+      <p>Resultados ambíguos são separados das comunicações confirmadas e nunca geram prazos automaticamente.</p>
+    </section> : null}
+
+    {context.workspace.role === "owner" ? <section className={styles.panel}>
+      <h2>Estado da captura DJeN</h2>
+      {captureStatus.length ? captureStatus.map((status) =>
+        <p key={`${status.lawyerOab.rawNumber}/${status.lawyerOab.state}`}>
+          {status.lawyerOab.rawNumber}/{status.lawyerOab.state} · Último dia completo: {status.completedThrough?.toISOString().slice(0, 10) ?? "ainda não capturado"}
+          {status.status === "ERROR" ? ` · Falha: ${status.lastError || "verificar captura"}` : ""}
+        </p>) : <p>Sem captura registrada. O agendador de produção depende de homologação e ativação.</p>}
+    </section> : null}
 
     {showManualSync ? <DjenSyncButton /> : null}
 

@@ -10,6 +10,8 @@ type CaptureResult = {
   newPublications: number;
   updatedPublications: number;
   linkedToProcesses: number;
+  reviewCandidates: number;
+  skippedOabs: number;
   errors: Array<{ oab: string; error: string }>;
   window: { startDate: string; endDate: string };
 };
@@ -29,8 +31,8 @@ export function DjenSyncButton() {
       const body = await response.json().catch(() => null) as { result?: CaptureResult; error?: string } | null;
       if (!response.ok || !body?.result) throw new Error(body?.error || "Falha ao consultar o DJeN.");
       const result = body.result;
-      const errorSuffix = result.errors.length ? ` · ${result.errors.length} OAB(s) com erro` : "";
-      setMessage(`${result.newPublications} nova(s), ${result.updatedPublications} já conhecida(s), ${result.linkedToProcesses} vinculada(s) a processo${errorSuffix}.`);
+      const errorSuffix = result.errors.length ? ` · ${result.errors.length} OAB(s) com erro, consulte o diagnóstico` : "";
+      setMessage(`${result.newPublications} nova(s), ${result.updatedPublications} já conhecida(s), ${result.reviewCandidates} candidata(s) para revisão humana, ${result.linkedToProcesses} vinculada(s) a processo${errorSuffix}.`);
       router.refresh();
     } catch (cause) {
       const code = cause instanceof Error ? cause.message : "DJEN_SYNC_FAILED";

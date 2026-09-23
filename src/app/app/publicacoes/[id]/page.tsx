@@ -71,7 +71,10 @@ export default async function PublicationDetailPage({ params }: { params: Promis
 
         {explicitDates.length ? <div><h3>Datas escritas no texto</h3><div className={styles.dates}>{explicitDates.map((date) => <span className={styles.dateChip} key={date}>{date.split("-").reverse().join("/")}</span>)}</div><p className={styles.muted}>São apenas datas localizadas literalmente. O Jurisportal não assume que qualquer uma delas seja o vencimento do prazo.</p></div> : null}
 
-        <div><h3>Conteúdo</h3><div className={styles.content}>{publication.content || "Conteúdo não informado pelo DJeN."}</div></div>
+        {publication.summary ? <div><h3>Resumo da comunicação</h3><p>{publication.summary}</p>
+          <p className={styles.muted}>Trecho fiel do texto original, não é interpretação jurídica nem cálculo de prazo.</p></div> : null}
+        {publication.sourceUrl ? <div><a href={publication.sourceUrl} target="_blank" rel="noopener noreferrer">Abrir link da fonte judicial</a></div> : null}
+        <div><h3>Conteúdo integral</h3><div className={styles.content}>{publication.content || "Conteúdo não informado pelo DJeN."}</div></div>
       </div>
 
       <div className={styles.panel}>
