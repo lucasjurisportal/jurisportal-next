@@ -1,4 +1,5 @@
 import { prisma } from "@/infrastructure/database/prisma";
+import { normalizeDjenItem } from "@/modules/integrations/djen/domain/djen-publication";
 import { auditActionLabel, auditCategoryLabel } from "@/shared/audit/audit-labels";
 import { saoPauloTodayString } from "@/modules/work-items/domain/work-item-date";
 
@@ -26,6 +27,7 @@ export type DashboardActivity = {
   title: string;
   meta: string;
   actor: string;
+  href?: string;
 };
 
 export type DashboardAgendaItem = {
@@ -94,6 +96,7 @@ export async function getDashboardData(input: {
   const [
     publicationNew,
     intimationToday,
+    pendingCandidatesRows,
     deadlinesToday,
     highDeadlinesToday,
     overdueDeadlines,
@@ -114,8 +117,9 @@ export async function getDashboardData(input: {
     agendaEvents,
     teamProfiles,
   ] = await Promise.all([
-    prisma.publication.count({ where: { organizationId: input.organizationId, kind: "PUBLICATION", sourceStatus: "ACTIVE", readAt: null } }),
-    prisma.publication.count({ where: { organizationId: input.organizationId, kind: "INTIMATION", sourceStatus: "ACTIVE", publicationDate: { gte: today, lt: tomorrow } } }),
+    prisma.publication.count({ where: { organizationId: input.organizationId, kind: "PUBLICATION", sourceStatus: "ACTIVE", treatedAt: null } }),
+    prisma.publication.count({ where: { organizationId: input.organizationId, kind: "INTIMATION", sourceStatus: "ACTIVE", treatedAt: null } }),
+    input.role === "owner" ? prisma.djenReviewCandidate.findMany({ where: { organizationId: input.organizationId, status: "PENDING" }, select: { payload: true } }) : Promise.resolve([]),
     prisma.processWorkItem.count({ where: { organizationId: input.organizationId, kind: "DEADLINE", status: "OPEN", dueDate: { gte: today, lt: tomorrow }, ...staffScope } }),
     prisma.processWorkItem.count({ where: { organizationId: input.organizationId, kind: "DEADLINE", status: "OPEN", priority: "HIGH", dueDate: { gte: today, lt: tomorrow }, ...staffScope } }),
     prisma.processWorkItem.count({ where: { organizationId: input.organizationId, kind: "DEADLINE", status: "OPEN", dueDate: { lt: today }, ...staffScope } }),
@@ -152,7 +156,7 @@ export async function getDashboardData(input: {
     }),
     prisma.auditEvent.findMany({
       where: { organizationId: input.organizationId, action: { notIn: ["notification.read", "report.daily_email_sent", "report.daily_email_failed"] }, ...(input.role === "owner" ? {} : { actorUserId: input.userId }) },
-      select: { id: true, action: true, category: true, entityType: true, createdAt: true, actor: { select: { name: true } } },
+      select: { id: true, action: true, category: true, entityType: true, entityId: true, metadata: true, createdAt: true, actor: { select: { name: true } } },
       orderBy: { createdAt: "desc" },
       take: 8,
     }),
@@ -176,9 +180,17 @@ export async function getDashboardData(input: {
     }) : Promise.resolve([]),
   ]);
 
+  const pendingCandidates = pendingCandidatesRows.length;
+  const pendingByKind = { PUBLICATION: 0, INTIMATION: 0 };
+  for (const candidate of pendingCandidatesRows) {
+    try { pendingByKind[normalizeDjenItem(candidate.payload).kind]++; }
+    catch { /* Dados inconsistentes não podem derrubar o painel inteiro. */ }
+  }
+
   const metrics: DashboardMetric[] = [
-    { label: "Publicações novas", value: publicationNew, helper: "aguardando tratamento", tone: "blue", href: "/app/publicacoes?view=new&kind=PUBLICATION" },
-    { label: "Intimações hoje", value: intimationToday, helper: "recebidas na data", tone: "blue", href: "/app/publicacoes?view=new&kind=INTIMATION" },
+    { label: "Publicações pendentes", value: publicationNew + pendingByKind.PUBLICATION, helper: "inclui resultados para revisão", tone: "blue", href: "/app/publicacoes?view=untreated&kind=PUBLICATION" },
+    { label: "Intimações pendentes", value: intimationToday + pendingByKind.INTIMATION, helper: "inclui resultados para revisão", tone: "blue", href: "/app/publicacoes?view=untreated&kind=INTIMATION" },
+    ...(input.role === "owner" ? [{ label: "Para revisão", value: pendingCandidates, helper: "identificação do destinatário", tone: "amber" as const, href: "/app/publicacoes?view=untreated" }] : []),
     { label: "Prazos hoje", value: deadlinesToday, helper: highDeadlinesToday ? `${highDeadlinesToday} com prioridade alta` : "para acompanhar hoje", tone: "amber", href: "/app/prazos?view=today&kind=DEADLINE" },
     { label: "Prazos atrasados", value: overdueDeadlines, helper: overdueDeadlines ? "exigem ação" : "nenhum em atraso", tone: "red", href: "/app/prazos?view=overdue&kind=DEADLINE" },
     { label: "Audiências", value: upcomingHearings, helper: "nos próximos 7 dias", tone: "slate", href: "/app/agenda?view=week" },
@@ -234,13 +246,26 @@ export async function getDashboardData(input: {
     });
   }
 
-  const activity: DashboardActivity[] = auditEvents.map((event) => ({
-    id: event.id,
-    time: timePt(event.createdAt),
-    title: auditActionLabel(event.action),
-    meta: auditCategoryLabel(event.category),
-    actor: event.actor?.name || "Sistema",
-  }));
+  const activity: DashboardActivity[] = auditEvents.map((event) => {
+    const metadata = event.metadata && typeof event.metadata === "object" && !Array.isArray(event.metadata)
+      ? event.metadata as Record<string, unknown> : {};
+    const kind = metadata.kind === "INTIMATION" ? "Intimação" : "Publicação";
+    const isCapture = event.action === "publication.capture_completed" || event.action === "publication.capture_partial";
+    const publicationAction = event.action === "publication.captured" || event.action === "publication.process_linked" || event.action === "publication.review_candidate_received";
+    return {
+      id: event.id,
+      time: timePt(event.createdAt),
+      title: event.action === "publication.captured" ? `${kind} recebida do DJeN`
+        : event.action === "publication.review_candidate_received" ? `${kind} aguardando conferência` : auditActionLabel(event.action),
+      meta: isCapture
+        ? `${typeof metadata.newPublications === "number" ? metadata.newPublications : 0} novas · ${typeof metadata.reviewCandidates === "number" ? metadata.reviewCandidates : 0} para revisão`
+        : publicationAction ? `DJeN · ${typeof metadata.cnj === "string" ? metadata.cnj : "abrir publicações para conferir"}`
+        : auditCategoryLabel(event.category),
+      actor: event.actor?.name || "Sistema",
+      ...(publicationAction && event.entityType === "publication" ? { href: `/app/publicacoes/${event.entityId}` } : {}),
+      ...(publicationAction && event.entityType === "djen_review_candidate" ? { href: `/app/publicacoes/revisao#${event.entityId}` } : {}),
+    };
+  });
 
   const workAgenda: DashboardAgendaItem[] = agendaWork.flatMap((item) => {
     if (!item.dueDate) return [];

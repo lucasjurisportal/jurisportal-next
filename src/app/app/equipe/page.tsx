@@ -26,7 +26,7 @@ export default async function TeamPage() {
   }
 
   const [members, usage] = await Promise.all([
-    listTeamMembers(context.workspace.organizationId),
+    listTeamMembers(context.workspace.organizationId, context.workspace.role === "owner"),
     getTeamUsage(context.workspace.organizationId),
   ]);
 
@@ -35,10 +35,7 @@ export default async function TeamPage() {
       <section className={styles.heading}>
         <span className={styles.eyebrow}>Equipe</span>
         <h1>Equipe do escritório</h1>
-        <p>
-          Cada auxiliar pertence exclusivamente a esta conta e ocupa uma vaga de usuário e uma vaga
-          de OAB do plano. Não há compartilhamento entre escritórios nesta fase.
-        </p>
+        <p>Gerencie os advogados e auxiliares do seu escritório.</p>
       </section>
       <TeamManager
         members={members}

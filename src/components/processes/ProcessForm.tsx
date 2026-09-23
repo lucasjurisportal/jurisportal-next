@@ -294,7 +294,8 @@ export function ProcessForm({
           <select id="process-primaryClientId" value={value.primaryClientId} onChange={(e) => {
             update("primaryClientId", e.target.value);
             setValue((current) => ({ ...current, primaryClientId: e.target.value, additionalClientIds: current.additionalClientIds.filter((id) => id !== e.target.value) }));
-          }}>
+          }} required>
+            <option value="" disabled>Selecione o cliente principal</option>
             {clients.map((client) => <option key={client.id} value={client.id}>{clientLabel(client)}</option>)}
           </select>
           {fieldError("primaryClientId")}

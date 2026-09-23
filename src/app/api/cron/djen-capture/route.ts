@@ -33,6 +33,7 @@ export async function GET(request: Request) {
       JOIN "subscription" s ON s."organizationId" = l."organizationId"
       LEFT JOIN "djen_capture_cursor" c ON c."lawyerOabId" = l."id"
       WHERE l."isActive" = TRUE AND s."planSlug" <> 'free'
+        AND (c."lastAttemptAt" IS NULL OR c."lastAttemptAt" < NOW() - INTERVAL '3 hours')
       GROUP BY l."organizationId"
       ORDER BY MIN(COALESCE(c."lastAttemptAt", TIMESTAMP '1970-01-01')) ASC
       LIMIT 1

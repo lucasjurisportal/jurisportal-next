@@ -9,6 +9,7 @@ type MemberOption = { user: { id: string; name: string } };
 
 type Props = {
   publicationId: string;
+  processNumberNormalized: string | null;
   processId: string | null;
   reviewStatus: string | null;
   reviewTitle: string;
@@ -19,6 +20,7 @@ type Props = {
 };
 
 function errorMessage(code: string) {
+  if (code === "PUBLICATION_DEADLINE_REVIEW_REQUIRED") return "Confira o prazo ou escolha Não gera prazo antes de concluir a comunicação.";
   if (code === "PUBLICATION_PROCESS_REQUIRED") return "Vincule esta comunicação a um processo antes de criar prazo ou tarefa.";
   if (code === "DEADLINE_REVIEW_ALREADY_RESOLVED") return "A revisão de prazo desta comunicação já foi resolvida.";
   if (code === "PROCESS_NOT_FOUND") return "O processo selecionado não foi encontrado neste escritório.";
@@ -58,8 +60,14 @@ export function PublicationActions(props: Props) {
       const form = new FormData(event.currentTarget);
       void action({ action: "link-process", processId: form.get("processId") }, "link");
     }}>
-      <h3>Vincular a um processo</h3>
-      <p>O vínculo automático acontece quando o CNJ já existe. Se não aconteceu, selecione manualmente um processo deste escritório.</p>
+      <h3>Este processo ainda não está cadastrado</h3>
+      {props.processNumberNormalized?.length === 20 ? <div className={styles.formActions}>
+        <a className={styles.primaryButton} href={`/app/processos/novo?publicationId=${encodeURIComponent(props.publicationId)}`}>
+          Criar processo com os dados da publicação
+        </a>
+      </div> : <p>O número CNJ não está completo. Confira a comunicação antes de criar o processo.</p>}
+      <h3>Vincular a processo existente</h3>
+      <p>Se o processo já estiver cadastrado, selecione-o. O Jurisportal confere o número CNJ antes de vincular.</p>
       <div className={styles.field}><label>Processo</label><select name="processId" required defaultValue=""><option value="" disabled>Selecione...</option>{props.processes.map((process) => <option key={process.id} value={process.id}>{process.internalCode} · {process.cnjFormatted}{process.subject ? ` · ${process.subject}` : ""}</option>)}</select></div>
       <div className={styles.formActions}><button className={styles.primaryButton} disabled={busy === "link"}>{busy === "link" ? "Vinculando..." : "Vincular processo"}</button></div>
     </form> : null}
@@ -69,12 +77,12 @@ export function PublicationActions(props: Props) {
       const form = new FormData(event.currentTarget);
       void action({ action: "confirm-deadline", title: form.get("title"), dueDate: form.get("dueDate") }, "deadline");
     }}>
-      <h3>Revisar prazo</h3>
+      <h3>Criar prazo?</h3>
       <p>A data só vira prazo do Jurisportal depois da sua confirmação. Data expressa é informação auxiliar, não decisão jurídica automática.</p>
       <div className={styles.field}><label>Título</label><input name="title" defaultValue={props.reviewTitle} required /></div>
       <div className={styles.field}><label>Data confirmada</label><input name="dueDate" type="date" defaultValue={props.suggestedDate} required /></div>
       <div className={styles.formActions}>
-        <button className={styles.primaryButton} disabled={busy === "deadline" || !props.processId}>{busy === "deadline" ? "Confirmando..." : "Confirmar prazo"}</button>
+        <button className={styles.primaryButton} disabled={busy === "deadline" || !props.processId}>{busy === "deadline" ? "Confirmando..." : "Criar prazo"}</button>
         <button className={styles.secondaryButton} type="button" disabled={busy === "dismiss"} onClick={() => void action({ action: "dismiss-deadline" }, "dismiss")}>{busy === "dismiss" ? "Descartando..." : "Não gera prazo"}</button>
       </div>
     </form> : null}
@@ -100,9 +108,9 @@ export function PublicationActions(props: Props) {
     </form>
 
     {!props.treated ? <div className={styles.actionCard}>
-      <h3>Tratamento da comunicação</h3>
-      <p>Use quando a publicação já tiver sido conferida e as ações necessárias tiverem sido tomadas.</p>
-      <div className={styles.formActions}><button className={styles.secondaryButton} type="button" disabled={busy === "treated"} onClick={() => void action({ action: "mark-treated" }, "treated")}>{busy === "treated" ? "Salvando..." : "Marcar como tratada"}</button></div>
+      <h3>Concluir atendimento</h3>
+      <p>A comunicação permanece na lista de pendentes até você concluí-la. Se houver prazo, confirme-o ou escolha Não gera prazo antes de concluir.</p>
+      <div className={styles.formActions}><button className={styles.secondaryButton} type="button" disabled={busy === "treated"} onClick={() => void action({ action: "mark-treated" }, "treated")}>{busy === "treated" ? "Salvando..." : "Concluir"}</button></div>
     </div> : null}
   </div>;
 }

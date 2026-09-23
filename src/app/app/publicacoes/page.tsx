@@ -2,21 +2,22 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getAppContext } from "@/infrastructure/auth/app-context";
 import { hasCapability } from "@/modules/plans/application/plan-entitlements";
-import { isPlatformMaster } from "@/modules/security/application/platform-admin";
 import {
   getPublicationFilters,
   getPublicationSummary,
   jsonStringArray,
   listPublications,
 } from "@/modules/publications/application/publication-service";
-import { getDjenCaptureStatus, getDjenReviewCount } from "@/modules/publications/application/djen-review-service";
+import { getDjenCaptureStatus, getDjenReviewCount, listDjenReviewCandidates, getDjenRecentUpdates } from "@/modules/publications/application/djen-review-service";
+import { DjenCandidateActions } from "@/components/publications/DjenCandidateActions";
 import { DjenSyncButton } from "@/components/publications/DjenSyncButton";
+import { normalizeDjenItem } from "@/modules/integrations/djen/domain/djen-publication";
 import styles from "@/components/publications/Publications.module.css";
 
 const views = [
   ["all", "Todas"],
   ["new", "Novas"],
-  ["untreated", "Não tratadas"],
+  ["untreated", "Pendentes"],
   ["treated", "Tratadas"],
   ["with-date", "Com data expressa"],
 ] as const;
@@ -57,7 +58,7 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
   const responsibleUserId = str("responsibleUserId") || "";
   const page = Math.max(1, Number(str("page") || "1") || 1);
 
-  const [result, summary, filters, platformMaster, reviewCount, captureStatus] = await Promise.all([
+  const [result, summary, filters, reviewCount, captureStatus, reviewCandidates, recentUpdates] = await Promise.all([
     listPublications({
       organizationId: context.workspace.organizationId,
       view,
@@ -69,9 +70,10 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
     }),
     getPublicationSummary(context.workspace.organizationId),
     getPublicationFilters(context.workspace.organizationId),
-    isPlatformMaster(context.user.id),
     context.workspace.role === "owner" ? getDjenReviewCount(context.workspace.organizationId) : Promise.resolve(0),
     context.workspace.role === "owner" ? getDjenCaptureStatus(context.workspace.organizationId) : Promise.resolve([]),
+    context.workspace.role === "owner" ? listDjenReviewCandidates(context.workspace.organizationId) : Promise.resolve([]),
+    context.workspace.role === "owner" ? getDjenRecentUpdates(context.workspace.organizationId) : Promise.resolve([]),
   ]);
 
   const current = {
@@ -81,7 +83,19 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
     lawyerOabId: lawyerOabId || undefined,
     responsibleUserId: responsibleUserId || undefined,
   };
-  const showManualSync = process.env.NODE_ENV !== "production" || platformMaster;
+  const showManualSync = context.workspace.role === "owner" &&
+    (process.env.NODE_ENV !== "production" || captureStatus.some((cursor) => cursor.status === "ERROR"));
+  // Resultados ainda sem identidade confirmada aparecem NO MESMO quadro e filtros das publicações.
+  // A fila de identidade pertence ao proprietário; não vaza dados para outros integrantes.
+  const visibleCandidates = (page === 1 && ["all", "new", "untreated"].includes(view) ? reviewCandidates : []).flatMap((candidate) => {
+    const item = normalizeDjenItem(candidate.payload);
+    if (kind && item.kind !== kind) return [];
+    if (lawyerOabId && candidate.lawyerOabId !== lawyerOabId) return [];
+    if (responsibleUserId && candidate.lawyerOab.userId !== responsibleUserId) return [];
+    if (q && ![item.processNumberFormatted, item.processNumberRaw, item.court, item.judicialBody,
+      item.content, item.communicationType].some((part) => part?.toLowerCase().includes(q.toLowerCase()))) return [];
+    return [{ candidate, item }];
+  });
 
   return <div className={styles.page}>
     <section className={styles.heading}>
@@ -89,26 +103,24 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
     </section>
 
     {context.workspace.role === "owner" ? <section className={styles.panel}>
-      <Link href="/app/publicacoes/revisao">Revisar identidade de destinatários · {reviewCount} pendente(s)</Link>
-      <p>Resultados ambíguos são separados das comunicações confirmadas e nunca geram prazos automaticamente.</p>
-    </section> : null}
-
-    {context.workspace.role === "owner" ? <section className={styles.panel}>
-      <h2>Estado da captura DJeN</h2>
-      {captureStatus.length ? captureStatus.map((status) =>
-        <p key={`${status.lawyerOab.rawNumber}/${status.lawyerOab.state}`}>
-          {status.lawyerOab.rawNumber}/{status.lawyerOab.state} · Último dia completo: {status.completedThrough?.toISOString().slice(0, 10) ?? "ainda não capturado"}
-          {status.status === "ERROR" ? ` · Falha: ${status.lastError || "verificar captura"}` : ""}
-        </p>) : <p>Sem captura registrada. O agendador de produção depende de homologação e ativação.</p>}
+      <h2>Últimas atualizações do DJeN</h2>
+      {recentUpdates.length ? recentUpdates.map((update) => <p key={update.day}>
+        <strong>{update.day.split("-").reverse().join("/")}</strong> · {update.confirmed} confirmada(s) · {update.pending} para revisão
+      </p>) : <p>Nenhuma publicação nova ou resultado para revisão neste período.</p>}
+      {captureStatus.filter((status) => status.status === "ERROR" || status.status === "MANUAL_ERROR").map((status) =>
+        <p className={styles.error} key={`${status.lawyerOab.rawNumber}/${status.lawyerOab.state}`}>
+          Não foi possível concluir a consulta da OAB {status.lawyerOab.rawNumber}/{status.lawyerOab.state}.
+          {status.lastError ? ` Código: ${status.lastError}` : ""}
+        </p>)}
     </section> : null}
 
     {showManualSync ? <DjenSyncButton /> : null}
 
     <section className={styles.summary}>
-      <article><span>Total</span><strong>{summary.total}</strong></article>
-      <article><span>Novas</span><strong>{summary.unread}</strong></article>
-      <article><span>Não tratadas</span><strong>{summary.untreated}</strong></article>
-      <article><span>Revisar prazo</span><strong>{summary.pendingDeadlineReview}</strong></article>
+      <article><span>Total</span><strong>{summary.total + reviewCount}</strong></article>
+      <article><span>Novas</span><strong>{summary.unread + reviewCount}</strong></article>
+      <article><span>Pendentes</span><strong>{summary.untreated + reviewCount}</strong></article>
+      <article><span>Criar prazo?</span><strong>{summary.pendingDeadlineReview}</strong></article>
       <article><span>Canceladas na origem</span><strong>{summary.cancelled}</strong></article>
     </section>
 
@@ -124,12 +136,20 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
     </form>
 
     <section className={styles.tablePanel}>
-      {result.items.length === 0 ? <div className={styles.empty}>Nenhuma comunicação encontrada com estes filtros.</div> : <table className={styles.table}>
+      {result.items.length === 0 && visibleCandidates.length === 0 ? <div className={styles.empty}>Nenhuma comunicação encontrada com estes filtros.</div> : <table className={styles.table}>
         <thead><tr><th>Status</th><th>Comunicação</th><th>Processo</th><th>OAB</th><th>Data</th><th>Ação</th></tr></thead>
-        <tbody>{result.items.map((publication) => {
+        <tbody>{visibleCandidates.map(({ candidate, item }) => <tr key={`candidate:${candidate.id}`} id={candidate.id}>
+          <td><div className={styles.statusLine}><span className={item.kind === "INTIMATION" ? styles.badgeIntimation : styles.badgePublication}>{typeLabel(item.kind)}</span><span className={styles.badgeReview}>Para revisão</span></div></td>
+          <td><div className={styles.itemTitle}><strong>{item.communicationType}</strong><small>{item.court || "Tribunal não informado"}{item.judicialBody ? ` · ${item.judicialBody}` : ""}</small><span className={styles.snippet}>{item.summary || "Texto disponível em Conferir"}</span></div></td>
+          <td><strong>{item.processNumberFormatted || item.processNumberRaw || "Não informado"}</strong><small> · Aguardando confirmação</small></td>
+          <td>{candidate.lawyerOab.rawNumber}/{candidate.lawyerOab.state}<small> · {candidate.lawyerOab.user.name}</small></td>
+          <td>{displayDate(new Date(`${item.publicationDate}T00:00:00.000Z`))}</td>
+          <td><div className={styles.candidateActions}><DjenCandidateActions candidateId={candidate.id} />
+            <Link className={styles.linkButton} href={`/app/publicacoes/revisao#${candidate.id}`}>Conferir</Link></div></td>
+        </tr>)}{result.items.map((publication) => {
           const dates = jsonStringArray(publication.explicitDates);
           return <tr key={publication.id}>
-            <td><div className={styles.statusLine}><span className={publication.kind === "INTIMATION" ? styles.badgeIntimation : styles.badgePublication}>{typeLabel(publication.kind)}</span>{!publication.readAt ? <span className={styles.badgeNew}>Nova</span> : null}{publication.treatedAt ? <span className={styles.badgeTreated}>Tratada</span> : null}{publication.sourceStatus === "CANCELLED" ? <span className={styles.badgeCancelled}>Cancelada</span> : null}{publication.deadlineReview?.status === "PENDING_REVIEW" ? <span className={styles.badgeReview}>Revisar prazo</span> : null}</div></td>
+            <td><div className={styles.statusLine}><span className={publication.kind === "INTIMATION" ? styles.badgeIntimation : styles.badgePublication}>{typeLabel(publication.kind)}</span>{!publication.readAt ? <span className={styles.badgeNew}>Nova</span> : null}{publication.treatedAt ? <span className={styles.badgeTreated}>Tratada</span> : null}{publication.sourceStatus === "CANCELLED" ? <span className={styles.badgeCancelled}>Cancelada</span> : null}{publication.deadlineReview?.status === "PENDING_REVIEW" ? <span className={styles.badgeReview}>Criar prazo?</span> : null}</div></td>
             <td><div className={styles.itemTitle}><strong>{publication.communicationType}</strong><small>{publication.court || "Tribunal não informado"}{publication.judicialBody ? ` · ${publication.judicialBody}` : ""}</small><span className={styles.snippet}>{publication.content || "Conteúdo não informado pelo DJeN."}</span>{dates.length ? <div className={styles.dates}>{dates.slice(0, 3).map((date) => <span className={styles.dateChip} key={date}>{date.split("-").reverse().join("/")}</span>)}</div> : null}</div></td>
             <td>{publication.process ? <div className={styles.itemTitle}><Link className={styles.processLink} href={`/app/processos/${publication.process.id}?tab=publicacoes`}>{publication.process.cnjFormatted}</Link><small>{publication.process.subject || "Sem assunto cadastrado"}</small></div> : <div className={styles.itemTitle}><strong>{publication.processNumberFormatted || publication.processNumberRaw || "Não informado"}</strong><small>Não vinculado ao cadastro</small></div>}</td>
             <td><div className={styles.oabList}>{publication.recipients.map((recipient) => <span key={recipient.id}>{recipient.lawyerOab.rawNumber}/{recipient.lawyerOab.state}<small> · {recipient.lawyerOab.user.name}</small></span>)}</div></td>
@@ -138,7 +158,7 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
           </tr>;
         })}</tbody>
       </table>}
-      <div className={styles.pagination}><span>Página {result.page} de {result.pages} · {result.total} comunicação(ões)</span><div>{result.page > 1 ? <Link href={queryHref(current, { page: String(result.page - 1) })}>← Anterior</Link> : null}{result.page < result.pages ? <Link style={{ marginLeft: 14 }} href={queryHref(current, { page: String(result.page + 1) })}>Próxima →</Link> : null}</div></div>
+      <div className={styles.pagination}><span>Página {result.page} de {result.pages} · {result.total + (page === 1 ? visibleCandidates.length : 0)} item(ns) exibidos / {result.total + reviewCount} no escritório</span><div>{result.page > 1 ? <Link href={queryHref(current, { page: String(result.page - 1) })}>← Anterior</Link> : null}{result.page < result.pages ? <Link style={{ marginLeft: 14 }} href={queryHref(current, { page: String(result.page + 1) })}>Próxima →</Link> : null}</div></div>
     </section>
   </div>;
 }

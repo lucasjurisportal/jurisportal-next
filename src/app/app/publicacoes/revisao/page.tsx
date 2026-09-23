@@ -18,19 +18,19 @@ export default async function DjenReviewPage() {
   const candidates = await listDjenReviewCandidates(context.workspace.organizationId);
   return <div className={styles.page}>
     <Link className={styles.back} href="/app/publicacoes">← Publicações e intimações</Link>
-    <section className={styles.heading}><div><span className={styles.eyebrow}>DJeN · Revisão humana</span>
-      <h1>Confirmar identidade do destinatário</h1>
-      <p>Resultados encontrados por OAB ou nome sem comprovação suficiente. Não geram publicação vinculada, prazo ou notificações até revisão.</p>
+    <section className={styles.heading}><div><span className={styles.eyebrow}>DJeN · Para revisão</span>
+      <h1>Para revisão</h1>
+      <p>Resultados encontrados que precisam de conferência antes de entrar nas publicações do escritório.</p>
     </div></section>
     <p className={styles.muted}>Revise a inscrição, UF, nome completo, texto e fonte oficial antes de confirmar.
       Somente os primeiros 100 candidatos pendentes são exibidos por vez.</p>
     {candidates.length === 0 ? <section className={styles.panel}>Nenhum candidato pendente de identificação.</section> :
       candidates.map((candidate) => {
         const item = normalizeDjenItem(candidate.payload);
-        return <section className={styles.panel} key={candidate.id}>
+        return <section className={styles.panel} id={candidate.id} key={candidate.id}>
           <h2>{item.communicationType} · {item.court || "Tribunal não informado"}</h2>
           <p>OAB cadastrada: {candidate.lawyerOab.rawNumber}/{candidate.lawyerOab.state} · {candidate.lawyerOab.user.name}</p>
-          <p>Busca: {candidate.searchMethod === "NAME" ? "Nome completo" : "OAB/UF"} · Motivo: {candidate.reason}</p>
+          <p>Busca: {candidate.searchMethod === "NAME" ? "Nome completo" : "OAB/UF"} · Verificação: {candidate.reason.replaceAll("_", " ").toLowerCase()}</p>
           <p>Processo: {item.processNumberFormatted || item.processNumberRaw || "Não informado"} · Disponibilização: {item.publicationDate}</p>
           <p>Advogados informados na fonte: {item.lawyers.map((lawyer) => `${lawyer.name} · ${lawyer.oab}/${lawyer.state}`).join("; ") || "Nenhum"}</p>
           <div className={styles.content}>{item.content || "Sem texto informado."}</div>

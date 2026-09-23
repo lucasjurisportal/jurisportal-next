@@ -291,7 +291,7 @@ export async function createProcess(input: {
         processId: null,
         processNumberNormalized: cnjNormalized,
       },
-      select: { id: true, kind: true, communicationType: true },
+      select: { id: true, kind: true, communicationType: true, summary: true },
     });
 
     if (pendingPublications.length > 0) {
@@ -305,7 +305,7 @@ export async function createProcess(input: {
           processId: process.id,
           kind: publication.kind === "INTIMATION" ? "INTIMATION_RECEIVED" : "PUBLICATION_RECEIVED",
           title: publication.kind === "INTIMATION" ? "Intimação vinculada automaticamente" : "Publicação vinculada automaticamente",
-          description: `${publication.communicationType} · DJeN · vínculo recuperado após cadastro do processo`,
+          description: `${publication.communicationType} · DJeN · ${publication.summary || "Vinculada após cadastro do processo"}`,
           source: "DJEN",
           createdByUserId: input.actorUserId,
         })),

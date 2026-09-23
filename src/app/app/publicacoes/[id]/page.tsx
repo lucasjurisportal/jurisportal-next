@@ -7,6 +7,7 @@ import {
   jsonStringArray,
   markPublicationRead,
 } from "@/modules/publications/application/publication-service";
+import { CopyCnjButton } from "@/components/publications/CopyCnjButton";
 import { PublicationActions } from "@/components/publications/PublicationActions";
 import styles from "@/components/publications/Publications.module.css";
 
@@ -50,7 +51,7 @@ export default async function PublicationDetailPage({ params }: { params: Promis
         <div className={styles.statusLine}>
           <span className={publication.kind === "INTIMATION" ? styles.badgeIntimation : styles.badgePublication}>{publication.kind === "INTIMATION" ? "Intimação" : "Publicação"}</span>
           {publication.sourceStatus === "CANCELLED" ? <span className={styles.badgeCancelled}>Cancelada na origem</span> : null}
-          {publication.treatedAt ? <span className={styles.badgeTreated}>Tratada</span> : <span className={styles.badgeNew}>Não tratada</span>}
+          {publication.treatedAt ? <span className={styles.badgeTreated}>Tratada</span> : <span className={styles.badgeNew}>Pendente</span>}
           {review?.status === "PENDING_REVIEW" ? <span className={styles.badgeReview}>Revisar prazo</span> : null}
         </div>
 
@@ -79,7 +80,14 @@ export default async function PublicationDetailPage({ params }: { params: Promis
 
       <div className={styles.panel}>
         <h2>Ações</h2>
+        {!publication.processId && publication.processNumberNormalized?.slice(13, 16) === "826" ? <div className={styles.actionCard}>
+          <h3>Consultar no tribunal</h3>
+          <p>Abra a consulta unificada do eproc TJSP, escolha a instância e pesquise pelo número CNJ. O número não define sozinho o sistema nem o grau da tramitação.</p>
+          <a className={styles.linkButton} href="https://eproc1g.tjsp.jus.br/eproc" target="_blank" rel="noopener noreferrer">Abrir consulta eproc TJSP</a>
+          {publication.processNumberNormalized ? <CopyCnjButton cnj={publication.processNumberFormatted ?? publication.processNumberNormalized} /> : null}
+        </div> : null}
         <PublicationActions
+          processNumberNormalized={publication.processNumberNormalized}
           publicationId={publication.id}
           processId={publication.processId}
           reviewStatus={review?.status ?? null}

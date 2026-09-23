@@ -11,6 +11,9 @@ type CaptureResult = {
   updatedPublications: number;
   linkedToProcesses: number;
   reviewCandidates: number;
+  reviewItems: number;
+  ignoredItems: number;
+  uniqueItems: number;
   skippedOabs: number;
   errors: Array<{ oab: string; error: string }>;
   window: { startDate: string; endDate: string };
@@ -31,8 +34,15 @@ export function DjenSyncButton() {
       const body = await response.json().catch(() => null) as { result?: CaptureResult; error?: string } | null;
       if (!response.ok || !body?.result) throw new Error(body?.error || "Falha ao consultar o DJeN.");
       const result = body.result;
-      const errorSuffix = result.errors.length ? ` · ${result.errors.length} OAB(s) com erro, consulte o diagnóstico` : "";
-      setMessage(`${result.newPublications} nova(s), ${result.updatedPublications} já conhecida(s), ${result.reviewCandidates} candidata(s) para revisão humana, ${result.linkedToProcesses} vinculada(s) a processo${errorSuffix}.`);
+      const numbers = `O DJeN retornou ${result.sourceItems} resultado(s), incluindo possíveis repetições entre buscas. ${result.newPublications} nova(s) confirmada(s), ${result.updatedPublications} já conhecida(s), ${result.reviewItems} para revisão (${result.reviewCandidates} nova(s) na fila), ${result.ignoredItems} fora da identificação pesquisada. ${result.linkedToProcesses} vinculada(s) a processo.`;
+      if (result.errors.length) {
+        // Nunca exibir a consulta como sucesso quando alguma OAB falhou.
+        const first = result.errors[0]?.error ?? "DJEN_SYNC_FAILED";
+        setError(`Consulta incompleta para ${result.errors.length} OAB(s). ${first}. O período será consultado novamente; nenhum prazo foi confirmado.`);
+        if (result.newPublications || result.updatedPublications || result.reviewCandidates) setMessage(numbers);
+      } else {
+        setMessage(numbers);
+      }
       router.refresh();
     } catch (cause) {
       const code = cause instanceof Error ? cause.message : "DJEN_SYNC_FAILED";
@@ -44,11 +54,11 @@ export function DjenSyncButton() {
 
   return <div className={styles.syncBox}>
     <div>
-      <strong>Consulta DJeN de desenvolvimento</strong>
-      <p>Busca ontem + hoje para as OABs ativas. Repetir é seguro: o banco deduplica as comunicações.</p>
+      <strong>Verificação do DJeN</strong>
+      <p>Houve uma falha na captura, ou você está testando o sistema. É possível tentar uma consulta manual.</p>
       {message ? <div className={styles.success}>{message}</div> : null}
       {error ? <div className={styles.error}>{error}</div> : null}
     </div>
-    <button className={styles.primaryButton} type="button" onClick={sync} disabled={loading}>{loading ? "Consultando..." : "Consultar DJeN agora"}</button>
+    <button className={styles.primaryButton} type="button" onClick={sync} disabled={loading}>{loading ? "Consultando..." : "Verificar manualmente"}</button>
   </div>;
 }

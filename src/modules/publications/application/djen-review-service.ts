@@ -1,6 +1,7 @@
 import { prisma } from "@/infrastructure/database/prisma";
 import { normalizeDjenItem } from "@/modules/integrations/djen/domain/djen-publication";
-import { persistPublication } from "./djen-capture-service";
+import { persistPublication, nextIsoDate, saoPauloDateString } from "./djen-capture-service";
+import { recentDjenDays } from "../domain/djen-update-days";
 
 export async function getDjenCaptureStatus(organizationId: string) {
   return prisma.djenCaptureCursor.findMany({
@@ -21,8 +22,33 @@ export async function listDjenReviewCandidates(organizationId: string) {
   return prisma.djenReviewCandidate.findMany({
     where: { organizationId, status: "PENDING" },
     orderBy: { lastSeenAt: "desc" }, take: 100,
-    include: { lawyerOab: { include: { user: { select: { name: true } } } } },
+    include: { lawyerOab: { include: { user: { select: { id: true, name: true } } } } },
   });
+}
+
+/** Prévia da fila na própria página de Publicações, isolada por escritório. */
+export async function getDjenReviewPreview(organizationId: string) {
+  return prisma.djenReviewCandidate.findMany({
+    where: { organizationId, status: "PENDING" },
+    orderBy: { lastSeenAt: "desc" },
+    take: 20,
+    include: { lawyerOab: { include: { user: { select: { id: true, name: true } } } } },
+  });
+}
+
+/** Resumo visual, NÃO apaga publicações antigas do banco. Sexta permanece visível no fim de semana e na segunda. */
+export async function getDjenRecentUpdates(organizationId: string, today = saoPauloDateString()) {
+  const dates = recentDjenDays(today);
+  const results = await Promise.all(dates.map(async (day) => {
+    const since = new Date(`${day}T03:00:00.000Z`);
+    const before = new Date(`${nextIsoDate(day)}T03:00:00.000Z`);
+    const [confirmed, pending] = await Promise.all([
+      prisma.publication.count({ where: { organizationId, source: "DJEN", capturedAt: { gte: since, lt: before } } }),
+      prisma.djenReviewCandidate.count({ where: { organizationId, status: "PENDING", firstSeenAt: { gte: since, lt: before } } }),
+    ]);
+    return { day, confirmed, pending };
+  }));
+  return results.filter((item) => item.confirmed > 0 || item.pending > 0).reverse();
 }
 
 /** Aprovação não confirma PRAZO: apenas identifica a comunicação e gera revisão jurídica. */

@@ -27,7 +27,7 @@ export function DjenCandidateActions({ candidateId }: { candidateId: string }) {
     finally { setBusy(false); }
   }
   return <div className={styles.statusLine}>
-    <button type="button" className={styles.primaryButton} disabled={busy} onClick={() => decide("APPROVE")}>Confirmar identidade</button>
+    <button type="button" className={styles.primaryButton} disabled={busy} onClick={() => decide("APPROVE")}>Confirmar</button>
     <button type="button" className={styles.secondaryButton} disabled={busy} onClick={() => decide("DISMISS")}>Descartar</button>
     {error ? <span className={styles.error}>{error}</span> : null}
   </div>;

@@ -157,10 +157,11 @@ export async function markPublicationRead(input: { organizationId: string; publi
 export async function markPublicationTreated(input: { organizationId: string; publicationId: string; actorUserId: string }) {
   const publication = await prisma.publication.findFirst({
     where: { id: input.publicationId, organizationId: input.organizationId },
-    select: { id: true, treatedAt: true },
+    select: { id: true, treatedAt: true, deadlineReview: { select: { status: true } } },
   });
   if (!publication) throw new Error("PUBLICATION_NOT_FOUND");
   if (publication.treatedAt) return publication;
+  if (publication.deadlineReview?.status === "PENDING_REVIEW") throw new Error("PUBLICATION_DEADLINE_REVIEW_REQUIRED");
 
   return prisma.$transaction(async (tx) => {
     const updated = await tx.publication.update({
@@ -209,7 +210,7 @@ export async function linkPublicationToProcess(input: {
         processId: process.id,
         kind: publication.kind === "INTIMATION" ? "INTIMATION_RECEIVED" : "PUBLICATION_RECEIVED",
         title: publication.kind === "INTIMATION" ? "Intimação vinculada" : "Publicação vinculada",
-        description: `${publication.communicationType} · DJeN`,
+        description: `${publication.communicationType} · DJeN · ${publication.summary || "Comunicação vinculada"}`,
         source: "DJEN",
         createdByUserId: input.actorUserId,
       },

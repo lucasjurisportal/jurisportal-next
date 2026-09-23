@@ -76,7 +76,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   } catch (error) {
     const message = error instanceof Error ? error.message : "PUBLICATION_ACTION_FAILED";
     const status = message === "PUBLICATION_NOT_FOUND" || message === "PROCESS_NOT_FOUND" ? 404
-      : message === "PUBLICATION_PROCESS_REQUIRED" || message === "DEADLINE_REVIEW_ALREADY_RESOLVED" || message === "PROCESS_RESPONSIBLE_INVALID" ? 422
+      : message === "PUBLICATION_PROCESS_REQUIRED" || message === "PUBLICATION_DEADLINE_REVIEW_REQUIRED" || message === "DEADLINE_REVIEW_ALREADY_RESOLVED" || message === "PROCESS_RESPONSIBLE_INVALID" ? 422
       : message === "PUBLICATION_PROCESS_CNJ_MISMATCH" ? 409
       : 500;
     if (status === 500) console.error("[publication.action]", error);

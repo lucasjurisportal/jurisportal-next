@@ -1,0 +1,30 @@
+name: DJeN agendado
+
+on:
+  schedule:
+    # 06h, 12h e 20h de Sao Paulo (UTC-3). GitHub Actions pode atrasar.
+    - cron: "0 9,15,23 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: jurisportal-djen-capture
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      DJEN_CRON_URL: ${{ secrets.DJEN_CRON_URL }}
+      DJEN_CRON_SECRET: ${{ secrets.DJEN_CRON_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Consultar DJeN (quando homologado)
+        run: |
+          if [ -z "$DJEN_CRON_URL" ] || [ -z "$DJEN_CRON_SECRET" ]; then
+            echo "Captura nao executada: faltam DJEN_CRON_URL e DJEN_CRON_SECRET."; exit 0;
+          fi
+          node scripts/djen/scheduled-capture.mjs

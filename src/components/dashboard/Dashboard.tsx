@@ -99,7 +99,7 @@ export function Dashboard({ data, userName, role, processLimit }: Props) {
             </div>
           </article> : <article className={styles.panel}>
             <div className={styles.panelHeadCompact}><div><span className={styles.eyebrow}>Seu trabalho</span><h2>Atalhos</h2></div></div>
-            <div className={styles.personalLinks}><Link href="/app/prazos?view=mine">Minhas tarefas</Link><Link href="/app/agenda?view=week">Minha agenda</Link><Link href="/app/publicacoes?view=new">Publicações novas</Link></div>
+            <div className={styles.personalLinks}><Link href="/app/prazos?view=mine">Minhas tarefas</Link><Link href="/app/agenda?view=week">Minha agenda</Link><Link href="/app/publicacoes?view=untreated">Publicações pendentes</Link></div>
           </article>}
         </aside>
       </section>
@@ -108,7 +108,7 @@ export function Dashboard({ data, userName, role, processLimit }: Props) {
         <article className={styles.panel}>
           <div className={styles.panelHead}><div><span className={styles.eyebrow}>Atividade recente</span><h2>{role === "owner" ? "O que mudou no escritório" : "Suas últimas ações"}</h2></div></div>
           <div className={styles.activityTable}>
-            {data.activity.length === 0 ? <div className={styles.emptyState}>As atividades registradas aparecerão aqui.</div> : data.activity.map((item) => <div className={styles.activityRow} key={item.id}><time>{item.time}</time><span className={styles.activityMarker} /><div><strong>{item.title}</strong><span>{item.meta}</span></div><small>{item.actor}</small></div>)}
+            {data.activity.length === 0 ? <div className={styles.emptyState}>As atividades registradas aparecerão aqui.</div> : data.activity.map((item) => <div className={styles.activityRow} key={item.id}><time>{item.time}</time><span className={styles.activityMarker} /><div>{item.href ? <Link href={item.href}><strong>{item.title}</strong></Link> : <strong>{item.title}</strong>}<span>{item.meta}</span></div><small>{item.actor}</small></div>)}
           </div>
         </article>
 

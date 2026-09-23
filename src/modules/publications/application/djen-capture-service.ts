@@ -21,6 +21,9 @@ export type DjenCaptureResult = {
   linkedToProcesses: number;
   unverifiedItems: number;
   reviewCandidates: number;
+  reviewItems: number;
+  ignoredItems: number;
+  uniqueItems: number;
   skippedOabs: number;
   errors: Array<{ oab: string; error: string }>;
   window: { startDate: string; endDate: string };
@@ -90,7 +93,10 @@ export async function persistPublication(input: {
       OR: [
         { externalKey: input.publication.externalKey },
         ...(input.publication.externalId ? [{ externalId: input.publication.externalId }] : []),
-        ...(input.publication.hash ? [{ sourceHash: input.publication.hash }] : []),
+        ...(input.publication.hash ? [{ AND: [
+          { sourceHash: input.publication.hash },
+          { OR: [{ externalId: null }, ...(input.publication.externalId ? [{ externalId: input.publication.externalId }] : [])] },
+        ] }] : []),
       ],
     },
     select: { id: true, processId: true, sourceStatus: true, cancellationReason: true },
@@ -236,6 +242,7 @@ export async function persistPublication(input: {
             processId,
             lawyerOabId: input.lawyerOabId,
             publicationDate: input.publication.publicationDate,
+            cnj: input.publication.processNumberFormatted ?? input.publication.processNumberRaw,
           },
         },
       });
@@ -273,21 +280,24 @@ async function saveReviewCandidate(input: {
         OR: [
           { externalKey: input.publication.externalKey },
           ...(input.publication.externalId ? [{ externalId: input.publication.externalId }] : []),
-          ...(input.publication.hash ? [{ sourceHash: input.publication.hash }] : []),
+          ...(input.publication.hash ? [{ AND: [
+          { sourceHash: input.publication.hash },
+          { OR: [{ externalId: null }, ...(input.publication.externalId ? [{ externalId: input.publication.externalId }] : [])] },
+        ] }] : []),
         ],
       },
     },
     select: { id: true },
   });
-  if (verified) return false;
+  if (verified) return "verified" as const;
   const where = {
     organizationId_lawyerOabId_source_externalKey: {
       organizationId: input.organizationId, lawyerOabId: input.lawyerOabId,
       source: "DJEN", externalKey: input.publication.externalKey,
     },
   };
-  const found = await prisma.djenReviewCandidate.findUnique({ where, select: { id: true } });
-  await prisma.djenReviewCandidate.upsert({
+  const found = await prisma.djenReviewCandidate.findUnique({ where, select: { id: true, status: true } });
+  const candidate = await prisma.djenReviewCandidate.upsert({
     where,
     create: {
       organizationId: input.organizationId, lawyerOabId: input.lawyerOabId,
@@ -299,7 +309,21 @@ async function saveReviewCandidate(input: {
       lastSeenAt: new Date(), payload: jsonValue(input.raw),
     },
   });
-  return !found;
+  if (!found) {
+    await prisma.auditEvent.create({
+      data: {
+        organizationId: input.organizationId,
+        category: "publications", action: "publication.review_candidate_received",
+        entityType: "djen_review_candidate", entityId: candidate.id,
+        metadata: {
+          kind: input.publication.kind,
+          cnj: input.publication.processNumberFormatted ?? input.publication.processNumberRaw,
+        },
+      },
+    });
+  }
+  if (found?.status !== undefined && found.status !== "PENDING") return "closed" as const;
+  return found ? "existing" as const : "created" as const;
 }
 
 /** Só uma captura por OAB, com cursor persistente e backfill idempotente. */
@@ -324,7 +348,8 @@ export async function syncOrganizationDjen(input: {
   });
   const result: DjenCaptureResult = {
     oabsChecked: 0, sourceItems: 0, newPublications: 0, updatedPublications: 0,
-    linkedToProcesses: 0, unverifiedItems: 0, reviewCandidates: 0, skippedOabs: 0,
+    linkedToProcesses: 0, unverifiedItems: 0, reviewCandidates: 0, reviewItems: 0,
+    ignoredItems: 0, uniqueItems: 0, skippedOabs: 0,
     errors: [], window: requested ?? defaultDjenCaptureWindow(),
   };
 
@@ -361,6 +386,7 @@ export async function syncOrganizationDjen(input: {
       // Cada dia só é considerado completo após ambas as pesquisas, todas as variantes e as gravações.
       for (let day = window.startDate; day <= window.endDate; day = nextIsoDate(day)) {
         const verified = new Map<string, NormalizedDjenPublication>();
+        const seen = new Set<string>();
         const pending = new Map<string, { publication: NormalizedDjenPublication; raw: unknown;
           method: "OAB" | "NAME"; reason: string }>();
         const queries = [
@@ -371,18 +397,43 @@ export async function syncOrganizationDjen(input: {
         for (const query of queries) {
           const rawItems = await searchDjenAllPages(query);
           result.sourceItems += rawItems.length;
-          for (const raw of rawItems) {
+          for (const [itemIndex, raw] of rawItems.entries()) {
             let publication: NormalizedDjenPublication;
             try { publication = normalizeDjenItem(raw); }
-            catch { throw new Error("DJEN_NORMALIZATION_FAILED"); }
+            catch (cause) {
+              // Nunca ocultar a causa real ou registrar texto, nome, processo e OAB
+              // recebidos do CNJ. Metadados abaixo identificam a falha sem PII.
+              const code = cause instanceof Error && /^DJEN_[A-Z0-9_]+$/.test(cause.message)
+                ? cause.message : "DJEN_NORMALIZATION_UNEXPECTED";
+              const fields = raw && typeof raw === "object" && !Array.isArray(raw)
+                ? Object.keys(raw).filter((key) => /data|date/i.test(key)).slice(0, 12)
+                : [];
+              console.error("[djen.capture.normalization]", {
+                code, method: query.mode, day, position: itemIndex + 1, dateFields: fields,
+              });
+              // A data nao e presumida nem o cursor avanca: a janela sera repescada.
+              throw new Error(`${code} [${query.mode} ${day} item ${itemIndex + 1}]`);
+            }
+            seen.add(publication.externalKey);
             let matched = publicationTargetsOab(publication, oab.normalizedNumber, oab.state, oab.user.name);
-            if (!matched && publication.sourceStatus === "CANCELLED" && publication.externalId) {
-              // Cancelamento pode vir sem destinatários; só atualizar comunicação JÁ verificada
-              // para esta inscrição, nunca usar ausência de advogado para criar destinatário.
+            if (!matched) {
+              // Comunicações que já foram confirmadas para esta inscrição permanecem verificadas
+              // após retificação/cancelamento, inclusive quando a origem só oferece hash.
+              // O vínculo pré-existente é exigido: nunca atribuir a nova OAB por inferência.
               const known = await prisma.publicationRecipient.findFirst({
-                where: { organizationId: input.organizationId, lawyerOabId: oab.id,
+                where: {
+                  organizationId: input.organizationId, lawyerOabId: oab.id,
                   publication: { organizationId: input.organizationId, source: "DJEN",
-                    externalId: publication.externalId } },
+                    OR: [
+                      { externalKey: publication.externalKey },
+                      ...(publication.externalId ? [{ externalId: publication.externalId }] : []),
+                      ...(publication.hash ? [{ AND: [
+                        { sourceHash: publication.hash },
+                        { OR: [{ externalId: null }, ...(publication.externalId ? [{ externalId: publication.externalId }] : [])] },
+                      ] }] : []),
+                    ],
+                  },
+                },
                 select: { id: true },
               });
               matched = Boolean(known);
@@ -401,6 +452,8 @@ export async function syncOrganizationDjen(input: {
             }
           }
         }
+        result.uniqueItems += seen.size;
+        result.ignoredItems += Math.max(0, seen.size - verified.size - pending.size);
         for (const publication of verified.values()) {
           const saved = await persistPublication({
             organizationId: input.organizationId, actorUserId: input.actorUserId,
@@ -416,9 +469,11 @@ export async function syncOrganizationDjen(input: {
           });
         }
         for (const entry of pending.values()) {
-          if (await saveReviewCandidate({ organizationId: input.organizationId, lawyerOabId: oab.id,
+          const saved = await saveReviewCandidate({ organizationId: input.organizationId, lawyerOabId: oab.id,
             publication: entry.publication, raw: entry.raw,
-            searchMethod: entry.method, reason: entry.reason })) result.reviewCandidates += 1;
+            searchMethod: entry.method, reason: entry.reason });
+          if (saved === "created") result.reviewCandidates += 1;
+          if (saved === "created" || saved === "existing") result.reviewItems += 1;
         }
         // Sucesso por DIA: se o worker falhar amanhã, repesca do último dia + sobreposição.
         await prisma.djenCaptureCursor.updateMany({
@@ -445,6 +500,23 @@ export async function syncOrganizationDjen(input: {
             ? {} : { status: "IDLE" }) },
       });
     }
+  }
+  if (result.oabsChecked > 0) {
+    await prisma.auditEvent.create({
+      data: {
+        organizationId: input.organizationId,
+        actorUserId: input.actorUserId ?? null,
+        category: "publications",
+        action: result.errors.length ? "publication.capture_partial" : "publication.capture_completed",
+        entityType: "djen_capture",
+        entityId: input.organizationId,
+        metadata: {
+          oabsChecked: result.oabsChecked, newPublications: result.newPublications,
+          updatedPublications: result.updatedPublications,
+          reviewCandidates: result.reviewCandidates, errors: result.errors.length,
+        },
+      },
+    });
   }
   return result;
 }

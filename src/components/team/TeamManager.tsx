@@ -8,6 +8,7 @@ type Member = {
   userId: string;
   name: string;
   email: string;
+  mobile: string;
   role: string;
   accessLevel: string;
   jobTitle: string | null;
@@ -28,6 +29,7 @@ type Props = {
 const initialForm = {
   name: "",
   email: "",
+  mobile: "",
   jobTitle: "",
   accessLevel: "LEVEL_1",
   oabState: "",
@@ -48,10 +50,17 @@ export function TeamManager({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [form, setForm] = useState(initialForm);
+  const [editingUserId, setEditingUserId] = useState<string | null>(null);
+  const [editEmail, setEditEmail] = useState("");
+  const [editMobile, setEditMobile] = useState("");
+  const [editBusy, setEditBusy] = useState(false);
+  const [info, setInfo] = useState("");
 
   async function submit(event: FormEvent) {
     event.preventDefault();
+    if (!window.confirm("Confira nome, OAB, UF, função e nível de acesso. Depois de criar o auxiliar, somente e-mail e celular poderão ser editados nesta área. Deseja salvar?")) return;
     setError("");
+    setInfo("");
     setBusy(true);
     try {
       const response = await fetch("/api/team", {
@@ -86,6 +95,47 @@ export function TeamManager({
     }
   }
 
+  function beginEdit(member: Member) {
+    setEditingUserId(member.userId);
+    setEditEmail(member.email);
+    setEditMobile(member.mobile);
+    setError("");
+    setInfo("");
+  }
+
+  async function saveContact(event: FormEvent, member: Member) {
+    event.preventDefault();
+    const emailChanged = editEmail.trim().toLowerCase() !== member.email;
+    if (emailChanged && !window.confirm(
+      "O e-mail de acesso será alterado. O auxiliar terá que entrar novamente e confirmar o novo endereço. Deseja continuar?",
+    )) return;
+    setEditBusy(true);
+    setError("");
+    setInfo("");
+    try {
+      const response = await fetch(`/api/team/${member.userId}`, {
+        method: "PATCH", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email: editEmail, mobile: editMobile }),
+      });
+      const data = await response.json().catch(() => null) as { error?: string; emailChanged?: boolean } | null;
+      if (!response.ok) {
+        const messages: Record<string, string> = {
+          TEAM_EMAIL_ALREADY_IN_USE: "Este e-mail já está cadastrado no Jurisportal.",
+          TEAM_INVALID_CONTACT: "Confira o e-mail e informe um celular com DDD, ou deixe o celular vazio.",
+          TEAM_OWNER_REQUIRED: "Somente o proprietário pode atualizar os contatos.",
+          TEAM_EMAIL_DELIVERY_NOT_CONFIGURED: "O envio de e-mail ainda não está disponível. O e-mail não foi alterado.",
+        };
+        setError(messages[data?.error ?? ""] ?? "Não foi possível atualizar os contatos.");
+        return;
+      }
+      setEditingUserId(null);
+      setInfo(data?.emailChanged
+        ? "Contatos atualizados. O auxiliar precisará entrar novamente e confirmar o novo e-mail."
+        : "Celular atualizado.");
+      router.refresh();
+    } finally { setEditBusy(false); }
+  }
+
   async function remove(userId: string, name: string) {
     if (!confirm(`Remover ${name} da equipe? O acesso será encerrado, mas o histórico permanecerá.`)) {
       return;
@@ -106,26 +156,18 @@ export function TeamManager({
     <div className={styles.wrap}>
       <section className={styles.summaryGrid}>
         <div className={styles.summaryCard}>
-          <span>Usuários do plano</span>
+          <span>Usuários</span>
           <strong>
             {userUsage} / {userLimit}
           </strong>
-          <small>
-            {userFull
-              ? "Limite de usuários atingido."
-              : `${userLimit - userUsage} vaga(s) de usuário disponível(is).`}
-          </small>
+          
         </div>
         <div className={styles.summaryCard}>
-          <span>OABs do plano</span>
+          <span>OABs</span>
           <strong>
             {oabUsage} / {oabLimit}
           </strong>
-          <small>
-            {oabFull
-              ? "Limite de OABs atingido."
-              : `${oabLimit - oabUsage} vaga(s) de OAB disponível(is).`}
-          </small>
+          
         </div>
         {isOwner ? (
           <button
@@ -146,13 +188,14 @@ export function TeamManager({
       ) : null}
 
       {error ? <div className={styles.error}>{error}</div> : null}
+      {info ? <div className={styles.notice}>{info}</div> : null}
 
       {open ? (
         <form className={styles.form} onSubmit={submit}>
           <h2>Criar auxiliar</h2>
           <p className={styles.formLead}>
-            A OAB é obrigatória e será vinculada a este usuário. Nesta fase ela não pode ser trocada
-            pela tela de Equipe, evitando reutilização de uma mesma vaga para OABs diferentes.
+            Confira nome, OAB, UF, função e nível de acesso antes de salvar. Depois do cadastro,
+            apenas o e-mail e o celular poderão ser editados nesta área. O auxiliar terá que trocar a senha no primeiro acesso.
           </p>
           <div className={styles.grid}>
             <label>
@@ -170,6 +213,16 @@ export function TeamManager({
                 value={form.email}
                 onChange={(event) => setForm({ ...form, email: event.target.value })}
                 required
+              />
+            </label>
+            <label>
+              Celular
+              <input
+                type="tel"
+                inputMode="tel"
+                value={form.mobile}
+                onChange={(event) => setForm({ ...form, mobile: event.target.value })}
+                placeholder="(11) 99999-9999"
               />
             </label>
             <label>
@@ -232,7 +285,7 @@ export function TeamManager({
 
       <section className={styles.list}>
         <div className={styles.listHead}>
-          <strong>Integrantes</strong>
+          <strong>Equipe</strong>
           <span>OAB vinculada</span>
           <span>Ações</span>
         </div>
@@ -241,6 +294,7 @@ export function TeamManager({
             <div>
               <strong>{member.name}</strong>
               <span>{member.email}</span>
+              {member.mobile ? <span>Celular: {member.mobile}</span> : null}
               <span>
                 {member.role === "owner"
                   ? "Proprietário"
@@ -256,9 +310,14 @@ export function TeamManager({
                   ? `${member.oabNumber}/${member.oabState}`
                   : "OAB não localizada"}
               </strong>
-              <span>{member.role === "owner" ? "OAB do proprietário" : "OAB do auxiliar"}</span>
+              
             </div>
             <div className={styles.rowActions}>
+              {isOwner && member.role !== "owner" ? (
+                <button className={styles.primary} type="button" onClick={() => beginEdit(member)}>
+                  Editar
+                </button>
+              ) : null}
               {isOwner && member.role !== "owner" ? (
                 <button
                   className={styles.danger}
@@ -268,6 +327,17 @@ export function TeamManager({
                 </button>
               ) : null}
             </div>
+            {isOwner && editingUserId === member.userId ? <form className={styles.contactForm}
+              onSubmit={(event) => void saveContact(event, member)}>
+              <label>E-mail<input type="email" required value={editEmail}
+                onChange={(event) => setEditEmail(event.target.value)} /></label>
+              <label>Celular<input type="tel" inputMode="tel" value={editMobile}
+                onChange={(event) => setEditMobile(event.target.value)} placeholder="(11) 99999-9999" /></label>
+              <div className={styles.contactActions}>
+                <button className={styles.primary} disabled={editBusy} type="submit">{editBusy ? "Salvando..." : "Salvar"}</button>
+                <button type="button" className={styles.secondary} onClick={() => setEditingUserId(null)}>Cancelar</button>
+              </div>
+            </form> : null}
           </div>
         ))}
       </section>
