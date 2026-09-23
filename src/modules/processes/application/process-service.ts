@@ -1,4 +1,5 @@
 import { Prisma } from "@/generated/prisma/client";
+import { scopedProcessWhere } from "@/modules/security/domain/tenant-process-scope";
 import { prisma } from "@/infrastructure/database/prisma";
 import type { PlanLimit } from "@/modules/plans/domain/plan.types";
 import { formatCnjNumber, normalizeCnjDigits } from "../domain/cnj-number";
@@ -396,7 +397,7 @@ export async function updateProcess(input: {
 
   return prisma.$transaction(async (tx) => {
     const process = await tx.process.update({
-      where: { id: input.processId },
+      where: scopedProcessWhere(input.processId, input.organizationId),
       data: {
         ...processMutablePersistence(input.data),
         ...(cnjChanged
@@ -410,7 +411,7 @@ export async function updateProcess(input: {
       },
     });
 
-    await tx.processClient.deleteMany({ where: { processId: input.processId } });
+    await tx.processClient.deleteMany({ where: { processId: input.processId, organizationId: input.organizationId } });
     await tx.processClient.createMany({
       data: clientIds.map((clientId) => ({
         organizationId: input.organizationId,
@@ -420,7 +421,7 @@ export async function updateProcess(input: {
       })),
     });
 
-    await tx.processParty.deleteMany({ where: { processId: input.processId } });
+    await tx.processParty.deleteMany({ where: { processId: input.processId, organizationId: input.organizationId } });
     if (input.data.parties.length > 0) {
       await tx.processParty.createMany({
         data: input.data.parties.map((party) => ({

@@ -152,7 +152,7 @@ export async function markPublicationRead(input: { organizationId: string; publi
   if (!publication) throw new Error("PUBLICATION_NOT_FOUND");
   if (publication.readAt) return publication;
   return prisma.publication.update({
-    where: { id: publication.id },
+    where: { id: publication.id, organizationId: input.organizationId },
     data: { readAt: new Date(), readByUserId: input.actorUserId },
   });
 }
@@ -168,7 +168,7 @@ export async function markPublicationTreated(input: { organizationId: string; pu
 
   return prisma.$transaction(async (tx) => {
     const updated = await tx.publication.update({
-      where: { id: publication.id },
+      where: { id: publication.id, organizationId: input.organizationId },
       data: {
         readAt: new Date(),
         readByUserId: input.actorUserId,

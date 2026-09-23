@@ -1,0 +1,16 @@
+.env.example
+package.json
+src/modules/integrations/process-metadata/domain/process-metadata.ts
+src/modules/integrations/process-metadata/domain/process-metadata.test.ts
+src/modules/integrations/process-metadata/infrastructure/datajud-client.ts
+src/modules/integrations/process-metadata/infrastructure/datajud-client.test.ts
+src/app/api/processes/lookup/route.ts
+src/app/app/processos/novo/page.tsx
+src/app/app/processos/[id]/editar/page.tsx
+src/components/processes/ProcessForm.tsx
+src/modules/security/domain/tenant-process-scope.ts
+src/modules/security/domain/tenant-process-scope.test.ts
+src/modules/processes/application/process-service.ts
+src/modules/publications/application/publication-service.ts
+docs/blocos/44-integracao-processual-seguranca.md
+docs/blocos/44-arquivos-patch.txt

@@ -104,12 +104,14 @@ export function ProcessForm({
   currentUserId,
   initialValue,
   canEditCnj = false,
+  lookupEnabled = false,
 }: {
   clients: ClientOption[];
   members: MemberOption[];
   currentUserId: string;
   initialValue?: ProcessFormValue;
   canEditCnj?: boolean;
+  lookupEnabled?: boolean;
 }) {
   const router = useRouter();
   const defaultResponsible = members.some((member) => member.user.id === currentUserId) ? currentUserId : "";
@@ -132,6 +134,8 @@ export function ProcessForm({
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [lookupBusy, setLookupBusy] = useState(false);
+  const [lookupMessage, setLookupMessage] = useState("");
   const [clientQuery, setClientQuery] = useState("");
   const [cnjReviewed, setCnjReviewed] = useState(Boolean(initialValue?.id));
   const [cnjCorrectionReason, setCnjCorrectionReason] = useState("");
@@ -174,6 +178,49 @@ export function ProcessForm({
 
   function removeParty(index: number) {
     setValue((current) => ({ ...current, parties: current.parties.filter((_, partyIndex) => partyIndex !== index) }));
+  }
+
+  async function consultSource() {
+    setLookupBusy(true);
+    setLookupMessage("");
+    try {
+      const response = await fetch("/api/processes/lookup", {
+        method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ cnj: value.cnj }),
+      });
+      const data = await response.json() as { preview?: {
+        cnj: string; court: string | null; division: string | null; district: string | null;
+        forum: string | null; processClass: string | null; subject: string | null;
+        distributionDate: null; filingDate: string | null; degree: string | null; electronicSystem: string | null;
+      }; error?: string };
+      if (!response.ok || !data.preview) {
+        const reasons: Record<string, string> = {
+          PROCESS_LOOKUP_NOT_FOUND: "Nenhum dado encontrado para esse CNJ na fonte consultada.",
+          PROCESS_LOOKUP_MULTIPLE_MATCHES: "A fonte retornou mais de uma instância. Confira diretamente no tribunal.",
+          PROCESS_LOOKUP_COURT_UNSUPPORTED: "O tribunal deste número ainda não está habilitado para consulta.",
+          PROCESS_LOOKUP_INVALID_CNJ: "Confira o número CNJ antes de consultar.",
+          PROCESS_LOOKUP_RATE_LIMIT: "A fonte limitou as consultas. Tente novamente mais tarde.",
+        };
+        setLookupMessage(reasons[data.error ?? ""] ?? "A consulta está indisponível. Você pode preencher o processo normalmente.");
+        return;
+      }
+      const preview = data.preview;
+      setValue((current) => {
+        // Não sobrescrever campos preenchidos pelo advogado nem alterar CNJ, partes ou cliente.
+        if (onlyDigits(current.cnj) !== preview.cnj) return current;
+        return { ...current,
+          court: current.court || preview.court || "",
+          division: current.division || preview.division || "",
+          district: current.district || preview.district || "",
+          forum: current.forum || preview.forum || "",
+          processClass: current.processClass || preview.processClass || "",
+          subject: current.subject || preview.subject || "",
+        };
+      });
+      setLookupMessage(`Dados encontrados na fonte externa. Confira antes de salvar.${preview.filingDate ? ` Ajuizamento informado: ${preview.filingDate} (não preenche a data de distribuição).` : ""}${preview.degree ? ` Grau informado: ${preview.degree}.` : ""}`);
+    } catch {
+      setLookupMessage("Não foi possível consultar os dados agora. O cadastro manual continua disponível.");
+    } finally { setLookupBusy(false); }
   }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -245,6 +292,10 @@ export function ProcessForm({
           {!initialValue?.id ? <label className={styles.confirmCnj}><input type="checkbox" checked={cnjReviewed} onChange={(e) => setCnjReviewed(e.target.checked)} /><span>Revisei o número CNJ e entendo que ele ficará bloqueado após o cadastro.</span></label> : null}
           {canEditCnj && initialValue?.id ? <small className={styles.adminNotice}>Administrador mestre: uma correção de CNJ será registrada na auditoria.</small> : null}
           {fieldError("cnj")}
+          {lookupEnabled ? <div className={styles.lookupHelp}>
+            <button type="button" className={styles.secondaryButton} disabled={lookupBusy || !/^\d{20}$/.test(onlyDigits(value.cnj))} onClick={consultSource}>{lookupBusy ? "Consultando..." : "Consultar dados do processo"}</button>
+            {lookupMessage ? <small role="status" className={styles.muted}>{lookupMessage}</small> : null}
+          </div> : null}
         </div>
         {canEditCnj && cnjChanged ? <div className={fieldClass("cnjCorrectionReason", styles.span3)}>
           <label htmlFor="process-cnjCorrectionReason">Motivo da correção do CNJ</label>
@@ -275,7 +326,7 @@ export function ProcessForm({
         </div>
       </div>
 
-      <div className={styles.sectionTitle}><strong>Tribunal e responsabilidade</strong><span>Esses campos poderão ser preenchidos automaticamente por integrações futuras.</span></div>
+      <div className={styles.sectionTitle}><strong>Tribunal e responsabilidade</strong><span>Confira os dados sugeridos pela publicação ou pela fonte processual antes de salvar.</span></div>
       <div className={styles.grid3}>
         <div className={fieldClass("court")}><label htmlFor="process-court">Tribunal</label><input id="process-court" value={value.court} onChange={(e) => update("court", e.target.value)} placeholder="Ex.: TJSP" />{fieldError("court")}</div>
         <div className={fieldClass("division")}><label htmlFor="process-division">Vara / unidade</label><input id="process-division" value={value.division} onChange={(e) => update("division", e.target.value)} placeholder="Ex.: 2ª Vara Cível" />{fieldError("division")}</div>

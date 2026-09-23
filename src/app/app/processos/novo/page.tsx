@@ -5,6 +5,7 @@ import { getPublicationDetail } from "@/modules/publications/application/publica
 import { getProcessFormOptions } from "@/modules/processes/application/process-service";
 import { ProcessForm } from "@/components/processes/ProcessForm";
 import styles from "@/components/processes/Processes.module.css";
+import { isProcessLookupEnabled } from "@/modules/integrations/process-metadata/infrastructure/datajud-client";
 
 export default async function NewProcessPage({ searchParams }: { searchParams: Promise<{ publicationId?: string }> }) {
   const context = await getAppContext();
@@ -20,5 +21,5 @@ export default async function NewProcessPage({ searchParams }: { searchParams: P
   );
   return <div className={styles.page}><section className={styles.heading}><div><span className={styles.eyebrow}>Processos</span><h1>Novo processo</h1>
     <p>{initialValue ? "Dados disponíveis na comunicação foram sugeridos abaixo. Confira comarca, fórum, classe, assunto, data de distribuição e cliente antes de salvar. O DJeN não fornece necessariamente todos esses campos. A comunicação será vinculada pelo CNJ ao processo cadastrado." : "Cadastre o número CNJ, vincule o cliente e complemente os dados disponíveis."}</p>
-  </div></section><ProcessForm clients={options.clients} members={options.members} currentUserId={context.user.id} initialValue={initialValue} /></div>;
+  </div></section><ProcessForm clients={options.clients} members={options.members} currentUserId={context.user.id} initialValue={initialValue} lookupEnabled={isProcessLookupEnabled()} /></div>;
 }
