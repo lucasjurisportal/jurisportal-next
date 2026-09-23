@@ -11,7 +11,7 @@ export function djenCandidateReason(
   if (!publication.lawyers.length) return "SEM_OAB_NA_FONTE";
   if (exactOab) return "NOME_DIVERGENTE";
   if (exactName) return "OAB_DIVERGENTE_OU_HOMONIMO";
-  return "IDENTIDADE_DIVERGENTE";
+  return "IDENTIDADE_NAO_CONFIRMADA";
 }
 
 /** Evita entupir a fila com resultados de busca textual que não dizem respeito ao nome pesquisado. */
@@ -23,7 +23,8 @@ export function isPotentialDjenCandidate(input: {
   if (!lawyers.length) return true; // busca trouxe item sem destinatário: revisão, nunca match automático
   if (input.mode === "NAME") return lawyers.some((lawyer) =>
     normalizeLawyerName(lawyer.name) === normalizeLawyerName(input.registeredName));
-  return lawyers.some((lawyer) =>
-    normalizeOabForComparison(lawyer.oab) === normalizeOabForComparison(input.oab)
-    && lawyer.state.toUpperCase() === input.state.toUpperCase());
+  // A consulta por OAB/UF pode devolver destinatários com campo incompleto ou divergente.
+  // Não associar automaticamente e não jogar fora o retorno: deixar o proprietário conferir.
+  // Isso NÃO valida a identidade, apenas coloca o resultado na fila do escritório consultado.
+  return true;
 }

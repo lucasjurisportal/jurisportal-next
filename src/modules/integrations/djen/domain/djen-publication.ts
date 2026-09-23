@@ -162,9 +162,15 @@ function normalizeProcessNumber(value: string | null) {
 
 function normalizePublicationDate(value: string | null): string {
   if (!value) throw new Error("DJEN_PUBLICATION_DATE_MISSING");
-  const match = value.match(/^(\d{4}-\d{2}-\d{2})/);
-  if (!match) throw new Error("DJEN_PUBLICATION_DATE_INVALID");
-  return match[1];
+  // A consulta oficial informa a data de DISPONIBILIZACAO, que nao e prazo nem
+  // necessariamente o dia juridico da publicacao. Nao usar data_publicacao como fallback.
+  const iso = value.match(/^(\d{4})-(\d{2})-(\d{2})(?:$|[T\s])/);
+  const br = value.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:$|\s)/);
+  const valid = iso
+    ? validIsoDate(Number(iso[1]), Number(iso[2]), Number(iso[3]))
+    : br ? validIsoDate(Number(br[3]), Number(br[2]), Number(br[1])) : null;
+  if (!valid) throw new Error("DJEN_PUBLICATION_DATE_INVALID");
+  return valid;
 }
 
 function classifyCommunication(value: string): "PUBLICATION" | "INTIMATION" {

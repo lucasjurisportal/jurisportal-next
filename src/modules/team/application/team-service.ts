@@ -3,7 +3,7 @@ import { prisma } from "@/infrastructure/database/prisma";
 import { createOab } from "@/modules/lawyers/domain/oab";
 import type { PlanDefinition } from "@/modules/plans/domain/plan.types";
 import type { z } from "zod";
-import type { createTeamMemberSchema } from "../domain/team.schema";
+import { normalizeTeamMobile, type createTeamMemberSchema, type editTeamContactSchema } from "../domain/team.schema";
 
 export async function getTeamUsage(organizationId: string) {
   const [users, oabs] = await Promise.all([
@@ -14,7 +14,7 @@ export async function getTeamUsage(organizationId: string) {
   return { users, oabs };
 }
 
-export async function listTeamMembers(organizationId: string) {
+export async function listTeamMembers(organizationId: string, canSeeContacts = false) {
   const members = await prisma.member.findMany({
     where: { organizationId },
     orderBy: { createdAt: "asc" },
@@ -26,6 +26,7 @@ export async function listTeamMembers(organizationId: string) {
           email: true,
           createdAt: true,
           teamProfile: true,
+          profile: { select: { phone: true } },
           lawyerOabs: {
             where: { organizationId, isActive: true },
             orderBy: [{ isPrimary: "desc" }, { createdAt: "asc" }],
@@ -44,6 +45,7 @@ export async function listTeamMembers(organizationId: string) {
       userId: member.userId,
       name: member.user.name,
       email: member.user.email,
+      mobile: canSeeContacts ? (member.user.profile?.phone ?? "") : "",
       role: member.role,
       accessLevel:
         member.user.teamProfile?.accessLevel ??
@@ -148,6 +150,11 @@ export async function createTeamMember(input: {
           where: { id: userId },
           data: { emailVerified: true },
         });
+        if (input.data.mobile.trim()) {
+          await tx.userProfile.create({
+            data: { userId, phone: normalizeTeamMobile(input.data.mobile) },
+          });
+        }
         await tx.member.create({
           data: {
             organizationId: input.organizationId,
@@ -205,6 +212,68 @@ export async function createTeamMember(input: {
     }
     throw error;
   }
+}
+
+/** Somente contatos podem ser alterados. OAB, nome, nível de acesso e histórico ficam intactos. */
+export async function updateTeamMemberContact(input: {
+  organizationId: string;
+  actorUserId: string;
+  userId: string;
+  data: z.infer<typeof editTeamContactSchema>;
+}) {
+  const actor = await prisma.member.findUnique({
+    where: { organizationId_userId: { organizationId: input.organizationId, userId: input.actorUserId } },
+    select: { role: true },
+  });
+  if (actor?.role !== "owner") throw new Error("TEAM_OWNER_REQUIRED");
+  const target = await prisma.member.findUnique({
+    where: { organizationId_userId: { organizationId: input.organizationId, userId: input.userId } },
+    include: { user: { select: { email: true, profile: { select: { phone: true } } } } },
+  });
+  if (!target) throw new Error("TEAM_MEMBER_NOT_FOUND");
+  if (target.role === "owner") throw new Error("TEAM_OWNER_CONTACT_RESTRICTED");
+  const mobile = normalizeTeamMobile(input.data.mobile);
+  const emailChanged = target.user.email !== input.data.email;
+  const mobileChanged = (target.user.profile?.phone ?? "") !== mobile;
+  if (!emailChanged && !mobileChanged) return { emailChanged: false };
+  if (emailChanged) {
+    if (!process.env.RESEND_API_KEY) throw new Error("TEAM_EMAIL_DELIVERY_NOT_CONFIGURED");
+    const inUse = await prisma.user.findUnique({ where: { email: input.data.email }, select: { id: true } });
+    if (inUse && inUse.id !== input.userId) throw new Error("TEAM_EMAIL_ALREADY_IN_USE");
+  }
+  try {
+    await prisma.$transaction(async (tx) => {
+      if (emailChanged) {
+        // Não declarar automaticamente que o novo e-mail pertence ao auxiliar.
+        await tx.user.update({ where: { id: input.userId }, data: { email: input.data.email, emailVerified: false } });
+        await tx.session.deleteMany({ where: { userId: input.userId } });
+        await tx.trustedDevice.deleteMany({ where: { userId: input.userId } });
+        await tx.authChallenge.deleteMany({ where: { userId: input.userId } });
+      }
+      if (mobileChanged) {
+        if (mobile) {
+          await tx.userProfile.upsert({
+            where: { userId: input.userId }, create: { userId: input.userId, phone: mobile },
+            update: { phone: mobile },
+          });
+        } else {
+          await tx.userProfile.deleteMany({ where: { userId: input.userId } });
+        }
+      }
+      await tx.auditEvent.create({
+        data: { organizationId: input.organizationId, actorUserId: input.actorUserId,
+          category: "team", action: "team.contact.updated", entityType: "user", entityId: input.userId,
+          metadata: { emailChanged, mobileChanged },
+        },
+      });
+    });
+  } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "P2002") {
+      throw new Error("TEAM_EMAIL_ALREADY_IN_USE");
+    }
+    throw error;
+  }
+  return { emailChanged };
 }
 
 export async function removeTeamMember(input: {

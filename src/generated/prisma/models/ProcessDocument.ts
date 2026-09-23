@@ -1649,7 +1649,7 @@ export type $ProcessDocumentPayload<ExtArgs extends runtime.Types.Extensions.Int
     uploadExpiresAt: Date | null
     deletedAt: Date | null
     /**
-     * PENDING | COPYING | VERIFIED | FAILED; o documento continua usável se a cópia falhar.
+     * PENDING | COPYING | VERIFIED | FAILED | ACKNOWLEDGED_MISSING (apenas staging; perda auditada).
      */
     backupStatus: string
     backupObjectKey: string | null

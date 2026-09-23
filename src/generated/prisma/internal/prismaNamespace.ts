@@ -428,6 +428,8 @@ export const ModelName = {
   AgendaEvent: 'AgendaEvent',
   Publication: 'Publication',
   PublicationRecipient: 'PublicationRecipient',
+  DjenReviewCandidate: 'DjenReviewCandidate',
+  DjenCaptureCursor: 'DjenCaptureCursor',
   DeadlineReview: 'DeadlineReview',
   GoogleCalendarConnection: 'GoogleCalendarConnection',
   ExternalCalendarEventLink: 'ExternalCalendarEventLink',
@@ -451,7 +453,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument"
+    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "djenReviewCandidate" | "djenCaptureCursor" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2749,6 +2751,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DjenReviewCandidate: {
+      payload: Prisma.$DjenReviewCandidatePayload<ExtArgs>
+      fields: Prisma.DjenReviewCandidateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DjenReviewCandidateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DjenReviewCandidateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload>
+        }
+        findFirst: {
+          args: Prisma.DjenReviewCandidateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DjenReviewCandidateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload>
+        }
+        findMany: {
+          args: Prisma.DjenReviewCandidateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload>[]
+        }
+        create: {
+          args: Prisma.DjenReviewCandidateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload>
+        }
+        createMany: {
+          args: Prisma.DjenReviewCandidateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DjenReviewCandidateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload>[]
+        }
+        delete: {
+          args: Prisma.DjenReviewCandidateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload>
+        }
+        update: {
+          args: Prisma.DjenReviewCandidateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload>
+        }
+        deleteMany: {
+          args: Prisma.DjenReviewCandidateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DjenReviewCandidateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DjenReviewCandidateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload>[]
+        }
+        upsert: {
+          args: Prisma.DjenReviewCandidateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenReviewCandidatePayload>
+        }
+        aggregate: {
+          args: Prisma.DjenReviewCandidateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDjenReviewCandidate>
+        }
+        groupBy: {
+          args: Prisma.DjenReviewCandidateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DjenReviewCandidateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DjenReviewCandidateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DjenReviewCandidateCountAggregateOutputType> | number
+        }
+      }
+    }
+    DjenCaptureCursor: {
+      payload: Prisma.$DjenCaptureCursorPayload<ExtArgs>
+      fields: Prisma.DjenCaptureCursorFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DjenCaptureCursorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DjenCaptureCursorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload>
+        }
+        findFirst: {
+          args: Prisma.DjenCaptureCursorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DjenCaptureCursorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload>
+        }
+        findMany: {
+          args: Prisma.DjenCaptureCursorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload>[]
+        }
+        create: {
+          args: Prisma.DjenCaptureCursorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload>
+        }
+        createMany: {
+          args: Prisma.DjenCaptureCursorCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DjenCaptureCursorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload>[]
+        }
+        delete: {
+          args: Prisma.DjenCaptureCursorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload>
+        }
+        update: {
+          args: Prisma.DjenCaptureCursorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload>
+        }
+        deleteMany: {
+          args: Prisma.DjenCaptureCursorDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DjenCaptureCursorUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DjenCaptureCursorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload>[]
+        }
+        upsert: {
+          args: Prisma.DjenCaptureCursorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DjenCaptureCursorPayload>
+        }
+        aggregate: {
+          args: Prisma.DjenCaptureCursorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDjenCaptureCursor>
+        }
+        groupBy: {
+          args: Prisma.DjenCaptureCursorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DjenCaptureCursorGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DjenCaptureCursorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DjenCaptureCursorCountAggregateOutputType> | number
+        }
+      }
+    }
     DeadlineReview: {
       payload: Prisma.$DeadlineReviewPayload<ExtArgs>
       fields: Prisma.DeadlineReviewFieldRefs
@@ -3885,6 +4035,7 @@ export const PublicationScalarFieldEnum = {
   processNumberFormatted: 'processNumberFormatted',
   publicationDate: 'publicationDate',
   content: 'content',
+  summary: 'summary',
   parties: 'parties',
   explicitDates: 'explicitDates',
   sourceUrl: 'sourceUrl',
@@ -3912,6 +4063,42 @@ export const PublicationRecipientScalarFieldEnum = {
 } as const
 
 export type PublicationRecipientScalarFieldEnum = (typeof PublicationRecipientScalarFieldEnum)[keyof typeof PublicationRecipientScalarFieldEnum]
+
+
+export const DjenReviewCandidateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  lawyerOabId: 'lawyerOabId',
+  source: 'source',
+  externalKey: 'externalKey',
+  searchMethod: 'searchMethod',
+  reason: 'reason',
+  payload: 'payload',
+  status: 'status',
+  decidedByUserId: 'decidedByUserId',
+  decidedAt: 'decidedAt',
+  firstSeenAt: 'firstSeenAt',
+  lastSeenAt: 'lastSeenAt'
+} as const
+
+export type DjenReviewCandidateScalarFieldEnum = (typeof DjenReviewCandidateScalarFieldEnum)[keyof typeof DjenReviewCandidateScalarFieldEnum]
+
+
+export const DjenCaptureCursorScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  lawyerOabId: 'lawyerOabId',
+  completedThrough: 'completedThrough',
+  lastAttemptAt: 'lastAttemptAt',
+  lastSuccessAt: 'lastSuccessAt',
+  lastError: 'lastError',
+  status: 'status',
+  leaseToken: 'leaseToken',
+  leaseUntil: 'leaseUntil',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DjenCaptureCursorScalarFieldEnum = (typeof DjenCaptureCursorScalarFieldEnum)[keyof typeof DjenCaptureCursorScalarFieldEnum]
 
 
 export const DeadlineReviewScalarFieldEnum = {
@@ -4088,6 +4275,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -4407,6 +4601,8 @@ export type GlobalOmitConfig = {
   agendaEvent?: Prisma.AgendaEventOmit
   publication?: Prisma.PublicationOmit
   publicationRecipient?: Prisma.PublicationRecipientOmit
+  djenReviewCandidate?: Prisma.DjenReviewCandidateOmit
+  djenCaptureCursor?: Prisma.DjenCaptureCursorOmit
   deadlineReview?: Prisma.DeadlineReviewOmit
   googleCalendarConnection?: Prisma.GoogleCalendarConnectionOmit
   externalCalendarEventLink?: Prisma.ExternalCalendarEventLinkOmit

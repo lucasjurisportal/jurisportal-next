@@ -106,3 +106,24 @@ test("resumo fiel limitado e sem interpretação de prazo", () => {
   assert.equal(summarizeDjenContent("  Ato  publicado   hoje  "), "Ato publicado hoje");
   assert.ok(summarizeDjenContent("texto ".repeat(100)).length <= 320);
 });
+
+// Regressao de captura: a origem pode apresentar data no formato brasileiro;
+// a disponibilizacao nao pode ser inventada usando outro campo juridico.
+test("aceita variantes explicitas da data de disponibilizacao", () => {
+  for (const [field, value] of [
+    ["datadisponibilizacao", "2026-09-22T00:00:00.000Z"],
+    ["dataDisponibilizacao", "22/09/2026"],
+    ["data_disponibilizacao", "2026-09-22"],
+  ] as const) {
+    const pub = normalizeDjenItem({ id: 123, [field]: value, texto: "Comunicação" });
+    assert.equal(pub.publicationDate, "2026-09-22");
+  }
+});
+
+test("falha com motivo explicito se faltar disponibilizacao, sem inventar dia", () => {
+  assert.throws(() => normalizeDjenItem({ id: 124, data_publicacao: "2026-09-23", texto: "Comunicação" }),
+    /DJEN_PUBLICATION_DATE_MISSING/);
+  assert.throws(() => normalizeDjenItem({ id: 125, datadisponibilizacao: "31/02/2026" }),
+    /DJEN_PUBLICATION_DATE_INVALID/);
+  assert.throws(() => normalizeDjenItem(null), /DJEN_PUBLICATION_DATE_MISSING/);
+});

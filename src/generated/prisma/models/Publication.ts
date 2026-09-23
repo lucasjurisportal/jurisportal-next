@@ -43,6 +43,7 @@ export type PublicationMinAggregateOutputType = {
   processNumberFormatted: string | null
   publicationDate: Date | null
   content: string | null
+  summary: string | null
   sourceUrl: string | null
   sourceStatus: string | null
   cancellationReason: string | null
@@ -74,6 +75,7 @@ export type PublicationMaxAggregateOutputType = {
   processNumberFormatted: string | null
   publicationDate: Date | null
   content: string | null
+  summary: string | null
   sourceUrl: string | null
   sourceStatus: string | null
   cancellationReason: string | null
@@ -105,6 +107,7 @@ export type PublicationCountAggregateOutputType = {
   processNumberFormatted: number
   publicationDate: number
   content: number
+  summary: number
   parties: number
   explicitDates: number
   sourceUrl: number
@@ -140,6 +143,7 @@ export type PublicationMinAggregateInputType = {
   processNumberFormatted?: true
   publicationDate?: true
   content?: true
+  summary?: true
   sourceUrl?: true
   sourceStatus?: true
   cancellationReason?: true
@@ -171,6 +175,7 @@ export type PublicationMaxAggregateInputType = {
   processNumberFormatted?: true
   publicationDate?: true
   content?: true
+  summary?: true
   sourceUrl?: true
   sourceStatus?: true
   cancellationReason?: true
@@ -202,6 +207,7 @@ export type PublicationCountAggregateInputType = {
   processNumberFormatted?: true
   publicationDate?: true
   content?: true
+  summary?: true
   parties?: true
   explicitDates?: true
   sourceUrl?: true
@@ -308,6 +314,7 @@ export type PublicationGroupByOutputType = {
   processNumberFormatted: string | null
   publicationDate: Date
   content: string
+  summary: string | null
   parties: runtime.JsonValue | null
   explicitDates: runtime.JsonValue | null
   sourceUrl: string | null
@@ -362,6 +369,7 @@ export type PublicationWhereInput = {
   processNumberFormatted?: Prisma.StringNullableFilter<"Publication"> | string | null
   publicationDate?: Prisma.DateTimeFilter<"Publication"> | Date | string
   content?: Prisma.StringFilter<"Publication"> | string
+  summary?: Prisma.StringNullableFilter<"Publication"> | string | null
   parties?: Prisma.JsonNullableFilter<"Publication">
   explicitDates?: Prisma.JsonNullableFilter<"Publication">
   sourceUrl?: Prisma.StringNullableFilter<"Publication"> | string | null
@@ -401,6 +409,7 @@ export type PublicationOrderByWithRelationInput = {
   processNumberFormatted?: Prisma.SortOrderInput | Prisma.SortOrder
   publicationDate?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  summary?: Prisma.SortOrderInput | Prisma.SortOrder
   parties?: Prisma.SortOrderInput | Prisma.SortOrder
   explicitDates?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -444,6 +453,7 @@ export type PublicationWhereUniqueInput = Prisma.AtLeast<{
   processNumberFormatted?: Prisma.StringNullableFilter<"Publication"> | string | null
   publicationDate?: Prisma.DateTimeFilter<"Publication"> | Date | string
   content?: Prisma.StringFilter<"Publication"> | string
+  summary?: Prisma.StringNullableFilter<"Publication"> | string | null
   parties?: Prisma.JsonNullableFilter<"Publication">
   explicitDates?: Prisma.JsonNullableFilter<"Publication">
   sourceUrl?: Prisma.StringNullableFilter<"Publication"> | string | null
@@ -483,6 +493,7 @@ export type PublicationOrderByWithAggregationInput = {
   processNumberFormatted?: Prisma.SortOrderInput | Prisma.SortOrder
   publicationDate?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  summary?: Prisma.SortOrderInput | Prisma.SortOrder
   parties?: Prisma.SortOrderInput | Prisma.SortOrder
   explicitDates?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -522,6 +533,7 @@ export type PublicationScalarWhereWithAggregatesInput = {
   processNumberFormatted?: Prisma.StringNullableWithAggregatesFilter<"Publication"> | string | null
   publicationDate?: Prisma.DateTimeWithAggregatesFilter<"Publication"> | Date | string
   content?: Prisma.StringWithAggregatesFilter<"Publication"> | string
+  summary?: Prisma.StringNullableWithAggregatesFilter<"Publication"> | string | null
   parties?: Prisma.JsonNullableWithAggregatesFilter<"Publication">
   explicitDates?: Prisma.JsonNullableWithAggregatesFilter<"Publication">
   sourceUrl?: Prisma.StringNullableWithAggregatesFilter<"Publication"> | string | null
@@ -553,6 +565,7 @@ export type PublicationCreateInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -590,6 +603,7 @@ export type PublicationUncheckedCreateInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -623,6 +637,7 @@ export type PublicationUpdateInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -660,6 +675,7 @@ export type PublicationUncheckedUpdateInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -695,6 +711,7 @@ export type PublicationCreateManyInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -726,6 +743,7 @@ export type PublicationUpdateManyMutationInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -757,6 +775,7 @@ export type PublicationUncheckedUpdateManyInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -806,6 +825,7 @@ export type PublicationCountOrderByAggregateInput = {
   processNumberFormatted?: Prisma.SortOrder
   publicationDate?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   parties?: Prisma.SortOrder
   explicitDates?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
@@ -839,6 +859,7 @@ export type PublicationMaxOrderByAggregateInput = {
   processNumberFormatted?: Prisma.SortOrder
   publicationDate?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
   sourceStatus?: Prisma.SortOrder
   cancellationReason?: Prisma.SortOrder
@@ -870,6 +891,7 @@ export type PublicationMinOrderByAggregateInput = {
   processNumberFormatted?: Prisma.SortOrder
   publicationDate?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
   sourceStatus?: Prisma.SortOrder
   cancellationReason?: Prisma.SortOrder
@@ -1100,6 +1122,7 @@ export type PublicationCreateWithoutReadByInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1136,6 +1159,7 @@ export type PublicationUncheckedCreateWithoutReadByInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1178,6 +1202,7 @@ export type PublicationCreateWithoutTreatedByInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1214,6 +1239,7 @@ export type PublicationUncheckedCreateWithoutTreatedByInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1277,6 +1303,7 @@ export type PublicationScalarWhereInput = {
   processNumberFormatted?: Prisma.StringNullableFilter<"Publication"> | string | null
   publicationDate?: Prisma.DateTimeFilter<"Publication"> | Date | string
   content?: Prisma.StringFilter<"Publication"> | string
+  summary?: Prisma.StringNullableFilter<"Publication"> | string | null
   parties?: Prisma.JsonNullableFilter<"Publication">
   explicitDates?: Prisma.JsonNullableFilter<"Publication">
   sourceUrl?: Prisma.StringNullableFilter<"Publication"> | string | null
@@ -1324,6 +1351,7 @@ export type PublicationCreateWithoutOrganizationInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1359,6 +1387,7 @@ export type PublicationUncheckedCreateWithoutOrganizationInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1418,6 +1447,7 @@ export type PublicationCreateWithoutProcessInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1453,6 +1483,7 @@ export type PublicationUncheckedCreateWithoutProcessInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1512,6 +1543,7 @@ export type PublicationCreateWithoutRecipientsInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1548,6 +1580,7 @@ export type PublicationUncheckedCreateWithoutRecipientsInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1596,6 +1629,7 @@ export type PublicationUpdateWithoutRecipientsInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1632,6 +1666,7 @@ export type PublicationUncheckedUpdateWithoutRecipientsInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1664,6 +1699,7 @@ export type PublicationCreateWithoutDeadlineReviewInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1700,6 +1736,7 @@ export type PublicationUncheckedCreateWithoutDeadlineReviewInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1748,6 +1785,7 @@ export type PublicationUpdateWithoutDeadlineReviewInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1784,6 +1822,7 @@ export type PublicationUncheckedUpdateWithoutDeadlineReviewInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1818,6 +1857,7 @@ export type PublicationCreateManyReadByInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1850,6 +1890,7 @@ export type PublicationCreateManyTreatedByInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -1880,6 +1921,7 @@ export type PublicationUpdateWithoutReadByInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1916,6 +1958,7 @@ export type PublicationUncheckedUpdateWithoutReadByInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1950,6 +1993,7 @@ export type PublicationUncheckedUpdateManyWithoutReadByInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1980,6 +2024,7 @@ export type PublicationUpdateWithoutTreatedByInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2016,6 +2061,7 @@ export type PublicationUncheckedUpdateWithoutTreatedByInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2050,6 +2096,7 @@ export type PublicationUncheckedUpdateManyWithoutTreatedByInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2081,6 +2128,7 @@ export type PublicationCreateManyOrganizationInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -2112,6 +2160,7 @@ export type PublicationUpdateWithoutOrganizationInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2147,6 +2196,7 @@ export type PublicationUncheckedUpdateWithoutOrganizationInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2181,6 +2231,7 @@ export type PublicationUncheckedUpdateManyWithoutOrganizationInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2213,6 +2264,7 @@ export type PublicationCreateManyProcessInput = {
   processNumberFormatted?: string | null
   publicationDate: Date | string
   content: string
+  summary?: string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: string | null
@@ -2244,6 +2296,7 @@ export type PublicationUpdateWithoutProcessInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2279,6 +2332,7 @@ export type PublicationUncheckedUpdateWithoutProcessInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2313,6 +2367,7 @@ export type PublicationUncheckedUpdateManyWithoutProcessInput = {
   processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2377,6 +2432,7 @@ export type PublicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   processNumberFormatted?: boolean
   publicationDate?: boolean
   content?: boolean
+  summary?: boolean
   parties?: boolean
   explicitDates?: boolean
   sourceUrl?: boolean
@@ -2417,6 +2473,7 @@ export type PublicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   processNumberFormatted?: boolean
   publicationDate?: boolean
   content?: boolean
+  summary?: boolean
   parties?: boolean
   explicitDates?: boolean
   sourceUrl?: boolean
@@ -2454,6 +2511,7 @@ export type PublicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   processNumberFormatted?: boolean
   publicationDate?: boolean
   content?: boolean
+  summary?: boolean
   parties?: boolean
   explicitDates?: boolean
   sourceUrl?: boolean
@@ -2491,6 +2549,7 @@ export type PublicationSelectScalar = {
   processNumberFormatted?: boolean
   publicationDate?: boolean
   content?: boolean
+  summary?: boolean
   parties?: boolean
   explicitDates?: boolean
   sourceUrl?: boolean
@@ -2506,7 +2565,7 @@ export type PublicationSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PublicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "processId" | "source" | "externalKey" | "externalId" | "sourceHash" | "kind" | "communicationType" | "documentType" | "court" | "judicialBody" | "processNumberRaw" | "processNumberNormalized" | "processNumberFormatted" | "publicationDate" | "content" | "parties" | "explicitDates" | "sourceUrl" | "sourceStatus" | "cancellationReason" | "capturedAt" | "lastSeenAt" | "readAt" | "readByUserId" | "treatedAt" | "treatedByUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["publication"]>
+export type PublicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "processId" | "source" | "externalKey" | "externalId" | "sourceHash" | "kind" | "communicationType" | "documentType" | "court" | "judicialBody" | "processNumberRaw" | "processNumberNormalized" | "processNumberFormatted" | "publicationDate" | "content" | "summary" | "parties" | "explicitDates" | "sourceUrl" | "sourceStatus" | "cancellationReason" | "capturedAt" | "lastSeenAt" | "readAt" | "readByUserId" | "treatedAt" | "treatedByUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["publication"]>
 export type PublicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   process?: boolean | Prisma.Publication$processArgs<ExtArgs>
@@ -2557,6 +2616,7 @@ export type $PublicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     processNumberFormatted: string | null
     publicationDate: Date
     content: string
+    summary: string | null
     parties: runtime.JsonValue | null
     explicitDates: runtime.JsonValue | null
     sourceUrl: string | null
@@ -3016,6 +3076,7 @@ export interface PublicationFieldRefs {
   readonly processNumberFormatted: Prisma.FieldRef<"Publication", 'String'>
   readonly publicationDate: Prisma.FieldRef<"Publication", 'DateTime'>
   readonly content: Prisma.FieldRef<"Publication", 'String'>
+  readonly summary: Prisma.FieldRef<"Publication", 'String'>
   readonly parties: Prisma.FieldRef<"Publication", 'Json'>
   readonly explicitDates: Prisma.FieldRef<"Publication", 'Json'>
   readonly sourceUrl: Prisma.FieldRef<"Publication", 'String'>

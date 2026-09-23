@@ -218,6 +218,8 @@ export type OrganizationWhereInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkListRelationFilter
   publications?: Prisma.PublicationListRelationFilter
   publicationRecipients?: Prisma.PublicationRecipientListRelationFilter
+  djenCandidates?: Prisma.DjenReviewCandidateListRelationFilter
+  djenCursors?: Prisma.DjenCaptureCursorListRelationFilter
   deadlineReviews?: Prisma.DeadlineReviewListRelationFilter
   processNumberSequences?: Prisma.ProcessNumberSequenceListRelationFilter
   petitionTemplates?: Prisma.PetitionTemplateListRelationFilter
@@ -256,6 +258,8 @@ export type OrganizationOrderByWithRelationInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkOrderByRelationAggregateInput
   publications?: Prisma.PublicationOrderByRelationAggregateInput
   publicationRecipients?: Prisma.PublicationRecipientOrderByRelationAggregateInput
+  djenCandidates?: Prisma.DjenReviewCandidateOrderByRelationAggregateInput
+  djenCursors?: Prisma.DjenCaptureCursorOrderByRelationAggregateInput
   deadlineReviews?: Prisma.DeadlineReviewOrderByRelationAggregateInput
   processNumberSequences?: Prisma.ProcessNumberSequenceOrderByRelationAggregateInput
   petitionTemplates?: Prisma.PetitionTemplateOrderByRelationAggregateInput
@@ -297,6 +301,8 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkListRelationFilter
   publications?: Prisma.PublicationListRelationFilter
   publicationRecipients?: Prisma.PublicationRecipientListRelationFilter
+  djenCandidates?: Prisma.DjenReviewCandidateListRelationFilter
+  djenCursors?: Prisma.DjenCaptureCursorListRelationFilter
   deadlineReviews?: Prisma.DeadlineReviewListRelationFilter
   processNumberSequences?: Prisma.ProcessNumberSequenceListRelationFilter
   petitionTemplates?: Prisma.PetitionTemplateListRelationFilter
@@ -361,6 +367,8 @@ export type OrganizationCreateInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -399,6 +407,8 @@ export type OrganizationUncheckedCreateInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -437,6 +447,8 @@ export type OrganizationUpdateInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -475,6 +487,8 @@ export type OrganizationUncheckedUpdateInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -830,6 +844,34 @@ export type OrganizationUpdateOneRequiredWithoutPublicationRecipientsNestedInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPublicationRecipientsInput, Prisma.OrganizationUpdateWithoutPublicationRecipientsInput>, Prisma.OrganizationUncheckedUpdateWithoutPublicationRecipientsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutDjenCandidatesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDjenCandidatesInput, Prisma.OrganizationUncheckedCreateWithoutDjenCandidatesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDjenCandidatesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDjenCandidatesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDjenCandidatesInput, Prisma.OrganizationUncheckedCreateWithoutDjenCandidatesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDjenCandidatesInput
+  upsert?: Prisma.OrganizationUpsertWithoutDjenCandidatesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDjenCandidatesInput, Prisma.OrganizationUpdateWithoutDjenCandidatesInput>, Prisma.OrganizationUncheckedUpdateWithoutDjenCandidatesInput>
+}
+
+export type OrganizationCreateNestedOneWithoutDjenCursorsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDjenCursorsInput, Prisma.OrganizationUncheckedCreateWithoutDjenCursorsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDjenCursorsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutDjenCursorsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDjenCursorsInput, Prisma.OrganizationUncheckedCreateWithoutDjenCursorsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDjenCursorsInput
+  upsert?: Prisma.OrganizationUpsertWithoutDjenCursorsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutDjenCursorsInput, Prisma.OrganizationUpdateWithoutDjenCursorsInput>, Prisma.OrganizationUncheckedUpdateWithoutDjenCursorsInput>
+}
+
 export type OrganizationCreateNestedOneWithoutDeadlineReviewsInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutDeadlineReviewsInput, Prisma.OrganizationUncheckedCreateWithoutDeadlineReviewsInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutDeadlineReviewsInput
@@ -969,6 +1011,8 @@ export type OrganizationCreateWithoutMembersInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -1006,6 +1050,8 @@ export type OrganizationUncheckedCreateWithoutMembersInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1059,6 +1105,8 @@ export type OrganizationUpdateWithoutMembersInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -1096,6 +1144,8 @@ export type OrganizationUncheckedUpdateWithoutMembersInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1133,6 +1183,8 @@ export type OrganizationCreateWithoutInvitationsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -1170,6 +1222,8 @@ export type OrganizationUncheckedCreateWithoutInvitationsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1223,6 +1277,8 @@ export type OrganizationUpdateWithoutInvitationsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -1260,6 +1316,8 @@ export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1298,6 +1356,8 @@ export type OrganizationCreateWithoutTeamMemberProfilesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -1335,6 +1395,8 @@ export type OrganizationUncheckedCreateWithoutTeamMemberProfilesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1388,6 +1450,8 @@ export type OrganizationUpdateWithoutTeamMemberProfilesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -1425,6 +1489,8 @@ export type OrganizationUncheckedUpdateWithoutTeamMemberProfilesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1461,6 +1527,8 @@ export type OrganizationCreateWithoutSubscriptionInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -1498,6 +1566,8 @@ export type OrganizationUncheckedCreateWithoutSubscriptionInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1551,6 +1621,8 @@ export type OrganizationUpdateWithoutSubscriptionInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -1588,6 +1660,8 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1625,6 +1699,8 @@ export type OrganizationCreateWithoutAuditEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -1662,6 +1738,8 @@ export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1715,6 +1793,8 @@ export type OrganizationUpdateWithoutAuditEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -1752,6 +1832,8 @@ export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1789,6 +1871,8 @@ export type OrganizationCreateWithoutProfileInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -1826,6 +1910,8 @@ export type OrganizationUncheckedCreateWithoutProfileInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1879,6 +1965,8 @@ export type OrganizationUpdateWithoutProfileInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -1916,6 +2004,8 @@ export type OrganizationUncheckedUpdateWithoutProfileInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1953,6 +2043,8 @@ export type OrganizationCreateWithoutLawyerOabsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -1990,6 +2082,8 @@ export type OrganizationUncheckedCreateWithoutLawyerOabsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2043,6 +2137,8 @@ export type OrganizationUpdateWithoutLawyerOabsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -2080,6 +2176,8 @@ export type OrganizationUncheckedUpdateWithoutLawyerOabsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2117,6 +2215,8 @@ export type OrganizationCreateWithoutLegalAcceptancesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -2154,6 +2254,8 @@ export type OrganizationUncheckedCreateWithoutLegalAcceptancesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2207,6 +2309,8 @@ export type OrganizationUpdateWithoutLegalAcceptancesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -2244,6 +2348,8 @@ export type OrganizationUncheckedUpdateWithoutLegalAcceptancesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2281,6 +2387,8 @@ export type OrganizationCreateWithoutClientsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -2318,6 +2426,8 @@ export type OrganizationUncheckedCreateWithoutClientsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2371,6 +2481,8 @@ export type OrganizationUpdateWithoutClientsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -2408,6 +2520,8 @@ export type OrganizationUncheckedUpdateWithoutClientsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2445,6 +2559,8 @@ export type OrganizationCreateWithoutProcessesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -2482,6 +2598,8 @@ export type OrganizationUncheckedCreateWithoutProcessesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2535,6 +2653,8 @@ export type OrganizationUpdateWithoutProcessesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -2572,6 +2692,8 @@ export type OrganizationUncheckedUpdateWithoutProcessesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2610,6 +2732,8 @@ export type OrganizationCreateWithoutProcessNumberSequencesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
@@ -2647,6 +2771,8 @@ export type OrganizationUncheckedCreateWithoutProcessNumberSequencesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2700,6 +2826,8 @@ export type OrganizationUpdateWithoutProcessNumberSequencesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
@@ -2737,6 +2865,8 @@ export type OrganizationUncheckedUpdateWithoutProcessNumberSequencesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2773,6 +2903,8 @@ export type OrganizationCreateWithoutProcessClientsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -2810,6 +2942,8 @@ export type OrganizationUncheckedCreateWithoutProcessClientsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2863,6 +2997,8 @@ export type OrganizationUpdateWithoutProcessClientsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -2900,6 +3036,8 @@ export type OrganizationUncheckedUpdateWithoutProcessClientsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2937,6 +3075,8 @@ export type OrganizationCreateWithoutProcessPartiesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -2974,6 +3114,8 @@ export type OrganizationUncheckedCreateWithoutProcessPartiesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3027,6 +3169,8 @@ export type OrganizationUpdateWithoutProcessPartiesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -3064,6 +3208,8 @@ export type OrganizationUncheckedUpdateWithoutProcessPartiesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3101,6 +3247,8 @@ export type OrganizationCreateWithoutProcessTimelineEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -3138,6 +3286,8 @@ export type OrganizationUncheckedCreateWithoutProcessTimelineEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3191,6 +3341,8 @@ export type OrganizationUpdateWithoutProcessTimelineEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -3228,6 +3380,8 @@ export type OrganizationUncheckedUpdateWithoutProcessTimelineEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3265,6 +3419,8 @@ export type OrganizationCreateWithoutProcessWorkItemsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -3302,6 +3458,8 @@ export type OrganizationUncheckedCreateWithoutProcessWorkItemsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3355,6 +3513,8 @@ export type OrganizationUpdateWithoutProcessWorkItemsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -3392,6 +3552,8 @@ export type OrganizationUncheckedUpdateWithoutProcessWorkItemsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3429,6 +3591,8 @@ export type OrganizationCreateWithoutProcessFeeAgreementsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -3466,6 +3630,8 @@ export type OrganizationUncheckedCreateWithoutProcessFeeAgreementsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3519,6 +3685,8 @@ export type OrganizationUpdateWithoutProcessFeeAgreementsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -3556,6 +3724,8 @@ export type OrganizationUncheckedUpdateWithoutProcessFeeAgreementsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3593,6 +3763,8 @@ export type OrganizationCreateWithoutProcessFinanceEntriesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -3630,6 +3802,8 @@ export type OrganizationUncheckedCreateWithoutProcessFinanceEntriesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3683,6 +3857,8 @@ export type OrganizationUpdateWithoutProcessFinanceEntriesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -3720,6 +3896,8 @@ export type OrganizationUncheckedUpdateWithoutProcessFinanceEntriesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3757,6 +3935,8 @@ export type OrganizationCreateWithoutAgendaEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -3794,6 +3974,8 @@ export type OrganizationUncheckedCreateWithoutAgendaEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3847,6 +4029,8 @@ export type OrganizationUpdateWithoutAgendaEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -3884,6 +4068,8 @@ export type OrganizationUncheckedUpdateWithoutAgendaEventsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3921,6 +4107,8 @@ export type OrganizationCreateWithoutPublicationsInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -3958,6 +4146,8 @@ export type OrganizationUncheckedCreateWithoutPublicationsInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4011,6 +4201,8 @@ export type OrganizationUpdateWithoutPublicationsInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -4048,6 +4240,8 @@ export type OrganizationUncheckedUpdateWithoutPublicationsInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4085,6 +4279,8 @@ export type OrganizationCreateWithoutPublicationRecipientsInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -4122,6 +4318,8 @@ export type OrganizationUncheckedCreateWithoutPublicationRecipientsInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4175,6 +4373,8 @@ export type OrganizationUpdateWithoutPublicationRecipientsInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -4212,6 +4412,352 @@ export type OrganizationUncheckedUpdateWithoutPublicationRecipientsInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDjenCandidatesInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDjenCandidatesInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileUncheckedCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDjenCandidatesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDjenCandidatesInput, Prisma.OrganizationUncheckedCreateWithoutDjenCandidatesInput>
+}
+
+export type OrganizationUpsertWithoutDjenCandidatesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDjenCandidatesInput, Prisma.OrganizationUncheckedUpdateWithoutDjenCandidatesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDjenCandidatesInput, Prisma.OrganizationUncheckedCreateWithoutDjenCandidatesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDjenCandidatesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDjenCandidatesInput, Prisma.OrganizationUncheckedUpdateWithoutDjenCandidatesInput>
+}
+
+export type OrganizationUpdateWithoutDjenCandidatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDjenCandidatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUncheckedUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutDjenCursorsInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDjenCursorsInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileUncheckedCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDjenCursorsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDjenCursorsInput, Prisma.OrganizationUncheckedCreateWithoutDjenCursorsInput>
+}
+
+export type OrganizationUpsertWithoutDjenCursorsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDjenCursorsInput, Prisma.OrganizationUncheckedUpdateWithoutDjenCursorsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDjenCursorsInput, Prisma.OrganizationUncheckedCreateWithoutDjenCursorsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDjenCursorsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDjenCursorsInput, Prisma.OrganizationUncheckedUpdateWithoutDjenCursorsInput>
+}
+
+export type OrganizationUpdateWithoutDjenCursorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDjenCursorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUncheckedUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4250,6 +4796,8 @@ export type OrganizationCreateWithoutDeadlineReviewsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
@@ -4287,6 +4835,8 @@ export type OrganizationUncheckedCreateWithoutDeadlineReviewsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4340,6 +4890,8 @@ export type OrganizationUpdateWithoutDeadlineReviewsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
@@ -4377,6 +4929,8 @@ export type OrganizationUncheckedUpdateWithoutDeadlineReviewsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4413,6 +4967,8 @@ export type OrganizationCreateWithoutGoogleCalendarConnectionsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -4450,6 +5006,8 @@ export type OrganizationUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4503,6 +5061,8 @@ export type OrganizationUpdateWithoutGoogleCalendarConnectionsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -4540,6 +5100,8 @@ export type OrganizationUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4577,6 +5139,8 @@ export type OrganizationCreateWithoutExternalCalendarEventLinksInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -4614,6 +5178,8 @@ export type OrganizationUncheckedCreateWithoutExternalCalendarEventLinksInput = 
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4667,6 +5233,8 @@ export type OrganizationUpdateWithoutExternalCalendarEventLinksInput = {
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -4704,6 +5272,8 @@ export type OrganizationUncheckedUpdateWithoutExternalCalendarEventLinksInput = 
   googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4742,6 +5312,8 @@ export type OrganizationCreateWithoutPetitionTemplatesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
@@ -4779,6 +5351,8 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplatesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4832,6 +5406,8 @@ export type OrganizationUpdateWithoutPetitionTemplatesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
@@ -4869,6 +5445,8 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplatesInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4906,6 +5484,8 @@ export type OrganizationCreateWithoutPetitionTemplateVersionsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -4943,6 +5523,8 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplateVersionsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4996,6 +5578,8 @@ export type OrganizationUpdateWithoutPetitionTemplateVersionsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -5033,6 +5617,8 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplateVersionsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5070,6 +5656,8 @@ export type OrganizationCreateWithoutPetitionGenerationsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -5107,6 +5695,8 @@ export type OrganizationUncheckedCreateWithoutPetitionGenerationsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5160,6 +5750,8 @@ export type OrganizationUpdateWithoutPetitionGenerationsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -5197,6 +5789,8 @@ export type OrganizationUncheckedUpdateWithoutPetitionGenerationsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5234,6 +5828,8 @@ export type OrganizationCreateWithoutStorageUsageInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -5271,6 +5867,8 @@ export type OrganizationUncheckedCreateWithoutStorageUsageInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5324,6 +5922,8 @@ export type OrganizationUpdateWithoutStorageUsageInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -5361,6 +5961,8 @@ export type OrganizationUncheckedUpdateWithoutStorageUsageInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5398,6 +6000,8 @@ export type OrganizationCreateWithoutProcessDocumentsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
@@ -5435,6 +6039,8 @@ export type OrganizationUncheckedCreateWithoutProcessDocumentsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
   publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5488,6 +6094,8 @@ export type OrganizationUpdateWithoutProcessDocumentsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
@@ -5525,6 +6133,8 @@ export type OrganizationUncheckedUpdateWithoutProcessDocumentsInput = {
   externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
   publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
   deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
   processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5558,6 +6168,8 @@ export type OrganizationCountOutputType = {
   externalCalendarEventLinks: number
   publications: number
   publicationRecipients: number
+  djenCandidates: number
+  djenCursors: number
   deadlineReviews: number
   processNumberSequences: number
   petitionTemplates: number
@@ -5586,6 +6198,8 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   externalCalendarEventLinks?: boolean | OrganizationCountOutputTypeCountExternalCalendarEventLinksArgs
   publications?: boolean | OrganizationCountOutputTypeCountPublicationsArgs
   publicationRecipients?: boolean | OrganizationCountOutputTypeCountPublicationRecipientsArgs
+  djenCandidates?: boolean | OrganizationCountOutputTypeCountDjenCandidatesArgs
+  djenCursors?: boolean | OrganizationCountOutputTypeCountDjenCursorsArgs
   deadlineReviews?: boolean | OrganizationCountOutputTypeCountDeadlineReviewsArgs
   processNumberSequences?: boolean | OrganizationCountOutputTypeCountProcessNumberSequencesArgs
   petitionTemplates?: boolean | OrganizationCountOutputTypeCountPetitionTemplatesArgs
@@ -5734,6 +6348,20 @@ export type OrganizationCountOutputTypeCountPublicationRecipientsArgs<ExtArgs ex
 /**
  * OrganizationCountOutputType without action
  */
+export type OrganizationCountOutputTypeCountDjenCandidatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DjenReviewCandidateWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountDjenCursorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DjenCaptureCursorWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
 export type OrganizationCountOutputTypeCountDeadlineReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.DeadlineReviewWhereInput
 }
@@ -5809,6 +6437,8 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   externalCalendarEventLinks?: boolean | Prisma.Organization$externalCalendarEventLinksArgs<ExtArgs>
   publications?: boolean | Prisma.Organization$publicationsArgs<ExtArgs>
   publicationRecipients?: boolean | Prisma.Organization$publicationRecipientsArgs<ExtArgs>
+  djenCandidates?: boolean | Prisma.Organization$djenCandidatesArgs<ExtArgs>
+  djenCursors?: boolean | Prisma.Organization$djenCursorsArgs<ExtArgs>
   deadlineReviews?: boolean | Prisma.Organization$deadlineReviewsArgs<ExtArgs>
   processNumberSequences?: boolean | Prisma.Organization$processNumberSequencesArgs<ExtArgs>
   petitionTemplates?: boolean | Prisma.Organization$petitionTemplatesArgs<ExtArgs>
@@ -5872,6 +6502,8 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   externalCalendarEventLinks?: boolean | Prisma.Organization$externalCalendarEventLinksArgs<ExtArgs>
   publications?: boolean | Prisma.Organization$publicationsArgs<ExtArgs>
   publicationRecipients?: boolean | Prisma.Organization$publicationRecipientsArgs<ExtArgs>
+  djenCandidates?: boolean | Prisma.Organization$djenCandidatesArgs<ExtArgs>
+  djenCursors?: boolean | Prisma.Organization$djenCursorsArgs<ExtArgs>
   deadlineReviews?: boolean | Prisma.Organization$deadlineReviewsArgs<ExtArgs>
   processNumberSequences?: boolean | Prisma.Organization$processNumberSequencesArgs<ExtArgs>
   petitionTemplates?: boolean | Prisma.Organization$petitionTemplatesArgs<ExtArgs>
@@ -5908,6 +6540,8 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     externalCalendarEventLinks: Prisma.$ExternalCalendarEventLinkPayload<ExtArgs>[]
     publications: Prisma.$PublicationPayload<ExtArgs>[]
     publicationRecipients: Prisma.$PublicationRecipientPayload<ExtArgs>[]
+    djenCandidates: Prisma.$DjenReviewCandidatePayload<ExtArgs>[]
+    djenCursors: Prisma.$DjenCaptureCursorPayload<ExtArgs>[]
     deadlineReviews: Prisma.$DeadlineReviewPayload<ExtArgs>[]
     processNumberSequences: Prisma.$ProcessNumberSequencePayload<ExtArgs>[]
     petitionTemplates: Prisma.$PetitionTemplatePayload<ExtArgs>[]
@@ -6339,6 +6973,8 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   externalCalendarEventLinks<T extends Prisma.Organization$externalCalendarEventLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$externalCalendarEventLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExternalCalendarEventLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   publications<T extends Prisma.Organization$publicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$publicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PublicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   publicationRecipients<T extends Prisma.Organization$publicationRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$publicationRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PublicationRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  djenCandidates<T extends Prisma.Organization$djenCandidatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$djenCandidatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DjenReviewCandidatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  djenCursors<T extends Prisma.Organization$djenCursorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$djenCursorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DjenCaptureCursorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deadlineReviews<T extends Prisma.Organization$deadlineReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$deadlineReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeadlineReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processNumberSequences<T extends Prisma.Organization$processNumberSequencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processNumberSequencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessNumberSequencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   petitionTemplates<T extends Prisma.Organization$petitionTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$petitionTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetitionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7243,6 +7879,54 @@ export type Organization$publicationRecipientsArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.PublicationRecipientScalarFieldEnum | Prisma.PublicationRecipientScalarFieldEnum[]
+}
+
+/**
+ * Organization.djenCandidates
+ */
+export type Organization$djenCandidatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DjenReviewCandidate
+   */
+  select?: Prisma.DjenReviewCandidateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DjenReviewCandidate
+   */
+  omit?: Prisma.DjenReviewCandidateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DjenReviewCandidateInclude<ExtArgs> | null
+  where?: Prisma.DjenReviewCandidateWhereInput
+  orderBy?: Prisma.DjenReviewCandidateOrderByWithRelationInput | Prisma.DjenReviewCandidateOrderByWithRelationInput[]
+  cursor?: Prisma.DjenReviewCandidateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DjenReviewCandidateScalarFieldEnum | Prisma.DjenReviewCandidateScalarFieldEnum[]
+}
+
+/**
+ * Organization.djenCursors
+ */
+export type Organization$djenCursorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DjenCaptureCursor
+   */
+  select?: Prisma.DjenCaptureCursorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DjenCaptureCursor
+   */
+  omit?: Prisma.DjenCaptureCursorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DjenCaptureCursorInclude<ExtArgs> | null
+  where?: Prisma.DjenCaptureCursorWhereInput
+  orderBy?: Prisma.DjenCaptureCursorOrderByWithRelationInput | Prisma.DjenCaptureCursorOrderByWithRelationInput[]
+  cursor?: Prisma.DjenCaptureCursorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DjenCaptureCursorScalarFieldEnum | Prisma.DjenCaptureCursorScalarFieldEnum[]
 }
 
 /**

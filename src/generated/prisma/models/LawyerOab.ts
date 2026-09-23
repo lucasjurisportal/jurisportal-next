@@ -225,6 +225,8 @@ export type LawyerOabWhereInput = {
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   publicationRecipients?: Prisma.PublicationRecipientListRelationFilter
+  djenCandidates?: Prisma.DjenReviewCandidateListRelationFilter
+  djenCursor?: Prisma.XOR<Prisma.DjenCaptureCursorNullableScalarRelationFilter, Prisma.DjenCaptureCursorWhereInput> | null
 }
 
 export type LawyerOabOrderByWithRelationInput = {
@@ -241,6 +243,8 @@ export type LawyerOabOrderByWithRelationInput = {
   organization?: Prisma.OrganizationOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   publicationRecipients?: Prisma.PublicationRecipientOrderByRelationAggregateInput
+  djenCandidates?: Prisma.DjenReviewCandidateOrderByRelationAggregateInput
+  djenCursor?: Prisma.DjenCaptureCursorOrderByWithRelationInput
 }
 
 export type LawyerOabWhereUniqueInput = Prisma.AtLeast<{
@@ -261,6 +265,8 @@ export type LawyerOabWhereUniqueInput = Prisma.AtLeast<{
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   publicationRecipients?: Prisma.PublicationRecipientListRelationFilter
+  djenCandidates?: Prisma.DjenReviewCandidateListRelationFilter
+  djenCursor?: Prisma.XOR<Prisma.DjenCaptureCursorNullableScalarRelationFilter, Prisma.DjenCaptureCursorWhereInput> | null
 }, "id" | "organizationId_normalizedNumber_state">
 
 export type LawyerOabOrderByWithAggregationInput = {
@@ -307,6 +313,8 @@ export type LawyerOabCreateInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutLawyerOabsInput
   user: Prisma.UserCreateNestedOneWithoutLawyerOabsInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutLawyerOabInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorCreateNestedOneWithoutLawyerOabInput
 }
 
 export type LawyerOabUncheckedCreateInput = {
@@ -321,6 +329,8 @@ export type LawyerOabUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutLawyerOabInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedCreateNestedOneWithoutLawyerOabInput
 }
 
 export type LawyerOabUpdateInput = {
@@ -335,6 +345,8 @@ export type LawyerOabUpdateInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutLawyerOabsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutLawyerOabsNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutLawyerOabNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUpdateOneWithoutLawyerOabNestedInput
 }
 
 export type LawyerOabUncheckedUpdateInput = {
@@ -349,6 +361,8 @@ export type LawyerOabUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutLawyerOabNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedUpdateOneWithoutLawyerOabNestedInput
 }
 
 export type LawyerOabCreateManyInput = {
@@ -546,6 +560,34 @@ export type LawyerOabUpdateOneRequiredWithoutPublicationRecipientsNestedInput = 
   update?: Prisma.XOR<Prisma.XOR<Prisma.LawyerOabUpdateToOneWithWhereWithoutPublicationRecipientsInput, Prisma.LawyerOabUpdateWithoutPublicationRecipientsInput>, Prisma.LawyerOabUncheckedUpdateWithoutPublicationRecipientsInput>
 }
 
+export type LawyerOabCreateNestedOneWithoutDjenCandidatesInput = {
+  create?: Prisma.XOR<Prisma.LawyerOabCreateWithoutDjenCandidatesInput, Prisma.LawyerOabUncheckedCreateWithoutDjenCandidatesInput>
+  connectOrCreate?: Prisma.LawyerOabCreateOrConnectWithoutDjenCandidatesInput
+  connect?: Prisma.LawyerOabWhereUniqueInput
+}
+
+export type LawyerOabUpdateOneRequiredWithoutDjenCandidatesNestedInput = {
+  create?: Prisma.XOR<Prisma.LawyerOabCreateWithoutDjenCandidatesInput, Prisma.LawyerOabUncheckedCreateWithoutDjenCandidatesInput>
+  connectOrCreate?: Prisma.LawyerOabCreateOrConnectWithoutDjenCandidatesInput
+  upsert?: Prisma.LawyerOabUpsertWithoutDjenCandidatesInput
+  connect?: Prisma.LawyerOabWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LawyerOabUpdateToOneWithWhereWithoutDjenCandidatesInput, Prisma.LawyerOabUpdateWithoutDjenCandidatesInput>, Prisma.LawyerOabUncheckedUpdateWithoutDjenCandidatesInput>
+}
+
+export type LawyerOabCreateNestedOneWithoutDjenCursorInput = {
+  create?: Prisma.XOR<Prisma.LawyerOabCreateWithoutDjenCursorInput, Prisma.LawyerOabUncheckedCreateWithoutDjenCursorInput>
+  connectOrCreate?: Prisma.LawyerOabCreateOrConnectWithoutDjenCursorInput
+  connect?: Prisma.LawyerOabWhereUniqueInput
+}
+
+export type LawyerOabUpdateOneRequiredWithoutDjenCursorNestedInput = {
+  create?: Prisma.XOR<Prisma.LawyerOabCreateWithoutDjenCursorInput, Prisma.LawyerOabUncheckedCreateWithoutDjenCursorInput>
+  connectOrCreate?: Prisma.LawyerOabCreateOrConnectWithoutDjenCursorInput
+  upsert?: Prisma.LawyerOabUpsertWithoutDjenCursorInput
+  connect?: Prisma.LawyerOabWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LawyerOabUpdateToOneWithWhereWithoutDjenCursorInput, Prisma.LawyerOabUpdateWithoutDjenCursorInput>, Prisma.LawyerOabUncheckedUpdateWithoutDjenCursorInput>
+}
+
 export type LawyerOabCreateWithoutUserInput = {
   id?: string
   rawNumber: string
@@ -557,6 +599,8 @@ export type LawyerOabCreateWithoutUserInput = {
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutLawyerOabsInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutLawyerOabInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorCreateNestedOneWithoutLawyerOabInput
 }
 
 export type LawyerOabUncheckedCreateWithoutUserInput = {
@@ -570,6 +614,8 @@ export type LawyerOabUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutLawyerOabInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedCreateNestedOneWithoutLawyerOabInput
 }
 
 export type LawyerOabCreateOrConnectWithoutUserInput = {
@@ -625,6 +671,8 @@ export type LawyerOabCreateWithoutOrganizationInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutLawyerOabsInput
   publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutLawyerOabInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorCreateNestedOneWithoutLawyerOabInput
 }
 
 export type LawyerOabUncheckedCreateWithoutOrganizationInput = {
@@ -638,6 +686,8 @@ export type LawyerOabUncheckedCreateWithoutOrganizationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutLawyerOabInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedCreateNestedOneWithoutLawyerOabInput
 }
 
 export type LawyerOabCreateOrConnectWithoutOrganizationInput = {
@@ -677,6 +727,8 @@ export type LawyerOabCreateWithoutPublicationRecipientsInput = {
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutLawyerOabsInput
   user: Prisma.UserCreateNestedOneWithoutLawyerOabsInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorCreateNestedOneWithoutLawyerOabInput
 }
 
 export type LawyerOabUncheckedCreateWithoutPublicationRecipientsInput = {
@@ -690,6 +742,8 @@ export type LawyerOabUncheckedCreateWithoutPublicationRecipientsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedCreateNestedOneWithoutLawyerOabInput
 }
 
 export type LawyerOabCreateOrConnectWithoutPublicationRecipientsInput = {
@@ -719,6 +773,8 @@ export type LawyerOabUpdateWithoutPublicationRecipientsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutLawyerOabsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutLawyerOabsNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUpdateOneWithoutLawyerOabNestedInput
 }
 
 export type LawyerOabUncheckedUpdateWithoutPublicationRecipientsInput = {
@@ -732,6 +788,160 @@ export type LawyerOabUncheckedUpdateWithoutPublicationRecipientsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedUpdateOneWithoutLawyerOabNestedInput
+}
+
+export type LawyerOabCreateWithoutDjenCandidatesInput = {
+  id?: string
+  rawNumber: string
+  normalizedNumber: string
+  state: string
+  isPrimary?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutLawyerOabsInput
+  user: Prisma.UserCreateNestedOneWithoutLawyerOabsInput
+  publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorCreateNestedOneWithoutLawyerOabInput
+}
+
+export type LawyerOabUncheckedCreateWithoutDjenCandidatesInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  rawNumber: string
+  normalizedNumber: string
+  state: string
+  isPrimary?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutLawyerOabInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedCreateNestedOneWithoutLawyerOabInput
+}
+
+export type LawyerOabCreateOrConnectWithoutDjenCandidatesInput = {
+  where: Prisma.LawyerOabWhereUniqueInput
+  create: Prisma.XOR<Prisma.LawyerOabCreateWithoutDjenCandidatesInput, Prisma.LawyerOabUncheckedCreateWithoutDjenCandidatesInput>
+}
+
+export type LawyerOabUpsertWithoutDjenCandidatesInput = {
+  update: Prisma.XOR<Prisma.LawyerOabUpdateWithoutDjenCandidatesInput, Prisma.LawyerOabUncheckedUpdateWithoutDjenCandidatesInput>
+  create: Prisma.XOR<Prisma.LawyerOabCreateWithoutDjenCandidatesInput, Prisma.LawyerOabUncheckedCreateWithoutDjenCandidatesInput>
+  where?: Prisma.LawyerOabWhereInput
+}
+
+export type LawyerOabUpdateToOneWithWhereWithoutDjenCandidatesInput = {
+  where?: Prisma.LawyerOabWhereInput
+  data: Prisma.XOR<Prisma.LawyerOabUpdateWithoutDjenCandidatesInput, Prisma.LawyerOabUncheckedUpdateWithoutDjenCandidatesInput>
+}
+
+export type LawyerOabUpdateWithoutDjenCandidatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  rawNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutLawyerOabsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutLawyerOabsNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUpdateOneWithoutLawyerOabNestedInput
+}
+
+export type LawyerOabUncheckedUpdateWithoutDjenCandidatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  rawNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedUpdateOneWithoutLawyerOabNestedInput
+}
+
+export type LawyerOabCreateWithoutDjenCursorInput = {
+  id?: string
+  rawNumber: string
+  normalizedNumber: string
+  state: string
+  isPrimary?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutLawyerOabsInput
+  user: Prisma.UserCreateNestedOneWithoutLawyerOabsInput
+  publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutLawyerOabInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutLawyerOabInput
+}
+
+export type LawyerOabUncheckedCreateWithoutDjenCursorInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  rawNumber: string
+  normalizedNumber: string
+  state: string
+  isPrimary?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutLawyerOabInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutLawyerOabInput
+}
+
+export type LawyerOabCreateOrConnectWithoutDjenCursorInput = {
+  where: Prisma.LawyerOabWhereUniqueInput
+  create: Prisma.XOR<Prisma.LawyerOabCreateWithoutDjenCursorInput, Prisma.LawyerOabUncheckedCreateWithoutDjenCursorInput>
+}
+
+export type LawyerOabUpsertWithoutDjenCursorInput = {
+  update: Prisma.XOR<Prisma.LawyerOabUpdateWithoutDjenCursorInput, Prisma.LawyerOabUncheckedUpdateWithoutDjenCursorInput>
+  create: Prisma.XOR<Prisma.LawyerOabCreateWithoutDjenCursorInput, Prisma.LawyerOabUncheckedCreateWithoutDjenCursorInput>
+  where?: Prisma.LawyerOabWhereInput
+}
+
+export type LawyerOabUpdateToOneWithWhereWithoutDjenCursorInput = {
+  where?: Prisma.LawyerOabWhereInput
+  data: Prisma.XOR<Prisma.LawyerOabUpdateWithoutDjenCursorInput, Prisma.LawyerOabUncheckedUpdateWithoutDjenCursorInput>
+}
+
+export type LawyerOabUpdateWithoutDjenCursorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  rawNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutLawyerOabsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutLawyerOabsNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutLawyerOabNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutLawyerOabNestedInput
+}
+
+export type LawyerOabUncheckedUpdateWithoutDjenCursorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  rawNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutLawyerOabNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutLawyerOabNestedInput
 }
 
 export type LawyerOabCreateManyUserInput = {
@@ -757,6 +967,8 @@ export type LawyerOabUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutLawyerOabsNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutLawyerOabNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUpdateOneWithoutLawyerOabNestedInput
 }
 
 export type LawyerOabUncheckedUpdateWithoutUserInput = {
@@ -770,6 +982,8 @@ export type LawyerOabUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutLawyerOabNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedUpdateOneWithoutLawyerOabNestedInput
 }
 
 export type LawyerOabUncheckedUpdateManyWithoutUserInput = {
@@ -807,6 +1021,8 @@ export type LawyerOabUpdateWithoutOrganizationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutLawyerOabsNestedInput
   publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutLawyerOabNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUpdateOneWithoutLawyerOabNestedInput
 }
 
 export type LawyerOabUncheckedUpdateWithoutOrganizationInput = {
@@ -820,6 +1036,8 @@ export type LawyerOabUncheckedUpdateWithoutOrganizationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutLawyerOabNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutLawyerOabNestedInput
+  djenCursor?: Prisma.DjenCaptureCursorUncheckedUpdateOneWithoutLawyerOabNestedInput
 }
 
 export type LawyerOabUncheckedUpdateManyWithoutOrganizationInput = {
@@ -841,10 +1059,12 @@ export type LawyerOabUncheckedUpdateManyWithoutOrganizationInput = {
 
 export type LawyerOabCountOutputType = {
   publicationRecipients: number
+  djenCandidates: number
 }
 
 export type LawyerOabCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   publicationRecipients?: boolean | LawyerOabCountOutputTypeCountPublicationRecipientsArgs
+  djenCandidates?: boolean | LawyerOabCountOutputTypeCountDjenCandidatesArgs
 }
 
 /**
@@ -864,6 +1084,13 @@ export type LawyerOabCountOutputTypeCountPublicationRecipientsArgs<ExtArgs exten
   where?: Prisma.PublicationRecipientWhereInput
 }
 
+/**
+ * LawyerOabCountOutputType without action
+ */
+export type LawyerOabCountOutputTypeCountDjenCandidatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DjenReviewCandidateWhereInput
+}
+
 
 export type LawyerOabSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -879,6 +1106,8 @@ export type LawyerOabSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   publicationRecipients?: boolean | Prisma.LawyerOab$publicationRecipientsArgs<ExtArgs>
+  djenCandidates?: boolean | Prisma.LawyerOab$djenCandidatesArgs<ExtArgs>
+  djenCursor?: boolean | Prisma.LawyerOab$djenCursorArgs<ExtArgs>
   _count?: boolean | Prisma.LawyerOabCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lawyerOab"]>
 
@@ -930,6 +1159,8 @@ export type LawyerOabInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   publicationRecipients?: boolean | Prisma.LawyerOab$publicationRecipientsArgs<ExtArgs>
+  djenCandidates?: boolean | Prisma.LawyerOab$djenCandidatesArgs<ExtArgs>
+  djenCursor?: boolean | Prisma.LawyerOab$djenCursorArgs<ExtArgs>
   _count?: boolean | Prisma.LawyerOabCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LawyerOabIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -947,6 +1178,8 @@ export type $LawyerOabPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     organization: Prisma.$OrganizationPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
     publicationRecipients: Prisma.$PublicationRecipientPayload<ExtArgs>[]
+    djenCandidates: Prisma.$DjenReviewCandidatePayload<ExtArgs>[]
+    djenCursor: Prisma.$DjenCaptureCursorPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1356,6 +1589,8 @@ export interface Prisma__LawyerOabClient<T, Null = never, ExtArgs extends runtim
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   publicationRecipients<T extends Prisma.LawyerOab$publicationRecipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LawyerOab$publicationRecipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PublicationRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  djenCandidates<T extends Prisma.LawyerOab$djenCandidatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LawyerOab$djenCandidatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DjenReviewCandidatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  djenCursor<T extends Prisma.LawyerOab$djenCursorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LawyerOab$djenCursorArgs<ExtArgs>>): Prisma.Prisma__DjenCaptureCursorClient<runtime.Types.Result.GetResult<Prisma.$DjenCaptureCursorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1817,6 +2052,49 @@ export type LawyerOab$publicationRecipientsArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.PublicationRecipientScalarFieldEnum | Prisma.PublicationRecipientScalarFieldEnum[]
+}
+
+/**
+ * LawyerOab.djenCandidates
+ */
+export type LawyerOab$djenCandidatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DjenReviewCandidate
+   */
+  select?: Prisma.DjenReviewCandidateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DjenReviewCandidate
+   */
+  omit?: Prisma.DjenReviewCandidateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DjenReviewCandidateInclude<ExtArgs> | null
+  where?: Prisma.DjenReviewCandidateWhereInput
+  orderBy?: Prisma.DjenReviewCandidateOrderByWithRelationInput | Prisma.DjenReviewCandidateOrderByWithRelationInput[]
+  cursor?: Prisma.DjenReviewCandidateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DjenReviewCandidateScalarFieldEnum | Prisma.DjenReviewCandidateScalarFieldEnum[]
+}
+
+/**
+ * LawyerOab.djenCursor
+ */
+export type LawyerOab$djenCursorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DjenCaptureCursor
+   */
+  select?: Prisma.DjenCaptureCursorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DjenCaptureCursor
+   */
+  omit?: Prisma.DjenCaptureCursorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DjenCaptureCursorInclude<ExtArgs> | null
+  where?: Prisma.DjenCaptureCursorWhereInput
 }
 
 /**

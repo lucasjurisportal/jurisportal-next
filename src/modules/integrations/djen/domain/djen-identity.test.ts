@@ -22,8 +22,15 @@ test("nome diverge mesmo que a OAB e UF coincidam: exige revisão", () => {
   assert.equal(djenCandidateReason(publication, "1234A", "SP", "Maria Souza"), "NOME_DIVERGENTE");
 });
 
-test("outra UF e outro número não entram pela busca OAB", () => {
+test("OAB consultada com identidade divergente aparece para revisão, nunca como comprovada", () => {
   const publication = pub("Nome Distinto", "1234", "RJ");
   assert.equal(isPotentialDjenCandidate({ publication, oab: "1234", state: "SP",
-    registeredName: "João da Silva", mode: "OAB" }), false);
+    registeredName: "João da Silva", mode: "OAB" }), true);
+  assert.equal(djenCandidateReason(publication, "1234", "SP", "João da Silva"), "IDENTIDADE_NAO_CONFIRMADA");
+});
+
+test("busca ampla por nome não sugere outro advogado com nome divergente", () => {
+  const publication = pub("Pessoa Diferente", "1234", "RJ");
+  assert.equal(isPotentialDjenCandidate({ publication, oab: "1234", state: "SP",
+    registeredName: "João da Silva", mode: "NAME" }), false);
 });

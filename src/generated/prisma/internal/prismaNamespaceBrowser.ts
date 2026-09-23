@@ -82,6 +82,8 @@ export const ModelName = {
   AgendaEvent: 'AgendaEvent',
   Publication: 'Publication',
   PublicationRecipient: 'PublicationRecipient',
+  DjenReviewCandidate: 'DjenReviewCandidate',
+  DjenCaptureCursor: 'DjenCaptureCursor',
   DeadlineReview: 'DeadlineReview',
   GoogleCalendarConnection: 'GoogleCalendarConnection',
   ExternalCalendarEventLink: 'ExternalCalendarEventLink',
@@ -613,6 +615,7 @@ export const PublicationScalarFieldEnum = {
   processNumberFormatted: 'processNumberFormatted',
   publicationDate: 'publicationDate',
   content: 'content',
+  summary: 'summary',
   parties: 'parties',
   explicitDates: 'explicitDates',
   sourceUrl: 'sourceUrl',
@@ -640,6 +643,42 @@ export const PublicationRecipientScalarFieldEnum = {
 } as const
 
 export type PublicationRecipientScalarFieldEnum = (typeof PublicationRecipientScalarFieldEnum)[keyof typeof PublicationRecipientScalarFieldEnum]
+
+
+export const DjenReviewCandidateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  lawyerOabId: 'lawyerOabId',
+  source: 'source',
+  externalKey: 'externalKey',
+  searchMethod: 'searchMethod',
+  reason: 'reason',
+  payload: 'payload',
+  status: 'status',
+  decidedByUserId: 'decidedByUserId',
+  decidedAt: 'decidedAt',
+  firstSeenAt: 'firstSeenAt',
+  lastSeenAt: 'lastSeenAt'
+} as const
+
+export type DjenReviewCandidateScalarFieldEnum = (typeof DjenReviewCandidateScalarFieldEnum)[keyof typeof DjenReviewCandidateScalarFieldEnum]
+
+
+export const DjenCaptureCursorScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  lawyerOabId: 'lawyerOabId',
+  completedThrough: 'completedThrough',
+  lastAttemptAt: 'lastAttemptAt',
+  lastSuccessAt: 'lastSuccessAt',
+  lastError: 'lastError',
+  status: 'status',
+  leaseToken: 'leaseToken',
+  leaseUntil: 'leaseUntil',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DjenCaptureCursorScalarFieldEnum = (typeof DjenCaptureCursorScalarFieldEnum)[keyof typeof DjenCaptureCursorScalarFieldEnum]
 
 
 export const DeadlineReviewScalarFieldEnum = {
@@ -816,6 +855,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

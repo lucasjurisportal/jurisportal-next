@@ -16,7 +16,7 @@ export async function GET() {
   }
 
   const [members, usage] = await Promise.all([
-    listTeamMembers(context.workspace.organizationId),
+    listTeamMembers(context.workspace.organizationId, context.workspace.role === "owner"),
     getTeamUsage(context.workspace.organizationId),
   ]);
 

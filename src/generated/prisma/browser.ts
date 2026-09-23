@@ -181,6 +181,17 @@ export type Publication = Prisma.PublicationModel
  */
 export type PublicationRecipient = Prisma.PublicationRecipientModel
 /**
+ * Model DjenReviewCandidate
+ * Resultado encontrado por OAB ou nome, mas sem identidade suficiente para associação automática.
+ * NÃO aparece como publicação nem gera prazo/notificação até aceite explícito.
+ */
+export type DjenReviewCandidate = Prisma.DjenReviewCandidateModel
+/**
+ * Model DjenCaptureCursor
+ * Cursor por OAB: avança apenas depois de ambas as buscas e de TODOS os dias terem sucesso.
+ */
+export type DjenCaptureCursor = Prisma.DjenCaptureCursorModel
+/**
  * Model DeadlineReview
  * Etapa humana entre uma publicação/intimação e um prazo jurídico definitivo.
  * Nenhum prazo vindo de comunicação externa é confirmado automaticamente.
