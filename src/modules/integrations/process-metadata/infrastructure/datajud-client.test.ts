@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { lookupDatajudProcess } from "./datajud-client";
+import { lookupDatajudProcess, lookupDatajudProcessDetail } from "./datajud-client";
 const cnj = "10008790820148260462";
 async function enabled(fn: () => Promise<void>) {
   const prior = { provider: process.env.PROCESS_LOOKUP_PROVIDER, auth: process.env.DATAJUD_ACCESS_AUTHORIZED,
@@ -20,7 +20,7 @@ async function enabled(fn: () => Promise<void>) {
 test("endereço é fixo e busca só por CNJ; resposta incorreta ignorada", async () => enabled(async () => {
   const fetcher = (async (url: string, init: RequestInit) => {
     assert.match(url, /^https:\/\/api-publica\.datajud\.cnj\.jus\.br\/api_publica_tjsp\/_search$/);
-    assert.deepEqual(JSON.parse(String(init.body)), { size: 5, query: { term: { numeroProcesso: cnj } } });
+    assert.deepEqual(JSON.parse(String(init.body)), { size: 5, query: { term: { numeroProcesso: cnj } }, _source: { excludes: ["movimentos"] } });
     return { ok: true, status: 200, json: async () => ({ hits: { hits: [{ _source: { numeroProcesso: "99999999920248260462" } }] } }) } as Response;
   }) as typeof fetch;
   assert.equal(await lookupDatajudProcess(cnj, fetcher), null);
@@ -47,4 +47,64 @@ test("não seleciona resultado quando a fonte informou mais registros do que ret
 test("resposta 429 não se transforma em sucesso vazio", async () => enabled(async () => {
   const fetcher = (async () => ({ ok: false, status: 429 } as Response)) as typeof fetch;
   await assert.rejects(lookupDatajudProcess(cnj, fetcher), /PROCESS_LOOKUP_RATE_LIMIT/);
+}));
+
+test("conector usa Justiça Federal 4 e Justiça do Trabalho 5, conforme CNJ", async () => enabled(async () => {
+  const cases = [
+    ["00000000020244010001", "trf1"],
+    ["00000000020245020001", "trt2"],
+  ] as const;
+  for (const [cnjInput, alias] of cases) {
+    const fetcher = (async (url: string) => {
+      assert.equal(url, `https://api-publica.datajud.cnj.jus.br/api_publica_${alias}/_search`);
+      return { ok: true, status: 200, json: async () => ({ hits: { hits: [
+        { _source: { numeroProcesso: cnjInput, sistema: { codigo: 4, nome: "EPROC" },
+          movimentos: [{ codigo: 26, nome: "Distribuição", dataHora: "2024-01-03T10:00:00.000Z" }] } },
+      ] } }) } as Response;
+    }) as typeof fetch;
+    const result = await lookupDatajudProcessDetail(cnjInput, fetcher);
+    assert.equal(result?.preview.electronicSystem, "EPROC");
+    assert.equal(result?.movementsTotal, 1);
+    assert.equal(result?.movements[0]?.name, "Distribuição");
+  }
+}));
+
+// Regressão v45: buscar a capa não pode baixar/processar o array de movimentações.
+test("consulta da capa exclui movimentos; consulta de movimentos os mantém", async () => enabled(async () => {
+  let calls = 0;
+  const fetcher = (async (_url: string, init: RequestInit) => {
+    const query = JSON.parse(String(init.body));
+    calls++;
+    if (calls === 1) {
+      assert.deepEqual(query._source, { excludes: ["movimentos"] });
+      return { ok: true, status: 200, json: async () => ({ hits: { hits: [
+        { _source: { numeroProcesso: cnj, classe: { nome: "Procedimento Comum" } } },
+      ] } }) } as Response;
+    }
+    assert.equal(query._source, undefined);
+    return { ok: true, status: 200, json: async () => ({ hits: { hits: [
+      { _source: { numeroProcesso: cnj, movimentos: [
+        { codigo: 26, nome: "Distribuição", dataHora: "2024-01-03T10:00:00.000Z" },
+      ] } },
+    ] } }) } as Response;
+  }) as typeof fetch;
+  assert.equal((await lookupDatajudProcess(cnj, fetcher))?.processClass, "Procedimento Comum");
+  assert.equal((await lookupDatajudProcessDetail(cnj, fetcher))?.movementsTotal, 1);
+  assert.equal(calls, 2);
+}));
+
+test("diferencia erro 403 de indisponibilidade e resposta malformada", async () => enabled(async () => {
+  const forbidden = (async () => ({ ok: false, status: 403 } as Response)) as typeof fetch;
+  await assert.rejects(lookupDatajudProcess(cnj, forbidden), /PROCESS_LOOKUP_AUTH_FAILED/);
+  const upstream = (async () => ({ ok: false, status: 503 } as Response)) as typeof fetch;
+  await assert.rejects(lookupDatajudProcess(cnj, upstream), /PROCESS_LOOKUP_SOURCE_UNAVAILABLE/);
+  const brokenJson = (async () => new Response("invalid json", { status: 200 })) as typeof fetch;
+  await assert.rejects(lookupDatajudProcess(cnj, brokenJson), /PROCESS_LOOKUP_INVALID_RESPONSE/);
+  const brokenStructure = (async () => ({ ok: true, status: 200, json: async () => ({ error: "unexpected upstream" }) } as Response)) as typeof fetch;
+  await assert.rejects(lookupDatajudProcess(cnj, brokenStructure), /PROCESS_LOOKUP_INVALID_RESPONSE/);
+}));
+
+test("falha de rede tem erro próprio, sem expor detalhes do fetch", async () => enabled(async () => {
+  const fetcher = (async () => { throw new TypeError("internal network details"); }) as typeof fetch;
+  await assert.rejects(lookupDatajudProcess(cnj, fetcher), /PROCESS_LOOKUP_NETWORK_ERROR/);
 }));
