@@ -56,10 +56,12 @@ export type ProcessMinAggregateOutputType = {
   division: string | null
   district: string | null
   forum: string | null
+  caseType: string | null
   processClass: string | null
   subject: string | null
   caseValue: runtime.Decimal | null
   distributionDate: Date | null
+  lastMovementCheckAt: Date | null
   responsibleUserId: string | null
   notes: string | null
   archivedAt: Date | null
@@ -87,10 +89,12 @@ export type ProcessMaxAggregateOutputType = {
   division: string | null
   district: string | null
   forum: string | null
+  caseType: string | null
   processClass: string | null
   subject: string | null
   caseValue: runtime.Decimal | null
   distributionDate: Date | null
+  lastMovementCheckAt: Date | null
   responsibleUserId: string | null
   notes: string | null
   archivedAt: Date | null
@@ -118,10 +122,13 @@ export type ProcessCountAggregateOutputType = {
   division: number
   district: number
   forum: number
+  caseType: number
   processClass: number
   subject: number
+  otherSubjects: number
   caseValue: number
   distributionDate: number
+  lastMovementCheckAt: number
   responsibleUserId: number
   notes: number
   archivedAt: number
@@ -163,10 +170,12 @@ export type ProcessMinAggregateInputType = {
   division?: true
   district?: true
   forum?: true
+  caseType?: true
   processClass?: true
   subject?: true
   caseValue?: true
   distributionDate?: true
+  lastMovementCheckAt?: true
   responsibleUserId?: true
   notes?: true
   archivedAt?: true
@@ -194,10 +203,12 @@ export type ProcessMaxAggregateInputType = {
   division?: true
   district?: true
   forum?: true
+  caseType?: true
   processClass?: true
   subject?: true
   caseValue?: true
   distributionDate?: true
+  lastMovementCheckAt?: true
   responsibleUserId?: true
   notes?: true
   archivedAt?: true
@@ -225,10 +236,13 @@ export type ProcessCountAggregateInputType = {
   division?: true
   district?: true
   forum?: true
+  caseType?: true
   processClass?: true
   subject?: true
+  otherSubjects?: true
   caseValue?: true
   distributionDate?: true
+  lastMovementCheckAt?: true
   responsibleUserId?: true
   notes?: true
   archivedAt?: true
@@ -343,10 +357,13 @@ export type ProcessGroupByOutputType = {
   division: string | null
   district: string | null
   forum: string | null
+  caseType: string | null
   processClass: string | null
   subject: string | null
+  otherSubjects: string[]
   caseValue: runtime.Decimal | null
   distributionDate: Date | null
+  lastMovementCheckAt: Date | null
   responsibleUserId: string | null
   notes: string | null
   archivedAt: Date | null
@@ -397,10 +414,13 @@ export type ProcessWhereInput = {
   division?: Prisma.StringNullableFilter<"Process"> | string | null
   district?: Prisma.StringNullableFilter<"Process"> | string | null
   forum?: Prisma.StringNullableFilter<"Process"> | string | null
+  caseType?: Prisma.StringNullableFilter<"Process"> | string | null
   processClass?: Prisma.StringNullableFilter<"Process"> | string | null
   subject?: Prisma.StringNullableFilter<"Process"> | string | null
+  otherSubjects?: Prisma.StringNullableListFilter<"Process">
   caseValue?: Prisma.DecimalNullableFilter<"Process"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.DateTimeNullableFilter<"Process"> | Date | string | null
+  lastMovementCheckAt?: Prisma.DateTimeNullableFilter<"Process"> | Date | string | null
   responsibleUserId?: Prisma.UuidNullableFilter<"Process"> | string | null
   notes?: Prisma.StringNullableFilter<"Process"> | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Process"> | Date | string | null
@@ -417,6 +437,7 @@ export type ProcessWhereInput = {
   clients?: Prisma.ProcessClientListRelationFilter
   parties?: Prisma.ProcessPartyListRelationFilter
   timeline?: Prisma.ProcessTimelineEventListRelationFilter
+  externalMovements?: Prisma.ProcessExternalMovementListRelationFilter
   workItems?: Prisma.ProcessWorkItemListRelationFilter
   feeAgreement?: Prisma.XOR<Prisma.ProcessFeeAgreementNullableScalarRelationFilter, Prisma.ProcessFeeAgreementWhereInput> | null
   financeEntries?: Prisma.ProcessFinanceEntryListRelationFilter
@@ -443,10 +464,13 @@ export type ProcessOrderByWithRelationInput = {
   division?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   forum?: Prisma.SortOrderInput | Prisma.SortOrder
+  caseType?: Prisma.SortOrderInput | Prisma.SortOrder
   processClass?: Prisma.SortOrderInput | Prisma.SortOrder
   subject?: Prisma.SortOrderInput | Prisma.SortOrder
+  otherSubjects?: Prisma.SortOrder
   caseValue?: Prisma.SortOrderInput | Prisma.SortOrder
   distributionDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastMovementCheckAt?: Prisma.SortOrderInput | Prisma.SortOrder
   responsibleUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -463,6 +487,7 @@ export type ProcessOrderByWithRelationInput = {
   clients?: Prisma.ProcessClientOrderByRelationAggregateInput
   parties?: Prisma.ProcessPartyOrderByRelationAggregateInput
   timeline?: Prisma.ProcessTimelineEventOrderByRelationAggregateInput
+  externalMovements?: Prisma.ProcessExternalMovementOrderByRelationAggregateInput
   workItems?: Prisma.ProcessWorkItemOrderByRelationAggregateInput
   feeAgreement?: Prisma.ProcessFeeAgreementOrderByWithRelationInput
   financeEntries?: Prisma.ProcessFinanceEntryOrderByRelationAggregateInput
@@ -495,10 +520,13 @@ export type ProcessWhereUniqueInput = Prisma.AtLeast<{
   division?: Prisma.StringNullableFilter<"Process"> | string | null
   district?: Prisma.StringNullableFilter<"Process"> | string | null
   forum?: Prisma.StringNullableFilter<"Process"> | string | null
+  caseType?: Prisma.StringNullableFilter<"Process"> | string | null
   processClass?: Prisma.StringNullableFilter<"Process"> | string | null
   subject?: Prisma.StringNullableFilter<"Process"> | string | null
+  otherSubjects?: Prisma.StringNullableListFilter<"Process">
   caseValue?: Prisma.DecimalNullableFilter<"Process"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.DateTimeNullableFilter<"Process"> | Date | string | null
+  lastMovementCheckAt?: Prisma.DateTimeNullableFilter<"Process"> | Date | string | null
   responsibleUserId?: Prisma.UuidNullableFilter<"Process"> | string | null
   notes?: Prisma.StringNullableFilter<"Process"> | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Process"> | Date | string | null
@@ -515,6 +543,7 @@ export type ProcessWhereUniqueInput = Prisma.AtLeast<{
   clients?: Prisma.ProcessClientListRelationFilter
   parties?: Prisma.ProcessPartyListRelationFilter
   timeline?: Prisma.ProcessTimelineEventListRelationFilter
+  externalMovements?: Prisma.ProcessExternalMovementListRelationFilter
   workItems?: Prisma.ProcessWorkItemListRelationFilter
   feeAgreement?: Prisma.XOR<Prisma.ProcessFeeAgreementNullableScalarRelationFilter, Prisma.ProcessFeeAgreementWhereInput> | null
   financeEntries?: Prisma.ProcessFinanceEntryListRelationFilter
@@ -541,10 +570,13 @@ export type ProcessOrderByWithAggregationInput = {
   division?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   forum?: Prisma.SortOrderInput | Prisma.SortOrder
+  caseType?: Prisma.SortOrderInput | Prisma.SortOrder
   processClass?: Prisma.SortOrderInput | Prisma.SortOrder
   subject?: Prisma.SortOrderInput | Prisma.SortOrder
+  otherSubjects?: Prisma.SortOrder
   caseValue?: Prisma.SortOrderInput | Prisma.SortOrder
   distributionDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastMovementCheckAt?: Prisma.SortOrderInput | Prisma.SortOrder
   responsibleUserId?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -580,10 +612,13 @@ export type ProcessScalarWhereWithAggregatesInput = {
   division?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   district?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   forum?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
+  caseType?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   processClass?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   subject?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
+  otherSubjects?: Prisma.StringNullableListFilter<"Process">
   caseValue?: Prisma.DecimalNullableWithAggregatesFilter<"Process"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Process"> | Date | string | null
+  lastMovementCheckAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Process"> | Date | string | null
   responsibleUserId?: Prisma.UuidNullableWithAggregatesFilter<"Process"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Process"> | string | null
   archivedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Process"> | Date | string | null
@@ -609,10 +644,13 @@ export type ProcessCreateInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -626,6 +664,7 @@ export type ProcessCreateInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -652,10 +691,13 @@ export type ProcessUncheckedCreateInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -667,6 +709,7 @@ export type ProcessUncheckedCreateInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -691,10 +734,13 @@ export type ProcessUpdateInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -708,6 +754,7 @@ export type ProcessUpdateInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -734,10 +781,13 @@ export type ProcessUncheckedUpdateInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -749,6 +799,7 @@ export type ProcessUncheckedUpdateInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -775,10 +826,13 @@ export type ProcessCreateManyInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -804,10 +858,13 @@ export type ProcessUpdateManyMutationInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -832,10 +889,13 @@ export type ProcessUncheckedUpdateManyInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -854,6 +914,14 @@ export type ProcessListRelationFilter = {
 
 export type ProcessOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type ProcessOrganizationIdCnjNormalizedCompoundUniqueInput = {
@@ -889,10 +957,13 @@ export type ProcessCountOrderByAggregateInput = {
   division?: Prisma.SortOrder
   district?: Prisma.SortOrder
   forum?: Prisma.SortOrder
+  caseType?: Prisma.SortOrder
   processClass?: Prisma.SortOrder
   subject?: Prisma.SortOrder
+  otherSubjects?: Prisma.SortOrder
   caseValue?: Prisma.SortOrder
   distributionDate?: Prisma.SortOrder
+  lastMovementCheckAt?: Prisma.SortOrder
   responsibleUserId?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
@@ -926,10 +997,12 @@ export type ProcessMaxOrderByAggregateInput = {
   division?: Prisma.SortOrder
   district?: Prisma.SortOrder
   forum?: Prisma.SortOrder
+  caseType?: Prisma.SortOrder
   processClass?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   caseValue?: Prisma.SortOrder
   distributionDate?: Prisma.SortOrder
+  lastMovementCheckAt?: Prisma.SortOrder
   responsibleUserId?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
@@ -957,10 +1030,12 @@ export type ProcessMinOrderByAggregateInput = {
   division?: Prisma.SortOrder
   district?: Prisma.SortOrder
   forum?: Prisma.SortOrder
+  caseType?: Prisma.SortOrder
   processClass?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   caseValue?: Prisma.SortOrder
   distributionDate?: Prisma.SortOrder
+  lastMovementCheckAt?: Prisma.SortOrder
   responsibleUserId?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
@@ -1197,6 +1272,15 @@ export type ProcessUncheckedUpdateManyWithoutOrganizationNestedInput = {
   deleteMany?: Prisma.ProcessScalarWhereInput | Prisma.ProcessScalarWhereInput[]
 }
 
+export type ProcessCreateotherSubjectsInput = {
+  set: string[]
+}
+
+export type ProcessUpdateotherSubjectsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type NullableDecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1245,6 +1329,20 @@ export type ProcessUpdateOneRequiredWithoutTimelineNestedInput = {
   upsert?: Prisma.ProcessUpsertWithoutTimelineInput
   connect?: Prisma.ProcessWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProcessUpdateToOneWithWhereWithoutTimelineInput, Prisma.ProcessUpdateWithoutTimelineInput>, Prisma.ProcessUncheckedUpdateWithoutTimelineInput>
+}
+
+export type ProcessCreateNestedOneWithoutExternalMovementsInput = {
+  create?: Prisma.XOR<Prisma.ProcessCreateWithoutExternalMovementsInput, Prisma.ProcessUncheckedCreateWithoutExternalMovementsInput>
+  connectOrCreate?: Prisma.ProcessCreateOrConnectWithoutExternalMovementsInput
+  connect?: Prisma.ProcessWhereUniqueInput
+}
+
+export type ProcessUpdateOneRequiredWithoutExternalMovementsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProcessCreateWithoutExternalMovementsInput, Prisma.ProcessUncheckedCreateWithoutExternalMovementsInput>
+  connectOrCreate?: Prisma.ProcessCreateOrConnectWithoutExternalMovementsInput
+  upsert?: Prisma.ProcessUpsertWithoutExternalMovementsInput
+  connect?: Prisma.ProcessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProcessUpdateToOneWithWhereWithoutExternalMovementsInput, Prisma.ProcessUpdateWithoutExternalMovementsInput>, Prisma.ProcessUncheckedUpdateWithoutExternalMovementsInput>
 }
 
 export type ProcessCreateNestedOneWithoutWorkItemsInput = {
@@ -1366,10 +1464,13 @@ export type ProcessCreateWithoutResponsibleInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -1382,6 +1483,7 @@ export type ProcessCreateWithoutResponsibleInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -1408,10 +1510,13 @@ export type ProcessUncheckedCreateWithoutResponsibleInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -1422,6 +1527,7 @@ export type ProcessUncheckedCreateWithoutResponsibleInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -1456,10 +1562,13 @@ export type ProcessCreateWithoutCreatedByInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -1472,6 +1581,7 @@ export type ProcessCreateWithoutCreatedByInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -1498,10 +1608,13 @@ export type ProcessUncheckedCreateWithoutCreatedByInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -1512,6 +1625,7 @@ export type ProcessUncheckedCreateWithoutCreatedByInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -1546,10 +1660,13 @@ export type ProcessCreateWithoutUpdatedByInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -1562,6 +1679,7 @@ export type ProcessCreateWithoutUpdatedByInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -1588,10 +1706,13 @@ export type ProcessUncheckedCreateWithoutUpdatedByInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -1602,6 +1723,7 @@ export type ProcessUncheckedCreateWithoutUpdatedByInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -1636,10 +1758,13 @@ export type ProcessCreateWithoutCnjLockedByInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -1652,6 +1777,7 @@ export type ProcessCreateWithoutCnjLockedByInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -1677,10 +1803,13 @@ export type ProcessUncheckedCreateWithoutCnjLockedByInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -1692,6 +1821,7 @@ export type ProcessUncheckedCreateWithoutCnjLockedByInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -1747,10 +1877,13 @@ export type ProcessScalarWhereInput = {
   division?: Prisma.StringNullableFilter<"Process"> | string | null
   district?: Prisma.StringNullableFilter<"Process"> | string | null
   forum?: Prisma.StringNullableFilter<"Process"> | string | null
+  caseType?: Prisma.StringNullableFilter<"Process"> | string | null
   processClass?: Prisma.StringNullableFilter<"Process"> | string | null
   subject?: Prisma.StringNullableFilter<"Process"> | string | null
+  otherSubjects?: Prisma.StringNullableListFilter<"Process">
   caseValue?: Prisma.DecimalNullableFilter<"Process"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.DateTimeNullableFilter<"Process"> | Date | string | null
+  lastMovementCheckAt?: Prisma.DateTimeNullableFilter<"Process"> | Date | string | null
   responsibleUserId?: Prisma.UuidNullableFilter<"Process"> | string | null
   notes?: Prisma.StringNullableFilter<"Process"> | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Process"> | Date | string | null
@@ -1824,10 +1957,13 @@ export type ProcessCreateWithoutOrganizationInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -1840,6 +1976,7 @@ export type ProcessCreateWithoutOrganizationInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -1865,10 +2002,13 @@ export type ProcessUncheckedCreateWithoutOrganizationInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -1880,6 +2020,7 @@ export type ProcessUncheckedCreateWithoutOrganizationInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -1930,10 +2071,13 @@ export type ProcessCreateWithoutClientsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -1946,6 +2090,7 @@ export type ProcessCreateWithoutClientsInput = {
   cnjLockedBy?: Prisma.UserCreateNestedOneWithoutProcessCnjLocksInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -1972,10 +2117,13 @@ export type ProcessUncheckedCreateWithoutClientsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -1986,6 +2134,7 @@ export type ProcessUncheckedCreateWithoutClientsInput = {
   updatedAt?: Date | string
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -2026,10 +2175,13 @@ export type ProcessUpdateWithoutClientsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2042,6 +2194,7 @@ export type ProcessUpdateWithoutClientsInput = {
   cnjLockedBy?: Prisma.UserUpdateOneWithoutProcessCnjLocksNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -2068,10 +2221,13 @@ export type ProcessUncheckedUpdateWithoutClientsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2082,6 +2238,7 @@ export type ProcessUncheckedUpdateWithoutClientsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -2106,10 +2263,13 @@ export type ProcessCreateWithoutPartiesInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -2122,6 +2282,7 @@ export type ProcessCreateWithoutPartiesInput = {
   cnjLockedBy?: Prisma.UserCreateNestedOneWithoutProcessCnjLocksInput
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -2148,10 +2309,13 @@ export type ProcessUncheckedCreateWithoutPartiesInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -2162,6 +2326,7 @@ export type ProcessUncheckedCreateWithoutPartiesInput = {
   updatedAt?: Date | string
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -2202,10 +2367,13 @@ export type ProcessUpdateWithoutPartiesInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2218,6 +2386,7 @@ export type ProcessUpdateWithoutPartiesInput = {
   cnjLockedBy?: Prisma.UserUpdateOneWithoutProcessCnjLocksNestedInput
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -2244,10 +2413,13 @@ export type ProcessUncheckedUpdateWithoutPartiesInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2258,6 +2430,7 @@ export type ProcessUncheckedUpdateWithoutPartiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -2282,10 +2455,13 @@ export type ProcessCreateWithoutTimelineInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -2298,6 +2474,7 @@ export type ProcessCreateWithoutTimelineInput = {
   cnjLockedBy?: Prisma.UserCreateNestedOneWithoutProcessCnjLocksInput
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -2324,10 +2501,13 @@ export type ProcessUncheckedCreateWithoutTimelineInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -2338,6 +2518,7 @@ export type ProcessUncheckedCreateWithoutTimelineInput = {
   updatedAt?: Date | string
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -2378,10 +2559,13 @@ export type ProcessUpdateWithoutTimelineInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2394,6 +2578,7 @@ export type ProcessUpdateWithoutTimelineInput = {
   cnjLockedBy?: Prisma.UserUpdateOneWithoutProcessCnjLocksNestedInput
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -2420,10 +2605,13 @@ export type ProcessUncheckedUpdateWithoutTimelineInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2434,6 +2622,199 @@ export type ProcessUncheckedUpdateWithoutTimelineInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
+  workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
+  feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
+  financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
+  agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
+  publications?: Prisma.PublicationUncheckedUpdateManyWithoutProcessNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutProcessNestedInput
+}
+
+export type ProcessCreateWithoutExternalMovementsInput = {
+  id?: string
+  cnjRaw: string
+  cnjNormalized: string
+  cnjFormatted: string
+  internalCode: string
+  internalYear: number
+  internalSequence: number
+  cnjLockedAt: Date | string
+  source?: string
+  status?: string
+  court?: string | null
+  division?: string | null
+  district?: string | null
+  forum?: string | null
+  caseType?: string | null
+  processClass?: string | null
+  subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
+  caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
+  notes?: string | null
+  archivedAt?: Date | string | null
+  closedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutProcessesInput
+  responsible?: Prisma.UserCreateNestedOneWithoutProcessesResponsibleInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutProcessesCreatedInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutProcessesUpdatedInput
+  cnjLockedBy?: Prisma.UserCreateNestedOneWithoutProcessCnjLocksInput
+  clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
+  parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
+  timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
+  feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
+  financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
+  agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
+  publications?: Prisma.PublicationCreateNestedManyWithoutProcessInput
+  petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentCreateNestedManyWithoutProcessInput
+}
+
+export type ProcessUncheckedCreateWithoutExternalMovementsInput = {
+  id?: string
+  organizationId: string
+  cnjRaw: string
+  cnjNormalized: string
+  cnjFormatted: string
+  internalCode: string
+  internalYear: number
+  internalSequence: number
+  cnjLockedAt: Date | string
+  cnjLockedByUserId?: string | null
+  source?: string
+  status?: string
+  court?: string | null
+  division?: string | null
+  district?: string | null
+  forum?: string | null
+  caseType?: string | null
+  processClass?: string | null
+  subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
+  caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
+  responsibleUserId?: string | null
+  notes?: string | null
+  archivedAt?: Date | string | null
+  closedAt?: Date | string | null
+  createdByUserId?: string | null
+  updatedByUserId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
+  parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
+  timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
+  feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
+  financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
+  agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
+  publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutProcessInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutProcessInput
+  documents?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutProcessInput
+}
+
+export type ProcessCreateOrConnectWithoutExternalMovementsInput = {
+  where: Prisma.ProcessWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProcessCreateWithoutExternalMovementsInput, Prisma.ProcessUncheckedCreateWithoutExternalMovementsInput>
+}
+
+export type ProcessUpsertWithoutExternalMovementsInput = {
+  update: Prisma.XOR<Prisma.ProcessUpdateWithoutExternalMovementsInput, Prisma.ProcessUncheckedUpdateWithoutExternalMovementsInput>
+  create: Prisma.XOR<Prisma.ProcessCreateWithoutExternalMovementsInput, Prisma.ProcessUncheckedCreateWithoutExternalMovementsInput>
+  where?: Prisma.ProcessWhereInput
+}
+
+export type ProcessUpdateToOneWithWhereWithoutExternalMovementsInput = {
+  where?: Prisma.ProcessWhereInput
+  data: Prisma.XOR<Prisma.ProcessUpdateWithoutExternalMovementsInput, Prisma.ProcessUncheckedUpdateWithoutExternalMovementsInput>
+}
+
+export type ProcessUpdateWithoutExternalMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjRaw?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjNormalized?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjFormatted?: Prisma.StringFieldUpdateOperationsInput | string
+  internalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  internalYear?: Prisma.IntFieldUpdateOperationsInput | number
+  internalSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  cnjLockedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
+  caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutProcessesNestedInput
+  responsible?: Prisma.UserUpdateOneWithoutProcessesResponsibleNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutProcessesCreatedNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutProcessesUpdatedNestedInput
+  cnjLockedBy?: Prisma.UserUpdateOneWithoutProcessCnjLocksNestedInput
+  clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
+  parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
+  timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
+  feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
+  financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
+  agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
+  publications?: Prisma.PublicationUpdateManyWithoutProcessNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutProcessNestedInput
+  documents?: Prisma.ProcessDocumentUpdateManyWithoutProcessNestedInput
+}
+
+export type ProcessUncheckedUpdateWithoutExternalMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjRaw?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjNormalized?: Prisma.StringFieldUpdateOperationsInput | string
+  cnjFormatted?: Prisma.StringFieldUpdateOperationsInput | string
+  internalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  internalYear?: Prisma.IntFieldUpdateOperationsInput | number
+  internalSequence?: Prisma.IntFieldUpdateOperationsInput | number
+  cnjLockedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cnjLockedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
+  caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
+  parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
+  timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -2458,10 +2839,13 @@ export type ProcessCreateWithoutWorkItemsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -2475,6 +2859,7 @@ export type ProcessCreateWithoutWorkItemsInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
@@ -2500,10 +2885,13 @@ export type ProcessUncheckedCreateWithoutWorkItemsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -2515,6 +2903,7 @@ export type ProcessUncheckedCreateWithoutWorkItemsInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
@@ -2554,10 +2943,13 @@ export type ProcessUpdateWithoutWorkItemsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2571,6 +2963,7 @@ export type ProcessUpdateWithoutWorkItemsInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
@@ -2596,10 +2989,13 @@ export type ProcessUncheckedUpdateWithoutWorkItemsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2611,6 +3007,7 @@ export type ProcessUncheckedUpdateWithoutWorkItemsInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
@@ -2634,10 +3031,13 @@ export type ProcessCreateWithoutFeeAgreementInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -2651,6 +3051,7 @@ export type ProcessCreateWithoutFeeAgreementInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
@@ -2676,10 +3077,13 @@ export type ProcessUncheckedCreateWithoutFeeAgreementInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -2691,6 +3095,7 @@ export type ProcessUncheckedCreateWithoutFeeAgreementInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
@@ -2730,10 +3135,13 @@ export type ProcessUpdateWithoutFeeAgreementInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2747,6 +3155,7 @@ export type ProcessUpdateWithoutFeeAgreementInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
@@ -2772,10 +3181,13 @@ export type ProcessUncheckedUpdateWithoutFeeAgreementInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2787,6 +3199,7 @@ export type ProcessUncheckedUpdateWithoutFeeAgreementInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
@@ -2810,10 +3223,13 @@ export type ProcessCreateWithoutFinanceEntriesInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -2827,6 +3243,7 @@ export type ProcessCreateWithoutFinanceEntriesInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutProcessInput
@@ -2852,10 +3269,13 @@ export type ProcessUncheckedCreateWithoutFinanceEntriesInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -2867,6 +3287,7 @@ export type ProcessUncheckedCreateWithoutFinanceEntriesInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutProcessInput
@@ -2906,10 +3327,13 @@ export type ProcessUpdateWithoutFinanceEntriesInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2923,6 +3347,7 @@ export type ProcessUpdateWithoutFinanceEntriesInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutProcessNestedInput
@@ -2948,10 +3373,13 @@ export type ProcessUncheckedUpdateWithoutFinanceEntriesInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2963,6 +3391,7 @@ export type ProcessUncheckedUpdateWithoutFinanceEntriesInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutProcessNestedInput
@@ -2986,10 +3415,13 @@ export type ProcessCreateWithoutAgendaEventsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -3003,6 +3435,7 @@ export type ProcessCreateWithoutAgendaEventsInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -3028,10 +3461,13 @@ export type ProcessUncheckedCreateWithoutAgendaEventsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -3043,6 +3479,7 @@ export type ProcessUncheckedCreateWithoutAgendaEventsInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -3082,10 +3519,13 @@ export type ProcessUpdateWithoutAgendaEventsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3099,6 +3539,7 @@ export type ProcessUpdateWithoutAgendaEventsInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -3124,10 +3565,13 @@ export type ProcessUncheckedUpdateWithoutAgendaEventsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3139,6 +3583,7 @@ export type ProcessUncheckedUpdateWithoutAgendaEventsInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -3162,10 +3607,13 @@ export type ProcessCreateWithoutPublicationsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -3179,6 +3627,7 @@ export type ProcessCreateWithoutPublicationsInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -3204,10 +3653,13 @@ export type ProcessUncheckedCreateWithoutPublicationsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -3219,6 +3671,7 @@ export type ProcessUncheckedCreateWithoutPublicationsInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -3258,10 +3711,13 @@ export type ProcessUpdateWithoutPublicationsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3275,6 +3731,7 @@ export type ProcessUpdateWithoutPublicationsInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -3300,10 +3757,13 @@ export type ProcessUncheckedUpdateWithoutPublicationsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3315,6 +3775,7 @@ export type ProcessUncheckedUpdateWithoutPublicationsInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -3338,10 +3799,13 @@ export type ProcessCreateWithoutPetitionGenerationsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -3355,6 +3819,7 @@ export type ProcessCreateWithoutPetitionGenerationsInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -3380,10 +3845,13 @@ export type ProcessUncheckedCreateWithoutPetitionGenerationsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -3395,6 +3863,7 @@ export type ProcessUncheckedCreateWithoutPetitionGenerationsInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -3434,10 +3903,13 @@ export type ProcessUpdateWithoutPetitionGenerationsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3451,6 +3923,7 @@ export type ProcessUpdateWithoutPetitionGenerationsInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -3476,10 +3949,13 @@ export type ProcessUncheckedUpdateWithoutPetitionGenerationsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3491,6 +3967,7 @@ export type ProcessUncheckedUpdateWithoutPetitionGenerationsInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -3514,10 +3991,13 @@ export type ProcessCreateWithoutDocumentsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -3531,6 +4011,7 @@ export type ProcessCreateWithoutDocumentsInput = {
   clients?: Prisma.ProcessClientCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutProcessInput
@@ -3556,10 +4037,13 @@ export type ProcessUncheckedCreateWithoutDocumentsInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -3571,6 +4055,7 @@ export type ProcessUncheckedCreateWithoutDocumentsInput = {
   clients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutProcessInput
   parties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutProcessInput
   timeline?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutProcessInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutProcessInput
   workItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutProcessInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedCreateNestedOneWithoutProcessInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutProcessInput
@@ -3610,10 +4095,13 @@ export type ProcessUpdateWithoutDocumentsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3627,6 +4115,7 @@ export type ProcessUpdateWithoutDocumentsInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -3652,10 +4141,13 @@ export type ProcessUncheckedUpdateWithoutDocumentsInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3667,6 +4159,7 @@ export type ProcessUncheckedUpdateWithoutDocumentsInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -3692,10 +4185,13 @@ export type ProcessCreateManyResponsibleInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   notes?: string | null
   archivedAt?: Date | string | null
   closedAt?: Date | string | null
@@ -3722,10 +4218,13 @@ export type ProcessCreateManyCreatedByInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -3752,10 +4251,13 @@ export type ProcessCreateManyUpdatedByInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -3781,10 +4283,13 @@ export type ProcessCreateManyCnjLockedByInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -3810,10 +4315,13 @@ export type ProcessUpdateWithoutResponsibleInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3826,6 +4334,7 @@ export type ProcessUpdateWithoutResponsibleInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -3852,10 +4361,13 @@ export type ProcessUncheckedUpdateWithoutResponsibleInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3866,6 +4378,7 @@ export type ProcessUncheckedUpdateWithoutResponsibleInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -3892,10 +4405,13 @@ export type ProcessUncheckedUpdateManyWithoutResponsibleInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3920,10 +4436,13 @@ export type ProcessUpdateWithoutCreatedByInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3936,6 +4455,7 @@ export type ProcessUpdateWithoutCreatedByInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -3962,10 +4482,13 @@ export type ProcessUncheckedUpdateWithoutCreatedByInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -3976,6 +4499,7 @@ export type ProcessUncheckedUpdateWithoutCreatedByInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -4002,10 +4526,13 @@ export type ProcessUncheckedUpdateManyWithoutCreatedByInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4030,10 +4557,13 @@ export type ProcessUpdateWithoutUpdatedByInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4046,6 +4576,7 @@ export type ProcessUpdateWithoutUpdatedByInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -4072,10 +4603,13 @@ export type ProcessUncheckedUpdateWithoutUpdatedByInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4086,6 +4620,7 @@ export type ProcessUncheckedUpdateWithoutUpdatedByInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -4112,10 +4647,13 @@ export type ProcessUncheckedUpdateManyWithoutUpdatedByInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4140,10 +4678,13 @@ export type ProcessUpdateWithoutCnjLockedByInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4156,6 +4697,7 @@ export type ProcessUpdateWithoutCnjLockedByInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -4181,10 +4723,13 @@ export type ProcessUncheckedUpdateWithoutCnjLockedByInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4196,6 +4741,7 @@ export type ProcessUncheckedUpdateWithoutCnjLockedByInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -4221,10 +4767,13 @@ export type ProcessUncheckedUpdateManyWithoutCnjLockedByInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4251,10 +4800,13 @@ export type ProcessCreateManyOrganizationInput = {
   division?: string | null
   district?: string | null
   forum?: string | null
+  caseType?: string | null
   processClass?: string | null
   subject?: string | null
+  otherSubjects?: Prisma.ProcessCreateotherSubjectsInput | string[]
   caseValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Date | string | null
+  lastMovementCheckAt?: Date | string | null
   responsibleUserId?: string | null
   notes?: string | null
   archivedAt?: Date | string | null
@@ -4280,10 +4832,13 @@ export type ProcessUpdateWithoutOrganizationInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4296,6 +4851,7 @@ export type ProcessUpdateWithoutOrganizationInput = {
   clients?: Prisma.ProcessClientUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutProcessNestedInput
@@ -4321,10 +4877,13 @@ export type ProcessUncheckedUpdateWithoutOrganizationInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4336,6 +4895,7 @@ export type ProcessUncheckedUpdateWithoutOrganizationInput = {
   clients?: Prisma.ProcessClientUncheckedUpdateManyWithoutProcessNestedInput
   parties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutProcessNestedInput
   timeline?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutProcessNestedInput
+  externalMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutProcessNestedInput
   workItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutProcessNestedInput
   feeAgreement?: Prisma.ProcessFeeAgreementUncheckedUpdateOneWithoutProcessNestedInput
   financeEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutProcessNestedInput
@@ -4361,10 +4921,13 @@ export type ProcessUncheckedUpdateManyWithoutOrganizationInput = {
   division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   forum?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   processClass?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSubjects?: Prisma.ProcessUpdateotherSubjectsInput | string[]
   caseValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   distributionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastMovementCheckAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   responsibleUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4384,6 +4947,7 @@ export type ProcessCountOutputType = {
   clients: number
   parties: number
   timeline: number
+  externalMovements: number
   workItems: number
   financeEntries: number
   agendaEvents: number
@@ -4396,6 +4960,7 @@ export type ProcessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   clients?: boolean | ProcessCountOutputTypeCountClientsArgs
   parties?: boolean | ProcessCountOutputTypeCountPartiesArgs
   timeline?: boolean | ProcessCountOutputTypeCountTimelineArgs
+  externalMovements?: boolean | ProcessCountOutputTypeCountExternalMovementsArgs
   workItems?: boolean | ProcessCountOutputTypeCountWorkItemsArgs
   financeEntries?: boolean | ProcessCountOutputTypeCountFinanceEntriesArgs
   agendaEvents?: boolean | ProcessCountOutputTypeCountAgendaEventsArgs
@@ -4433,6 +4998,13 @@ export type ProcessCountOutputTypeCountPartiesArgs<ExtArgs extends runtime.Types
  */
 export type ProcessCountOutputTypeCountTimelineArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProcessTimelineEventWhereInput
+}
+
+/**
+ * ProcessCountOutputType without action
+ */
+export type ProcessCountOutputTypeCountExternalMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcessExternalMovementWhereInput
 }
 
 /**
@@ -4495,10 +5067,13 @@ export type ProcessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   division?: boolean
   district?: boolean
   forum?: boolean
+  caseType?: boolean
   processClass?: boolean
   subject?: boolean
+  otherSubjects?: boolean
   caseValue?: boolean
   distributionDate?: boolean
+  lastMovementCheckAt?: boolean
   responsibleUserId?: boolean
   notes?: boolean
   archivedAt?: boolean
@@ -4515,6 +5090,7 @@ export type ProcessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   clients?: boolean | Prisma.Process$clientsArgs<ExtArgs>
   parties?: boolean | Prisma.Process$partiesArgs<ExtArgs>
   timeline?: boolean | Prisma.Process$timelineArgs<ExtArgs>
+  externalMovements?: boolean | Prisma.Process$externalMovementsArgs<ExtArgs>
   workItems?: boolean | Prisma.Process$workItemsArgs<ExtArgs>
   feeAgreement?: boolean | Prisma.Process$feeAgreementArgs<ExtArgs>
   financeEntries?: boolean | Prisma.Process$financeEntriesArgs<ExtArgs>
@@ -4542,10 +5118,13 @@ export type ProcessSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   division?: boolean
   district?: boolean
   forum?: boolean
+  caseType?: boolean
   processClass?: boolean
   subject?: boolean
+  otherSubjects?: boolean
   caseValue?: boolean
   distributionDate?: boolean
+  lastMovementCheckAt?: boolean
   responsibleUserId?: boolean
   notes?: boolean
   archivedAt?: boolean
@@ -4578,10 +5157,13 @@ export type ProcessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   division?: boolean
   district?: boolean
   forum?: boolean
+  caseType?: boolean
   processClass?: boolean
   subject?: boolean
+  otherSubjects?: boolean
   caseValue?: boolean
   distributionDate?: boolean
+  lastMovementCheckAt?: boolean
   responsibleUserId?: boolean
   notes?: boolean
   archivedAt?: boolean
@@ -4614,10 +5196,13 @@ export type ProcessSelectScalar = {
   division?: boolean
   district?: boolean
   forum?: boolean
+  caseType?: boolean
   processClass?: boolean
   subject?: boolean
+  otherSubjects?: boolean
   caseValue?: boolean
   distributionDate?: boolean
+  lastMovementCheckAt?: boolean
   responsibleUserId?: boolean
   notes?: boolean
   archivedAt?: boolean
@@ -4628,7 +5213,7 @@ export type ProcessSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProcessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "cnjRaw" | "cnjNormalized" | "cnjFormatted" | "internalCode" | "internalYear" | "internalSequence" | "cnjLockedAt" | "cnjLockedByUserId" | "source" | "status" | "court" | "division" | "district" | "forum" | "processClass" | "subject" | "caseValue" | "distributionDate" | "responsibleUserId" | "notes" | "archivedAt" | "closedAt" | "createdByUserId" | "updatedByUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["process"]>
+export type ProcessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "cnjRaw" | "cnjNormalized" | "cnjFormatted" | "internalCode" | "internalYear" | "internalSequence" | "cnjLockedAt" | "cnjLockedByUserId" | "source" | "status" | "court" | "division" | "district" | "forum" | "caseType" | "processClass" | "subject" | "otherSubjects" | "caseValue" | "distributionDate" | "lastMovementCheckAt" | "responsibleUserId" | "notes" | "archivedAt" | "closedAt" | "createdByUserId" | "updatedByUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["process"]>
 export type ProcessInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   responsible?: boolean | Prisma.Process$responsibleArgs<ExtArgs>
@@ -4638,6 +5223,7 @@ export type ProcessInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   clients?: boolean | Prisma.Process$clientsArgs<ExtArgs>
   parties?: boolean | Prisma.Process$partiesArgs<ExtArgs>
   timeline?: boolean | Prisma.Process$timelineArgs<ExtArgs>
+  externalMovements?: boolean | Prisma.Process$externalMovementsArgs<ExtArgs>
   workItems?: boolean | Prisma.Process$workItemsArgs<ExtArgs>
   feeAgreement?: boolean | Prisma.Process$feeAgreementArgs<ExtArgs>
   financeEntries?: boolean | Prisma.Process$financeEntriesArgs<ExtArgs>
@@ -4673,6 +5259,7 @@ export type $ProcessPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     clients: Prisma.$ProcessClientPayload<ExtArgs>[]
     parties: Prisma.$ProcessPartyPayload<ExtArgs>[]
     timeline: Prisma.$ProcessTimelineEventPayload<ExtArgs>[]
+    externalMovements: Prisma.$ProcessExternalMovementPayload<ExtArgs>[]
     workItems: Prisma.$ProcessWorkItemPayload<ExtArgs>[]
     feeAgreement: Prisma.$ProcessFeeAgreementPayload<ExtArgs> | null
     financeEntries: Prisma.$ProcessFinanceEntryPayload<ExtArgs>[]
@@ -4698,10 +5285,13 @@ export type $ProcessPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     division: string | null
     district: string | null
     forum: string | null
+    caseType: string | null
     processClass: string | null
     subject: string | null
+    otherSubjects: string[]
     caseValue: runtime.Decimal | null
     distributionDate: Date | null
+    lastMovementCheckAt: Date | null
     responsibleUserId: string | null
     notes: string | null
     archivedAt: Date | null
@@ -5112,6 +5702,7 @@ export interface Prisma__ProcessClient<T, Null = never, ExtArgs extends runtime.
   clients<T extends Prisma.Process$clientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   parties<T extends Prisma.Process$partiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$partiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessPartyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   timeline<T extends Prisma.Process$timelineArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$timelineArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessTimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  externalMovements<T extends Prisma.Process$externalMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$externalMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessExternalMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   workItems<T extends Prisma.Process$workItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$workItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessWorkItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   feeAgreement<T extends Prisma.Process$feeAgreementArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$feeAgreementArgs<ExtArgs>>): Prisma.Prisma__ProcessFeeAgreementClient<runtime.Types.Result.GetResult<Prisma.$ProcessFeeAgreementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   financeEntries<T extends Prisma.Process$financeEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Process$financeEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessFinanceEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5164,10 +5755,13 @@ export interface ProcessFieldRefs {
   readonly division: Prisma.FieldRef<"Process", 'String'>
   readonly district: Prisma.FieldRef<"Process", 'String'>
   readonly forum: Prisma.FieldRef<"Process", 'String'>
+  readonly caseType: Prisma.FieldRef<"Process", 'String'>
   readonly processClass: Prisma.FieldRef<"Process", 'String'>
   readonly subject: Prisma.FieldRef<"Process", 'String'>
+  readonly otherSubjects: Prisma.FieldRef<"Process", 'String[]'>
   readonly caseValue: Prisma.FieldRef<"Process", 'Decimal'>
   readonly distributionDate: Prisma.FieldRef<"Process", 'DateTime'>
+  readonly lastMovementCheckAt: Prisma.FieldRef<"Process", 'DateTime'>
   readonly responsibleUserId: Prisma.FieldRef<"Process", 'String'>
   readonly notes: Prisma.FieldRef<"Process", 'String'>
   readonly archivedAt: Prisma.FieldRef<"Process", 'DateTime'>
@@ -5722,6 +6316,30 @@ export type Process$timelineArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.ProcessTimelineEventScalarFieldEnum | Prisma.ProcessTimelineEventScalarFieldEnum[]
+}
+
+/**
+ * Process.externalMovements
+ */
+export type Process$externalMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcessExternalMovement
+   */
+  select?: Prisma.ProcessExternalMovementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcessExternalMovement
+   */
+  omit?: Prisma.ProcessExternalMovementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcessExternalMovementInclude<ExtArgs> | null
+  where?: Prisma.ProcessExternalMovementWhereInput
+  orderBy?: Prisma.ProcessExternalMovementOrderByWithRelationInput | Prisma.ProcessExternalMovementOrderByWithRelationInput[]
+  cursor?: Prisma.ProcessExternalMovementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcessExternalMovementScalarFieldEnum | Prisma.ProcessExternalMovementScalarFieldEnum[]
 }
 
 /**

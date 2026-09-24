@@ -195,6 +195,7 @@ async function previewProcesses(input: {
       district: values.district,
       processClass: values.processClass,
       subject: values.subject,
+      otherSubjects: [],
       caseValue: Number.isNaN(money) ? null : money,
       distributionDate: normalizeDate(values.distributionDate),
       notes: values.notes,

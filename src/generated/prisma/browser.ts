@@ -147,8 +147,14 @@ export type ProcessParty = Prisma.ProcessPartyModel
  */
 export type ProcessTimelineEvent = Prisma.ProcessTimelineEventModel
 /**
+ * Model ProcessExternalMovement
+ * Movimentos externos de fonte processual, vinculados APENAS a processos cadastrados.
+ * Não se confundem com intimações, prazos ou documentos PDF.
+ */
+export type ProcessExternalMovement = Prisma.ProcessExternalMovementModel
+/**
  * Model ProcessWorkItem
- * Prazo ou tarefa operacional vinculada a um processo.
+ * Prazo ou tarefa operacional vinculado a um processo.
  * Datas jurídicas permanecem pendentes até confirmação humana quando a origem for publicação/IA.
  */
 export type ProcessWorkItem = Prisma.ProcessWorkItemModel

@@ -1,0 +1,14 @@
+prisma/schema.prisma
+prisma/migrations/20260924100000_v50_process_classification/migration.sql
+src/modules/processes/domain/process.schema.ts
+src/modules/processes/application/process-service.ts
+src/modules/integrations/process-metadata/domain/process-metadata.ts
+src/modules/integrations/process-metadata/domain/process-metadata.test.ts
+src/components/processes/ProcessForm.tsx
+src/app/app/processos/[id]/editar/page.tsx
+src/app/app/processos/[id]/page.tsx
+src/app/app/processos/page.tsx
+src/app/app/processos/novo/page.tsx
+src/modules/publications/domain/publication-process-prefill.ts
+docs/blocos/50-classificacao-processual-datajud.md
+docs/blocos/50-arquivos-patch.txt

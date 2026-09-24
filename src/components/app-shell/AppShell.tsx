@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TopbarUserControls } from "./TopbarUserControls";
 import { ActivityGuard } from "@/components/team/ActivityGuard";
 import { ModuleGuide } from "@/components/help/ModuleGuide";
@@ -64,6 +64,9 @@ export function AppShell({
   subscriptionStatus,
 }: Props) {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => setMobileMenuOpen(false), [pathname]);
 
   useEffect(() => {
     const scale = window.localStorage.getItem("jp-font-scale") || "1";
@@ -79,7 +82,7 @@ export function AppShell({
     <div className={styles.shell}>
       <ActivityGuard role={role} />
       <ModuleGuide />
-      <aside className={styles.sidebar}>
+      <aside className={`${styles.sidebar} ${mobileMenuOpen ? styles.sidebarOpen : ""}`}>
         <div className={styles.logoWrap}>
           <Image
             className={styles.logo}
@@ -91,7 +94,11 @@ export function AppShell({
           />
         </div>
 
-        <nav className={styles.nav} aria-label="Navegação principal">
+        <button className={styles.mobileMenuToggle} type="button" aria-expanded={mobileMenuOpen}
+          aria-controls="jp-main-menu" onClick={() => setMobileMenuOpen((open) => !open)}>
+          {mobileMenuOpen ? "Fechar menu" : "☰ Menu"}
+        </button>
+        <nav id="jp-main-menu" className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ""}`} aria-label="Navegação principal">
           <p className={styles.navLabel}>Escritório</p>
           {menu.filter(([label]) => label !== "Relatórios" || role === "owner").map(([label, href, icon]) => (
             <Link
@@ -113,10 +120,10 @@ export function AppShell({
             <span className={styles.navIcon}>?</span>
             <span>Ajuda</span>
           </Link>
-          <Link href="/app/plano" className={`${styles.navItem} ${isActive("/app/plano") ? styles.active : ""}`}>
+          {role === "owner" && <Link href="/app/plano" className={`${styles.navItem} ${isActive("/app/plano") ? styles.active : ""}`}>
             <span className={styles.navIcon}>◇</span>
             <span>Plano e cobrança</span>
-          </Link>
+          </Link>}
         </nav>
 
         <div className={styles.licenseBox}>

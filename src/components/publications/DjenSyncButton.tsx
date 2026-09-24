@@ -10,6 +10,8 @@ type CaptureResult = {
   newPublications: number;
   updatedPublications: number;
   linkedToProcesses: number;
+  existingProcessIds: string[];
+  processLookupRemaining: number;
   reviewCandidates: number;
   reviewItems: number;
   ignoredItems: number;
@@ -24,11 +26,15 @@ export function DjenSyncButton() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [movementStatus, setMovementStatus] = useState("");
+  const [movementNotices, setMovementNotices] = useState<Array<{ id: string; count: number; firstNewId: string | null }>>([]);
 
   async function sync() {
     setLoading(true);
     setMessage("");
     setError("");
+    setMovementStatus("");
+    setMovementNotices([]);
     try {
       const response = await fetch("/api/publications/sync", { method: "POST" });
       const body = await response.json().catch(() => null) as { result?: CaptureResult; error?: string } | null;
@@ -42,6 +48,69 @@ export function DjenSyncButton() {
         if (result.newPublications || result.updatedPublications || result.reviewCandidates) setMessage(numbers);
       } else {
         setMessage(numbers);
+      }
+      // Exibir as publicações assim que o DJeN terminar; a consulta processual
+      // é adicional e não deve bloquear a atualização dos contadores/tabelas.
+      router.refresh();
+      if (result.errors.length) {
+        setMovementStatus("Movimentações não verificadas nesta tentativa porque a captura do DJeN ficou incompleta.");
+        return;
+      }
+      // Segunda fase independente: falha do DataJud NÃO invalida a captura DJeN.
+      const affected = [...new Set(result.existingProcessIds ?? [])];
+      if (affected.length) {
+        setMovementStatus(`Conferindo movimentações dos processos cadastrados...`);
+        let failure = 0;
+        let attempts = 0;
+        let sourceStopped = false;
+        let stopReason = "";
+        let budgetReached = false;
+        const movementStartedAt = Date.now();
+        // O limite de tempo restringe só a verificação extra, não a captura DJeN.
+        for (const id of affected.slice(0, 20)) {
+          if (attempts > 0 && Date.now() - movementStartedAt >= 22_000) {
+            budgetReached = true;
+            break;
+          }
+          attempts++;
+          setMovementStatus(`Conferindo movimentações: processo ${attempts} de ${affected.length}...`);
+          try {
+            const movementResponse = await fetch("/api/publications/sync-movements", {
+              method: "POST", headers: { "content-type": "application/json" },
+              body: JSON.stringify({ processId: id }),
+            });
+            const movement = await movementResponse.json() as { result?: { newMovements: number; firstNewId: string | null; truncated: boolean }; error?: string };
+            if (!movementResponse.ok || !movement.result) {
+              failure++;
+              if (["PROCESS_LOOKUP_DISABLED", "PROCESS_LOOKUP_RATE_LIMIT", "PROCESS_LOOKUP_TIMEOUT",
+                "PROCESS_LOOKUP_NETWORK_ERROR", "PROCESS_LOOKUP_SOURCE_UNAVAILABLE", "PROCESS_LOOKUP_AUTH_FAILED"].includes(movement.error ?? "")) {
+                sourceStopped = true;
+                stopReason = movement.error ?? "PROCESS_LOOKUP_SOURCE_UNAVAILABLE";
+                break;
+              }
+              continue;
+            }
+            if (movement.result.newMovements) setMovementNotices(previous => [...previous,
+              { id, count: movement.result!.newMovements, firstNewId: movement.result!.firstNewId }]);
+            if (movement.result.truncated) failure++;
+          } catch {
+            failure++;
+            sourceStopped = true;
+            stopReason = "MOVEMENT_SYNC_NETWORK_ERROR";
+            break;
+          }
+        }
+        const remaining = result.processLookupRemaining + Math.max(0, affected.length - attempts);
+        if (failure || remaining || sourceStopped || budgetReached) {
+          const offline = stopReason === "PROCESS_LOOKUP_TIMEOUT"
+            ? "O DataJud demorou a responder."
+            : stopReason === "PROCESS_LOOKUP_RATE_LIMIT"
+              ? "O DataJud limitou as consultas."
+              : sourceStopped ? "A consulta processual está temporariamente indisponível." : "";
+          setMovementStatus(`${offline} Movimentações: ${failure} consulta(s) sem conclusão${remaining ? `; ${remaining} processo(s) aguardam consulta` : ""}. As publicações e intimações foram preservadas.`);
+        } else {
+          setMovementStatus("Movimentações conferidas nos processos selecionados.");
+        }
       }
       router.refresh();
     } catch (cause) {
@@ -58,6 +127,10 @@ export function DjenSyncButton() {
       <p>Houve uma falha na captura, ou você está testando o sistema. É possível tentar uma consulta manual.</p>
       {message ? <div className={styles.success}>{message}</div> : null}
       {error ? <div className={styles.error}>{error}</div> : null}
+      {movementStatus ? <div role="status" className={styles.muted}>{movementStatus}</div> : null}
+      {movementNotices.map(notice => <div className={styles.success} key={notice.id}>
+        {notice.count} {notice.count === 1 ? "movimentação adicionada." : "movimentações adicionadas."} <a href={`/app/processos/${notice.id}?tab=movimentacoes${notice.firstNewId ? `#movimento-${notice.firstNewId}` : ""}`}>Saiba mais</a>
+      </div>)}
     </div>
     <button className={styles.primaryButton} type="button" onClick={sync} disabled={loading}>{loading ? "Consultando..." : "Verificar manualmente"}</button>
   </div>;

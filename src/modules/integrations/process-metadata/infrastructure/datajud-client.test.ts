@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { lookupDatajudProcess, lookupDatajudProcessDetail } from "./datajud-client";
+import { lookupDatajudProcess, lookupDatajudProcessDetail, datajudTimeoutMs } from "./datajud-client";
 const cnj = "10008790820148260462";
 async function enabled(fn: () => Promise<void>) {
   const prior = { provider: process.env.PROCESS_LOOKUP_PROVIDER, auth: process.env.DATAJUD_ACCESS_AUTHORIZED,
@@ -20,7 +20,7 @@ async function enabled(fn: () => Promise<void>) {
 test("endereço é fixo e busca só por CNJ; resposta incorreta ignorada", async () => enabled(async () => {
   const fetcher = (async (url: string, init: RequestInit) => {
     assert.match(url, /^https:\/\/api-publica\.datajud\.cnj\.jus\.br\/api_publica_tjsp\/_search$/);
-    assert.deepEqual(JSON.parse(String(init.body)), { size: 5, query: { term: { numeroProcesso: cnj } }, _source: { excludes: ["movimentos"] } });
+    assert.deepEqual(JSON.parse(String(init.body)), { size: 2, query: { term: { numeroProcesso: cnj } }, _source: { includes: ["numeroProcesso", "tribunal", "orgaoJulgador", "classe", "assuntos", "comarca", "forum", "valorCausa", "dataDistribuicao"] } });
     return { ok: true, status: 200, json: async () => ({ hits: { hits: [{ _source: { numeroProcesso: "99999999920248260462" } }] } }) } as Response;
   }) as typeof fetch;
   assert.equal(await lookupDatajudProcess(cnj, fetcher), null);
@@ -76,12 +76,12 @@ test("consulta da capa exclui movimentos; consulta de movimentos os mantém", as
     const query = JSON.parse(String(init.body));
     calls++;
     if (calls === 1) {
-      assert.deepEqual(query._source, { excludes: ["movimentos"] });
+      assert.deepEqual(query._source, { includes: ["numeroProcesso", "tribunal", "orgaoJulgador", "classe", "assuntos", "comarca", "forum", "valorCausa", "dataDistribuicao"] });
       return { ok: true, status: 200, json: async () => ({ hits: { hits: [
         { _source: { numeroProcesso: cnj, classe: { nome: "Procedimento Comum" } } },
       ] } }) } as Response;
     }
-    assert.equal(query._source, undefined);
+    assert.deepEqual(query._source, { includes: ["numeroProcesso", "tribunal", "movimentos.codigo", "movimentos.nome", "movimentos.dataHora", "movimentos.orgaoJulgador.nomeOrgao", "movimentos.orgaoJulgador.nome"] });
     return { ok: true, status: 200, json: async () => ({ hits: { hits: [
       { _source: { numeroProcesso: cnj, movimentos: [
         { codigo: 26, nome: "Distribuição", dataHora: "2024-01-03T10:00:00.000Z" },
@@ -108,3 +108,20 @@ test("falha de rede tem erro próprio, sem expor detalhes do fetch", async () =>
   const fetcher = (async () => { throw new TypeError("internal network details"); }) as typeof fetch;
   await assert.rejects(lookupDatajudProcess(cnj, fetcher), /PROCESS_LOOKUP_NETWORK_ERROR/);
 }));
+
+// Nunca considerar resposta HTTP 200 com timed_out=true uma consulta completa.
+test("DataJud com resultado parcial por timeout não é tratado como sucesso", async () => enabled(async () => {
+  const fetcher = (async () => new Response(JSON.stringify({ timed_out: true, hits: { hits: [
+    { _source: { numeroProcesso: cnj, movimentos: [{ codigo: 26, nome: "Distribuição" }] } },
+  ] } }), { status: 200, headers: { "content-type": "application/json" } })) as typeof fetch;
+  await assert.rejects(lookupDatajudProcessDetail(cnj, fetcher), /PROCESS_LOOKUP_TIMEOUT/);
+}));
+
+
+test("orçamento da capa não é o antigo limite de 18s e configuração é limitada", () => {
+  assert.equal(datajudTimeoutMs("preview", {}), 45_000);
+  assert.equal(datajudTimeoutMs("movements", {}), 20_000);
+  assert.equal(datajudTimeoutMs("preview", { DATAJUD_PREVIEW_TIMEOUT_MS: "52000" }), 52_000);
+  assert.equal(datajudTimeoutMs("preview", { DATAJUD_PREVIEW_TIMEOUT_MS: "300000" }), 45_000);
+  assert.equal(datajudTimeoutMs("preview", { DATAJUD_PREVIEW_TIMEOUT_MS: "abc" }), 45_000);
+});

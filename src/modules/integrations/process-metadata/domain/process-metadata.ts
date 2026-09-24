@@ -10,11 +10,13 @@ export type ProcessLookupPreview = {
   forum: string | null;
   processClass: string | null;
   subject: string | null;
-  filingDate: string | null;
-  distributionDate: null;
+  otherSubjects: string[];
+  caseValue: string | null;
+  distributionDate: string | null;
   degree: string | null;
   electronicSystem: string | null;
   movementsAvailable: number;
+  municipalityIbgeCode: number | null;
   notice: string;
 };
 
@@ -33,8 +35,8 @@ export function courtAliasForCnj(cnj: string): string | null {
   const tribunal = digits.slice(14, 16);
   if (branch === "8") return stateCodes[tribunal] ?? null;
   const n = Number(tribunal);
-  if (branch === "5" && n >= 1 && n <= 6) return `trf${n}`;
-  if (branch === "4" && n >= 1 && n <= 24) return `trt${n}`;
+  if (branch === "4" && n >= 1 && n <= 6) return `trf${n}`;
+  if (branch === "5" && n >= 1 && n <= 24) return `trt${n}`;
   return null; // Outros ramos exigem mapeamento explícito/documentado.
 }
 
@@ -50,6 +52,11 @@ function dateOnly(value: unknown): string | null {
   const parsed = new Date(`${out}T00:00:00Z`);
   return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === out ? out : null;
 }
+function moneyFromSource(value: unknown): string | null {
+  if (typeof value === "number") return Number.isFinite(value) && value >= 0 && value <= 999999999999.99 ? value.toFixed(2) : null;
+  if (typeof value === "string" && /^\d{1,12}(?:\.\d{1,2})?$/.test(value.trim())) return Number(value).toFixed(2);
+  return null;
+}
 function named(value: unknown, max = 160): string | null {
   return text(value, max) ?? text(obj(value).nome, max);
 }
@@ -61,16 +68,63 @@ export function normalizeDatajudProcess(value: unknown, requestedCnj: string): P
   if (!/^\d{20}$/.test(cnj) || cnj !== normalizeCnjDigits(requestedCnj)) return null;
   const unit = obj(source.orgaoJulgador);
   const subjects = Array.isArray(source.assuntos) ? source.assuntos : [];
+  const names = [...new Set(subjects.map((item) => named(item, 300)).filter((item): item is string => item !== null))];
   const principal = subjects.find((item) => obj(item).principal === true);
-  const subject = named(principal, 300) ?? (subjects.length === 1 ? named(subjects[0], 300) : null);
+  const subject = named(principal, 300) ?? (names.length === 1 ? names[0] : null);
+  // Sem marcação de principal e com vários assuntos, nenhum vira principal por acaso.
+  // Guardamos todos como assuntos adicionais para o advogado classificar depois.
+  const otherSubjects = names.filter((name) => name !== subject).slice(0, 30);
   return {
     source: "DATAJUD_PUBLIC", cnj,
     court: text(source.tribunal, 120), division: text(unit.nome, 120),
     district: text(source.comarca, 120), forum: text(source.forum, 160),
-    processClass: named(source.classe, 120), subject,
-    filingDate: dateOnly(source.dataAjuizamento), distributionDate: null,
-    degree: text(source.grau, 80), electronicSystem: text(source.sistema, 120),
+    processClass: named(source.classe, 120), subject, otherSubjects,
+    caseValue: moneyFromSource(source.valorCausa), distributionDate: dateOnly(source.dataDistribuicao),
+    degree: text(source.grau, 80), electronicSystem: named(source.sistema, 120),
     movementsAvailable: Array.isArray(source.movimentos) ? source.movimentos.length : 0,
-    notice: "Dados informados pela fonte externa; revise antes de salvar. Ajuizamento não é data de distribuição. Fórum e comarca não são inferidos pelo CNJ.",
+    municipalityIbgeCode: typeof unit.codigoMunicipioIBGE === "number" && Number.isInteger(unit.codigoMunicipioIBGE)
+      ? unit.codigoMunicipioIBGE : null,
+    notice: "Comarca, fórum, valor da causa e distribuição só são preenchidos quando a fonte os informa expressamente. Confira os campos faltantes na capa oficial do processo.",
   };
+}
+
+/** Movimentações externas são dados de consulta, separados de DJeN e da linha do tempo interna. */
+export type ExternalProcessMovement = {
+  source: "DATAJUD_PUBLIC";
+  code: number | null;
+  name: string;
+  occurredAt: string | null;
+  judicialBody: string | null;
+};
+
+export function normalizeDatajudMovements(value: unknown, maxItems = 100): {
+  items: ExternalProcessMovement[]; total: number; truncated: boolean;
+} {
+  const source = obj(value);
+  const raw = Array.isArray(source.movimentos) ? source.movimentos : [];
+  const total = raw.length;
+  // A ordem devolvida pelo tribunal não é garantida. Cortar antes de ordenar
+  // deixava apenas os 100 movimentos mais antigos de alguns processos.
+  const items = raw.map((entry) => {
+    const movement = obj(entry);
+    const judicialBody = obj(movement.orgaoJulgador);
+    const rawDate = movement.dataHora;
+    let occurredAt: string | null = null;
+    if (typeof rawDate === "string" && /^\d{4}-?\d{2}-?\d{2}/.test(rawDate)) {
+      const normalized = /^\d{14}$/.test(rawDate)
+        ? `${rawDate.slice(0, 4)}-${rawDate.slice(4, 6)}-${rawDate.slice(6, 8)}T${rawDate.slice(8, 10)}:${rawDate.slice(10, 12)}:${rawDate.slice(12, 14)}`
+        : rawDate;
+      const check = new Date(normalized);
+      if (!Number.isNaN(check.getTime())) occurredAt = normalized; // não inventar fuso onde fonte não forneceu
+    }
+    return {
+      source: "DATAJUD_PUBLIC" as const,
+      code: typeof movement.codigo === "number" && Number.isInteger(movement.codigo) ? movement.codigo : null,
+      name: named(movement, 240) ?? "Movimentação sem descrição na fonte",
+      occurredAt,
+      judicialBody: text(judicialBody.nomeOrgao, 160),
+    };
+  });
+  items.sort((a, b) => (b.occurredAt ?? "").localeCompare(a.occurredAt ?? ""));
+  return { items: items.slice(0, maxItems), total, truncated: total > maxItems };
 }

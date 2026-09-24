@@ -32,8 +32,10 @@ type ProcessFormValue = {
   division: string;
   district: string;
   forum: string;
+  caseType: string;
   processClass: string;
   subject: string;
+  otherSubjects: string[];
   caseValue: string;
   distributionDate: string;
   notes: string;
@@ -124,13 +126,16 @@ export function ProcessForm({
     division: "",
     district: "",
     forum: "",
+    caseType: "",
     processClass: "",
     subject: "",
+    otherSubjects: [],
     caseValue: "",
     distributionDate: "",
     notes: "",
     parties: [],
   });
+  const [otherSubjectsText, setOtherSubjectsText] = useState(() => initialValue?.otherSubjects.join("\n") ?? "");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -191,7 +196,9 @@ export function ProcessForm({
       const data = await response.json() as { preview?: {
         cnj: string; court: string | null; division: string | null; district: string | null;
         forum: string | null; processClass: string | null; subject: string | null;
-        distributionDate: null; filingDate: string | null; degree: string | null; electronicSystem: string | null;
+        otherSubjects: string[];
+        distributionDate: string | null; caseValue: string | null;
+        municipalityIbgeCode: number | null; notice: string;
       }; error?: string };
       if (!response.ok || !data.preview) {
         const reasons: Record<string, string> = {
@@ -199,12 +206,22 @@ export function ProcessForm({
           PROCESS_LOOKUP_MULTIPLE_MATCHES: "A fonte retornou mais de uma instância. Confira diretamente no tribunal.",
           PROCESS_LOOKUP_COURT_UNSUPPORTED: "O tribunal deste número ainda não está habilitado para consulta.",
           PROCESS_LOOKUP_INVALID_CNJ: "Confira o número CNJ antes de consultar.",
-          PROCESS_LOOKUP_RATE_LIMIT: "A fonte limitou as consultas. Tente novamente mais tarde.",
+          PROCESS_LOOKUP_RATE_LIMIT: "O DataJud limitou as consultas. Aguarde antes de tentar novamente.",
+          PROCESS_LOOKUP_DISABLED: "A consulta processual não está habilitada neste ambiente. Confira as configurações do servidor.",
+          PROCESS_LOOKUP_AUTH_FAILED: "O DataJud recusou a chave de acesso. Verifique a chave pública configurada no servidor.",
+          PROCESS_LOOKUP_TIMEOUT: "A consulta ao DataJud foi encerrada antes de receber resposta HTTP. O cadastro manual continua disponível.",
+          PROCESS_LOOKUP_NETWORK_ERROR: "Não foi possível estabelecer conexão com o DataJud. Tente novamente mais tarde.",
+          PROCESS_LOOKUP_INVALID_RESPONSE: "O DataJud retornou uma resposta inesperada. A consulta não alterou seu cadastro.",
+          PROCESS_LOOKUP_SOURCE_UNAVAILABLE: "O DataJud está indisponível para esta consulta. Tente novamente mais tarde.",
         };
         setLookupMessage(reasons[data.error ?? ""] ?? "A consulta está indisponível. Você pode preencher o processo normalmente.");
         return;
       }
       const preview = data.preview;
+      setOtherSubjectsText((current) => [...new Set([
+        ...current.split(/\r?\n/).map((item) => item.trim()).filter(Boolean),
+        ...preview.otherSubjects,
+      ])].join("\n"));
       setValue((current) => {
         // Não sobrescrever campos preenchidos pelo advogado nem alterar CNJ, partes ou cliente.
         if (onlyDigits(current.cnj) !== preview.cnj) return current;
@@ -213,11 +230,16 @@ export function ProcessForm({
           division: current.division || preview.division || "",
           district: current.district || preview.district || "",
           forum: current.forum || preview.forum || "",
+          // Tipo/área permanece livre: não confundir ramo da Justiça com a matéria da ação.
           processClass: current.processClass || preview.processClass || "",
           subject: current.subject || preview.subject || "",
+          otherSubjects: [...new Set([...current.otherSubjects, ...preview.otherSubjects])]
+            .filter((item) => item !== (current.subject || preview.subject)),
+          caseValue: current.caseValue || (preview.caseValue ? preview.caseValue.replace(".", ",") : ""),
+          distributionDate: current.distributionDate || preview.distributionDate || "",
         };
       });
-      setLookupMessage(`Dados encontrados na fonte externa. Confira antes de salvar.${preview.filingDate ? ` Ajuizamento informado: ${preview.filingDate} (não preenche a data de distribuição).` : ""}${preview.degree ? ` Grau informado: ${preview.degree}.` : ""}`);
+      setLookupMessage(`Dados encontrados. ${preview.notice}`);
     } catch {
       setLookupMessage("Não foi possível consultar os dados agora. O cadastro manual continua disponível.");
     } finally { setLookupBusy(false); }
@@ -293,7 +315,13 @@ export function ProcessForm({
           {canEditCnj && initialValue?.id ? <small className={styles.adminNotice}>Administrador mestre: uma correção de CNJ será registrada na auditoria.</small> : null}
           {fieldError("cnj")}
           {lookupEnabled ? <div className={styles.lookupHelp}>
-            <button type="button" className={styles.secondaryButton} disabled={lookupBusy || !/^\d{20}$/.test(onlyDigits(value.cnj))} onClick={consultSource}>{lookupBusy ? "Consultando..." : "Consultar dados do processo"}</button>
+            <button type="button" className={styles.secondaryButton} disabled={lookupBusy || busy || !/^\d{20}$/.test(onlyDigits(value.cnj))} onClick={consultSource}>{lookupBusy ? "Buscando dados..." : "Consultar dados do processo"}</button>
+            {lookupBusy ? <div className={styles.lookupProgress} role="status" aria-live="polite">
+              <span>Consultando a fonte processual. Isso pode levar alguns segundos.</span>
+              <div className={styles.lookupProgressTrack} role="progressbar" aria-label="Busca dos dados processuais em andamento">
+                <div className={styles.lookupProgressFill} />
+              </div>
+            </div> : null}
             {lookupMessage ? <small role="status" className={styles.muted}>{lookupMessage}</small> : null}
           </div> : null}
         </div>
@@ -308,20 +336,39 @@ export function ProcessForm({
           <small className={styles.muted}>Não confundir com a data de disponibilização da publicação. Se não veio da fonte, preencha após conferir nos autos.</small>
           {fieldError("distributionDate")}
         </div>
+        <div className={fieldClass("caseType")}>
+          <label htmlFor="process-caseType">Tipo / área</label>
+          <input id="process-caseType" value={value.caseType} onChange={(e) => update("caseType", e.target.value)} maxLength={100} placeholder="Ex.: Cível, Trabalhista, Penal..." />
+          <small className={styles.muted}>Preenchimento livre pelo escritório. Não é definido automaticamente pela UF ou pelo tribunal.</small>
+          {fieldError("caseType")}
+        </div>
         <div className={fieldClass("processClass")}>
-          <label htmlFor="process-processClass">Classe</label>
-          <input id="process-processClass" value={value.processClass} onChange={(e) => update("processClass", e.target.value)} placeholder="Ex.: Procedimento Comum Cível" />
+          <label htmlFor="process-processClass">Ação / procedimento</label>
+          <input id="process-processClass" value={value.processClass} onChange={(e) => update("processClass", e.target.value)} maxLength={120} placeholder="Ex.: Execução de Título Extrajudicial" />
+          <small className={styles.muted}>Classe oficial informada pela fonte processual, editável após conferência.</small>
           {fieldError("processClass")}
         </div>
         <div className={fieldClass("subject")}>
-          <label htmlFor="process-subject">Assunto</label>
-          <input id="process-subject" value={value.subject} onChange={(e) => update("subject", e.target.value)} placeholder="Assunto principal do processo" />
+          <label htmlFor="process-subject">Assunto principal</label>
+          <input id="process-subject" value={value.subject} onChange={(e) => update("subject", e.target.value)} maxLength={300} placeholder="Ex.: Contratos Bancários" />
+          <small className={styles.muted}>Matéria principal quando identificada na fonte; confirme se houver mais de um assunto.</small>
           {fieldError("subject")}
+        </div>
+        <div className={fieldClass("otherSubjects", styles.span3)}>
+          <label htmlFor="process-otherSubjects">Outros assuntos do processo</label>
+          <textarea id="process-otherSubjects" value={otherSubjectsText}
+            onChange={(e) => {
+              setOtherSubjectsText(e.target.value);
+              update("otherSubjects", e.target.value.split(/\r?\n/).map((item) => item.trim()).filter(Boolean));
+            }}
+            placeholder={"Um assunto por linha, se houver mais de um."} />
+          <small className={styles.muted}>A consulta preserva todos os assuntos encontrados; nenhum deles vira principal por suposição.</small>
+          {fieldError("otherSubjects")}
         </div>
         <div className={fieldClass("caseValue")}>
           <label htmlFor="process-caseValue">Valor da causa</label>
           <input id="process-caseValue" inputMode="decimal" value={value.caseValue} onChange={(e) => update("caseValue", formatMoneyInput(e.target.value))} placeholder="Ex.: 25.000,00" />
-          <small className={styles.muted}>Manual por enquanto. Futuras integrações poderão preencher este campo.</small>
+          <small className={styles.muted}>O DataJud público não fornece este valor como campo padronizado. Confira na capa do processo.</small>
           {fieldError("caseValue")}
         </div>
       </div>

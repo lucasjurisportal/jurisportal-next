@@ -141,6 +141,7 @@ model Organization {
   processClients ProcessClient[]
   processParties ProcessParty[]
   processTimelineEvents ProcessTimelineEvent[]
+  externalProcessMovements ProcessExternalMovement[]
   processWorkItems ProcessWorkItem[]
   processFeeAgreements ProcessFeeAgreement[]
   processFinanceEntries ProcessFinanceEntry[]
@@ -504,10 +505,13 @@ model Process {
   division           String?
   district           String?
   forum              String?
-  processClass       String?
-  subject            String?
+  caseType           String?   // Tipo/area de atuacao livre, informada pelo escritorio; sem inferencia automatica
+  processClass       String?   // Classe oficial do procedimento conforme a fonte
+  subject            String?   // Assunto principal quando explicitamente identificado
+  otherSubjects      String[]  @default([]) // Outros assuntos, sem sobrescrever o principal
   caseValue          Decimal?  @db.Decimal(14, 2)
   distributionDate   DateTime?
+  lastMovementCheckAt DateTime?
   responsibleUserId  String?   @db.Uuid
   notes              String?
   archivedAt         DateTime?
@@ -525,6 +529,7 @@ model Process {
   clients       ProcessClient[]
   parties       ProcessParty[]
   timeline      ProcessTimelineEvent[]
+  externalMovements ProcessExternalMovement[]
   workItems     ProcessWorkItem[]
   feeAgreement  ProcessFeeAgreement?
   financeEntries ProcessFinanceEntry[]
@@ -537,6 +542,7 @@ model Process {
   @@unique([organizationId, internalCode])
   @@unique([organizationId, internalYear, internalSequence])
   @@index([organizationId, status, updatedAt])
+  @@index([organizationId, lastMovementCheckAt])
   @@index([organizationId, responsibleUserId])
   @@index([organizationId, subject])
   @@map("process")
@@ -618,7 +624,29 @@ model ProcessTimelineEvent {
 }
 
 
-/// Prazo ou tarefa operacional vinculada a um processo.
+/// Movimentos externos de fonte processual, vinculados APENAS a processos cadastrados.
+/// Não se confundem com intimações, prazos ou documentos PDF.
+model ProcessExternalMovement {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @db.Uuid
+  processId      String   @db.Uuid
+  source         String
+  externalKey    String
+  code           Int?
+  name           String
+  occurredAt     String?
+  judicialBody   String?
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  process      Process      @relation(fields: [processId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, processId, source, externalKey])
+  @@index([organizationId, processId, occurredAt])
+  @@map("process_external_movement")
+}
+
+/// Prazo ou tarefa operacional vinculado a um processo.
 /// Datas jurídicas permanecem pendentes até confirmação humana quando a origem for publicação/IA.
 model ProcessWorkItem {
   id                String    @id @default(uuid()) @db.Uuid

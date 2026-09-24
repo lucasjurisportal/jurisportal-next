@@ -1,0 +1,14 @@
+src/modules/integrations/process-metadata/infrastructure/datajud-client.ts
+src/modules/integrations/process-metadata/infrastructure/datajud-client.test.ts
+src/app/api/processes/lookup/route.ts
+scripts/diagnostics/datajud.ts
+package.json
+src/components/app-shell/AppShell.tsx
+src/components/app-shell/AppShell.module.css
+src/components/public-site/Header.tsx
+src/components/public-site/PublicSite.module.css
+src/app/app/plano/page.tsx
+src/components/plans/PlanBillingPreview.tsx
+src/components/plans/PlanBilling.module.css
+docs/blocos/48-datajud-diagnostico-plano-responsividade.md
+docs/blocos/48-arquivos-patch.txt

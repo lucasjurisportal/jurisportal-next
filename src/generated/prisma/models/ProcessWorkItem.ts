@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model ProcessWorkItem
- * Prazo ou tarefa operacional vinculada a um processo.
+ * Prazo ou tarefa operacional vinculado a um processo.
  * Datas jurídicas permanecem pendentes até confirmação humana quando a origem for publicação/IA.
  */
 export type ProcessWorkItemModel = runtime.Types.Result.DefaultSelection<Prisma.$ProcessWorkItemPayload>

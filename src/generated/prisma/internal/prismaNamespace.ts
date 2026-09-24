@@ -422,6 +422,7 @@ export const ModelName = {
   ProcessClient: 'ProcessClient',
   ProcessParty: 'ProcessParty',
   ProcessTimelineEvent: 'ProcessTimelineEvent',
+  ProcessExternalMovement: 'ProcessExternalMovement',
   ProcessWorkItem: 'ProcessWorkItem',
   ProcessFeeAgreement: 'ProcessFeeAgreement',
   ProcessFinanceEntry: 'ProcessFinanceEntry',
@@ -454,7 +455,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "publicationEmailDelivery" | "djenReviewCandidate" | "djenCaptureCursor" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument"
+    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processExternalMovement" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "publicationEmailDelivery" | "djenReviewCandidate" | "djenCaptureCursor" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2308,6 +2309,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ProcessExternalMovement: {
+      payload: Prisma.$ProcessExternalMovementPayload<ExtArgs>
+      fields: Prisma.ProcessExternalMovementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProcessExternalMovementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProcessExternalMovementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload>
+        }
+        findFirst: {
+          args: Prisma.ProcessExternalMovementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProcessExternalMovementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload>
+        }
+        findMany: {
+          args: Prisma.ProcessExternalMovementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload>[]
+        }
+        create: {
+          args: Prisma.ProcessExternalMovementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload>
+        }
+        createMany: {
+          args: Prisma.ProcessExternalMovementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProcessExternalMovementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload>[]
+        }
+        delete: {
+          args: Prisma.ProcessExternalMovementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload>
+        }
+        update: {
+          args: Prisma.ProcessExternalMovementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProcessExternalMovementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProcessExternalMovementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProcessExternalMovementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProcessExternalMovementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcessExternalMovementPayload>
+        }
+        aggregate: {
+          args: Prisma.ProcessExternalMovementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProcessExternalMovement>
+        }
+        groupBy: {
+          args: Prisma.ProcessExternalMovementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProcessExternalMovementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProcessExternalMovementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProcessExternalMovementCountAggregateOutputType> | number
+        }
+      }
+    }
     ProcessWorkItem: {
       payload: Prisma.$ProcessWorkItemPayload<ExtArgs>
       fields: Prisma.ProcessWorkItemFieldRefs
@@ -3939,10 +4014,13 @@ export const ProcessScalarFieldEnum = {
   division: 'division',
   district: 'district',
   forum: 'forum',
+  caseType: 'caseType',
   processClass: 'processClass',
   subject: 'subject',
+  otherSubjects: 'otherSubjects',
   caseValue: 'caseValue',
   distributionDate: 'distributionDate',
+  lastMovementCheckAt: 'lastMovementCheckAt',
   responsibleUserId: 'responsibleUserId',
   notes: 'notes',
   archivedAt: 'archivedAt',
@@ -4007,6 +4085,22 @@ export const ProcessTimelineEventScalarFieldEnum = {
 } as const
 
 export type ProcessTimelineEventScalarFieldEnum = (typeof ProcessTimelineEventScalarFieldEnum)[keyof typeof ProcessTimelineEventScalarFieldEnum]
+
+
+export const ProcessExternalMovementScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  processId: 'processId',
+  source: 'source',
+  externalKey: 'externalKey',
+  code: 'code',
+  name: 'name',
+  occurredAt: 'occurredAt',
+  judicialBody: 'judicialBody',
+  createdAt: 'createdAt'
+} as const
+
+export type ProcessExternalMovementScalarFieldEnum = (typeof ProcessExternalMovementScalarFieldEnum)[keyof typeof ProcessExternalMovementScalarFieldEnum]
 
 
 export const ProcessWorkItemScalarFieldEnum = {
@@ -4693,6 +4787,7 @@ export type GlobalOmitConfig = {
   processClient?: Prisma.ProcessClientOmit
   processParty?: Prisma.ProcessPartyOmit
   processTimelineEvent?: Prisma.ProcessTimelineEventOmit
+  processExternalMovement?: Prisma.ProcessExternalMovementOmit
   processWorkItem?: Prisma.ProcessWorkItemOmit
   processFeeAgreement?: Prisma.ProcessFeeAgreementOmit
   processFinanceEntry?: Prisma.ProcessFinanceEntryOmit

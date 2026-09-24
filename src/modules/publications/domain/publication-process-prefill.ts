@@ -46,7 +46,8 @@ export function buildPublicationProcessPrefill(
     court: (publication.court ?? "").slice(0, 120),
     division: (publication.judicialBody ?? "").slice(0, 120),
     district: suggested("district", 120), forum: suggested("forum", 160),
-    processClass: suggested("processClass", 120), subject: suggested("subject", 300), caseValue: "",
+    caseType: "", processClass: suggested("processClass", 120), subject: suggested("subject", 300),
+    otherSubjects: [] as string[], caseValue: "",
     distributionDate: suggested("distributionDate", 10), notes: "", parties,
   };
 }

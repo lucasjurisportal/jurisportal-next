@@ -76,6 +76,7 @@ export const ModelName = {
   ProcessClient: 'ProcessClient',
   ProcessParty: 'ProcessParty',
   ProcessTimelineEvent: 'ProcessTimelineEvent',
+  ProcessExternalMovement: 'ProcessExternalMovement',
   ProcessWorkItem: 'ProcessWorkItem',
   ProcessFeeAgreement: 'ProcessFeeAgreement',
   ProcessFinanceEntry: 'ProcessFinanceEntry',
@@ -445,10 +446,13 @@ export const ProcessScalarFieldEnum = {
   division: 'division',
   district: 'district',
   forum: 'forum',
+  caseType: 'caseType',
   processClass: 'processClass',
   subject: 'subject',
+  otherSubjects: 'otherSubjects',
   caseValue: 'caseValue',
   distributionDate: 'distributionDate',
+  lastMovementCheckAt: 'lastMovementCheckAt',
   responsibleUserId: 'responsibleUserId',
   notes: 'notes',
   archivedAt: 'archivedAt',
@@ -513,6 +517,22 @@ export const ProcessTimelineEventScalarFieldEnum = {
 } as const
 
 export type ProcessTimelineEventScalarFieldEnum = (typeof ProcessTimelineEventScalarFieldEnum)[keyof typeof ProcessTimelineEventScalarFieldEnum]
+
+
+export const ProcessExternalMovementScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  processId: 'processId',
+  source: 'source',
+  externalKey: 'externalKey',
+  code: 'code',
+  name: 'name',
+  occurredAt: 'occurredAt',
+  judicialBody: 'judicialBody',
+  createdAt: 'createdAt'
+} as const
+
+export type ProcessExternalMovementScalarFieldEnum = (typeof ProcessExternalMovementScalarFieldEnum)[keyof typeof ProcessExternalMovementScalarFieldEnum]
 
 
 export const ProcessWorkItemScalarFieldEnum = {

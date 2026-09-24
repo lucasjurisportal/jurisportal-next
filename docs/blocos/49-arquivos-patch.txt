@@ -1,0 +1,13 @@
+.env.example
+package.json
+scripts/diagnostics/datajud-network.ts
+src/modules/integrations/process-metadata/infrastructure/datajud-client.ts
+src/components/processes/ProcessForm.tsx
+src/components/processes/ExternalProcessMovements.tsx
+src/app/app/plano/page.tsx
+src/components/plans/PlanBillingPreview.tsx
+src/components/plans/PlanBilling.module.css
+src/modules/plans/domain/plan-change-preview.ts
+src/modules/plans/domain/plan-change-preview.test.ts
+docs/blocos/49-datajud-rede-plano-cobranca.md
+docs/blocos/49-arquivos-patch.txt

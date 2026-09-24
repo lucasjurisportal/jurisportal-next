@@ -211,6 +211,7 @@ export type OrganizationWhereInput = {
   processClients?: Prisma.ProcessClientListRelationFilter
   processParties?: Prisma.ProcessPartyListRelationFilter
   processTimelineEvents?: Prisma.ProcessTimelineEventListRelationFilter
+  externalProcessMovements?: Prisma.ProcessExternalMovementListRelationFilter
   processWorkItems?: Prisma.ProcessWorkItemListRelationFilter
   processFeeAgreements?: Prisma.ProcessFeeAgreementListRelationFilter
   processFinanceEntries?: Prisma.ProcessFinanceEntryListRelationFilter
@@ -252,6 +253,7 @@ export type OrganizationOrderByWithRelationInput = {
   processClients?: Prisma.ProcessClientOrderByRelationAggregateInput
   processParties?: Prisma.ProcessPartyOrderByRelationAggregateInput
   processTimelineEvents?: Prisma.ProcessTimelineEventOrderByRelationAggregateInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementOrderByRelationAggregateInput
   processWorkItems?: Prisma.ProcessWorkItemOrderByRelationAggregateInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementOrderByRelationAggregateInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryOrderByRelationAggregateInput
@@ -296,6 +298,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   processClients?: Prisma.ProcessClientListRelationFilter
   processParties?: Prisma.ProcessPartyListRelationFilter
   processTimelineEvents?: Prisma.ProcessTimelineEventListRelationFilter
+  externalProcessMovements?: Prisma.ProcessExternalMovementListRelationFilter
   processWorkItems?: Prisma.ProcessWorkItemListRelationFilter
   processFeeAgreements?: Prisma.ProcessFeeAgreementListRelationFilter
   processFinanceEntries?: Prisma.ProcessFinanceEntryListRelationFilter
@@ -363,6 +366,7 @@ export type OrganizationCreateInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -404,6 +408,7 @@ export type OrganizationUncheckedCreateInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -445,6 +450,7 @@ export type OrganizationUpdateInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -486,6 +492,7 @@ export type OrganizationUncheckedUpdateInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -767,6 +774,20 @@ export type OrganizationUpdateOneRequiredWithoutProcessTimelineEventsNestedInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutProcessTimelineEventsInput, Prisma.OrganizationUpdateWithoutProcessTimelineEventsInput>, Prisma.OrganizationUncheckedUpdateWithoutProcessTimelineEventsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutExternalProcessMovementsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutExternalProcessMovementsInput, Prisma.OrganizationUncheckedCreateWithoutExternalProcessMovementsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutExternalProcessMovementsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutExternalProcessMovementsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutExternalProcessMovementsInput, Prisma.OrganizationUncheckedCreateWithoutExternalProcessMovementsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutExternalProcessMovementsInput
+  upsert?: Prisma.OrganizationUpsertWithoutExternalProcessMovementsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutExternalProcessMovementsInput, Prisma.OrganizationUpdateWithoutExternalProcessMovementsInput>, Prisma.OrganizationUncheckedUpdateWithoutExternalProcessMovementsInput>
+}
+
 export type OrganizationCreateNestedOneWithoutProcessWorkItemsInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutProcessWorkItemsInput, Prisma.OrganizationUncheckedCreateWithoutProcessWorkItemsInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutProcessWorkItemsInput
@@ -1025,6 +1046,7 @@ export type OrganizationCreateWithoutMembersInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -1065,6 +1087,7 @@ export type OrganizationUncheckedCreateWithoutMembersInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1121,6 +1144,7 @@ export type OrganizationUpdateWithoutMembersInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -1161,6 +1185,7 @@ export type OrganizationUncheckedUpdateWithoutMembersInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1201,6 +1226,7 @@ export type OrganizationCreateWithoutInvitationsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -1241,6 +1267,7 @@ export type OrganizationUncheckedCreateWithoutInvitationsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1297,6 +1324,7 @@ export type OrganizationUpdateWithoutInvitationsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -1337,6 +1365,7 @@ export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1378,6 +1407,7 @@ export type OrganizationCreateWithoutTeamMemberProfilesInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -1418,6 +1448,7 @@ export type OrganizationUncheckedCreateWithoutTeamMemberProfilesInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1474,6 +1505,7 @@ export type OrganizationUpdateWithoutTeamMemberProfilesInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -1514,6 +1546,7 @@ export type OrganizationUncheckedUpdateWithoutTeamMemberProfilesInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1553,6 +1586,7 @@ export type OrganizationCreateWithoutSubscriptionInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -1593,6 +1627,7 @@ export type OrganizationUncheckedCreateWithoutSubscriptionInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1649,6 +1684,7 @@ export type OrganizationUpdateWithoutSubscriptionInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -1689,6 +1725,7 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1729,6 +1766,7 @@ export type OrganizationCreateWithoutAuditEventsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -1769,6 +1807,7 @@ export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1825,6 +1864,7 @@ export type OrganizationUpdateWithoutAuditEventsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -1865,6 +1905,7 @@ export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1905,6 +1946,7 @@ export type OrganizationCreateWithoutProfileInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -1945,6 +1987,7 @@ export type OrganizationUncheckedCreateWithoutProfileInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2001,6 +2044,7 @@ export type OrganizationUpdateWithoutProfileInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -2041,6 +2085,7 @@ export type OrganizationUncheckedUpdateWithoutProfileInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2081,6 +2126,7 @@ export type OrganizationCreateWithoutLawyerOabsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -2121,6 +2167,7 @@ export type OrganizationUncheckedCreateWithoutLawyerOabsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2177,6 +2224,7 @@ export type OrganizationUpdateWithoutLawyerOabsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -2217,6 +2265,7 @@ export type OrganizationUncheckedUpdateWithoutLawyerOabsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2257,6 +2306,7 @@ export type OrganizationCreateWithoutLegalAcceptancesInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -2297,6 +2347,7 @@ export type OrganizationUncheckedCreateWithoutLegalAcceptancesInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2353,6 +2404,7 @@ export type OrganizationUpdateWithoutLegalAcceptancesInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -2393,6 +2445,7 @@ export type OrganizationUncheckedUpdateWithoutLegalAcceptancesInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2433,6 +2486,7 @@ export type OrganizationCreateWithoutClientsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -2473,6 +2527,7 @@ export type OrganizationUncheckedCreateWithoutClientsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2529,6 +2584,7 @@ export type OrganizationUpdateWithoutClientsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -2569,6 +2625,7 @@ export type OrganizationUncheckedUpdateWithoutClientsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2609,6 +2666,7 @@ export type OrganizationCreateWithoutProcessesInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -2649,6 +2707,7 @@ export type OrganizationUncheckedCreateWithoutProcessesInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2705,6 +2764,7 @@ export type OrganizationUpdateWithoutProcessesInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -2745,6 +2805,7 @@ export type OrganizationUncheckedUpdateWithoutProcessesInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2786,6 +2847,7 @@ export type OrganizationCreateWithoutProcessNumberSequencesInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -2826,6 +2888,7 @@ export type OrganizationUncheckedCreateWithoutProcessNumberSequencesInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2882,6 +2945,7 @@ export type OrganizationUpdateWithoutProcessNumberSequencesInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -2922,6 +2986,7 @@ export type OrganizationUncheckedUpdateWithoutProcessNumberSequencesInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2961,6 +3026,7 @@ export type OrganizationCreateWithoutProcessClientsInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -3001,6 +3067,7 @@ export type OrganizationUncheckedCreateWithoutProcessClientsInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3057,6 +3124,7 @@ export type OrganizationUpdateWithoutProcessClientsInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -3097,6 +3165,7 @@ export type OrganizationUncheckedUpdateWithoutProcessClientsInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3137,6 +3206,7 @@ export type OrganizationCreateWithoutProcessPartiesInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -3177,6 +3247,7 @@ export type OrganizationUncheckedCreateWithoutProcessPartiesInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3233,6 +3304,7 @@ export type OrganizationUpdateWithoutProcessPartiesInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -3273,6 +3345,7 @@ export type OrganizationUncheckedUpdateWithoutProcessPartiesInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3313,6 +3386,7 @@ export type OrganizationCreateWithoutProcessTimelineEventsInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -3353,6 +3427,7 @@ export type OrganizationUncheckedCreateWithoutProcessTimelineEventsInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3409,6 +3484,7 @@ export type OrganizationUpdateWithoutProcessTimelineEventsInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -3449,6 +3525,187 @@ export type OrganizationUncheckedUpdateWithoutProcessTimelineEventsInput = {
   publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutExternalProcessMovementsInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutExternalProcessMovementsInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileUncheckedCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutExternalProcessMovementsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutExternalProcessMovementsInput, Prisma.OrganizationUncheckedCreateWithoutExternalProcessMovementsInput>
+}
+
+export type OrganizationUpsertWithoutExternalProcessMovementsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutExternalProcessMovementsInput, Prisma.OrganizationUncheckedUpdateWithoutExternalProcessMovementsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutExternalProcessMovementsInput, Prisma.OrganizationUncheckedCreateWithoutExternalProcessMovementsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutExternalProcessMovementsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutExternalProcessMovementsInput, Prisma.OrganizationUncheckedUpdateWithoutExternalProcessMovementsInput>
+}
+
+export type OrganizationUpdateWithoutExternalProcessMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutExternalProcessMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUncheckedUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3490,6 +3747,7 @@ export type OrganizationCreateWithoutProcessWorkItemsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
@@ -3530,6 +3788,7 @@ export type OrganizationUncheckedCreateWithoutProcessWorkItemsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3586,6 +3845,7 @@ export type OrganizationUpdateWithoutProcessWorkItemsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
@@ -3626,6 +3886,7 @@ export type OrganizationUncheckedUpdateWithoutProcessWorkItemsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3666,6 +3927,7 @@ export type OrganizationCreateWithoutProcessFeeAgreementsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
@@ -3706,6 +3968,7 @@ export type OrganizationUncheckedCreateWithoutProcessFeeAgreementsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3762,6 +4025,7 @@ export type OrganizationUpdateWithoutProcessFeeAgreementsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
@@ -3802,6 +4066,7 @@ export type OrganizationUncheckedUpdateWithoutProcessFeeAgreementsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3842,6 +4107,7 @@ export type OrganizationCreateWithoutProcessFinanceEntriesInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
@@ -3882,6 +4148,7 @@ export type OrganizationUncheckedCreateWithoutProcessFinanceEntriesInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3938,6 +4205,7 @@ export type OrganizationUpdateWithoutProcessFinanceEntriesInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
@@ -3978,6 +4246,7 @@ export type OrganizationUncheckedUpdateWithoutProcessFinanceEntriesInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4018,6 +4287,7 @@ export type OrganizationCreateWithoutAgendaEventsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -4058,6 +4328,7 @@ export type OrganizationUncheckedCreateWithoutAgendaEventsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4114,6 +4385,7 @@ export type OrganizationUpdateWithoutAgendaEventsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -4154,6 +4426,7 @@ export type OrganizationUncheckedUpdateWithoutAgendaEventsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4194,6 +4467,7 @@ export type OrganizationCreateWithoutPublicationsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -4234,6 +4508,7 @@ export type OrganizationUncheckedCreateWithoutPublicationsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4290,6 +4565,7 @@ export type OrganizationUpdateWithoutPublicationsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -4330,6 +4606,7 @@ export type OrganizationUncheckedUpdateWithoutPublicationsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4370,6 +4647,7 @@ export type OrganizationCreateWithoutPublicationRecipientsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -4410,6 +4688,7 @@ export type OrganizationUncheckedCreateWithoutPublicationRecipientsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4466,6 +4745,7 @@ export type OrganizationUpdateWithoutPublicationRecipientsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -4506,6 +4786,7 @@ export type OrganizationUncheckedUpdateWithoutPublicationRecipientsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4545,6 +4826,7 @@ export type OrganizationCreateWithoutPublicationEmailDeliveriesInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -4585,6 +4867,7 @@ export type OrganizationUncheckedCreateWithoutPublicationEmailDeliveriesInput = 
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4641,6 +4924,7 @@ export type OrganizationUpdateWithoutPublicationEmailDeliveriesInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -4681,6 +4965,7 @@ export type OrganizationUncheckedUpdateWithoutPublicationEmailDeliveriesInput = 
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4722,6 +5007,7 @@ export type OrganizationCreateWithoutDjenCandidatesInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -4762,6 +5048,7 @@ export type OrganizationUncheckedCreateWithoutDjenCandidatesInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4818,6 +5105,7 @@ export type OrganizationUpdateWithoutDjenCandidatesInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -4858,6 +5146,7 @@ export type OrganizationUncheckedUpdateWithoutDjenCandidatesInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -4898,6 +5187,7 @@ export type OrganizationCreateWithoutDjenCursorsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -4938,6 +5228,7 @@ export type OrganizationUncheckedCreateWithoutDjenCursorsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -4994,6 +5285,7 @@ export type OrganizationUpdateWithoutDjenCursorsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -5034,6 +5326,7 @@ export type OrganizationUncheckedUpdateWithoutDjenCursorsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5074,6 +5367,7 @@ export type OrganizationCreateWithoutDeadlineReviewsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -5114,6 +5408,7 @@ export type OrganizationUncheckedCreateWithoutDeadlineReviewsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5170,6 +5465,7 @@ export type OrganizationUpdateWithoutDeadlineReviewsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -5210,6 +5506,7 @@ export type OrganizationUncheckedUpdateWithoutDeadlineReviewsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5250,6 +5547,7 @@ export type OrganizationCreateWithoutGoogleCalendarConnectionsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -5290,6 +5588,7 @@ export type OrganizationUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5346,6 +5645,7 @@ export type OrganizationUpdateWithoutGoogleCalendarConnectionsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -5386,6 +5686,7 @@ export type OrganizationUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5426,6 +5727,7 @@ export type OrganizationCreateWithoutExternalCalendarEventLinksInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -5466,6 +5768,7 @@ export type OrganizationUncheckedCreateWithoutExternalCalendarEventLinksInput = 
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5522,6 +5825,7 @@ export type OrganizationUpdateWithoutExternalCalendarEventLinksInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -5562,6 +5866,7 @@ export type OrganizationUncheckedUpdateWithoutExternalCalendarEventLinksInput = 
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5602,6 +5907,7 @@ export type OrganizationCreateWithoutPetitionTemplatesInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -5642,6 +5948,7 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplatesInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5698,6 +6005,7 @@ export type OrganizationUpdateWithoutPetitionTemplatesInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -5738,6 +6046,7 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplatesInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5778,6 +6087,7 @@ export type OrganizationCreateWithoutPetitionTemplateVersionsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -5818,6 +6128,7 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplateVersionsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5874,6 +6185,7 @@ export type OrganizationUpdateWithoutPetitionTemplateVersionsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -5914,6 +6226,7 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplateVersionsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5954,6 +6267,7 @@ export type OrganizationCreateWithoutPetitionGenerationsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -5994,6 +6308,7 @@ export type OrganizationUncheckedCreateWithoutPetitionGenerationsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -6050,6 +6365,7 @@ export type OrganizationUpdateWithoutPetitionGenerationsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -6090,6 +6406,7 @@ export type OrganizationUncheckedUpdateWithoutPetitionGenerationsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -6130,6 +6447,7 @@ export type OrganizationCreateWithoutStorageUsageInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -6170,6 +6488,7 @@ export type OrganizationUncheckedCreateWithoutStorageUsageInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -6226,6 +6545,7 @@ export type OrganizationUpdateWithoutStorageUsageInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -6266,6 +6586,7 @@ export type OrganizationUncheckedUpdateWithoutStorageUsageInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -6306,6 +6627,7 @@ export type OrganizationCreateWithoutProcessDocumentsInput = {
   processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
@@ -6346,6 +6668,7 @@ export type OrganizationUncheckedCreateWithoutProcessDocumentsInput = {
   processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
   processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
@@ -6402,6 +6725,7 @@ export type OrganizationUpdateWithoutProcessDocumentsInput = {
   processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
@@ -6442,6 +6766,7 @@ export type OrganizationUncheckedUpdateWithoutProcessDocumentsInput = {
   processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
   processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
   processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
   processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
   processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
   processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -6478,6 +6803,7 @@ export type OrganizationCountOutputType = {
   processClients: number
   processParties: number
   processTimelineEvents: number
+  externalProcessMovements: number
   processWorkItems: number
   processFeeAgreements: number
   processFinanceEntries: number
@@ -6509,6 +6835,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   processClients?: boolean | OrganizationCountOutputTypeCountProcessClientsArgs
   processParties?: boolean | OrganizationCountOutputTypeCountProcessPartiesArgs
   processTimelineEvents?: boolean | OrganizationCountOutputTypeCountProcessTimelineEventsArgs
+  externalProcessMovements?: boolean | OrganizationCountOutputTypeCountExternalProcessMovementsArgs
   processWorkItems?: boolean | OrganizationCountOutputTypeCountProcessWorkItemsArgs
   processFeeAgreements?: boolean | OrganizationCountOutputTypeCountProcessFeeAgreementsArgs
   processFinanceEntries?: boolean | OrganizationCountOutputTypeCountProcessFinanceEntriesArgs
@@ -6613,6 +6940,13 @@ export type OrganizationCountOutputTypeCountProcessPartiesArgs<ExtArgs extends r
  */
 export type OrganizationCountOutputTypeCountProcessTimelineEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProcessTimelineEventWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountExternalProcessMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcessExternalMovementWhereInput
 }
 
 /**
@@ -6756,6 +7090,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   processClients?: boolean | Prisma.Organization$processClientsArgs<ExtArgs>
   processParties?: boolean | Prisma.Organization$processPartiesArgs<ExtArgs>
   processTimelineEvents?: boolean | Prisma.Organization$processTimelineEventsArgs<ExtArgs>
+  externalProcessMovements?: boolean | Prisma.Organization$externalProcessMovementsArgs<ExtArgs>
   processWorkItems?: boolean | Prisma.Organization$processWorkItemsArgs<ExtArgs>
   processFeeAgreements?: boolean | Prisma.Organization$processFeeAgreementsArgs<ExtArgs>
   processFinanceEntries?: boolean | Prisma.Organization$processFinanceEntriesArgs<ExtArgs>
@@ -6822,6 +7157,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   processClients?: boolean | Prisma.Organization$processClientsArgs<ExtArgs>
   processParties?: boolean | Prisma.Organization$processPartiesArgs<ExtArgs>
   processTimelineEvents?: boolean | Prisma.Organization$processTimelineEventsArgs<ExtArgs>
+  externalProcessMovements?: boolean | Prisma.Organization$externalProcessMovementsArgs<ExtArgs>
   processWorkItems?: boolean | Prisma.Organization$processWorkItemsArgs<ExtArgs>
   processFeeAgreements?: boolean | Prisma.Organization$processFeeAgreementsArgs<ExtArgs>
   processFinanceEntries?: boolean | Prisma.Organization$processFinanceEntriesArgs<ExtArgs>
@@ -6861,6 +7197,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     processClients: Prisma.$ProcessClientPayload<ExtArgs>[]
     processParties: Prisma.$ProcessPartyPayload<ExtArgs>[]
     processTimelineEvents: Prisma.$ProcessTimelineEventPayload<ExtArgs>[]
+    externalProcessMovements: Prisma.$ProcessExternalMovementPayload<ExtArgs>[]
     processWorkItems: Prisma.$ProcessWorkItemPayload<ExtArgs>[]
     processFeeAgreements: Prisma.$ProcessFeeAgreementPayload<ExtArgs>[]
     processFinanceEntries: Prisma.$ProcessFinanceEntryPayload<ExtArgs>[]
@@ -7295,6 +7632,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   processClients<T extends Prisma.Organization$processClientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processClientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processParties<T extends Prisma.Organization$processPartiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processPartiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessPartyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processTimelineEvents<T extends Prisma.Organization$processTimelineEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processTimelineEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessTimelineEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  externalProcessMovements<T extends Prisma.Organization$externalProcessMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$externalProcessMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessExternalMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processWorkItems<T extends Prisma.Organization$processWorkItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processWorkItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessWorkItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processFeeAgreements<T extends Prisma.Organization$processFeeAgreementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processFeeAgreementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessFeeAgreementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   processFinanceEntries<T extends Prisma.Organization$processFinanceEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$processFinanceEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessFinanceEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8041,6 +8379,30 @@ export type Organization$processTimelineEventsArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.ProcessTimelineEventScalarFieldEnum | Prisma.ProcessTimelineEventScalarFieldEnum[]
+}
+
+/**
+ * Organization.externalProcessMovements
+ */
+export type Organization$externalProcessMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcessExternalMovement
+   */
+  select?: Prisma.ProcessExternalMovementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcessExternalMovement
+   */
+  omit?: Prisma.ProcessExternalMovementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcessExternalMovementInclude<ExtArgs> | null
+  where?: Prisma.ProcessExternalMovementWhereInput
+  orderBy?: Prisma.ProcessExternalMovementOrderByWithRelationInput | Prisma.ProcessExternalMovementOrderByWithRelationInput[]
+  cursor?: Prisma.ProcessExternalMovementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcessExternalMovementScalarFieldEnum | Prisma.ProcessExternalMovementScalarFieldEnum[]
 }
 
 /**

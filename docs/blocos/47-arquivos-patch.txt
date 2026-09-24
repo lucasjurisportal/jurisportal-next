@@ -1,0 +1,8 @@
+src/modules/integrations/process-metadata/infrastructure/datajud-client.ts
+src/modules/integrations/process-metadata/domain/process-metadata.ts
+src/components/publications/DjenSyncButton.tsx
+src/components/processes/ExternalProcessMovements.tsx
+src/modules/integrations/process-metadata/infrastructure/datajud-client.test.ts
+src/modules/integrations/process-metadata/domain/process-metadata.test.ts
+docs/blocos/47-captura-djen-consulta-complementar-datajud.md
+docs/blocos/47-arquivos-patch.txt

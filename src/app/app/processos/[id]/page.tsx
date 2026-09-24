@@ -17,8 +17,11 @@ import { buildProcessDisplayReference } from "@/modules/processes/domain/process
 import { auditActionLabel, auditCategoryLabel, operationalSourceLabel } from "@/shared/audit/audit-labels";
 import { listProcessDocuments } from "@/modules/documents/application/document-service";
 import { ProcessDocuments } from "@/components/documents/ProcessDocuments";
+import { ExternalProcessMovements } from "@/components/processes/ExternalProcessMovements";
+import { isProcessLookupEnabled } from "@/modules/integrations/process-metadata/infrastructure/datajud-client";
+import { listSavedProcessMovements } from "@/modules/integrations/process-metadata/application/sync-process-movements";
 
-const TABS = ["visao", "timeline", "publicacoes", "prazos", "documentos", "financeiro", "historico"] as const;
+const TABS = ["visao", "timeline", "movimentacoes", "publicacoes", "prazos", "documentos", "financeiro", "historico"] as const;
 type Tab = (typeof TABS)[number];
 
 function statusLabel(status: string) {
@@ -73,6 +76,7 @@ export default async function ProcessDetailPage({
     listProcessPublications(context.workspace.organizationId, id),
   ]);
   if (!process) notFound();
+  const savedMovements = tab === "movimentacoes" ? await listSavedProcessMovements(context.workspace.organizationId, id) : [];
   const documentsData = tab === "documentos" ? await listProcessDocuments({
     organizationId: context.workspace.organizationId, processId: id,
     planGb: context.workspace.plan.storageLimitGb,
@@ -104,7 +108,7 @@ export default async function ProcessDetailPage({
         <div className={styles.detailTitle}>
           <span className={styles.eyebrow}>Processo</span>
           <h1>{processReference}</h1>
-          <span className={styles.muted}>CNJ {process.cnjFormatted} · {process.processClass || "Classe não informada"} · {statusLabel(process.status)}</span>
+          <span className={styles.muted}>CNJ {process.cnjFormatted} · {process.processClass || "Ação não informada"} · {statusLabel(process.status)}</span>
         </div>
         <div className={styles.detailActions}>
           <Link className={styles.secondaryButton} href="/app/processos">← Voltar</Link>
@@ -124,7 +128,7 @@ export default async function ProcessDetailPage({
 
       <nav className={styles.tabs}>
         {[
-          ["visao", "Visão geral"], ["timeline", "Linha do tempo"], ["publicacoes", "Publicações"],
+          ["visao", "Visão geral"], ["timeline", "Linha do tempo"], ["movimentacoes", "Movimentações"], ["publicacoes", "Publicações"],
           ["prazos", "Prazos e tarefas"], ["documentos", "Documentos"], ["financeiro", "Financeiro"], ["historico", "Histórico"],
         ].map(([key, label]) => <Link key={key} href={tabHref(process.id, key as Tab)} className={tab === key ? styles.tab : styles.tabLink}>{label}</Link>)}
       </nav>
@@ -134,8 +138,10 @@ export default async function ProcessDetailPage({
           <section className={styles.panel}><span className={styles.eyebrow}>Dados processuais</span><div className={styles.facts}>
             <div className={styles.fact}><span>Referência interna</span><strong>{process.internalCode}</strong></div>
             <div className={styles.fact}><span>Número CNJ</span><strong>{process.cnjFormatted}</strong></div>
-            <div className={styles.fact}><span>Classe</span><strong>{process.processClass || "Não informada"}</strong></div>
-            <div className={styles.fact}><span>Assunto</span><strong>{process.subject || "Não informado"}</strong></div>
+            <div className={styles.fact}><span>Tipo / área</span><strong>{process.caseType || "Não informado"}</strong></div>
+            <div className={styles.fact}><span>Ação / procedimento</span><strong>{process.processClass || "Não informado"}</strong></div>
+            <div className={styles.fact}><span>Assunto principal</span><strong>{process.subject || "Não identificado"}</strong></div>
+            <div className={styles.fact}><span>Outros assuntos</span><strong>{process.otherSubjects.length ? process.otherSubjects.join(" · ") : "Nenhum informado"}</strong></div>
             <div className={styles.fact}><span>Distribuição</span><strong>{dateOnly(process.distributionDate)}</strong></div>
             <div className={styles.fact}><span>Comarca</span><strong>{process.district || "Não informada"}</strong></div>
             <div className={styles.fact}><span>Fórum</span><strong>{process.forum || "Não informado"}</strong></div>
@@ -154,6 +160,8 @@ export default async function ProcessDetailPage({
         <div className={styles.processPanelHead}><div><span className={styles.eyebrow}>Histórico operacional</span><h2>Linha do tempo</h2><p>Eventos do processo em ordem cronológica, independentemente da origem.</p></div><ProcessManualEventForm processId={process.id} /></div>
         <div className={styles.timeline}>{process.timeline.length === 0 ? <span className={styles.muted}>Nenhum evento registrado.</span> : process.timeline.map((event) => <div key={event.id} className={styles.timelineItem}><time>{event.eventDate.toLocaleString("pt-BR")}</time><div><strong>{event.title}</strong>{event.description ? <p>{event.description}</p> : null}<span className={styles.muted}>{event.createdBy?.name || "Sistema"} · {operationalSourceLabel(event.source)}</span></div></div>)}</div>
       </section> : null}
+
+      {tab === "movimentacoes" ? <ExternalProcessMovements processId={process.id} initialItems={savedMovements} lookupEnabled={isProcessLookupEnabled()} /> : null}
 
       {tab === "publicacoes" ? <section className={styles.panel}>
         <div className={styles.processPanelHead}><div><span className={styles.eyebrow}>DJeN</span><h2>Publicações e intimações</h2><p>Comunicações reais vinculadas a este CNJ.</p></div><Link className={styles.secondaryButton} href="/app/publicacoes">Abrir central de publicações</Link></div>

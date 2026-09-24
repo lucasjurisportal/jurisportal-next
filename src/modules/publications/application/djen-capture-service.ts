@@ -19,6 +19,8 @@ export type DjenCaptureResult = {
   newPublications: number;
   updatedPublications: number;
   linkedToProcesses: number;
+  existingProcessIds: string[];
+  processLookupRemaining: number;
   unverifiedItems: number;
   reviewCandidates: number;
   reviewItems: number;
@@ -275,7 +277,7 @@ export async function persistPublication(input: {
       });
     }
 
-    return { isNew: !existing, newlyLinked };
+    return { isNew: !existing, newlyLinked, processId };
   });
 }
 
@@ -360,7 +362,7 @@ export async function syncOrganizationDjen(input: {
   });
   const result: DjenCaptureResult = {
     oabsChecked: 0, sourceItems: 0, newPublications: 0, updatedPublications: 0,
-    linkedToProcesses: 0, unverifiedItems: 0, reviewCandidates: 0, reviewItems: 0,
+    linkedToProcesses: 0, existingProcessIds: [], processLookupRemaining: 0, unverifiedItems: 0, reviewCandidates: 0, reviewItems: 0,
     ignoredItems: 0, uniqueItems: 0, skippedOabs: 0,
     errors: [], window: requested ?? defaultDjenCaptureWindow(),
   };
@@ -474,6 +476,9 @@ export async function syncOrganizationDjen(input: {
           if (saved.isNew) result.newPublications += 1;
           else result.updatedPublications += 1;
           if (saved.newlyLinked) result.linkedToProcesses += 1;
+          if (saved.processId && !result.existingProcessIds.includes(saved.processId)) {
+            result.existingProcessIds.push(saved.processId);
+          }
           await prisma.djenReviewCandidate.updateMany({
             where: { organizationId: input.organizationId, lawyerOabId: oab.id,
               externalKey: publication.externalKey, status: "PENDING" },
@@ -513,6 +518,21 @@ export async function syncOrganizationDjen(input: {
       });
     }
   }
+  // O complemento processual é feito em uma segunda fase pelo navegador e NÃO bloqueia DJeN.
+  // Rotação de até 20 processos existentes por verificação, inclusive sem publicação nova.
+  // A data da última tentativa muda mesmo com timeout, evitando ficar preso sempre no mesmo CNJ.
+  const MAX_LOOKUPS = 20;
+  // Rotação justa: uma OAB com 20 resultados repetidos não pode impedir a
+  // atualização dos outros processos cadastrados na organização.
+  const selected = await prisma.process.findMany({
+    where: { organizationId: input.organizationId, status: { in: ["ACTIVE", "FOUND", "CLOSED"] } },
+    orderBy: [{ lastMovementCheckAt: { sort: "asc", nulls: "first" } }, { createdAt: "asc" }],
+    select: { id: true }, take: MAX_LOOKUPS,
+  });
+  result.existingProcessIds = selected.map((item) => item.id);
+  result.processLookupRemaining = Math.max(0,
+    await prisma.process.count({ where: { organizationId: input.organizationId,
+      status: { in: ["ACTIVE", "FOUND", "CLOSED"] } } }) - result.existingProcessIds.length);
   if (result.oabsChecked > 0) {
     await prisma.auditEvent.create({
       data: {

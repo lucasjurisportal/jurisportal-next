@@ -73,7 +73,7 @@ export default async function ProcessesPage({ searchParams }: { searchParams: Pr
             <thead><tr><th>Processo</th><th>Cliente(s)</th><th>Tribunal</th><th>Responsável</th><th>Status</th><th></th></tr></thead>
             <tbody>{result.items.map((process) => (
               <tr key={process.id}>
-                <td><div className={styles.processNumber}><strong>{buildProcessDisplayReference({ internalCode: process.internalCode, primaryClientName: process.clients[0]?.client.tradeName || process.clients[0]?.client.name, opposingPartyName: process.parties[0]?.name })}</strong><span>CNJ {process.cnjFormatted}</span><span>{process.processClass || process.subject || "Sem classificação"}</span></div></td>
+                <td><div className={styles.processNumber}><strong>{buildProcessDisplayReference({ internalCode: process.internalCode, primaryClientName: process.clients[0]?.client.tradeName || process.clients[0]?.client.name, opposingPartyName: process.parties[0]?.name })}</strong><span>CNJ {process.cnjFormatted}</span><span>{[process.caseType, process.processClass, process.subject].filter(Boolean).join(" · ") || "Sem classificação"}</span></div></td>
                 <td>{process.clients.slice(0,2).map((link) => link.client.tradeName || link.client.name).join(", ")}{process.clients.length > 2 ? ` +${process.clients.length - 2}` : ""}</td>
                 <td>{process.court || "—"}{process.division ? <><br/><span className={styles.muted}>{process.division}</span></> : null}</td>
                 <td>{process.responsible?.name || "Não definido"}</td>
