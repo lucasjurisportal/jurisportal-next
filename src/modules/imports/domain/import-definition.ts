@@ -36,8 +36,11 @@ export const processImportFields: readonly ImportField[] = [
   { key: "court", label: "Tribunal", required: false, aliases: ["tribunal", "court"] },
   { key: "division", label: "Vara / Unidade", required: false, aliases: ["vara", "unidade", "vara unidade", "órgão julgador", "orgao julgador"] },
   { key: "district", label: "Comarca", required: false, aliases: ["comarca", "foro"] },
-  { key: "processClass", label: "Classe", required: false, aliases: ["classe", "classe processual"] },
-  { key: "subject", label: "Assunto", required: false, aliases: ["assunto", "materia", "matéria"] },
+  { key: "forum", label: "Fórum", required: false, aliases: ["fórum", "forum", "foro judicial"] },
+  { key: "caseType", label: "Área do Direito", required: false, aliases: ["area do direito", "área do direito", "area juridica", "área jurídica", "tipo area", "tipo de processo", "ramo do direito"] },
+  { key: "processClass", label: "Ação / procedimento", required: false, aliases: ["classe", "classe processual", "procedimento", "acao procedimento", "ação procedimento"] },
+  { key: "subject", label: "Assunto principal", required: false, aliases: ["assunto", "assunto principal", "materia", "matéria"] },
+  { key: "otherSubjects", label: "Outros assuntos", required: false, aliases: ["outros assuntos", "assuntos adicionais", "outros assuntos do processo"] },
   { key: "caseValue", label: "Valor da causa", required: false, aliases: ["valor causa", "valor da causa", "valor"] },
   { key: "distributionDate", label: "Data de distribuição", required: false, aliases: ["data distribuicao", "data distribuição", "distribuicao", "distribuição"] },
   { key: "opposingParty", label: "Parte contrária", required: false, aliases: ["parte contraria", "parte contrária", "reu", "réu", "requerido"] },
@@ -72,4 +75,9 @@ export function suggestMapping(kind: ImportKind, headers: string[]): Record<stri
     if (fuzzy) result[field.key] = fuzzy.original;
   }
   return result;
+}
+
+/** Valores separados por ponto e vírgula ou linha; vírgula pode fazer parte do assunto. */
+export function parseImportedSubjects(raw: string): string[] {
+  return [...new Set(raw.split(/[;\n]+/).map((item) => item.trim()).filter(Boolean))];
 }

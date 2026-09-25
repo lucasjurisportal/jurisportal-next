@@ -3,6 +3,7 @@ import { scopedProcessWhere } from "@/modules/security/domain/tenant-process-sco
 import { prisma } from "@/infrastructure/database/prisma";
 import type { PlanLimit } from "@/modules/plans/domain/plan.types";
 import { formatCnjNumber, normalizeCnjDigits } from "../domain/cnj-number";
+import { normalizedAreaFilter, processAreaFilterOptions, UNCLASSIFIED_PROCESS_AREA } from "../domain/process-area";
 import { formatInternalProcessCode, saoPauloYear } from "../domain/process-reference";
 import { assertCnjMutationAllowed } from "../domain/process-identity-policy";
 import { assertProcessCapacity } from "../domain/process-policy";
@@ -111,15 +112,20 @@ export async function listProcesses(input: {
   query?: string;
   status?: "ACTIVE" | "CLOSED" | "ARCHIVED" | "FOUND";
   responsibleUserId?: string;
+  caseType?: string;
 }) {
   const page = Math.max(1, input.page ?? 1);
   const query = input.query?.trim();
   const queryDigits = query ? normalizeCnjDigits(query) : "";
+  const area = normalizedAreaFilter(input.caseType);
 
   const where: Prisma.ProcessWhereInput = {
     organizationId: input.organizationId,
     ...(input.status ? { status: input.status } : {}),
     ...(input.responsibleUserId ? { responsibleUserId: input.responsibleUserId } : {}),
+    ...(area === UNCLASSIFIED_PROCESS_AREA
+      ? { AND: [{ OR: [{ caseType: null }, { caseType: "" }] }] }
+      : area ? { caseType: { equals: area, mode: "insensitive" as const } } : {}),
     ...(query
       ? {
           OR: [
@@ -158,6 +164,16 @@ export async function listProcesses(input: {
     pageSize: PAGE_SIZE,
     totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)),
   };
+}
+
+/** As opções e as contagens vêm apenas dos processos desta organização. */
+export async function getProcessAreaOptions(organizationId: string) {
+  const groups = await prisma.process.groupBy({
+    by: ["caseType"],
+    where: { organizationId },
+    _count: { id: true },
+  });
+  return processAreaFilterOptions(groups);
 }
 
 export async function getProcess(organizationId: string, processId: string) {

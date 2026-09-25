@@ -19,7 +19,7 @@
     "test:clients": "tsx --test src/modules/clients/domain/tax-id.test.ts",
     "diagnose:datajud": "tsx scripts/diagnostics/datajud.ts",
     "test:process-lookup": "tsx --test src/modules/integrations/process-metadata/domain/process-metadata.test.ts src/modules/integrations/process-metadata/domain/movement-identity.test.ts src/modules/integrations/process-metadata/infrastructure/datajud-client.test.ts src/modules/security/domain/tenant-process-scope.test.ts",
-    "test:processes": "tsx --test src/modules/processes/domain/process-policy.test.ts src/modules/processes/domain/process-delete-policy.test.ts src/modules/processes/domain/process-reference.test.ts src/modules/processes/domain/process-identity-policy.test.ts",
+    "test:processes": "tsx --test src/modules/processes/domain/process-policy.test.ts src/modules/processes/domain/process-delete-policy.test.ts src/modules/processes/domain/process-reference.test.ts src/modules/processes/domain/process-identity-policy.test.ts src/modules/processes/domain/process-area.test.ts",
     "test:process-workspace": "tsx --test src/modules/processes/domain/process-workspace.schema.test.ts",
     "test:work-management": "tsx --test src/modules/processes/domain/fee-calculation.test.ts src/modules/work-items/domain/work-item-date.test.ts",
     "test:google-calendar": "tsx --test src/modules/integrations/google-calendar/domain/google-event.test.ts",

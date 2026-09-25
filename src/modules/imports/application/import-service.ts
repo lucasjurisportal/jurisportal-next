@@ -6,7 +6,7 @@ import { digitsOnly } from "@/modules/clients/domain/tax-id";
 import { processInputSchema, type ProcessInput } from "@/modules/processes/domain/process.schema";
 import { createProcess } from "@/modules/processes/application/process-service";
 import { normalizeCnjDigits } from "@/modules/processes/domain/cnj-number";
-import { fieldsFor, suggestMapping, type ImportKind } from "../domain/import-definition";
+import { parseImportedSubjects, fieldsFor, suggestMapping, type ImportKind } from "../domain/import-definition";
 import { parseTabularFile } from "../infrastructure/tabular-file";
 
 export type ImportMapping = Record<string, string>;
@@ -193,9 +193,11 @@ async function previewProcesses(input: {
       court: values.court,
       division: values.division,
       district: values.district,
+      forum: values.forum,
+      caseType: values.caseType,
       processClass: values.processClass,
       subject: values.subject,
-      otherSubjects: [],
+      otherSubjects: parseImportedSubjects(values.otherSubjects),
       caseValue: Number.isNaN(money) ? null : money,
       distributionDate: normalizeDate(values.distributionDate),
       notes: values.notes,
@@ -320,8 +322,9 @@ export async function commitImport(input: {
         primaryClientId,
         additionalClientIds,
         responsibleUserId: values.responsibleEmail ? memberByEmail.get(values.responsibleEmail.toLowerCase()) ?? "" : "",
-        court: values.court, division: values.division, district: values.district, processClass: values.processClass,
-        subject: values.subject, caseValue: Number.isNaN(money) ? null : money, distributionDate: normalizeDate(values.distributionDate), notes: values.notes,
+        court: values.court, division: values.division, district: values.district, forum: values.forum,
+        caseType: values.caseType, processClass: values.processClass,
+        subject: values.subject, otherSubjects: parseImportedSubjects(values.otherSubjects), caseValue: Number.isNaN(money) ? null : money, distributionDate: normalizeDate(values.distributionDate), notes: values.notes,
         parties: values.opposingParty ? [{ name: values.opposingParty, role: values.opposingPartyRole || "Parte contrária", document: "" }] : [],
       });
       try {

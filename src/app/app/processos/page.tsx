@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getAppContext } from "@/infrastructure/auth/app-context";
-import { getProcessCounts, getProcessResponsibleOptions, listProcesses } from "@/modules/processes/application/process-service";
+import { getProcessAreaOptions, getProcessCounts, getProcessResponsibleOptions, listProcesses } from "@/modules/processes/application/process-service";
+import { normalizedAreaFilter, UNCLASSIFIED_PROCESS_AREA } from "@/modules/processes/domain/process-area";
+import areaStyles from "@/components/processes/ProcessAreaFilter.module.css";
 import styles from "@/components/processes/Processes.module.css";
 import { buildProcessDisplayReference } from "@/modules/processes/domain/process-reference";
 
@@ -26,19 +28,22 @@ export default async function ProcessesPage({ searchParams }: { searchParams: Pr
   const q = typeof raw.q === "string" ? raw.q : "";
   const status = raw.status === "ACTIVE" || raw.status === "CLOSED" || raw.status === "ARCHIVED" || raw.status === "FOUND" ? raw.status : undefined;
   const responsibleUserId = typeof raw.responsibleUserId === "string" ? raw.responsibleUserId : undefined;
+  const caseType = normalizedAreaFilter(typeof raw.caseType === "string" ? raw.caseType : undefined);
   const parsedPage = typeof raw.page === "string" ? Number(raw.page) : 1;
   const page = Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1;
 
-  const [result, counts, responsibleOptions] = await Promise.all([
-    listProcesses({ organizationId: context.workspace.organizationId, page, query: q || undefined, status, responsibleUserId }),
+  const [result, counts, responsibleOptions, areaOptions] = await Promise.all([
+    listProcesses({ organizationId: context.workspace.organizationId, page, query: q || undefined, status, responsibleUserId, caseType }),
     getProcessCounts(context.workspace.organizationId),
     getProcessResponsibleOptions(context.workspace.organizationId),
+    getProcessAreaOptions(context.workspace.organizationId),
   ]);
 
   const current = new URLSearchParams();
   if (q) current.set("q", q);
   if (status) current.set("status", status);
   if (responsibleUserId) current.set("responsibleUserId", responsibleUserId);
+  if (caseType) current.set("caseType", caseType);
 
   const limit = context.workspace.plan.registeredProcessLimit;
   const usageText = limit === "unlimited" ? `${counts.total} processos` : `${counts.total} / ${limit}`;
@@ -58,11 +63,19 @@ export default async function ProcessesPage({ searchParams }: { searchParams: Pr
         <div className={styles.summaryCard}><strong>{usageText}</strong><span>uso do plano</span></div>
       </section>
 
-      <form className={styles.toolbar} method="get">
-        <input name="q" defaultValue={q} placeholder="Buscar referência, CNJ, cliente, parte, assunto..." />
-        <select name="status" defaultValue={status ?? ""}><option value="">Todos os status</option><option value="ACTIVE">Ativos</option><option value="CLOSED">Encerrados</option><option value="ARCHIVED">Arquivados</option><option value="FOUND">Encontrados</option></select>
-        <select name="responsibleUserId" defaultValue={responsibleUserId ?? ""}><option value="">Todos os responsáveis</option>{responsibleOptions.map((member) => <option key={member.id} value={member.user.id}>{member.user.name}</option>)}</select>
-        <button className={styles.secondaryButton} type="submit">Filtrar</button>
+      <form className={`${styles.toolbar} ${areaStyles.areaToolbar}`} method="get">
+        <input name="q" defaultValue={q} aria-label="Pesquisar processos" placeholder="Buscar referência, CNJ, cliente, parte, assunto..." />
+        <select name="status" defaultValue={status ?? ""} aria-label="Filtrar por status"><option value="">Todos os status</option><option value="ACTIVE">Ativos</option><option value="CLOSED">Encerrados</option><option value="ARCHIVED">Arquivados</option><option value="FOUND">Encontrados</option></select>
+        <select name="responsibleUserId" defaultValue={responsibleUserId ?? ""} aria-label="Filtrar por responsável"><option value="">Todos os responsáveis</option>{responsibleOptions.map((member) => <option key={member.id} value={member.user.id}>{member.user.name}</option>)}</select>
+        <select name="caseType" defaultValue={caseType ?? ""} aria-label="Filtrar por área do Direito">
+          <option value="">Todas as áreas</option>
+          {areaOptions.classified.map((area) => <option key={area.label} value={area.label}>{area.label} ({area.count})</option>)}
+          {areaOptions.unclassified > 0 || caseType === UNCLASSIFIED_PROCESS_AREA ? <option value={UNCLASSIFIED_PROCESS_AREA}>Sem área definida ({areaOptions.unclassified})</option> : null}
+        </select>
+        <div className={areaStyles.areaActions}>
+          <button className={styles.secondaryButton} type="submit">Filtrar</button>
+          {q || status || responsibleUserId || caseType ? <Link className={areaStyles.clearFilter} href="/app/processos">Limpar</Link> : null}
+        </div>
       </form>
 
       <section className={styles.tablePanel}>

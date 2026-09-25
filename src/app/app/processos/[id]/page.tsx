@@ -138,7 +138,7 @@ export default async function ProcessDetailPage({
           <section className={styles.panel}><span className={styles.eyebrow}>Dados processuais</span><div className={styles.facts}>
             <div className={styles.fact}><span>Referência interna</span><strong>{process.internalCode}</strong></div>
             <div className={styles.fact}><span>Número CNJ</span><strong>{process.cnjFormatted}</strong></div>
-            <div className={styles.fact}><span>Tipo / área</span><strong>{process.caseType || "Não informado"}</strong></div>
+            <div className={styles.fact}><span>Área do Direito</span><strong>{process.caseType || "Não informado"}</strong></div>
             <div className={styles.fact}><span>Ação / procedimento</span><strong>{process.processClass || "Não informado"}</strong></div>
             <div className={styles.fact}><span>Assunto principal</span><strong>{process.subject || "Não identificado"}</strong></div>
             <div className={styles.fact}><span>Outros assuntos</span><strong>{process.otherSubjects.length ? process.otherSubjects.join(" · ") : "Nenhum informado"}</strong></div>

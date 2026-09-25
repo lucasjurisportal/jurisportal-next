@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState, type FormEvent } from "react";
 import styles from "./Processes.module.css";
+import { CUSTOM_PROCESS_AREA, PROCESS_AREA_OPTIONS, isSuggestedProcessArea } from "@/modules/processes/domain/process-area";
 
 type ClientOption = {
   id: string;
@@ -136,6 +137,7 @@ export function ProcessForm({
     parties: [],
   });
   const [otherSubjectsText, setOtherSubjectsText] = useState(() => initialValue?.otherSubjects.join("\n") ?? "");
+  const [customArea, setCustomArea] = useState(() => Boolean(initialValue?.caseType && !isSuggestedProcessArea(initialValue.caseType)));
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -249,6 +251,11 @@ export function ProcessForm({
     event.preventDefault();
     setError("");
     setFieldErrors({});
+    if (customArea && !value.caseType.trim()) {
+      setFieldErrors({ caseType: "Informe a área ou escolha uma das opções." });
+      document.getElementById("process-caseTypeCustom")?.focus();
+      return;
+    }
     if (!initialValue?.id && !cnjReviewed) {
       setFieldErrors({ cnj: "Revise o número CNJ e confirme antes de cadastrar o processo." });
       setError("O número CNJ ficará bloqueado após o cadastro. Confirme que você o revisou.");
@@ -337,9 +344,23 @@ export function ProcessForm({
           {fieldError("distributionDate")}
         </div>
         <div className={fieldClass("caseType")}>
-          <label htmlFor="process-caseType">Tipo / área</label>
-          <input id="process-caseType" value={value.caseType} onChange={(e) => update("caseType", e.target.value)} maxLength={100} placeholder="Ex.: Cível, Trabalhista, Penal..." />
-          <small className={styles.muted}>Preenchimento livre pelo escritório. Não é definido automaticamente pela UF ou pelo tribunal.</small>
+          <label htmlFor="process-caseType">Área do Direito</label>
+          <select id="process-caseType" value={customArea ? CUSTOM_PROCESS_AREA : value.caseType}
+            onChange={(event) => {
+              const selected = event.target.value;
+              setCustomArea(selected === CUSTOM_PROCESS_AREA);
+              update("caseType", selected === CUSTOM_PROCESS_AREA ? "" : selected);
+            }}>
+            <option value="">Selecione a área (opcional)</option>
+            {PROCESS_AREA_OPTIONS.map((area) => <option value={area} key={area}>{area}</option>)}
+            <option value={CUSTOM_PROCESS_AREA}>Outra área...</option>
+          </select>
+          {customArea ? <>
+            <label htmlFor="process-caseTypeCustom">Qual área?</label>
+            <input id="process-caseTypeCustom" value={value.caseType} maxLength={100}
+              placeholder="Informe a área de atuação" onChange={(event) => update("caseType", event.target.value)} />
+          </> : null}
+          <small className={styles.muted}>Ação / procedimento e assunto são dados distintos. A área é escolhida pelo escritório; o DataJud não a presume.</small>
           {fieldError("caseType")}
         </div>
         <div className={fieldClass("processClass")}>

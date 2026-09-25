@@ -1,0 +1,15 @@
+package.json
+src/modules/processes/domain/process-area.ts
+src/modules/processes/domain/process-area.test.ts
+src/components/processes/ProcessForm.tsx
+src/components/processes/ProcessAreaFilter.module.css
+src/modules/processes/application/process-service.ts
+src/app/app/processos/page.tsx
+src/app/app/processos/novo/page.tsx
+src/app/app/processos/[id]/page.tsx
+src/app/api/processes/route.ts
+src/modules/imports/domain/import-definition.ts
+src/modules/imports/domain/import-mapping.test.ts
+src/modules/imports/application/import-service.ts
+docs/blocos/51-classificacao-areas-filtro-importacao.md
+docs/blocos/51-arquivos-patch.txt

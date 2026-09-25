@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getAppContext } from "@/infrastructure/auth/app-context";
 import { createProcess, listProcesses } from "@/modules/processes/application/process-service";
 import { processCreateInputSchema } from "@/modules/processes/domain/process.schema";
+import { normalizedAreaFilter } from "@/modules/processes/domain/process-area";
 
 export async function GET(request: Request) {
   const context = await getAppContext();
@@ -20,6 +21,7 @@ export async function GET(request: Request) {
         ? status
         : undefined,
     responsibleUserId: url.searchParams.get("responsibleUserId") || undefined,
+    caseType: normalizedAreaFilter(url.searchParams.get("caseType") || undefined),
   });
 
   return NextResponse.json(result);
