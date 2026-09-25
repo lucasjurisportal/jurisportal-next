@@ -32,7 +32,8 @@
     "test:ui-polish": "tsx --test src/modules/help/domain/help-content.test.ts",
     "backup:documents": "tsx scripts/backup/documents.ts",
     "test:backup": "tsx --test src/modules/documents/domain/backup-key.test.ts src/modules/documents/domain/backup-reconciliation.test.ts",
-    "diagnose:datajud:network": "tsx scripts/diagnostics/datajud-network.ts"
+    "diagnose:datajud:network": "tsx scripts/diagnostics/datajud-network.ts",
+    "test:notifications": "tsx --test src/modules/notifications/domain/notification-buckets.test.ts"
   },
   "dependencies": {
     "next": "latest",

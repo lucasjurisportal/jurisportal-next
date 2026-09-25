@@ -18,3 +18,10 @@
  .sidebar .navOpen .navItem span:not(.navIcon){display:inline}
  .sidebarOpen{align-items:center}
 }
+
+/* v52: filtros do sino, sem remover pendências por leitura */
+.notificationTabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:9px 11px;border-bottom:1px solid #edf1f6}
+.notificationTabs button{min-width:0;display:flex;justify-content:center;align-items:center;gap:5px;border:1px solid transparent;border-radius:9px;background:#f6f8fc;color:#475467;cursor:pointer;padding:9px 4px;font-size:11px;font-weight:750}
+.notificationTabs button span{font-size:10px;font-weight:800}
+.notificationTabs .notificationTabActive{border-color:#b6caff;background:#eaf1ff;color:#174aa6}
+.notificationHint{margin:0;padding:10px 13px;background:#fff9ed;color:#875500;font-size:10px;line-height:1.5}

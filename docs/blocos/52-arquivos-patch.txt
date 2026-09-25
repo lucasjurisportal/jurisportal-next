@@ -1,0 +1,11 @@
+package.json
+src/modules/notifications/domain/notification-buckets.ts
+src/modules/notifications/domain/notification-buckets.test.ts
+src/modules/notifications/application/notification-service.ts
+src/app/api/notifications/route.ts
+src/components/app-shell/TopbarUserControls.tsx
+src/components/app-shell/AppShell.module.css
+src/components/auth/LoginForm.tsx
+src/components/auth/Auth.module.css
+docs/blocos/52-notificacoes-lembrar-de-mim.md
+docs/blocos/52-arquivos-patch.txt

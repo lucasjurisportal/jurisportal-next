@@ -69,3 +69,6 @@
 @media(max-width:720px){.billingToggle{width:100%}.billingToggle button{flex:1}.planPicker{grid-template-columns:1fr}}
 .formError{border:1px solid #f1b4ae;background:#fff3f2;color:#9f2d24;border-radius:10px;padding:10px 12px;font-size:11px;font-weight:700}.formSuccess{border:1px solid #a7d8bd;background:#f1fbf5;color:#24613f;border-radius:10px;padding:10px 12px;font-size:11px;font-weight:700}.mutedAction{color:#8a96a8}.submit:disabled{opacity:.62;cursor:wait}
 .secondaryButton{min-height:46px;border:1px solid #cfd8e6;border-radius:12px;background:#fff;color:#1d4ed8;font-weight:850;cursor:pointer}.secondaryButton:disabled{opacity:.55;cursor:not-allowed}.channelNote{padding:11px 12px;border:1px dashed #cbd5e1;border-radius:10px;color:#667085;font-size:11px;line-height:1.5;background:#f8fafc}
+
+.rememberNote{margin:-7px 0 0;font-size:11px;line-height:1.5;color:#667085}
+@media(max-width:600px){.loginOptions{flex-direction:column;align-items:flex-start}}

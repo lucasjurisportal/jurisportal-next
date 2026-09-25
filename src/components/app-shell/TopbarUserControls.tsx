@@ -13,6 +13,7 @@ type Notification = {
   href: string;
   createdAt: string;
   read: boolean;
+  bucket: "new" | "pending" | "late";
 };
 
 type Props = {
@@ -79,6 +80,9 @@ export function TopbarUserControls({
   const fileRef = useRef<HTMLInputElement>(null);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [notificationTab, setNotificationTab] = useState<Notification["bucket"]>("new");
+  const [notificationCounts, setNotificationCounts] = useState({ new: 0, pending: 0, late: 0 });
+  const [notificationsTruncated, setNotificationsTruncated] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -93,9 +97,16 @@ export function TopbarUserControls({
   async function loadNotifications() {
     const response = await fetch("/api/notifications", { cache: "no-store" }).catch(() => null);
     if (!response?.ok) return;
-    const payload = await response.json() as { notifications?: Notification[]; unreadCount?: number };
+    const payload = await response.json() as {
+      notifications?: Notification[];
+      unreadCount?: number;
+      counts?: { new: number; pending: number; late: number };
+      truncated?: boolean;
+    };
     setNotifications(Array.isArray(payload.notifications) ? payload.notifications : []);
     setUnreadCount(typeof payload.unreadCount === "number" ? payload.unreadCount : 0);
+    setNotificationCounts(payload.counts ?? { new: 0, pending: 0, late: 0 });
+    setNotificationsTruncated(payload.truncated === true);
   }
 
   useEffect(() => {
@@ -129,13 +140,16 @@ export function TopbarUserControls({
 
   async function markRead(ids: string[]) {
     if (!ids.length) return;
-    await fetch("/api/notifications", {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ids }),
-    }).catch(() => undefined);
-    setNotifications((current) => current.map((item) => ids.includes(item.id) ? { ...item, read: true } : item));
-    setUnreadCount((current) => Math.max(0, current - notifications.filter((item) => ids.includes(item.id) && !item.read).length));
+    // A API valida até 30 IDs por requisição; não marcar localmente algo que ela recusou.
+    for (let index = 0; index < ids.length; index += 30) {
+      const response = await fetch("/api/notifications", {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ids: ids.slice(index, index + 30) }),
+      }).catch(() => null);
+      if (!response?.ok) break;
+    }
+    await loadNotifications();
   }
 
   async function openNotification(item: Notification) {
@@ -231,14 +245,29 @@ export function TopbarUserControls({
         {notificationOpen ? <section className={styles.notificationPopover} aria-label="Notificações">
           <div className={styles.popoverHead}>
             <div><strong>Notificações</strong><span>{unreadCount ? `${unreadCount} não lida${unreadCount > 1 ? "s" : ""}` : "Tudo em dia"}</span></div>
-            {unreadCount ? <button type="button" onClick={() => void markRead(notifications.filter((item) => !item.read).map((item) => item.id))}>Marcar como lidas</button> : null}
+            {unreadCount ? <button type="button" onClick={() => void markRead(notifications.filter((item) => !item.read).map((item) => item.id))}>Marcar visíveis como lidas</button> : null}
           </div>
-          <div className={styles.notificationList}>
-            {notifications.length === 0 ? <div className={styles.emptyPopover}>Nenhum aviso no momento.</div> : notifications.map((item) => <button key={item.id} type="button" className={`${styles.notificationItem} ${!item.read ? styles.notificationUnread : ""}`} onClick={() => void openNotification(item)}>
-              <span className={styles.notificationKind}>{notificationIcon(item.kind)}</span>
-              <span className={styles.notificationCopy}><strong>{item.title}</strong><small>{item.description}</small><em>{timeAgo(item.createdAt)}</em></span>
-            </button>)}
+          <div className={styles.notificationTabs} role="tablist" aria-label="Organizar notificações">
+            {([ ["new", "Novos"], ["pending", "Pendentes"], ["late", "Atrasados"] ] as const).map(([key, label]) => (
+              <button key={key} type="button" role="tab" aria-selected={notificationTab === key}
+                className={notificationTab === key ? styles.notificationTabActive : ""}
+                onClick={() => setNotificationTab(key)}>
+                {label} <span>{notificationCounts[key]}</span>
+              </button>
+            ))}
           </div>
+          {notificationTab === "late" ? <p className={styles.notificationHint}>Mais de 14 dias sem tratamento no Jurisportal. Isso não significa prazo judicial vencido.</p> : null}
+          <div className={styles.notificationList} role="tabpanel">
+            {notifications.filter((item) => item.bucket === notificationTab).length === 0
+              ? <div className={styles.emptyPopover}>Nenhuma notificação nesta área.</div>
+              : notifications.filter((item) => item.bucket === notificationTab).map((item) => <button key={item.id} type="button" className={`${styles.notificationItem} ${!item.read ? styles.notificationUnread : ""}`} onClick={() => void openNotification(item)}>
+                <span className={styles.notificationKind}>{notificationIcon(item.kind)}</span>
+                <span className={styles.notificationCopy}><strong>{item.title}</strong><small>{item.description}</small><em>{timeAgo(item.createdAt)}</em></span>
+              </button>)}
+          </div>
+          {notificationsTruncated || notificationCounts[notificationTab] > notifications.filter((item) => item.bucket === notificationTab).length
+            ? <button className={styles.popoverFooter} type="button" onClick={() => { setNotificationOpen(false); router.push("/app/publicacoes"); }}>Existem mais registros. Consultar publicações e intimações</button>
+            : null}
           <button className={styles.popoverFooter} type="button" onClick={() => { setNotificationOpen(false); router.push("/app/configuracoes?tab=notificacoes"); }}>Preferências de notificações</button>
         </section> : null}
       </div>
