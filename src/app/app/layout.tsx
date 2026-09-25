@@ -53,6 +53,7 @@ export default async function ProtectedAppLayout({ children }: { children: React
     <AppShell
       organizationName={workspace.organizationName}
       userName={user.name}
+      userId={user.id}
       userEmail={user.email}
       userImage={user.image}
       role={workspace.role}

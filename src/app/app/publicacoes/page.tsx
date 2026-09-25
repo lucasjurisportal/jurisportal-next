@@ -121,11 +121,13 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
 
     {emailPreview ? <section className={styles.panel}>
       <h2>E-mails das publicações</h2>
-      <p className={styles.muted}>{!emailPreview.enabled
-        ? "Envio automático de e-mails desativado durante a homologação. As comunicações continuam disponíveis no Jurisportal."
+      <p className={styles.muted}>{!emailPreview.preferenceEnabled
+        ? "O escritório desativou os e-mails de publicações em Configurações. A fila permanece preservada."
         : !emailPreview.configured
-          ? "Configure o remetente verificado do Resend antes de liberar o envio."
-          : "O envio está habilitado para comunicações confirmadas e advogados com e-mail verificado."}</p>
+          ? "Faltam configurações de e-mail. Verifique o remetente, a chave Resend e o endereço da aplicação."
+          : !emailPreview.enabled
+            ? "E-mail preparado, mas desativado durante a homologação. As comunicações permanecem no Jurisportal."
+            : "E-mail habilitado para advogados identificados e com endereço verificado."}</p>
       <p><strong>{emailPreview.pendingEmails}</strong> e-mail(s) previsto(s) para <strong>{emailPreview.pendingCommunications}</strong> comunicação(ões) distintas por destinatário na fila.</p>
       {emailPreview.needsReconciliation ? <p className={styles.error}>
         {emailPreview.needsReconciliation} entrega(s) com situação incerta. Confira no provedor antes de qualquer reenvio.

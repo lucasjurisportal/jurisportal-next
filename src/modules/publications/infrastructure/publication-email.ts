@@ -2,6 +2,8 @@ import { createHash } from "node:crypto";
 import { prisma } from "@/infrastructure/database/prisma";
 import { renderPublicationDigest, safePublicAppUrl, type DigestCommunication } from "../domain/publication-digest";
 import { planPublicationEmailBatches } from "../domain/publication-email-batches";
+import { publicationEmailSetup } from "../domain/publication-email-config";
+import { getOrganizationNotificationSettings } from "@/modules/settings/application/settings-service";
 
 const MAX_ATTEMPTS = 4;
 const BATCH_SIZE = 30;
@@ -39,9 +41,13 @@ export async function previewPendingPublicationEmails(organizationId: string) {
   const reconciliationCount = await prisma.publicationEmailDelivery.count({
     where: { organizationId, status: "UNKNOWN" },
   });
+  const preference = await getOrganizationNotificationSettings(organizationId);
+  const setup = publicationEmailSetup(process.env);
   return {
-    enabled: process.env.PUBLICATION_EMAIL_ENABLED === "true",
-    configured: Boolean(process.env.RESEND_API_KEY && process.env.RESEND_FROM),
+    enabled: setup.enabled,
+    configured: setup.configured,
+    preferenceEnabled: preference.publicationsEmail,
+    setupIssues: setup.issues,
     pendingEmails: planned.batches.length,
     pendingCommunications: planned.readyCommunications,
     skipped: planned.skipped,
@@ -52,11 +58,12 @@ export async function previewPendingPublicationEmails(organizationId: string) {
 
 /** Envio desacoplado da captura: falha de Resend não desfaz publicação. Cron continua desligado. */
 export async function dispatchPendingPublicationEmails(organizationId: string) {
-  if (process.env.PUBLICATION_EMAIL_ENABLED !== "true") {
-    return { disabled: true, sent: 0, emailBatches: 0, errors: 0 };
-  }
-  if (!process.env.RESEND_API_KEY || !process.env.RESEND_FROM) {
-    console.error("[publications.mail] REMETENTE_NAO_CONFIGURADO");
+  const setup = publicationEmailSetup(process.env);
+  if (!setup.enabled) return { disabled: true, sent: 0, emailBatches: 0, errors: 0 };
+  const preference = await getOrganizationNotificationSettings(organizationId);
+  if (!preference.publicationsEmail) return { disabled: true, sent: 0, emailBatches: 0, errors: 0 };
+  if (!setup.configured) {
+    console.error("[publications.mail] EMAIL_SETUP_INCOMPLETE", { issues: setup.issues });
     return { disabled: false, sent: 0, emailBatches: 0, errors: 1 };
   }
   const now = new Date();

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./Settings.module.css";
+import { APP_THEMES, DEFAULT_APP_THEME, THEME_EVENT, themeStorageKey, validAppTheme, type AppTheme } from "@/modules/appearance/domain/theme";
 
 type SettingsData = {
   user: { id: string; name: string; email: string };
@@ -68,6 +69,7 @@ export function SettingsManager({ initial, initialTab, isOwner, planName, oabLim
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fontScale, setFontScale] = useState("1");
+  const [theme, setTheme] = useState<AppTheme>(DEFAULT_APP_THEME);
   const [supportTopic, setSupportTopic] = useState(SUPPORT_TOPICS[0]);
   const [supportOther, setSupportOther] = useState("");
   const [supportMessage, setSupportMessage] = useState("");
@@ -84,7 +86,9 @@ export function SettingsManager({ initial, initialTab, isOwner, planName, oabLim
     const saved = window.localStorage.getItem("jp-font-scale") || "1";
     setFontScale(saved);
     document.documentElement.style.fontSize = `${Number(saved) * 100}%`;
-  }, []);
+    try { setTheme(validAppTheme(window.localStorage.getItem(themeStorageKey(initial.user.id)))); }
+    catch { setTheme(DEFAULT_APP_THEME); }
+  }, [initial.user.id]);
 
   const tabs = useMemo(() => [
     ["conta", "Conta e acesso"],
@@ -159,6 +163,13 @@ export function SettingsManager({ initial, initialTab, isOwner, planName, oabLim
       const code = error instanceof Error ? error.message : "";
       flash(code.includes("NOT_CONFIGURED") ? "O canal de suporte ainda precisa ser configurado pelo Jurisportal." : "Não foi possível enviar a solicitação agora.");
     } finally { setBusy(false); }
+  }
+
+  function applyTheme(next: AppTheme) {
+    setTheme(next);
+    try { window.localStorage.setItem(themeStorageKey(initial.user.id), next); }
+    catch { flash("Neste navegador, não foi possível guardar a preferência de cor."); }
+    window.dispatchEvent(new Event(THEME_EVENT));
   }
 
   function applyFontScale(scale: string) {
@@ -265,6 +276,18 @@ export function SettingsManager({ initial, initialTab, isOwner, planName, oabLim
       {tab === "acessibilidade" ? <section className={styles.panel}>
         <div className={styles.sectionHead}><span>Acessibilidade</span><h2>Leitura e conforto visual</h2><p>Escolha o tamanho de texto que fica mais confortável neste navegador.</p></div>
         <div className={styles.fontOptions}>{[["1","Padrão","100%"],["1.1","Confortável","110%"],["1.18","Maior","118%"]].map(([value, label, percent]) => <button key={value} type="button" className={fontScale === value ? styles.selectedFont : ""} onClick={() => applyFontScale(value)}><b>Aa</b><strong>{label}</strong><span>{percent}</span></button>)}</div>
+        <div className={styles.sectionHead}><h2>Cores do sistema</h2><p>Escolha a combinação que prefere. O azul e branco é o padrão. As tabelas permanecem claras para facilitar a leitura.</p></div>
+        <div className={styles.themeGrid} role="group" aria-label="Cores do sistema">
+          {APP_THEMES.map((option) => <button key={option.id} type="button"
+            className={`${styles.themeOption} ${theme === option.id ? styles.selectedTheme : ""}`}
+            aria-pressed={theme === option.id} onClick={() => applyTheme(option.id)}>
+            <span className={styles.themePreview} aria-hidden="true" style={{ backgroundColor: option.surface }}>
+              <i style={{ backgroundColor: option.swatch }} /><em style={{ backgroundColor: option.swatch }} />
+            </span>
+            <strong>{option.name}</strong><small>{theme === option.id ? "Selecionado" : "Selecionar"}</small>
+          </button>)}
+        </div>
+        <p className={styles.appearanceNote}>A escolha é salva neste navegador para seu usuário. Não altera a aparência dos outros integrantes do escritório nem a página pública.</p>
       </section> : null}
 
       {tab === "suporte" ? <section className={styles.panel}>

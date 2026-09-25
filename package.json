@@ -36,7 +36,9 @@
     "test:notifications": "tsx --test src/modules/notifications/domain/notification-buckets.test.ts",
     "test:tenant-scope": "tsx --test src/modules/security/domain/tenant-process-scope.test.ts",
     "audit:tenant-isolation": "tsx scripts/security/audit-tenant-isolation.ts",
-    "test:publication-email": "tsx --test src/modules/publications/domain/publication-email-batches.test.ts src/modules/publications/domain/publication-digest.test.ts"
+    "test:publication-email": "tsx --test src/modules/publications/domain/publication-email-batches.test.ts src/modules/publications/domain/publication-digest.test.ts src/modules/publications/domain/publication-email-config.test.ts",
+    "test:appearance": "tsx --test src/modules/appearance/domain/theme.test.ts",
+    "diagnose:publication-email": "tsx scripts/diagnostics/publication-email.ts"
   },
   "dependencies": {
     "next": "latest",

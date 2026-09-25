@@ -7,11 +7,13 @@ import { useEffect, useState } from "react";
 import { TopbarUserControls } from "./TopbarUserControls";
 import { ActivityGuard } from "@/components/team/ActivityGuard";
 import { ModuleGuide } from "@/components/help/ModuleGuide";
+import { DEFAULT_APP_THEME, THEME_EVENT, themeStorageKey, validAppTheme, type AppTheme } from "@/modules/appearance/domain/theme";
 import styles from "./AppShell.module.css";
 
 type Props = {
   children: React.ReactNode;
   organizationName: string;
+  userId: string;
   userName: string;
   userEmail: string;
   userImage: string | null;
@@ -50,6 +52,7 @@ function statusLabel(status: string) {
 export function AppShell({
   children,
   organizationName,
+  userId,
   userName,
   userEmail,
   userImage,
@@ -65,6 +68,22 @@ export function AppShell({
 }: Props) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [appTheme, setAppTheme] = useState<AppTheme>(DEFAULT_APP_THEME);
+
+  useEffect(() => {
+    const read = () => {
+      try { setAppTheme(validAppTheme(window.localStorage.getItem(themeStorageKey(userId)))); }
+      catch { setAppTheme(DEFAULT_APP_THEME); }
+    };
+    read();
+    window.addEventListener(THEME_EVENT, read);
+    // A preferência é por usuário e por navegador. Não transmite cores de um escritório a outro.
+    window.addEventListener("storage", read);
+    return () => {
+      window.removeEventListener(THEME_EVENT, read);
+      window.removeEventListener("storage", read);
+    };
+  }, [userId]);
 
   useEffect(() => setMobileMenuOpen(false), [pathname]);
 
@@ -79,7 +98,7 @@ export function AppShell({
   }
 
   return (
-    <div className={styles.shell}>
+    <div className={styles.shell} data-jp-theme={appTheme}>
       <ActivityGuard role={role} />
       <ModuleGuide />
       <aside className={`${styles.sidebar} ${mobileMenuOpen ? styles.sidebarOpen : ""}`}>

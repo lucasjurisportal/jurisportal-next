@@ -1,0 +1,5 @@
+src/components/app-shell/AppShell.module.css
+src/modules/appearance/domain/theme.ts
+src/modules/appearance/domain/theme.test.ts
+docs/blocos/55-correcao-aplicacao-temas.md
+docs/blocos/55-correcao-temas-arquivos-patch.txt
