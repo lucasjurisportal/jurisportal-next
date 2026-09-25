@@ -1,4 +1,5 @@
 import type { Prisma } from "@/generated/prisma/client";
+import { scopedRecordWhere } from "@/modules/security/domain/tenant-process-scope";
 import { prisma } from "@/infrastructure/database/prisma";
 import { assertPublicationProcessCnjMatch } from "../domain/publication-link-policy";
 import { normalizeCnjDigits } from "@/modules/processes/domain/cnj-number";
@@ -206,7 +207,7 @@ export async function linkPublicationToProcess(input: {
   assertPublicationProcessCnjMatch({ publicationCnjNormalized: publication.processNumberNormalized, processCnjNormalized: process.cnjNormalized });
 
   return prisma.$transaction(async (tx) => {
-    const updated = await tx.publication.update({ where: { id: publication.id }, data: { processId: process.id } });
+    const updated = await tx.publication.update({ where: scopedRecordWhere(publication.id, input.organizationId), data: { processId: process.id } });
     await tx.processTimelineEvent.create({
       data: {
         organizationId: input.organizationId,
@@ -277,7 +278,7 @@ export async function confirmPublicationDeadline(input: {
     });
 
     await tx.deadlineReview.update({
-      where: { id: publication.deadlineReview!.id },
+      where: scopedRecordWhere(publication.deadlineReview!.id, input.organizationId),
       data: {
         status: "CONFIRMED",
         title: input.title.trim(),
@@ -329,7 +330,7 @@ export async function dismissPublicationDeadlineReview(input: {
 
   return prisma.$transaction(async (tx) => {
     const updated = await tx.deadlineReview.update({
-      where: { id: review.id },
+      where: scopedRecordWhere(review.id, input.organizationId),
       data: { status: "DISMISSED", dismissedByUserId: input.actorUserId, dismissedAt: new Date() },
     });
     await tx.auditEvent.create({

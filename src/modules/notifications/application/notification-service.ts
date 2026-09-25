@@ -55,7 +55,7 @@ export async function getNotifications(input: {
         organizationId: input.organizationId,
         sourceStatus: "ACTIVE",
         treatedAt: null,
-        ...(input.role === "owner" ? {} : { recipients: { some: { lawyerOab: { userId: input.userId } } } }),
+        ...(input.role === "owner" ? {} : { recipients: { some: { lawyerOab: { userId: input.userId, organizationId: input.organizationId } } } }),
       },
       select: {
         id: true,
@@ -216,7 +216,7 @@ export async function markNotificationsRead(input: {
       where: {
         id: { in: byKind("publication") }, organizationId: input.organizationId,
         sourceStatus: "ACTIVE", treatedAt: null,
-        ...(input.role === "owner" ? {} : { recipients: { some: { lawyerOab: { userId: input.userId } } } }),
+        ...(input.role === "owner" ? {} : { recipients: { some: { lawyerOab: { userId: input.userId, organizationId: input.organizationId } } } }),
       }, select: { id: true },
     }),
     input.role === "owner" ? prisma.djenReviewCandidate.findMany({

@@ -1,6 +1,7 @@
 import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/infrastructure/database/prisma";
 import { calculateContractedFee } from "../domain/fee-calculation";
+import { scopedRecordWhere } from "@/modules/security/domain/tenant-process-scope";
 import type {
   FeeAgreementInput,
   FinanceEntryInput,
@@ -188,7 +189,7 @@ export async function changeProcessWorkItemStatus(input: {
 
   return prisma.$transaction(async (tx) => {
     const item = await tx.processWorkItem.update({
-      where: { id: current.id },
+      where: { ...scopedRecordWhere(current.id, input.organizationId), processId: input.processId },
       data: {
         status: input.status,
         completedAt: input.status === "DONE" ? new Date() : null,

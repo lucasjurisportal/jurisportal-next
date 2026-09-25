@@ -1,4 +1,5 @@
 import { Prisma } from "@/generated/prisma/client";
+import { scopedRecordWhere } from "@/modules/security/domain/tenant-process-scope";
 import { prisma } from "@/infrastructure/database/prisma";
 import { createProcessWorkItem, changeProcessWorkItemStatus } from "@/modules/processes/application/process-workspace-service";
 import type { GlobalWorkItemCreateInput, TaskEditInput } from "../domain/work-item.schema";
@@ -190,7 +191,7 @@ export async function updateTask(input: {
 
   return prisma.$transaction(async (tx) => {
     const item = await tx.processWorkItem.update({
-      where: { id: current.id },
+      where: scopedRecordWhere(current.id, input.organizationId),
       data: {
         title: input.data.title,
         dueDate: dateOnly(input.data.dueDate),

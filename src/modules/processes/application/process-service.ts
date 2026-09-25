@@ -537,7 +537,7 @@ export async function changeProcessStatus(input: {
 
   return prisma.$transaction(async (tx) => {
     const process = await tx.process.update({
-      where: { id: input.processId },
+      where: scopedProcessWhere(input.processId, input.organizationId),
       data: {
         status: input.status,
         archivedAt: input.status === "ARCHIVED" ? now : null,

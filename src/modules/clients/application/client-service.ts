@@ -1,4 +1,5 @@
 import { Prisma } from "@/generated/prisma/client";
+import { scopedRecordWhere } from "@/modules/security/domain/tenant-process-scope";
 import { prisma } from "@/infrastructure/database/prisma";
 import type { PlanLimit } from "@/modules/plans/domain/plan.types";
 import { assertClientCapacity } from "../domain/client-policy";
@@ -169,7 +170,7 @@ export async function updateClient(input: {
 
   return prisma.$transaction(async (tx) => {
     const client = await tx.client.update({
-      where: { id: input.clientId },
+      where: scopedRecordWhere(input.clientId, input.organizationId),
       data: {
         ...toPersistence(input.data),
         updatedByUserId: input.actorUserId,
@@ -202,7 +203,7 @@ export async function setClientArchived(input: {
 
   return prisma.$transaction(async (tx) => {
     const client = await tx.client.update({
-      where: { id: input.clientId },
+      where: scopedRecordWhere(input.clientId, input.organizationId),
       data: {
         status: input.archived ? "ARCHIVED" : "ACTIVE",
         archivedAt: input.archived ? new Date() : null,
@@ -260,7 +261,7 @@ export async function deleteClientPermanently(input: {
     });
 
     await tx.client.delete({
-      where: { id: current.id },
+      where: scopedRecordWhere(current.id, input.organizationId),
     });
 
     return { id: current.id };

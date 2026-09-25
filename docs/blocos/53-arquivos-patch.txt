@@ -1,0 +1,12 @@
+package.json
+src/modules/security/domain/tenant-process-scope.ts
+src/modules/security/domain/tenant-process-scope.test.ts
+src/modules/clients/application/client-service.ts
+src/modules/processes/application/process-service.ts
+src/modules/processes/application/process-workspace-service.ts
+src/modules/work-items/application/work-item-service.ts
+src/modules/publications/application/publication-service.ts
+src/modules/notifications/application/notification-service.ts
+scripts/security/audit-tenant-isolation.ts
+docs/blocos/53-seguranca-isolamento-escritorios.md
+docs/blocos/53-arquivos-patch.txt
