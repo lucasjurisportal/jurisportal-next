@@ -12,6 +12,7 @@ import { getDjenCaptureStatus, getDjenReviewCount, listDjenReviewCandidates, get
 import { DjenCandidateActions } from "@/components/publications/DjenCandidateActions";
 import { DjenSyncButton } from "@/components/publications/DjenSyncButton";
 import { normalizeDjenItem } from "@/modules/integrations/djen/domain/djen-publication";
+import { previewPendingPublicationEmails } from "@/modules/publications/infrastructure/publication-email";
 import styles from "@/components/publications/Publications.module.css";
 
 const views = [
@@ -76,6 +77,10 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
     context.workspace.role === "owner" ? getDjenRecentUpdates(context.workspace.organizationId) : Promise.resolve([]),
   ]);
 
+  const emailPreview = context.workspace.role === "owner"
+    ? await previewPendingPublicationEmails(context.workspace.organizationId)
+    : null;
+
   const current = {
     view,
     q: q || undefined,
@@ -112,6 +117,22 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
           Não foi possível concluir a consulta da OAB {status.lawyerOab.rawNumber}/{status.lawyerOab.state}.
           {status.lastError ? ` Código: ${status.lastError}` : ""}
         </p>)}
+    </section> : null}
+
+    {emailPreview ? <section className={styles.panel}>
+      <h2>E-mails das publicações</h2>
+      <p className={styles.muted}>{!emailPreview.enabled
+        ? "Envio automático de e-mails desativado durante a homologação. As comunicações continuam disponíveis no Jurisportal."
+        : !emailPreview.configured
+          ? "Configure o remetente verificado do Resend antes de liberar o envio."
+          : "O envio está habilitado para comunicações confirmadas e advogados com e-mail verificado."}</p>
+      <p><strong>{emailPreview.pendingEmails}</strong> e-mail(s) previsto(s) para <strong>{emailPreview.pendingCommunications}</strong> comunicação(ões) distintas por destinatário na fila.</p>
+      {emailPreview.needsReconciliation ? <p className={styles.error}>
+        {emailPreview.needsReconciliation} entrega(s) com situação incerta. Confira no provedor antes de qualquer reenvio.
+      </p> : null}
+      {emailPreview.skipped ? <p className={styles.muted}>{emailPreview.skipped} registro(s) aguardam identificação, e-mail verificado ou outra condição para envio.</p> : null}
+      {emailPreview.truncated ? <p className={styles.muted}>Prévia parcial: a fila ultrapassa 250 registros. Os demais serão examinados nos próximos lotes.</p> : null}
+      <p className={styles.muted}>E-mail aceito pelo provedor não comprova entrega na caixa postal.</p>
     </section> : null}
 
     {showManualSync ? <DjenSyncButton /> : null}

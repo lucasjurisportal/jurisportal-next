@@ -23,7 +23,7 @@
     "test:process-workspace": "tsx --test src/modules/processes/domain/process-workspace.schema.test.ts",
     "test:work-management": "tsx --test src/modules/processes/domain/fee-calculation.test.ts src/modules/work-items/domain/work-item-date.test.ts",
     "test:google-calendar": "tsx --test src/modules/integrations/google-calendar/domain/google-event.test.ts",
-    "test:publications": "tsx --test src/modules/integrations/djen/domain/djen-publication.test.ts src/modules/integrations/djen/infrastructure/djen-client.test.ts src/modules/integrations/djen/domain/djen-identity.test.ts src/modules/publications/domain/publication-link-policy.test.ts src/modules/publications/domain/djen-update-days.test.ts src/modules/publications/domain/publication-process-prefill.test.ts src/modules/integrations/djen/domain/djen-process-metadata.test.ts src/modules/publications/domain/publication-digest.test.ts",
+    "test:publications": "tsx --test src/modules/integrations/djen/domain/djen-publication.test.ts src/modules/integrations/djen/infrastructure/djen-client.test.ts src/modules/integrations/djen/domain/djen-identity.test.ts src/modules/publications/domain/publication-link-policy.test.ts src/modules/publications/domain/djen-update-days.test.ts src/modules/publications/domain/publication-process-prefill.test.ts src/modules/integrations/djen/domain/djen-process-metadata.test.ts src/modules/publications/domain/publication-digest.test.ts src/modules/publications/domain/publication-email-batches.test.ts",
     "test:petition-templates": "tsx --test src/modules/petition-templates/domain/template-variables.test.ts src/modules/petition-templates/infrastructure/petition-pdf.test.ts src/modules/petition-templates/domain/rich-document.test.ts",
     "test:team": "tsx --test src/modules/team/domain/team-activity-policy.test.ts src/modules/team/domain/team-contact-policy.test.ts",
     "test:reports": "tsx --test src/modules/reports/domain/report-period.test.ts src/modules/reports/infrastructure/report-csv.test.ts",
@@ -35,7 +35,8 @@
     "diagnose:datajud:network": "tsx scripts/diagnostics/datajud-network.ts",
     "test:notifications": "tsx --test src/modules/notifications/domain/notification-buckets.test.ts",
     "test:tenant-scope": "tsx --test src/modules/security/domain/tenant-process-scope.test.ts",
-    "audit:tenant-isolation": "tsx scripts/security/audit-tenant-isolation.ts"
+    "audit:tenant-isolation": "tsx scripts/security/audit-tenant-isolation.ts",
+    "test:publication-email": "tsx --test src/modules/publications/domain/publication-email-batches.test.ts src/modules/publications/domain/publication-digest.test.ts"
   },
   "dependencies": {
     "next": "latest",

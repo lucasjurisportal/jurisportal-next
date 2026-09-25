@@ -26,6 +26,7 @@ export function DjenSyncButton() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [mailStatus, setMailStatus] = useState("");
   const [movementStatus, setMovementStatus] = useState("");
   const [movementNotices, setMovementNotices] = useState<Array<{ id: string; count: number; firstNewId: string | null }>>([]);
 
@@ -35,11 +36,16 @@ export function DjenSyncButton() {
     setError("");
     setMovementStatus("");
     setMovementNotices([]);
+    setMailStatus("");
     try {
       const response = await fetch("/api/publications/sync", { method: "POST" });
-      const body = await response.json().catch(() => null) as { result?: CaptureResult; error?: string } | null;
+      const body = await response.json().catch(() => null) as { result?: CaptureResult; error?: string;
+        mail?: { disabled: boolean; sent: number; emailBatches: number; errors: number } } | null;
       if (!response.ok || !body?.result) throw new Error(body?.error || "Falha ao consultar o DJeN.");
       const result = body.result;
+      if (body.mail?.disabled) setMailStatus("E-mails desativados durante a homologação. As publicações permanecem no sistema.");
+      else if (body.mail?.errors) setMailStatus("Falha no envio de um ou mais e-mails. As publicações foram preservadas e a fila exige conferência.");
+      else if (body.mail?.emailBatches) setMailStatus(`${body.mail.emailBatches} e-mail(s) aceito(s) pelo provedor, com ${body.mail.sent} comunicação(ões) distintas por destinatário.`);
       const numbers = `O DJeN retornou ${result.sourceItems} resultado(s), incluindo possíveis repetições entre buscas. ${result.newPublications} nova(s) confirmada(s), ${result.updatedPublications} já conhecida(s), ${result.reviewItems} para revisão (${result.reviewCandidates} nova(s) na fila), ${result.ignoredItems} fora da identificação pesquisada. ${result.linkedToProcesses} vinculada(s) a processo.`;
       if (result.errors.length) {
         // Nunca exibir a consulta como sucesso quando alguma OAB falhou.
@@ -127,6 +133,7 @@ export function DjenSyncButton() {
       <p>Houve uma falha na captura, ou você está testando o sistema. É possível tentar uma consulta manual.</p>
       {message ? <div className={styles.success}>{message}</div> : null}
       {error ? <div className={styles.error}>{error}</div> : null}
+      {mailStatus ? <div role="status" className={styles.muted}>{mailStatus}</div> : null}
       {movementStatus ? <div role="status" className={styles.muted}>{movementStatus}</div> : null}
       {movementNotices.map(notice => <div className={styles.success} key={notice.id}>
         {notice.count} {notice.count === 1 ? "movimentação adicionada." : "movimentações adicionadas."} <a href={`/app/processos/${notice.id}?tab=movimentacoes${notice.firstNewId ? `#movimento-${notice.firstNewId}` : ""}`}>Saiba mais</a>

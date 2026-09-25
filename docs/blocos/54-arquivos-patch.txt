@@ -1,0 +1,8 @@
+package.json
+src/modules/publications/domain/publication-email-batches.ts
+src/modules/publications/domain/publication-email-batches.test.ts
+src/modules/publications/infrastructure/publication-email.ts
+src/app/app/publicacoes/page.tsx
+src/components/publications/DjenSyncButton.tsx
+docs/blocos/54-homologacao-comunicacoes.md
+docs/blocos/54-arquivos-patch.txt
