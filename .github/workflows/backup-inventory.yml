@@ -1,0 +1,39 @@
+name: Jurisportal - Auditoria de espaco dos backups (somente leitura)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      R2_BACKUP_ACCOUNT_ID: ${{ secrets.R2_BACKUP_ACCOUNT_ID }}
+      R2_BACKUP_BUCKET: ${{ vars.R2_BACKUP_BUCKET }}
+      R2_BACKUP_PREFIX: ${{ vars.R2_BACKUP_PREFIX }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_BACKUP_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_BACKUP_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: auto
+      AWS_EC2_METADATA_DISABLED: 'true'
+    steps:
+      - name: Contar objetos e bytes por familia sem modificar o R2
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in R2_BACKUP_ACCOUNT_ID R2_BACKUP_BUCKET R2_BACKUP_PREFIX AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY; do
+            test -n "${!name:-}" || { echo "Configuracao ausente: $name"; exit 1; }
+          done
+          case "$R2_BACKUP_PREFIX" in staging|production) ;; *) echo 'Prefixo nao reconhecido'; exit 1;; esac
+          endpoint="https://${R2_BACKUP_ACCOUNT_ID}.r2.cloudflarestorage.com"
+          for family in database/daily database/weekly database/monthly; do
+            echo "--- $family ---"
+            aws --endpoint-url "$endpoint" s3 ls "s3://${R2_BACKUP_BUCKET}/${R2_BACKUP_PREFIX}/${family}/" \
+              --recursive --summarize --human-readable | tail -n 2
+          done
+          echo '--- PDFs e outros objetos no prefixo (inclui database; NAO somar como total separado) ---'
+          aws --endpoint-url "$endpoint" s3 ls "s3://${R2_BACKUP_BUCKET}/${R2_BACKUP_PREFIX}/" \
+            --recursive --summarize --human-readable | tail -n 2
+          echo 'Apenas inventario. Nenhum objeto foi excluido, substituido ou teve retencao alterada.'

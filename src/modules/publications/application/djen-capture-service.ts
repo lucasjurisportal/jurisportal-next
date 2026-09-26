@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/infrastructure/database/prisma";
 import { planCatalog } from "@/modules/plans/domain/plan.catalog";
+import { pilotEntitlement } from "@/modules/promotions/domain/promotion";
 import { hasCapability } from "@/modules/plans/application/plan-entitlements";
 import {
   buildOabQueryVariants,
@@ -75,9 +76,14 @@ function jsonValue(value: unknown): Prisma.InputJsonValue {
   return value as Prisma.InputJsonValue;
 }
 
-async function resolvePlan(organizationId: string) {
-  const subscription = await prisma.subscription.findUnique({ where: { organizationId }, select: { planSlug: true } });
-  const plan = planCatalog.find((item) => item.slug === (subscription?.planSlug ?? "free")) ?? planCatalog[0];
+export async function resolvePlan(organizationId: string) {
+  const [subscription, pilot] = await Promise.all([
+    prisma.subscription.findUnique({ where: { organizationId }, select: { planSlug: true, status: true } }),
+    prisma.pilotAccess.findUnique({ where: { organizationId } }),
+  ]);
+  const testPlan = pilotEntitlement({ status: subscription?.status, pilot,
+    validPlanSlugs: planCatalog.map((item) => item.slug) });
+  const plan = planCatalog.find((item) => item.slug === (testPlan ?? subscription?.planSlug ?? "free")) ?? planCatalog[0];
   return plan;
 }
 
@@ -86,6 +92,7 @@ export async function persistPublication(input: {
   actorUserId?: string | null;
   lawyerOabId: string;
   publication: NormalizedDjenPublication;
+  allowEmail?: boolean;
 }) {
   // Prioriza ID da fonte e reconcilia registros legados cuja chave era baseada em hash.
   // Se duas linhas antigas possuírem identidades conflitantes, falha sem uni-las por CNJ.
@@ -174,12 +181,16 @@ export async function persistPublication(input: {
           },
         });
 
+    const existingRecipient = await tx.publicationRecipient.findUnique({
+      where: { publicationId_lawyerOabId: { publicationId: publication.id, lawyerOabId: input.lawyerOabId } },
+      select: { id: true },
+    });
     const recipient = await tx.publicationRecipient.upsert({
       where: { publicationId_lawyerOabId: { publicationId: publication.id, lawyerOabId: input.lawyerOabId } },
       create: { organizationId: input.organizationId, publicationId: publication.id, lawyerOabId: input.lawyerOabId },
       update: {},
     });
-    if (input.publication.sourceStatus === "ACTIVE") {
+    if (input.allowEmail !== false && !existingRecipient && input.publication.sourceStatus === "ACTIVE") {
       await tx.publicationEmailDelivery.upsert({
         where: { publicationId_lawyerOabId: { publicationId: publication.id, lawyerOabId: input.lawyerOabId } },
         create: {
@@ -234,7 +245,7 @@ export async function persistPublication(input: {
           processId,
           kind: input.publication.kind === "INTIMATION" ? "INTIMATION_RECEIVED" : "PUBLICATION_RECEIVED",
           title: input.publication.kind === "INTIMATION" ? "Intimação recebida" : "Publicação recebida",
-          description: `${input.publication.communicationType} · DJeN · ${input.publication.summary}`,
+          description: input.allowEmail === false ? `${input.publication.communicationType} · DJeN` : `${input.publication.communicationType} · DJeN · ${input.publication.summary}`,
           source: "DJEN",
           createdByUserId: input.actorUserId ?? null,
         },
@@ -472,6 +483,7 @@ export async function syncOrganizationDjen(input: {
           const saved = await persistPublication({
             organizationId: input.organizationId, actorUserId: input.actorUserId,
             lawyerOabId: oab.id, publication,
+            allowEmail: hasCapability(plan, "notifications.email"),
           });
           if (saved.isNew) result.newPublications += 1;
           else result.updatedPublications += 1;

@@ -1,0 +1,17 @@
+.github/workflows/backup-inventory.yml
+docs/blocos/58-free-djen-indicacoes-dashboard-backups.md
+docs/blocos/58-arquivos-patch.txt
+package.json
+src/app/api/referrals/me/route.ts
+src/app/app/configuracoes/page.tsx
+src/app/app/processos/[id]/page.tsx
+src/app/app/publicacoes/[id]/page.tsx
+src/app/app/publicacoes/page.tsx
+src/components/dashboard/Dashboard.module.css
+src/components/promotions/ReferralCodeCard.tsx
+src/components/public-site/PricingSection.tsx
+src/modules/plans/domain/free-djen-policy.test.ts
+src/modules/plans/domain/plan.catalog.ts
+src/modules/publications/application/djen-capture-service.ts
+src/modules/publications/application/djen-review-service.ts
+src/modules/publications/infrastructure/publication-email.ts

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./Settings.module.css";
+import { ReferralCodeCard } from "@/components/promotions/ReferralCodeCard";
 import { APP_THEMES, DEFAULT_APP_THEME, THEME_EVENT, themeStorageKey, validAppTheme, type AppTheme } from "@/modules/appearance/domain/theme";
 
 type SettingsData = {
@@ -31,6 +32,7 @@ type Props = {
   initial: SettingsData;
   initialTab?: string;
   isOwner: boolean;
+  allowReferrals: boolean;
   planName: string;
   oabLimit: number;
   processLimit: number | "unlimited";
@@ -57,7 +59,7 @@ async function jsonRequest(url: string, method: string, body?: unknown) {
   return payload;
 }
 
-export function SettingsManager({ initial, initialTab, isOwner, planName, oabLimit, processLimit, clientLimit }: Props) {
+export function SettingsManager({ initial, initialTab, isOwner, allowReferrals, planName, oabLimit, processLimit, clientLimit }: Props) {
   const router = useRouter();
   const [tab, setTab] = useState(initialTab || "conta");
   const [message, setMessage] = useState("");
@@ -218,6 +220,7 @@ export function SettingsManager({ initial, initialTab, isOwner, planName, oabLim
           <form className={styles.card} onSubmit={saveAccount}><h3>Dados do usuário</h3><label>Nome<input value={account.name} onChange={(e) => setAccount({ name: e.target.value })} required /></label><label>E-mail de acesso<input value={initial.user.email} disabled /></label><button className={styles.primary} disabled={busy}>Salvar dados</button></form>
           <form className={styles.card} onSubmit={changePassword}><h3>Alterar senha</h3><label>Senha atual<input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required /></label><label>Nova senha<input type="password" minLength={8} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required /></label><label>Confirme a nova senha<input type="password" minLength={8} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required /></label><button className={styles.primary} disabled={busy}>Alterar senha</button></form>
         </div>
+        {allowReferrals ? <ReferralCodeCard /> : null}
       </section> : null}
 
       {tab === "escritorio" && isOwner ? <section className={styles.panel}>

@@ -1,6 +1,7 @@
 import { prisma } from "@/infrastructure/database/prisma";
 import { normalizeDjenItem } from "@/modules/integrations/djen/domain/djen-publication";
-import { persistPublication, nextIsoDate, saoPauloDateString } from "./djen-capture-service";
+import { persistPublication, nextIsoDate, saoPauloDateString, resolvePlan } from "./djen-capture-service";
+import { hasCapability } from "@/modules/plans/application/plan-entitlements";
 import { recentDjenDays } from "../domain/djen-update-days";
 
 export async function getDjenCaptureStatus(organizationId: string) {
@@ -78,8 +79,10 @@ export async function decideDjenReview(input: {
     if (!changed.count) throw new Error("DJEN_CANDIDATE_ALREADY_DECIDED");
   } else {
     // Não alterar estado do candidato antes do upsert seguro da publicação.
+    const plan = await resolvePlan(input.organizationId);
     await persistPublication({ organizationId: input.organizationId,
-      lawyerOabId: candidate.lawyerOabId, actorUserId: input.actorUserId, publication });
+      lawyerOabId: candidate.lawyerOabId, actorUserId: input.actorUserId, publication,
+      allowEmail: hasCapability(plan, "notifications.email") });
     const changed = await prisma.djenReviewCandidate.updateMany({
       where: { id: candidate.id, organizationId: input.organizationId, status: "PENDING" },
       data: { status: "APPROVED", decidedAt: new Date(), decidedByUserId: input.actorUserId },

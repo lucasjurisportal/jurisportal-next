@@ -1,0 +1,16 @@
+prisma/schema.prisma
+prisma/migrations/20260925180000_v56_promotions_pilot/migration.sql
+src/modules/promotions/domain/promotion.ts
+src/modules/promotions/infrastructure/promotion-code.ts
+src/modules/promotions/domain/promotion.test.ts
+src/app/api/plans/promotion/preview/route.ts
+scripts/promotions/issue-migration-code.ts
+scripts/promotions/manage-pilot.ts
+src/modules/organizations/application/get-current-workspace.ts
+src/modules/publications/application/djen-capture-service.ts
+src/app/app/plano/page.tsx
+src/components/plans/PlanBillingPreview.tsx
+src/components/plans/PlanBilling.module.css
+package.json
+docs/blocos/56-cupons-migracao-e-piloto.md
+docs/blocos/56-arquivos-patch.txt

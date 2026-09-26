@@ -1,11 +1,13 @@
 import { prisma } from "@/infrastructure/database/prisma";
 import { planCatalog } from "@/modules/plans/domain/plan.catalog";
+import { pilotEntitlement } from "@/modules/promotions/domain/promotion";
 
 const membershipInclude = {
   organization: {
     include: {
       subscription: true,
       profile: true,
+      pilotAccess: true,
     },
   },
 } as const;
@@ -51,7 +53,13 @@ export async function getCurrentWorkspace(userId: string, activeOrganizationId?:
 
   if (!membership) return null;
 
-  const planSlug = membership.organization.subscription?.planSlug ?? "free";
+  const subscription = membership.organization.subscription;
+  const pilot = membership.organization.pilotAccess;
+  const pilotPlanSlug = pilotEntitlement({
+    status: subscription?.status, pilot,
+    validPlanSlugs: planCatalog.map((item) => item.slug),
+  });
+  const planSlug = pilotPlanSlug ?? subscription?.planSlug ?? "free";
   const plan = planCatalog.find((item) => item.slug === planSlug) ?? planCatalog[0];
 
   return {
@@ -59,7 +67,8 @@ export async function getCurrentWorkspace(userId: string, activeOrganizationId?:
     organizationName: membership.organization.name,
     organizationSlug: membership.organization.slug,
     role: membership.role,
-    subscription: membership.organization.subscription,
+    subscription,
+    pilotAccess: pilotPlanSlug ? { planSlug: pilotPlanSlug, expiresAt: pilot!.expiresAt } : null,
     plan,
   };
 }

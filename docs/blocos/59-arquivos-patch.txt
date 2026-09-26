@@ -1,0 +1,7 @@
+src/modules/promotions/domain/referrals.ts
+src/modules/promotions/domain/referrals.test.ts
+src/app/api/referrals/me/route.ts
+src/components/promotions/ReferralCodeCard.tsx
+src/components/promotions/ReferralCodeCard.module.css
+docs/blocos/59-indique-ganhe-meta-segura.md
+docs/blocos/59-arquivos-patch.txt

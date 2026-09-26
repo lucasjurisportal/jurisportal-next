@@ -21,6 +21,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
       </section>
       <SettingsManager
         initial={data}
+        allowReferrals
         initialTab={requestedTab}
         isOwner={context.workspace.role === "owner"}
         planName={context.workspace.plan.name}

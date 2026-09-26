@@ -27,7 +27,7 @@ export function PricingSection() {
             <span className="eyebrow">Planos Jurisportal</span>
             <h2 className="section-title">Comece pequeno e aumente a estrutura quando o escritório precisar.</h2>
             <p className="section-lead">
-              O Free permite testar a rotina por três meses. Todos os planos pagos incluem monitoramento de publicações e intimações do DJeN.
+              O Free permite acompanhar publicações e intimações dentro do Jurisportal por três meses. Os planos pagos acrescentam e-mails e recursos para a rotina do escritório.
             </p>
           </div>
           <div className={styles.billingToggle} role="group" aria-label="Forma de cobrança">

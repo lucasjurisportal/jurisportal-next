@@ -42,10 +42,11 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
   if (!context.ok) redirect("/login");
 
   const canMonitor = hasCapability(context.workspace.plan, "djen.monitoring");
+  const showSummary = context.workspace.plan.slug !== "free";
   if (!canMonitor) {
     return <div className={styles.page}>
       <section className={styles.heading}><div><span className={styles.eyebrow}>DJeN</span><h1>Publicações e intimações</h1><p>Comunicações sem processo vinculado. Após o vínculo, elas ficam na aba Publicações do processo.</p></div></section>
-      <section className={styles.locked}><h2>Monitoramento DJeN não está incluído no plano Free</h2><p>O Free mantém clientes, processos, tarefas, prazos e agenda manuais. O monitoramento de publicações começa no Essencial.</p></section>
+      <section className={styles.locked}><h2>Monitoramento indisponível</h2><p>Confira seu plano em Plano e cobrança.</p></section>
     </div>;
   }
 
@@ -77,7 +78,7 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
     context.workspace.role === "owner" ? getDjenRecentUpdates(context.workspace.organizationId) : Promise.resolve([]),
   ]);
 
-  const emailPreview = context.workspace.role === "owner"
+  const emailPreview = context.workspace.role === "owner" && hasCapability(context.workspace.plan, "notifications.email")
     ? await previewPendingPublicationEmails(context.workspace.organizationId)
     : null;
 
@@ -137,6 +138,7 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
       <p className={styles.muted}>E-mail aceito pelo provedor não comprova entrega na caixa postal.</p>
     </section> : null}
 
+    {context.workspace.plan.slug === "free" ? <p className={styles.muted}>No Free você consulta as publicações dentro do Jurisportal e confere o texto integral. E-mails e resumos ficam disponíveis nos planos pagos.</p> : null}
     {showManualSync ? <DjenSyncButton /> : null}
 
     <section className={styles.summary}>
@@ -163,7 +165,7 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
         <thead><tr><th>Status</th><th>Comunicação</th><th>Processo</th><th>OAB</th><th>Data</th><th>Ação</th></tr></thead>
         <tbody>{visibleCandidates.map(({ candidate, item }) => <tr key={`candidate:${candidate.id}`} id={candidate.id}>
           <td><div className={styles.statusLine}><span className={item.kind === "INTIMATION" ? styles.badgeIntimation : styles.badgePublication}>{typeLabel(item.kind)}</span><span className={styles.badgeReview}>Para revisão</span></div></td>
-          <td><div className={styles.itemTitle}><strong>{item.communicationType}</strong><small>{item.court || "Tribunal não informado"}{item.judicialBody ? ` · ${item.judicialBody}` : ""}</small><span className={styles.snippet}>{item.summary || "Texto disponível em Conferir"}</span></div></td>
+          <td><div className={styles.itemTitle}><strong>{item.communicationType}</strong><small>{item.court || "Tribunal não informado"}{item.judicialBody ? ` · ${item.judicialBody}` : ""}</small><span className={styles.snippet}>{showSummary ? item.summary || "Texto disponível em Conferir" : "Abra para ler a comunicação original"}</span></div></td>
           <td><strong>{item.processNumberFormatted || item.processNumberRaw || "Não informado"}</strong><small> · Aguardando confirmação</small></td>
           <td>{candidate.lawyerOab.rawNumber}/{candidate.lawyerOab.state}<small> · {candidate.lawyerOab.user.name}</small></td>
           <td>{displayDate(new Date(`${item.publicationDate}T00:00:00.000Z`))}</td>
@@ -173,7 +175,7 @@ export default async function PublicationsPage({ searchParams }: { searchParams:
           const dates = jsonStringArray(publication.explicitDates);
           return <tr key={publication.id}>
             <td><div className={styles.statusLine}><span className={publication.kind === "INTIMATION" ? styles.badgeIntimation : styles.badgePublication}>{typeLabel(publication.kind)}</span>{!publication.readAt ? <span className={styles.badgeNew}>Nova</span> : null}{publication.treatedAt ? <span className={styles.badgeTreated}>Tratada</span> : null}{publication.sourceStatus === "CANCELLED" ? <span className={styles.badgeCancelled}>Cancelada</span> : null}{publication.deadlineReview?.status === "PENDING_REVIEW" ? <span className={styles.badgeReview}>Criar prazo?</span> : null}</div></td>
-            <td><div className={styles.itemTitle}><strong>{publication.communicationType}</strong><small>{publication.court || "Tribunal não informado"}{publication.judicialBody ? ` · ${publication.judicialBody}` : ""}</small><span className={styles.snippet}>{publication.summary || publication.content || "Conteúdo não informado pelo DJeN."}</span>{dates.length ? <div className={styles.dates}>{dates.slice(0, 3).map((date) => <span className={styles.dateChip} key={date}>{date.split("-").reverse().join("/")}</span>)}</div> : null}</div></td>
+            <td><div className={styles.itemTitle}><strong>{publication.communicationType}</strong><small>{publication.court || "Tribunal não informado"}{publication.judicialBody ? ` · ${publication.judicialBody}` : ""}</small><span className={styles.snippet}>{showSummary ? publication.summary || publication.content || "Conteúdo não informado pelo DJeN." : "Abra para ler a comunicação original"}</span>{dates.length ? <div className={styles.dates}>{dates.slice(0, 3).map((date) => <span className={styles.dateChip} key={date}>{date.split("-").reverse().join("/")}</span>)}</div> : null}</div></td>
             <td>{publication.process ? <div className={styles.itemTitle}><Link className={styles.processLink} href={`/app/processos/${publication.process.id}?tab=publicacoes`}>{publication.process.cnjFormatted}</Link><small>{publication.process.subject || "Sem assunto cadastrado"}</small></div> : <div className={styles.itemTitle}><strong>{publication.processNumberFormatted || publication.processNumberRaw || "Não informado"}</strong><small>Não vinculado ao cadastro</small></div>}</td>
             <td><div className={styles.oabList}>{publication.recipients.map((recipient) => <span key={recipient.id}>{recipient.lawyerOab.rawNumber}/{recipient.lawyerOab.state}<small> · {recipient.lawyerOab.user.name}</small></span>)}</div></td>
             <td>{displayDate(publication.publicationDate)}</td>

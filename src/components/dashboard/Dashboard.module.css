@@ -3,3 +3,17 @@
 @media(max-width:760px){.heading{align-items:flex-start;flex-direction:column}.syncStatus{width:100%}.metricsGrid{grid-template-columns:repeat(2,1fr)}.sideStack{display:flex}.attentionRow{grid-template-columns:58px minmax(0,1fr)}.attentionRow button{grid-column:2;justify-self:start}.activityRow{grid-template-columns:36px 10px minmax(0,1fr)}.activityRow small{display:none}}
 @media(max-width:460px){.metricsGrid{grid-template-columns:1fr 1fr}.metric{min-height:104px;padding:12px}.heading h1{font-size:24px}.processStats{grid-template-columns:1fr}.quickActions{align-items:stretch}.quickActions a{flex:1 1 45%;justify-content:center}}
 .rowAction{border:1px solid #d9e2ee;background:#fff;border-radius:8px;min-height:29px;padding:0 10px;color:#234a84;font-size:8px;font-weight:800;text-decoration:none;display:inline-flex;align-items:center}.rowAction:hover{background:#f6f9fd}.emptyState{padding:24px 8px;text-align:center;color:#7d8998;font-size:10px;border-top:1px solid #edf1f5}.emptySmall{padding:12px 0;color:#7d8998;font-size:9px}.personalLinks{display:grid;gap:8px}.personalLinks a{border:1px solid #e1e7ef;background:#f8fafc;border-radius:10px;padding:10px 11px;text-decoration:none;color:#274b7d;font-size:9px;font-weight:800}.personalLinks a:hover{border-color:#bfd0e9;background:#fff}.agendaList .agendaLink{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid #edf1f5;text-decoration:none}.agendaList .agendaLink:first-child{border-top:0}.agendaList .agendaLink:hover p strong{color:var(--brand-blue-dark,#1451d3)}
+
+/* v58: tipografia operacional legível sem depender do zoom do navegador. */
+.heading h1{font-size:clamp(28px,2.4vw,34px)}.heading p{font-size:14px;line-height:1.5}
+.eyebrow{font-size:11px}.syncStatus strong{font-size:13px}.syncStatus span{font-size:11px}
+.metric{min-height:134px;padding:17px}.metric>span{font-size:12px;line-height:1.35}.metric strong{font-size:clamp(28px,2.4vw,36px)}.metric small{font-size:11px;line-height:1.35}.metric i{font-size:16px}
+.panel{padding:20px}.panelHead h2,.panelHeadCompact h2{font-size:18px}.panelHead a,.panelHeadCompact a{font-size:12px}
+.tag{font-size:11px;min-height:25px}.attentionText strong{font-size:13px;line-height:1.45}.attentionText span{font-size:11px;line-height:1.45}.attentionRow button,.rowAction{font-size:11px;min-height:34px}
+.processStats strong{font-size:24px}.processStats span{font-size:11px;line-height:1.4}.monitorBox>div:first-child{font-size:11px}
+.teamRows strong{font-size:12px}.teamRows small{font-size:11px}.personDot{font-size:12px;width:34px;height:34px}
+.activityRow time{font-size:11px}.activityRow strong{font-size:12px;line-height:1.4}.activityRow div span,.activityRow small{font-size:11px;line-height:1.4}
+.agendaList time b{font-size:16px}.agendaList time span{font-size:10px}.agendaList strong{font-size:12px}.agendaList p span{font-size:11px}
+.quickActions>span{font-size:11px}.quickActions a{font-size:11px;min-height:36px}.emptyState,.emptySmall{font-size:12px}.personalLinks a{font-size:12px}
+@media(max-width:760px){.panel{padding:16px}.metric{min-height:122px;padding:13px}.metric strong{font-size:29px}}
+@media(max-width:460px){.metric{min-height:116px}.metric>span{font-size:11px}.metric small{font-size:10px}}

@@ -19,7 +19,8 @@ export default async function PlanBillingPage() {
     currentPlanSlug={context.workspace.plan.slug}
     currentCycle={subscription?.billingCycle === "annual" ? "annual" : "monthly"}
     processCount={processCount}
-    subscriptionStatus={subscription?.status ?? null}
+    subscriptionStatus={context.workspace.pilotAccess ? "pilot" : subscription?.status ?? null}
+    pilotEndsAt={context.workspace.pilotAccess?.expiresAt.toISOString() ?? null}
     periodEnd={subscription?.currentPeriodEnd?.toISOString() ?? null}
   />;
 }

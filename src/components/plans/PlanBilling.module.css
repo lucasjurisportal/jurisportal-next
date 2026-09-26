@@ -16,3 +16,8 @@
 .dialog h2{font-size:20px;margin:4px 0}.dialog .grid{margin:18px 0}.dialog .plan{min-height:130px}.dialog .switch{width:max-content}
 .actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}.actions .disabledButton{width:auto;min-height:42px;padding:0 18px}
 @media(max-width:650px){.dialog{padding:14px}.dialog .switch{width:100%}.actions>*{flex:1}.dialog .plan{min-height:120px}}
+
+.couponBox{display:grid;gap:10px;margin-top:16px;padding:15px;border:1px solid #cddcf4;border-radius:12px;background:#f8faff}
+.couponBox label{font-size:12px;font-weight:800}.couponRow{display:flex;gap:8px}.couponRow input{flex:1;min-width:0;border:1px solid #b4c7e4;border-radius:9px;padding:11px 12px;color:#162944;background:#fff;font:inherit;font-size:13px}
+.couponSuccess{border-left:3px solid #32875e;padding:8px 10px;background:#ecfaf3;color:#165338!important;margin:0!important;line-height:1.7!important}
+@media(max-width:520px){.couponRow{flex-direction:column}.couponRow button{width:100%}}

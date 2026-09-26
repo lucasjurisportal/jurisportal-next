@@ -61,10 +61,14 @@ export function referralProgress(confirmedFirstPayments: number, eligiblePlan = 
   if (!Number.isInteger(confirmedFirstPayments) || confirmedFirstPayments < 0) throw new Error("INVALID_REFERRAL_COUNT");
   return {
     confirmedFirstPayments,
-    freeMonthEligible: eligiblePlan && confirmedFirstPayments >= REFERRAL_FREE_MONTH_THRESHOLD,
+    // Benefícios são faixas EXCLUSIVAS: aos cinco indicados passa ao programa em dinheiro.
+    // Não cria nem mantém nova elegibilidade de mês gratuito na faixa de remuneração.
+    freeMonthEligible: eligiblePlan
+      && confirmedFirstPayments >= REFERRAL_FREE_MONTH_THRESHOLD
+      && confirmedFirstPayments < REFERRAL_CASH_THRESHOLD,
     // Direito a participar da apuração, NÃO transferência automática.
     cashProgramEligible: confirmedFirstPayments >= REFERRAL_CASH_THRESHOLD,
-    remainingUntilFreeMonth: Math.max(0, REFERRAL_FREE_MONTH_THRESHOLD - confirmedFirstPayments),
+    remainingUntilFreeMonth: confirmedFirstPayments >= REFERRAL_CASH_THRESHOLD ? 0 : Math.max(0, REFERRAL_FREE_MONTH_THRESHOLD - confirmedFirstPayments),
     remainingUntilCash: Math.max(0, REFERRAL_CASH_THRESHOLD - confirmedFirstPayments),
   };
 }

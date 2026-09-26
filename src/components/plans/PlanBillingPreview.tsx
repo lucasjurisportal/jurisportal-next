@@ -17,23 +17,29 @@ type Props = {
   subscriptionStatus: string | null;
   periodEnd: string | null;
   processCount: number;
+  pilotEndsAt: string | null;
 };
 const statusLabels: Record<string, string> = {
   active: "Ativo", trialing: "Período gratuito", pending_payment: "Pagamento pendente",
   pending_verification: "Cadastro pendente", internal: "Ambiente de desenvolvimento",
-  canceled: "Cancelado", expired: "Expirado",
+  canceled: "Cancelado", expired: "Expirado", pilot: "Acesso de teste gratuito",
 };
 const dateBR = (iso: string | null): string | null => iso && !Number.isNaN(new Date(iso).getTime())
   ? new Date(iso).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" }) : null;
 const credits = (value: number) => new Intl.NumberFormat("pt-BR").format(value);
 
 export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, plans, currentPlanSlug,
-  currentCycle, subscriptionStatus, periodEnd, processCount }: Props) {
+  currentCycle, subscriptionStatus, periodEnd, processCount, pilotEndsAt }: Props) {
   const [cycle, setCycle] = useState<BillingCycle>(currentCycle);
   const [selectedSlug, setSelectedSlug] = useState(currentPlanSlug);
   const [modalOpen, setModalOpen] = useState(false);
   const [step, setStep] = useState<"choose" | "confirm" | "double-check" | "payment">("choose");
   const [paymentMethod, setPaymentMethod] = useState<"pix" | "boleto" | "card">("pix");
+  const [couponInput, setCouponInput] = useState("");
+  const [couponStatus, setCouponStatus] = useState<"idle" | "loading" | "valid" | "invalid">("idle");
+  const [couponQuote, setCouponQuote] = useState<{ discountCents:number;firstPaymentCents:number;nextPaymentCents:number;percent:number;kind?: "referral" | "migration" } | null>(null);
+  const [referralRegistered, setReferralRegistered] = useState(false);
+  const [couponError, setCouponError] = useState("");
   const current = plans.find((item) => item.slug === currentPlanSlug) ?? plans[0];
   const selected = plans.find((item) => item.slug === selectedSlug) ?? current;
   const currentIndex = plans.findIndex((item) => item.slug === current.slug);
@@ -41,6 +47,33 @@ export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, pl
   const comparison = planChangePreview(plans, current.slug, selected.slug, processCount);
   const period = dateBR(periodEnd);
   const renewalDate = subscriptionStatus === "active" ? period : null;
+  const pilotUntil = dateBR(pilotEndsAt);
+  const clearCoupon = () => { setCouponQuote(null); setCouponStatus("idle"); setCouponError(""); setReferralRegistered(false); };
+  const previewCoupon = async () => {
+    setCouponStatus("loading"); setCouponQuote(null); setCouponError("");
+    try {
+      const response = await fetch("/api/plans/promotion/preview", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: couponInput, cycle, planSlug: selected.slug }),
+      });
+      if (!response.ok) throw new Error("Este cupom não está disponível para este escritório e plano.");
+      const quote = await response.json() as { discountCents:number;firstPaymentCents:number;nextPaymentCents:number;percent:number;kind?: "referral" | "migration" };
+      setCouponQuote(quote); setCouponStatus("valid");
+    } catch {
+      setCouponStatus("invalid"); setCouponError("Não foi possível aplicar o cupom. Confira o código e as condições.");
+    }
+  };
+  async function registerReferral() {
+    setCouponError("");
+    try {
+      const response = await fetch("/api/referrals/claim", { method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: couponInput, cycle }),
+      });
+      if (!response.ok) throw new Error("REFERRAL_FAILED");
+      setReferralRegistered(true);
+    } catch { setCouponError("Não foi possível registrar o convite para este escritório."); }
+  }
   const isFree = current.slug === "free";
   const fee = isFree ? 0 : currentCycle === "annual" ? getAnnualPrice(current) : getMonthlyPrice(current);
   useEffect(() => {
@@ -49,7 +82,7 @@ export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, pl
     document.addEventListener("keydown", esc);
     return () => document.removeEventListener("keydown", esc);
   }, [modalOpen]);
-  const openModal = () => { setSelectedSlug(next?.slug ?? current.slug); setCycle(currentCycle); setStep("choose"); setModalOpen(true); };
+  const openModal = () => { setSelectedSlug(next?.slug ?? current.slug); setCycle(currentCycle); clearCoupon(); setStep("choose"); setModalOpen(true); };
 
   return <div className={styles.page}>
     <section className={styles.heading}>
@@ -57,6 +90,7 @@ export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, pl
       <h1>Plano e cobrança</h1>
       <p>Confira sua assinatura, seus limites e as opções de pagamento.</p>
     </section>
+    {subscriptionStatus === "pilot" && <div className={styles.banner} role="status"><strong>Teste gratuito autorizado</strong><span>Acesso temporário até {pilotUntil ?? "data não informada"}. Nenhuma cobrança é criada; dados do escritório permanecem separados dos demais.</span></div>}
     <div className={styles.banner} role="status"><strong>Prévia, sem cobranças</strong>
       <span>A alteração do plano, os créditos adicionais e o pagamento serão ativados após a integração financeira. Nenhuma escolha nesta tela exclui processos ou gera cobrança.</span>
     </div>
@@ -118,12 +152,12 @@ export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, pl
         </div>
         {step === "choose" ? <>
           <div className={styles.switch} role="group" aria-label="Modalidade">
-            <button type="button" aria-pressed={cycle === "annual"} className={cycle === "annual" ? styles.pressed : ""} onClick={() => setCycle("annual")}>Anual</button>
-            <button type="button" aria-pressed={cycle === "monthly"} className={cycle === "monthly" ? styles.pressed : ""} onClick={() => setCycle("monthly")}>Mensal</button>
+            <button type="button" aria-pressed={cycle === "annual"} className={cycle === "annual" ? styles.pressed : ""} onClick={() => { setCycle("annual"); clearCoupon(); }}>Anual</button>
+            <button type="button" aria-pressed={cycle === "monthly"} className={cycle === "monthly" ? styles.pressed : ""} onClick={() => { setCycle("monthly"); clearCoupon(); }}>Mensal</button>
           </div>
           <div className={styles.grid}>
             {plans.map((plan) => <button key={plan.slug} type="button" className={`${styles.plan} ${selectedSlug === plan.slug ? styles.selected : ""}`}
-              aria-pressed={selectedSlug === plan.slug} onClick={() => setSelectedSlug(plan.slug)}>
+              aria-pressed={selectedSlug === plan.slug} onClick={() => { setSelectedSlug(plan.slug); clearCoupon(); }}>
               <span className={styles.planName}>{plan.name} {plan.slug === current.slug ? <em>Atual</em> : null}</span>
               <strong>{plan.slug === "free" ? "Grátis" : currency(cycle === "annual" ? getAnnualPrice(plan) : getMonthlyPrice(plan))}</strong>
               <small>{plan.slug === "free" ? "3 meses" : cycle === "annual" ? "Anualidade" : "Mensalidade"}</small>
@@ -149,6 +183,26 @@ export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, pl
         </> : <>
           <div className={styles.field}><span>Plano selecionado</span><strong>{selected.name}</strong></div>
           <div className={styles.field}><span>{cycle === "annual" ? "Anualidade" : "Mensalidade"}</span><strong>{currency(cycle === "annual" ? getAnnualPrice(selected) : getMonthlyPrice(selected))}</strong></div>
+          {selected.slug !== "free" && <div className={styles.couponBox}>
+            <label htmlFor="jurisportal-coupon">Cupom de desconto ou código de indicação</label>
+            <div className={styles.couponRow}>
+              <input id="jurisportal-coupon" type="text" value={couponInput} autoComplete="off"
+                placeholder="Digite seu cupom" maxLength={100} onChange={(event) => { setCouponInput(event.target.value); clearCoupon(); }} />
+              <button className={styles.secondary} type="button" disabled={!couponInput.trim() || couponStatus === "loading"} onClick={previewCoupon}>
+                {couponStatus === "loading" ? "Verificando..." : "Aplicar"}
+              </button>
+            </div>
+            {couponStatus === "valid" && couponQuote && <p className={styles.couponSuccess} role="status">
+              {couponQuote.kind === "referral" ? "Indicação" : "Cupom"} válido: {couponQuote.percent}% na primeira {cycle === "annual" ? "anualidade" : "mensalidade"}.
+              <br />Primeira cobrança: <strong>{currency(couponQuote.firstPaymentCents / 100)}</strong> (economia de {currency(couponQuote.discountCents / 100)}).
+              <br />Próximas cobranças: {currency(couponQuote.nextPaymentCents / 100)}.
+              <br />O desconto será consumido apenas após a confirmação do pagamento, quando a integração financeira estiver habilitada.
+              {couponQuote.kind === "referral" ? <><br />{referralRegistered ? "Convite registrado. Aguardando a primeira mensalidade." : "Registre o convite para vincular este escritório ao indicador."}</> : null}
+            </p>}
+            {couponStatus === "valid" && couponQuote?.kind === "referral" && !referralRegistered &&
+              <button type="button" className={styles.secondary} onClick={() => void registerReferral()}>Registrar convite</button>}
+            {couponStatus === "invalid" && <p className={styles.warning} role="alert">{couponError}</p>}
+          </div>}
           <div className={styles.paymentOptions} role="group" aria-label="Método de pagamento">
             <label><input type="radio" name="billing-payment-preview" checked={paymentMethod === "pix"} onChange={() => setPaymentMethod("pix")} /> Pix (preferencial)</label>
             <label><input type="radio" name="billing-payment-preview" checked={paymentMethod === "boleto"} onChange={() => setPaymentMethod("boleto")} /> Boleto</label>

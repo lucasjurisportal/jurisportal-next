@@ -1,0 +1,7 @@
+src/modules/promotions/domain/referrals.ts
+src/modules/promotions/domain/referrals.test.ts
+src/components/promotions/ReferralCodeCard.tsx
+src/components/promotions/ReferralCodeCard.module.css
+docs/blocos/60-processos-bonus-mensal-indicacoes.md
+docs/blocos/60-1-exclusividade-beneficios-e-interface.md
+docs/blocos/60-1-arquivos-patch.txt

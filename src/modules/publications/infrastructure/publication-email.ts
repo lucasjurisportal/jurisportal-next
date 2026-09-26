@@ -4,6 +4,9 @@ import { renderPublicationDigest, safePublicAppUrl, type DigestCommunication } f
 import { planPublicationEmailBatches } from "../domain/publication-email-batches";
 import { publicationEmailSetup } from "../domain/publication-email-config";
 import { getOrganizationNotificationSettings } from "@/modules/settings/application/settings-service";
+import { planCatalog } from "@/modules/plans/domain/plan.catalog";
+import { hasCapability } from "@/modules/plans/application/plan-entitlements";
+import { pilotEntitlement } from "@/modules/promotions/domain/promotion";
 
 const MAX_ATTEMPTS = 4;
 const BATCH_SIZE = 30;
@@ -11,6 +14,18 @@ const LEASE_MS = 15 * 60 * 1000;
 const RESEND_KEY_MS = 24 * 60 * 60 * 1000;
 
 const QUEUE_READ_LIMIT = 250;
+
+/** O plano efetivo também inclui eventual concessão piloto; um downgrade não pode disparar fila antiga. */
+async function canSendPublicationEmail(organizationId: string): Promise<boolean> {
+  const [subscription, pilot] = await Promise.all([
+    prisma.subscription.findUnique({ where: { organizationId }, select: { planSlug: true, status: true } }),
+    prisma.pilotAccess.findUnique({ where: { organizationId } }),
+  ]);
+  const pilotSlug = pilotEntitlement({ status: subscription?.status, pilot,
+    validPlanSlugs: planCatalog.map((plan) => plan.slug) });
+  const plan = planCatalog.find((item) => item.slug === (pilotSlug ?? subscription?.planSlug ?? "free")) ?? planCatalog[0];
+  return hasCapability(plan, "notifications.email");
+}
 
 async function loadPendingEmailQueue(organizationId: string, now = new Date()) {
   const rows = await prisma.publicationEmailDelivery.findMany({
@@ -41,12 +56,15 @@ export async function previewPendingPublicationEmails(organizationId: string) {
   const reconciliationCount = await prisma.publicationEmailDelivery.count({
     where: { organizationId, status: "UNKNOWN" },
   });
-  const preference = await getOrganizationNotificationSettings(organizationId);
+  const [preference, canEmail] = await Promise.all([
+    getOrganizationNotificationSettings(organizationId), canSendPublicationEmail(organizationId),
+  ]);
   const setup = publicationEmailSetup(process.env);
   return {
-    enabled: setup.enabled,
+    enabled: setup.enabled && canEmail,
     configured: setup.configured,
     preferenceEnabled: preference.publicationsEmail,
+    planAllowsEmail: canEmail,
     setupIssues: setup.issues,
     pendingEmails: planned.batches.length,
     pendingCommunications: planned.readyCommunications,
@@ -58,6 +76,9 @@ export async function previewPendingPublicationEmails(organizationId: string) {
 
 /** Envio desacoplado da captura: falha de Resend não desfaz publicação. Cron continua desligado. */
 export async function dispatchPendingPublicationEmails(organizationId: string) {
+  // Bloqueio no servidor: nenhum dispatch para Free, mesmo se a fila já tiver linhas legadas.
+  if (!(await canSendPublicationEmail(organizationId)))
+    return { disabled: true, sent: 0, emailBatches: 0, errors: 0 };
   const setup = publicationEmailSetup(process.env);
   if (!setup.enabled) return { disabled: true, sent: 0, emailBatches: 0, errors: 0 };
   const preference = await getOrganizationNotificationSettings(organizationId);

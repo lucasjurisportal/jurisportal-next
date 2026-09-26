@@ -53,7 +53,7 @@ test("mês promocional é exclusivo de Premium mensal ativo, não de Alta Corte 
   assert.equal(premiumMonthlyRewardAllowed({ ...plan, canceledAt: new Date() }), false);
 });
 
-test("três completam a meta Premium; cinco habilitam a apuração, mas não autorizam transferência", () => {
+test("faixas exclusivas: três a quatro Premium mensal e cinco ou mais somente remuneração", () => {
   assert.equal(REFERRAL_FREE_MONTH_THRESHOLD, 3);
   assert.deepEqual(referralProgress(2, true), {
     confirmedFirstPayments: 2, freeMonthEligible: false, cashProgramEligible: false,
@@ -61,6 +61,10 @@ test("três completam a meta Premium; cinco habilitam a apuração, mas não aut
   });
   assert.equal(referralProgress(3, true).freeMonthEligible, true);
   assert.equal(referralProgress(3, false).freeMonthEligible, false);
+  assert.equal(referralProgress(4, true).freeMonthEligible, true);
+  assert.equal(referralProgress(5, true).freeMonthEligible, false);
+  assert.equal(referralProgress(10, true).freeMonthEligible, false);
+  assert.equal(referralProgress(5, false).freeMonthEligible, false);
   assert.equal(referralProgress(5, true).cashProgramEligible, true);
   assert.equal(referralProgress(4, true).cashProgramEligible, false);
   assert.equal(referralCommissionPreview(5), 15000);
