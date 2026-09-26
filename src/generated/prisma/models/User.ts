@@ -243,6 +243,7 @@ export type UserWhereInput = {
   referralsGiven?: Prisma.ReferralAttributionListRelationFilter
   referralCommissionEntries?: Prisma.ReferralCommissionEntryListRelationFilter
   aiCreditUsages?: Prisma.AiCreditUsageListRelationFilter
+  aiGenerations?: Prisma.AiGenerationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -298,6 +299,7 @@ export type UserOrderByWithRelationInput = {
   referralsGiven?: Prisma.ReferralAttributionOrderByRelationAggregateInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryOrderByRelationAggregateInput
   aiCreditUsages?: Prisma.AiCreditUsageOrderByRelationAggregateInput
+  aiGenerations?: Prisma.AiGenerationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -356,6 +358,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   referralsGiven?: Prisma.ReferralAttributionListRelationFilter
   referralCommissionEntries?: Prisma.ReferralCommissionEntryListRelationFilter
   aiCreditUsages?: Prisma.AiCreditUsageListRelationFilter
+  aiGenerations?: Prisma.AiGenerationListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -437,6 +440,7 @@ export type UserCreateInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -492,6 +496,7 @@ export type UserUncheckedCreateInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserUpdateInput = {
@@ -547,6 +552,7 @@ export type UserUpdateInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -602,6 +608,7 @@ export type UserUncheckedUpdateInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1374,6 +1381,20 @@ export type UserUpdateOneRequiredWithoutAiCreditUsagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAiCreditUsagesInput, Prisma.UserUpdateWithoutAiCreditUsagesInput>, Prisma.UserUncheckedUpdateWithoutAiCreditUsagesInput>
 }
 
+export type UserCreateNestedOneWithoutAiGenerationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAiGenerationsInput, Prisma.UserUncheckedCreateWithoutAiGenerationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAiGenerationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAiGenerationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAiGenerationsInput, Prisma.UserUncheckedCreateWithoutAiGenerationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAiGenerationsInput
+  upsert?: Prisma.UserUpsertWithoutAiGenerationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAiGenerationsInput, Prisma.UserUpdateWithoutAiGenerationsInput>, Prisma.UserUncheckedUpdateWithoutAiGenerationsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -1426,6 +1447,7 @@ export type UserCreateWithoutSessionsInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1480,6 +1502,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1550,6 +1573,7 @@ export type UserUpdateWithoutSessionsInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1604,6 +1628,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -1658,6 +1683,7 @@ export type UserCreateWithoutAccountsInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -1712,6 +1738,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1782,6 +1809,7 @@ export type UserUpdateWithoutAccountsInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1836,6 +1864,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutMembershipsInput = {
@@ -1890,6 +1919,7 @@ export type UserCreateWithoutMembershipsInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -1944,6 +1974,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -2014,6 +2045,7 @@ export type UserUpdateWithoutMembershipsInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -2068,6 +2100,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutInvitationsInput = {
@@ -2122,6 +2155,7 @@ export type UserCreateWithoutInvitationsInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutInvitationsInput = {
@@ -2176,6 +2210,7 @@ export type UserUncheckedCreateWithoutInvitationsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutInvitationsInput = {
@@ -2246,6 +2281,7 @@ export type UserUpdateWithoutInvitationsInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInvitationsInput = {
@@ -2300,6 +2336,7 @@ export type UserUncheckedUpdateWithoutInvitationsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutTeamProfileInput = {
@@ -2354,6 +2391,7 @@ export type UserCreateWithoutTeamProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutTeamProfileInput = {
@@ -2408,6 +2446,7 @@ export type UserUncheckedCreateWithoutTeamProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutTeamProfileInput = {
@@ -2478,6 +2517,7 @@ export type UserUpdateWithoutTeamProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeamProfileInput = {
@@ -2532,6 +2572,7 @@ export type UserUncheckedUpdateWithoutTeamProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutReferralProfileInput = {
@@ -2586,6 +2627,7 @@ export type UserCreateWithoutReferralProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutReferralProfileInput = {
@@ -2640,6 +2682,7 @@ export type UserUncheckedCreateWithoutReferralProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutReferralProfileInput = {
@@ -2710,6 +2753,7 @@ export type UserUpdateWithoutReferralProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReferralProfileInput = {
@@ -2764,6 +2808,7 @@ export type UserUncheckedUpdateWithoutReferralProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutReferralsGivenInput = {
@@ -2818,6 +2863,7 @@ export type UserCreateWithoutReferralsGivenInput = {
   referralProfile?: Prisma.ReferralProfileCreateNestedOneWithoutUserInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutReferralsGivenInput = {
@@ -2872,6 +2918,7 @@ export type UserUncheckedCreateWithoutReferralsGivenInput = {
   referralProfile?: Prisma.ReferralProfileUncheckedCreateNestedOneWithoutUserInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutReferralsGivenInput = {
@@ -2942,6 +2989,7 @@ export type UserUpdateWithoutReferralsGivenInput = {
   referralProfile?: Prisma.ReferralProfileUpdateOneWithoutUserNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReferralsGivenInput = {
@@ -2996,6 +3044,7 @@ export type UserUncheckedUpdateWithoutReferralsGivenInput = {
   referralProfile?: Prisma.ReferralProfileUncheckedUpdateOneWithoutUserNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutReferralCommissionEntriesInput = {
@@ -3050,6 +3099,7 @@ export type UserCreateWithoutReferralCommissionEntriesInput = {
   referralProfile?: Prisma.ReferralProfileCreateNestedOneWithoutUserInput
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutReferralCommissionEntriesInput = {
@@ -3104,6 +3154,7 @@ export type UserUncheckedCreateWithoutReferralCommissionEntriesInput = {
   referralProfile?: Prisma.ReferralProfileUncheckedCreateNestedOneWithoutUserInput
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutReferralCommissionEntriesInput = {
@@ -3174,6 +3225,7 @@ export type UserUpdateWithoutReferralCommissionEntriesInput = {
   referralProfile?: Prisma.ReferralProfileUpdateOneWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReferralCommissionEntriesInput = {
@@ -3228,6 +3280,7 @@ export type UserUncheckedUpdateWithoutReferralCommissionEntriesInput = {
   referralProfile?: Prisma.ReferralProfileUncheckedUpdateOneWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutAuditEventsInput = {
@@ -3282,6 +3335,7 @@ export type UserCreateWithoutAuditEventsInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutAuditEventsInput = {
@@ -3336,6 +3390,7 @@ export type UserUncheckedCreateWithoutAuditEventsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutAuditEventsInput = {
@@ -3406,6 +3461,7 @@ export type UserUpdateWithoutAuditEventsInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditEventsInput = {
@@ -3460,6 +3516,7 @@ export type UserUncheckedUpdateWithoutAuditEventsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -3514,6 +3571,7 @@ export type UserCreateWithoutProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -3568,6 +3626,7 @@ export type UserUncheckedCreateWithoutProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -3638,6 +3697,7 @@ export type UserUpdateWithoutProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -3692,6 +3752,7 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutLawyerOabsInput = {
@@ -3746,6 +3807,7 @@ export type UserCreateWithoutLawyerOabsInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutLawyerOabsInput = {
@@ -3800,6 +3862,7 @@ export type UserUncheckedCreateWithoutLawyerOabsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutLawyerOabsInput = {
@@ -3870,6 +3933,7 @@ export type UserUpdateWithoutLawyerOabsInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLawyerOabsInput = {
@@ -3924,6 +3988,7 @@ export type UserUncheckedUpdateWithoutLawyerOabsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutLegalAcceptancesInput = {
@@ -3978,6 +4043,7 @@ export type UserCreateWithoutLegalAcceptancesInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutLegalAcceptancesInput = {
@@ -4032,6 +4098,7 @@ export type UserUncheckedCreateWithoutLegalAcceptancesInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutLegalAcceptancesInput = {
@@ -4102,6 +4169,7 @@ export type UserUpdateWithoutLegalAcceptancesInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLegalAcceptancesInput = {
@@ -4156,6 +4224,7 @@ export type UserUncheckedUpdateWithoutLegalAcceptancesInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutSecurityProfileInput = {
@@ -4210,6 +4279,7 @@ export type UserCreateWithoutSecurityProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutSecurityProfileInput = {
@@ -4264,6 +4334,7 @@ export type UserUncheckedCreateWithoutSecurityProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutSecurityProfileInput = {
@@ -4334,6 +4405,7 @@ export type UserUpdateWithoutSecurityProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSecurityProfileInput = {
@@ -4388,6 +4460,7 @@ export type UserUncheckedUpdateWithoutSecurityProfileInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutAuthChallengesInput = {
@@ -4442,6 +4515,7 @@ export type UserCreateWithoutAuthChallengesInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutAuthChallengesInput = {
@@ -4496,6 +4570,7 @@ export type UserUncheckedCreateWithoutAuthChallengesInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutAuthChallengesInput = {
@@ -4566,6 +4641,7 @@ export type UserUpdateWithoutAuthChallengesInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthChallengesInput = {
@@ -4620,6 +4696,7 @@ export type UserUncheckedUpdateWithoutAuthChallengesInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutTrustedDevicesInput = {
@@ -4674,6 +4751,7 @@ export type UserCreateWithoutTrustedDevicesInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutTrustedDevicesInput = {
@@ -4728,6 +4806,7 @@ export type UserUncheckedCreateWithoutTrustedDevicesInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutTrustedDevicesInput = {
@@ -4798,6 +4877,7 @@ export type UserUpdateWithoutTrustedDevicesInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTrustedDevicesInput = {
@@ -4852,6 +4932,7 @@ export type UserUncheckedUpdateWithoutTrustedDevicesInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutPlatformAdminInput = {
@@ -4906,6 +4987,7 @@ export type UserCreateWithoutPlatformAdminInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPlatformAdminInput = {
@@ -4960,6 +5042,7 @@ export type UserUncheckedCreateWithoutPlatformAdminInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPlatformAdminInput = {
@@ -5030,6 +5113,7 @@ export type UserUpdateWithoutPlatformAdminInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlatformAdminInput = {
@@ -5084,6 +5168,7 @@ export type UserUncheckedUpdateWithoutPlatformAdminInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutSecurityEventsInput = {
@@ -5138,6 +5223,7 @@ export type UserCreateWithoutSecurityEventsInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutSecurityEventsInput = {
@@ -5192,6 +5278,7 @@ export type UserUncheckedCreateWithoutSecurityEventsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutSecurityEventsInput = {
@@ -5262,6 +5349,7 @@ export type UserUpdateWithoutSecurityEventsInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSecurityEventsInput = {
@@ -5316,6 +5404,7 @@ export type UserUncheckedUpdateWithoutSecurityEventsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutClientsCreatedInput = {
@@ -5370,6 +5459,7 @@ export type UserCreateWithoutClientsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutClientsCreatedInput = {
@@ -5424,6 +5514,7 @@ export type UserUncheckedCreateWithoutClientsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutClientsCreatedInput = {
@@ -5483,6 +5574,7 @@ export type UserCreateWithoutClientsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutClientsUpdatedInput = {
@@ -5537,6 +5629,7 @@ export type UserUncheckedCreateWithoutClientsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutClientsUpdatedInput = {
@@ -5607,6 +5700,7 @@ export type UserUpdateWithoutClientsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClientsCreatedInput = {
@@ -5661,6 +5755,7 @@ export type UserUncheckedUpdateWithoutClientsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutClientsUpdatedInput = {
@@ -5726,6 +5821,7 @@ export type UserUpdateWithoutClientsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClientsUpdatedInput = {
@@ -5780,6 +5876,7 @@ export type UserUncheckedUpdateWithoutClientsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutProcessesResponsibleInput = {
@@ -5834,6 +5931,7 @@ export type UserCreateWithoutProcessesResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessesResponsibleInput = {
@@ -5888,6 +5986,7 @@ export type UserUncheckedCreateWithoutProcessesResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessesResponsibleInput = {
@@ -5947,6 +6046,7 @@ export type UserCreateWithoutProcessesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessesCreatedInput = {
@@ -6001,6 +6101,7 @@ export type UserUncheckedCreateWithoutProcessesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessesCreatedInput = {
@@ -6060,6 +6161,7 @@ export type UserCreateWithoutProcessesUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessesUpdatedInput = {
@@ -6114,6 +6216,7 @@ export type UserUncheckedCreateWithoutProcessesUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessesUpdatedInput = {
@@ -6173,6 +6276,7 @@ export type UserCreateWithoutProcessCnjLocksInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessCnjLocksInput = {
@@ -6227,6 +6331,7 @@ export type UserUncheckedCreateWithoutProcessCnjLocksInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessCnjLocksInput = {
@@ -6297,6 +6402,7 @@ export type UserUpdateWithoutProcessesResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessesResponsibleInput = {
@@ -6351,6 +6457,7 @@ export type UserUncheckedUpdateWithoutProcessesResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutProcessesCreatedInput = {
@@ -6416,6 +6523,7 @@ export type UserUpdateWithoutProcessesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessesCreatedInput = {
@@ -6470,6 +6578,7 @@ export type UserUncheckedUpdateWithoutProcessesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutProcessesUpdatedInput = {
@@ -6535,6 +6644,7 @@ export type UserUpdateWithoutProcessesUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessesUpdatedInput = {
@@ -6589,6 +6699,7 @@ export type UserUncheckedUpdateWithoutProcessesUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutProcessCnjLocksInput = {
@@ -6654,6 +6765,7 @@ export type UserUpdateWithoutProcessCnjLocksInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessCnjLocksInput = {
@@ -6708,6 +6820,7 @@ export type UserUncheckedUpdateWithoutProcessCnjLocksInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutTimelineEventsCreatedInput = {
@@ -6762,6 +6875,7 @@ export type UserCreateWithoutTimelineEventsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutTimelineEventsCreatedInput = {
@@ -6816,6 +6930,7 @@ export type UserUncheckedCreateWithoutTimelineEventsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutTimelineEventsCreatedInput = {
@@ -6886,6 +7001,7 @@ export type UserUpdateWithoutTimelineEventsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTimelineEventsCreatedInput = {
@@ -6940,6 +7056,7 @@ export type UserUncheckedUpdateWithoutTimelineEventsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutProcessWorkItemsResponsibleInput = {
@@ -6994,6 +7111,7 @@ export type UserCreateWithoutProcessWorkItemsResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessWorkItemsResponsibleInput = {
@@ -7048,6 +7166,7 @@ export type UserUncheckedCreateWithoutProcessWorkItemsResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessWorkItemsResponsibleInput = {
@@ -7107,6 +7226,7 @@ export type UserCreateWithoutProcessWorkItemsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessWorkItemsCreatedInput = {
@@ -7161,6 +7281,7 @@ export type UserUncheckedCreateWithoutProcessWorkItemsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessWorkItemsCreatedInput = {
@@ -7220,6 +7341,7 @@ export type UserCreateWithoutProcessWorkItemsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessWorkItemsUpdatedInput = {
@@ -7274,6 +7396,7 @@ export type UserUncheckedCreateWithoutProcessWorkItemsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessWorkItemsUpdatedInput = {
@@ -7344,6 +7467,7 @@ export type UserUpdateWithoutProcessWorkItemsResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessWorkItemsResponsibleInput = {
@@ -7398,6 +7522,7 @@ export type UserUncheckedUpdateWithoutProcessWorkItemsResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutProcessWorkItemsCreatedInput = {
@@ -7463,6 +7588,7 @@ export type UserUpdateWithoutProcessWorkItemsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessWorkItemsCreatedInput = {
@@ -7517,6 +7643,7 @@ export type UserUncheckedUpdateWithoutProcessWorkItemsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutProcessWorkItemsUpdatedInput = {
@@ -7582,6 +7709,7 @@ export type UserUpdateWithoutProcessWorkItemsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessWorkItemsUpdatedInput = {
@@ -7636,6 +7764,7 @@ export type UserUncheckedUpdateWithoutProcessWorkItemsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutProcessFeeAgreementsCreatedInput = {
@@ -7690,6 +7819,7 @@ export type UserCreateWithoutProcessFeeAgreementsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessFeeAgreementsCreatedInput = {
@@ -7744,6 +7874,7 @@ export type UserUncheckedCreateWithoutProcessFeeAgreementsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessFeeAgreementsCreatedInput = {
@@ -7803,6 +7934,7 @@ export type UserCreateWithoutProcessFeeAgreementsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessFeeAgreementsUpdatedInput = {
@@ -7857,6 +7989,7 @@ export type UserUncheckedCreateWithoutProcessFeeAgreementsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessFeeAgreementsUpdatedInput = {
@@ -7927,6 +8060,7 @@ export type UserUpdateWithoutProcessFeeAgreementsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessFeeAgreementsCreatedInput = {
@@ -7981,6 +8115,7 @@ export type UserUncheckedUpdateWithoutProcessFeeAgreementsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutProcessFeeAgreementsUpdatedInput = {
@@ -8046,6 +8181,7 @@ export type UserUpdateWithoutProcessFeeAgreementsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessFeeAgreementsUpdatedInput = {
@@ -8100,6 +8236,7 @@ export type UserUncheckedUpdateWithoutProcessFeeAgreementsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutProcessFinanceEntriesCreatedInput = {
@@ -8154,6 +8291,7 @@ export type UserCreateWithoutProcessFinanceEntriesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutProcessFinanceEntriesCreatedInput = {
@@ -8208,6 +8346,7 @@ export type UserUncheckedCreateWithoutProcessFinanceEntriesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutProcessFinanceEntriesCreatedInput = {
@@ -8278,6 +8417,7 @@ export type UserUpdateWithoutProcessFinanceEntriesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProcessFinanceEntriesCreatedInput = {
@@ -8332,6 +8472,7 @@ export type UserUncheckedUpdateWithoutProcessFinanceEntriesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutAgendaEventsResponsibleInput = {
@@ -8386,6 +8527,7 @@ export type UserCreateWithoutAgendaEventsResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutAgendaEventsResponsibleInput = {
@@ -8440,6 +8582,7 @@ export type UserUncheckedCreateWithoutAgendaEventsResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutAgendaEventsResponsibleInput = {
@@ -8499,6 +8642,7 @@ export type UserCreateWithoutAgendaEventsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutAgendaEventsCreatedInput = {
@@ -8553,6 +8697,7 @@ export type UserUncheckedCreateWithoutAgendaEventsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutAgendaEventsCreatedInput = {
@@ -8612,6 +8757,7 @@ export type UserCreateWithoutAgendaEventsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutAgendaEventsUpdatedInput = {
@@ -8666,6 +8812,7 @@ export type UserUncheckedCreateWithoutAgendaEventsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutAgendaEventsUpdatedInput = {
@@ -8736,6 +8883,7 @@ export type UserUpdateWithoutAgendaEventsResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAgendaEventsResponsibleInput = {
@@ -8790,6 +8938,7 @@ export type UserUncheckedUpdateWithoutAgendaEventsResponsibleInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutAgendaEventsCreatedInput = {
@@ -8855,6 +9004,7 @@ export type UserUpdateWithoutAgendaEventsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAgendaEventsCreatedInput = {
@@ -8909,6 +9059,7 @@ export type UserUncheckedUpdateWithoutAgendaEventsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutAgendaEventsUpdatedInput = {
@@ -8974,6 +9125,7 @@ export type UserUpdateWithoutAgendaEventsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAgendaEventsUpdatedInput = {
@@ -9028,6 +9180,7 @@ export type UserUncheckedUpdateWithoutAgendaEventsUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutPublicationsReadInput = {
@@ -9082,6 +9235,7 @@ export type UserCreateWithoutPublicationsReadInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPublicationsReadInput = {
@@ -9136,6 +9290,7 @@ export type UserUncheckedCreateWithoutPublicationsReadInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPublicationsReadInput = {
@@ -9195,6 +9350,7 @@ export type UserCreateWithoutPublicationsTreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPublicationsTreatedInput = {
@@ -9249,6 +9405,7 @@ export type UserUncheckedCreateWithoutPublicationsTreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPublicationsTreatedInput = {
@@ -9319,6 +9476,7 @@ export type UserUpdateWithoutPublicationsReadInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPublicationsReadInput = {
@@ -9373,6 +9531,7 @@ export type UserUncheckedUpdateWithoutPublicationsReadInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutPublicationsTreatedInput = {
@@ -9438,6 +9597,7 @@ export type UserUpdateWithoutPublicationsTreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPublicationsTreatedInput = {
@@ -9492,6 +9652,7 @@ export type UserUncheckedUpdateWithoutPublicationsTreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutDeadlineReviewsConfirmedInput = {
@@ -9546,6 +9707,7 @@ export type UserCreateWithoutDeadlineReviewsConfirmedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutDeadlineReviewsConfirmedInput = {
@@ -9600,6 +9762,7 @@ export type UserUncheckedCreateWithoutDeadlineReviewsConfirmedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutDeadlineReviewsConfirmedInput = {
@@ -9659,6 +9822,7 @@ export type UserCreateWithoutDeadlineReviewsDismissedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutDeadlineReviewsDismissedInput = {
@@ -9713,6 +9877,7 @@ export type UserUncheckedCreateWithoutDeadlineReviewsDismissedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutDeadlineReviewsDismissedInput = {
@@ -9783,6 +9948,7 @@ export type UserUpdateWithoutDeadlineReviewsConfirmedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeadlineReviewsConfirmedInput = {
@@ -9837,6 +10003,7 @@ export type UserUncheckedUpdateWithoutDeadlineReviewsConfirmedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutDeadlineReviewsDismissedInput = {
@@ -9902,6 +10069,7 @@ export type UserUpdateWithoutDeadlineReviewsDismissedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeadlineReviewsDismissedInput = {
@@ -9956,6 +10124,7 @@ export type UserUncheckedUpdateWithoutDeadlineReviewsDismissedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutGoogleCalendarConnectionsInput = {
@@ -10010,6 +10179,7 @@ export type UserCreateWithoutGoogleCalendarConnectionsInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
@@ -10064,6 +10234,7 @@ export type UserUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutGoogleCalendarConnectionsInput = {
@@ -10134,6 +10305,7 @@ export type UserUpdateWithoutGoogleCalendarConnectionsInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
@@ -10188,6 +10360,7 @@ export type UserUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutExternalCalendarEventLinksInput = {
@@ -10242,6 +10415,7 @@ export type UserCreateWithoutExternalCalendarEventLinksInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutExternalCalendarEventLinksInput = {
@@ -10296,6 +10470,7 @@ export type UserUncheckedCreateWithoutExternalCalendarEventLinksInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutExternalCalendarEventLinksInput = {
@@ -10366,6 +10541,7 @@ export type UserUpdateWithoutExternalCalendarEventLinksInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExternalCalendarEventLinksInput = {
@@ -10420,6 +10596,7 @@ export type UserUncheckedUpdateWithoutExternalCalendarEventLinksInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutPetitionTemplatesCreatedInput = {
@@ -10474,6 +10651,7 @@ export type UserCreateWithoutPetitionTemplatesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPetitionTemplatesCreatedInput = {
@@ -10528,6 +10706,7 @@ export type UserUncheckedCreateWithoutPetitionTemplatesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPetitionTemplatesCreatedInput = {
@@ -10587,6 +10766,7 @@ export type UserCreateWithoutPetitionTemplatesUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPetitionTemplatesUpdatedInput = {
@@ -10641,6 +10821,7 @@ export type UserUncheckedCreateWithoutPetitionTemplatesUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPetitionTemplatesUpdatedInput = {
@@ -10711,6 +10892,7 @@ export type UserUpdateWithoutPetitionTemplatesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPetitionTemplatesCreatedInput = {
@@ -10765,6 +10947,7 @@ export type UserUncheckedUpdateWithoutPetitionTemplatesCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUpsertWithoutPetitionTemplatesUpdatedInput = {
@@ -10830,6 +11013,7 @@ export type UserUpdateWithoutPetitionTemplatesUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPetitionTemplatesUpdatedInput = {
@@ -10884,6 +11068,7 @@ export type UserUncheckedUpdateWithoutPetitionTemplatesUpdatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutPetitionTemplateVersionsCreatedInput = {
@@ -10938,6 +11123,7 @@ export type UserCreateWithoutPetitionTemplateVersionsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPetitionTemplateVersionsCreatedInput = {
@@ -10992,6 +11178,7 @@ export type UserUncheckedCreateWithoutPetitionTemplateVersionsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPetitionTemplateVersionsCreatedInput = {
@@ -11062,6 +11249,7 @@ export type UserUpdateWithoutPetitionTemplateVersionsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPetitionTemplateVersionsCreatedInput = {
@@ -11116,6 +11304,7 @@ export type UserUncheckedUpdateWithoutPetitionTemplateVersionsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutPetitionGenerationsCreatedInput = {
@@ -11170,6 +11359,7 @@ export type UserCreateWithoutPetitionGenerationsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPetitionGenerationsCreatedInput = {
@@ -11224,6 +11414,7 @@ export type UserUncheckedCreateWithoutPetitionGenerationsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPetitionGenerationsCreatedInput = {
@@ -11294,6 +11485,7 @@ export type UserUpdateWithoutPetitionGenerationsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPetitionGenerationsCreatedInput = {
@@ -11348,6 +11540,7 @@ export type UserUncheckedUpdateWithoutPetitionGenerationsCreatedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutDocumentsUploadedInput = {
@@ -11402,6 +11595,7 @@ export type UserCreateWithoutDocumentsUploadedInput = {
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutDocumentsUploadedInput = {
@@ -11456,6 +11650,7 @@ export type UserUncheckedCreateWithoutDocumentsUploadedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutDocumentsUploadedInput = {
@@ -11526,6 +11721,7 @@ export type UserUpdateWithoutDocumentsUploadedInput = {
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentsUploadedInput = {
@@ -11580,6 +11776,7 @@ export type UserUncheckedUpdateWithoutDocumentsUploadedInput = {
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
   aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutAiCreditUsagesInput = {
@@ -11634,6 +11831,7 @@ export type UserCreateWithoutAiCreditUsagesInput = {
   referralProfile?: Prisma.ReferralProfileCreateNestedOneWithoutUserInput
   referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutAiCreditUsagesInput = {
@@ -11688,6 +11886,7 @@ export type UserUncheckedCreateWithoutAiCreditUsagesInput = {
   referralProfile?: Prisma.ReferralProfileUncheckedCreateNestedOneWithoutUserInput
   referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutAiCreditUsagesInput = {
@@ -11758,6 +11957,7 @@ export type UserUpdateWithoutAiCreditUsagesInput = {
   referralProfile?: Prisma.ReferralProfileUpdateOneWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAiCreditUsagesInput = {
@@ -11812,6 +12012,243 @@ export type UserUncheckedUpdateWithoutAiCreditUsagesInput = {
   referralProfile?: Prisma.ReferralProfileUncheckedUpdateOneWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutAiGenerationsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MemberCreateNestedManyWithoutUserInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutInviterInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutActorInput
+  profile?: Prisma.UserProfileCreateNestedOneWithoutUserInput
+  lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutUserInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutUserInput
+  securityProfile?: Prisma.UserSecurityProfileCreateNestedOneWithoutUserInput
+  authChallenges?: Prisma.AuthChallengeCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceCreateNestedManyWithoutUserInput
+  platformAdmin?: Prisma.PlatformAdminCreateNestedOneWithoutUserInput
+  securityEvents?: Prisma.SecurityEventCreateNestedManyWithoutUserInput
+  clientsCreated?: Prisma.ClientCreateNestedManyWithoutCreatedByInput
+  clientsUpdated?: Prisma.ClientCreateNestedManyWithoutUpdatedByInput
+  processesResponsible?: Prisma.ProcessCreateNestedManyWithoutResponsibleInput
+  processesCreated?: Prisma.ProcessCreateNestedManyWithoutCreatedByInput
+  processesUpdated?: Prisma.ProcessCreateNestedManyWithoutUpdatedByInput
+  timelineEventsCreated?: Prisma.ProcessTimelineEventCreateNestedManyWithoutCreatedByInput
+  processWorkItemsResponsible?: Prisma.ProcessWorkItemCreateNestedManyWithoutResponsibleInput
+  processWorkItemsCreated?: Prisma.ProcessWorkItemCreateNestedManyWithoutCreatedByInput
+  processWorkItemsUpdated?: Prisma.ProcessWorkItemCreateNestedManyWithoutUpdatedByInput
+  processFeeAgreementsCreated?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutCreatedByInput
+  processFeeAgreementsUpdated?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutUpdatedByInput
+  processFinanceEntriesCreated?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutCreatedByInput
+  agendaEventsResponsible?: Prisma.AgendaEventCreateNestedManyWithoutResponsibleInput
+  agendaEventsCreated?: Prisma.AgendaEventCreateNestedManyWithoutCreatedByInput
+  agendaEventsUpdated?: Prisma.AgendaEventCreateNestedManyWithoutUpdatedByInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutUserInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutUserInput
+  publicationsRead?: Prisma.PublicationCreateNestedManyWithoutReadByInput
+  publicationsTreated?: Prisma.PublicationCreateNestedManyWithoutTreatedByInput
+  deadlineReviewsConfirmed?: Prisma.DeadlineReviewCreateNestedManyWithoutConfirmedByInput
+  deadlineReviewsDismissed?: Prisma.DeadlineReviewCreateNestedManyWithoutDismissedByInput
+  processCnjLocks?: Prisma.ProcessCreateNestedManyWithoutCnjLockedByInput
+  petitionTemplatesCreated?: Prisma.PetitionTemplateCreateNestedManyWithoutCreatedByInput
+  petitionTemplatesUpdated?: Prisma.PetitionTemplateCreateNestedManyWithoutUpdatedByInput
+  petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutCreatedByInput
+  petitionGenerationsCreated?: Prisma.PetitionGenerationCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentCreateNestedManyWithoutUploadedByInput
+  teamProfile?: Prisma.TeamMemberProfileCreateNestedOneWithoutUserInput
+  referralProfile?: Prisma.ReferralProfileCreateNestedOneWithoutUserInput
+  referralsGiven?: Prisma.ReferralAttributionCreateNestedManyWithoutReferrerInput
+  referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutReferrerInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutActorInput
+}
+
+export type UserUncheckedCreateWithoutAiGenerationsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MemberUncheckedCreateNestedManyWithoutUserInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutInviterInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutActorInput
+  profile?: Prisma.UserProfileUncheckedCreateNestedOneWithoutUserInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutUserInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutUserInput
+  securityProfile?: Prisma.UserSecurityProfileUncheckedCreateNestedOneWithoutUserInput
+  authChallenges?: Prisma.AuthChallengeUncheckedCreateNestedManyWithoutUserInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedCreateNestedManyWithoutUserInput
+  platformAdmin?: Prisma.PlatformAdminUncheckedCreateNestedOneWithoutUserInput
+  securityEvents?: Prisma.SecurityEventUncheckedCreateNestedManyWithoutUserInput
+  clientsCreated?: Prisma.ClientUncheckedCreateNestedManyWithoutCreatedByInput
+  clientsUpdated?: Prisma.ClientUncheckedCreateNestedManyWithoutUpdatedByInput
+  processesResponsible?: Prisma.ProcessUncheckedCreateNestedManyWithoutResponsibleInput
+  processesCreated?: Prisma.ProcessUncheckedCreateNestedManyWithoutCreatedByInput
+  processesUpdated?: Prisma.ProcessUncheckedCreateNestedManyWithoutUpdatedByInput
+  timelineEventsCreated?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutCreatedByInput
+  processWorkItemsResponsible?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutResponsibleInput
+  processWorkItemsCreated?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutCreatedByInput
+  processWorkItemsUpdated?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  processFeeAgreementsCreated?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutCreatedByInput
+  processFeeAgreementsUpdated?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutUpdatedByInput
+  processFinanceEntriesCreated?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutCreatedByInput
+  agendaEventsResponsible?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutResponsibleInput
+  agendaEventsCreated?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutCreatedByInput
+  agendaEventsUpdated?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutUpdatedByInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutUserInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutUserInput
+  publicationsRead?: Prisma.PublicationUncheckedCreateNestedManyWithoutReadByInput
+  publicationsTreated?: Prisma.PublicationUncheckedCreateNestedManyWithoutTreatedByInput
+  deadlineReviewsConfirmed?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutConfirmedByInput
+  deadlineReviewsDismissed?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutDismissedByInput
+  processCnjLocks?: Prisma.ProcessUncheckedCreateNestedManyWithoutCnjLockedByInput
+  petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
+  petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutGeneratedByInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutUploadedByInput
+  teamProfile?: Prisma.TeamMemberProfileUncheckedCreateNestedOneWithoutUserInput
+  referralProfile?: Prisma.ReferralProfileUncheckedCreateNestedOneWithoutUserInput
+  referralsGiven?: Prisma.ReferralAttributionUncheckedCreateNestedManyWithoutReferrerInput
+  referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutReferrerInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutActorInput
+}
+
+export type UserCreateOrConnectWithoutAiGenerationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAiGenerationsInput, Prisma.UserUncheckedCreateWithoutAiGenerationsInput>
+}
+
+export type UserUpsertWithoutAiGenerationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAiGenerationsInput, Prisma.UserUncheckedUpdateWithoutAiGenerationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAiGenerationsInput, Prisma.UserUncheckedCreateWithoutAiGenerationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAiGenerationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAiGenerationsInput, Prisma.UserUncheckedUpdateWithoutAiGenerationsInput>
+}
+
+export type UserUpdateWithoutAiGenerationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MemberUpdateManyWithoutUserNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutInviterNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutActorNestedInput
+  profile?: Prisma.UserProfileUpdateOneWithoutUserNestedInput
+  lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutUserNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutUserNestedInput
+  securityProfile?: Prisma.UserSecurityProfileUpdateOneWithoutUserNestedInput
+  authChallenges?: Prisma.AuthChallengeUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUpdateManyWithoutUserNestedInput
+  platformAdmin?: Prisma.PlatformAdminUpdateOneWithoutUserNestedInput
+  securityEvents?: Prisma.SecurityEventUpdateManyWithoutUserNestedInput
+  clientsCreated?: Prisma.ClientUpdateManyWithoutCreatedByNestedInput
+  clientsUpdated?: Prisma.ClientUpdateManyWithoutUpdatedByNestedInput
+  processesResponsible?: Prisma.ProcessUpdateManyWithoutResponsibleNestedInput
+  processesCreated?: Prisma.ProcessUpdateManyWithoutCreatedByNestedInput
+  processesUpdated?: Prisma.ProcessUpdateManyWithoutUpdatedByNestedInput
+  timelineEventsCreated?: Prisma.ProcessTimelineEventUpdateManyWithoutCreatedByNestedInput
+  processWorkItemsResponsible?: Prisma.ProcessWorkItemUpdateManyWithoutResponsibleNestedInput
+  processWorkItemsCreated?: Prisma.ProcessWorkItemUpdateManyWithoutCreatedByNestedInput
+  processWorkItemsUpdated?: Prisma.ProcessWorkItemUpdateManyWithoutUpdatedByNestedInput
+  processFeeAgreementsCreated?: Prisma.ProcessFeeAgreementUpdateManyWithoutCreatedByNestedInput
+  processFeeAgreementsUpdated?: Prisma.ProcessFeeAgreementUpdateManyWithoutUpdatedByNestedInput
+  processFinanceEntriesCreated?: Prisma.ProcessFinanceEntryUpdateManyWithoutCreatedByNestedInput
+  agendaEventsResponsible?: Prisma.AgendaEventUpdateManyWithoutResponsibleNestedInput
+  agendaEventsCreated?: Prisma.AgendaEventUpdateManyWithoutCreatedByNestedInput
+  agendaEventsUpdated?: Prisma.AgendaEventUpdateManyWithoutUpdatedByNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutUserNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutUserNestedInput
+  publicationsRead?: Prisma.PublicationUpdateManyWithoutReadByNestedInput
+  publicationsTreated?: Prisma.PublicationUpdateManyWithoutTreatedByNestedInput
+  deadlineReviewsConfirmed?: Prisma.DeadlineReviewUpdateManyWithoutConfirmedByNestedInput
+  deadlineReviewsDismissed?: Prisma.DeadlineReviewUpdateManyWithoutDismissedByNestedInput
+  processCnjLocks?: Prisma.ProcessUpdateManyWithoutCnjLockedByNestedInput
+  petitionTemplatesCreated?: Prisma.PetitionTemplateUpdateManyWithoutCreatedByNestedInput
+  petitionTemplatesUpdated?: Prisma.PetitionTemplateUpdateManyWithoutUpdatedByNestedInput
+  petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUpdateManyWithoutCreatedByNestedInput
+  petitionGenerationsCreated?: Prisma.PetitionGenerationUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUpdateManyWithoutUploadedByNestedInput
+  teamProfile?: Prisma.TeamMemberProfileUpdateOneWithoutUserNestedInput
+  referralProfile?: Prisma.ReferralProfileUpdateOneWithoutUserNestedInput
+  referralsGiven?: Prisma.ReferralAttributionUpdateManyWithoutReferrerNestedInput
+  referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutReferrerNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutActorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAiGenerationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MemberUncheckedUpdateManyWithoutUserNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutInviterNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutActorNestedInput
+  profile?: Prisma.UserProfileUncheckedUpdateOneWithoutUserNestedInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutUserNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutUserNestedInput
+  securityProfile?: Prisma.UserSecurityProfileUncheckedUpdateOneWithoutUserNestedInput
+  authChallenges?: Prisma.AuthChallengeUncheckedUpdateManyWithoutUserNestedInput
+  trustedDevices?: Prisma.TrustedDeviceUncheckedUpdateManyWithoutUserNestedInput
+  platformAdmin?: Prisma.PlatformAdminUncheckedUpdateOneWithoutUserNestedInput
+  securityEvents?: Prisma.SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+  clientsCreated?: Prisma.ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientsUpdated?: Prisma.ClientUncheckedUpdateManyWithoutUpdatedByNestedInput
+  processesResponsible?: Prisma.ProcessUncheckedUpdateManyWithoutResponsibleNestedInput
+  processesCreated?: Prisma.ProcessUncheckedUpdateManyWithoutCreatedByNestedInput
+  processesUpdated?: Prisma.ProcessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  timelineEventsCreated?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  processWorkItemsResponsible?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutResponsibleNestedInput
+  processWorkItemsCreated?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  processWorkItemsUpdated?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  processFeeAgreementsCreated?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutCreatedByNestedInput
+  processFeeAgreementsUpdated?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutUpdatedByNestedInput
+  processFinanceEntriesCreated?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+  agendaEventsResponsible?: Prisma.AgendaEventUncheckedUpdateManyWithoutResponsibleNestedInput
+  agendaEventsCreated?: Prisma.AgendaEventUncheckedUpdateManyWithoutCreatedByNestedInput
+  agendaEventsUpdated?: Prisma.AgendaEventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutUserNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutUserNestedInput
+  publicationsRead?: Prisma.PublicationUncheckedUpdateManyWithoutReadByNestedInput
+  publicationsTreated?: Prisma.PublicationUncheckedUpdateManyWithoutTreatedByNestedInput
+  deadlineReviewsConfirmed?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutConfirmedByNestedInput
+  deadlineReviewsDismissed?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutDismissedByNestedInput
+  processCnjLocks?: Prisma.ProcessUncheckedUpdateManyWithoutCnjLockedByNestedInput
+  petitionTemplatesCreated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  petitionTemplatesUpdated?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  petitionTemplateVersionsCreated?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  petitionGenerationsCreated?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutGeneratedByNestedInput
+  documentsUploaded?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutUploadedByNestedInput
+  teamProfile?: Prisma.TeamMemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  referralProfile?: Prisma.ReferralProfileUncheckedUpdateOneWithoutUserNestedInput
+  referralsGiven?: Prisma.ReferralAttributionUncheckedUpdateManyWithoutReferrerNestedInput
+  referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutReferrerNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutActorNestedInput
 }
 
 
@@ -11860,6 +12297,7 @@ export type UserCountOutputType = {
   referralsGiven: number
   referralCommissionEntries: number
   aiCreditUsages: number
+  aiGenerations: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -11903,6 +12341,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   referralsGiven?: boolean | UserCountOutputTypeCountReferralsGivenArgs
   referralCommissionEntries?: boolean | UserCountOutputTypeCountReferralCommissionEntriesArgs
   aiCreditUsages?: boolean | UserCountOutputTypeCountAiCreditUsagesArgs
+  aiGenerations?: boolean | UserCountOutputTypeCountAiGenerationsArgs
 }
 
 /**
@@ -12195,6 +12634,13 @@ export type UserCountOutputTypeCountAiCreditUsagesArgs<ExtArgs extends runtime.T
   where?: Prisma.AiCreditUsageWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAiGenerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AiGenerationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -12249,6 +12695,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   referralsGiven?: boolean | Prisma.User$referralsGivenArgs<ExtArgs>
   referralCommissionEntries?: boolean | Prisma.User$referralCommissionEntriesArgs<ExtArgs>
   aiCreditUsages?: boolean | Prisma.User$aiCreditUsagesArgs<ExtArgs>
+  aiGenerations?: boolean | Prisma.User$aiGenerationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -12329,6 +12776,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   referralsGiven?: boolean | Prisma.User$referralsGivenArgs<ExtArgs>
   referralCommissionEntries?: boolean | Prisma.User$referralCommissionEntriesArgs<ExtArgs>
   aiCreditUsages?: boolean | Prisma.User$aiCreditUsagesArgs<ExtArgs>
+  aiGenerations?: boolean | Prisma.User$aiGenerationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -12382,6 +12830,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     referralsGiven: Prisma.$ReferralAttributionPayload<ExtArgs>[]
     referralCommissionEntries: Prisma.$ReferralCommissionEntryPayload<ExtArgs>[]
     aiCreditUsages: Prisma.$AiCreditUsagePayload<ExtArgs>[]
+    aiGenerations: Prisma.$AiGenerationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -12830,6 +13279,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   referralsGiven<T extends Prisma.User$referralsGivenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referralsGivenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralAttributionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   referralCommissionEntries<T extends Prisma.User$referralCommissionEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referralCommissionEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralCommissionEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   aiCreditUsages<T extends Prisma.User$aiCreditUsagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$aiCreditUsagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AiCreditUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  aiGenerations<T extends Prisma.User$aiGenerationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$aiGenerationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AiGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14311,6 +14761,30 @@ export type User$aiCreditUsagesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.AiCreditUsageScalarFieldEnum | Prisma.AiCreditUsageScalarFieldEnum[]
+}
+
+/**
+ * User.aiGenerations
+ */
+export type User$aiGenerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AiGeneration
+   */
+  select?: Prisma.AiGenerationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AiGeneration
+   */
+  omit?: Prisma.AiGenerationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AiGenerationInclude<ExtArgs> | null
+  where?: Prisma.AiGenerationWhereInput
+  orderBy?: Prisma.AiGenerationOrderByWithRelationInput | Prisma.AiGenerationOrderByWithRelationInput[]
+  cursor?: Prisma.AiGenerationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AiGenerationScalarFieldEnum | Prisma.AiGenerationScalarFieldEnum[]
 }
 
 /**

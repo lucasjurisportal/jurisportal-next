@@ -9,6 +9,9 @@ import {
 } from "@/modules/publications/application/publication-service";
 import { CopyCnjButton } from "@/components/publications/CopyCnjButton";
 import { PublicationActions } from "@/components/publications/PublicationActions";
+import { PublicationAiSummary } from "@/components/publications/PublicationAiSummary";
+import { planHasCapability } from "@/modules/plans/application/plan-entitlements";
+import { estimatePublicationSummaryCredits } from "@/modules/ai/domain/publication-summary";
 import styles from "@/components/publications/Publications.module.css";
 
 function dateLabel(value: Date | null | undefined) {
@@ -74,6 +77,11 @@ export default async function PublicationDetailPage({ params }: { params: Promis
 
         {context.workspace.plan.slug !== "free" && publication.summary ? <div><h3>Resumo da comunicação</h3><p>{publication.summary}</p>
           <p className={styles.muted}>Trecho fiel do texto original, não é interpretação jurídica nem cálculo de prazo.</p></div> : null}
+        <PublicationAiSummary
+          publicationId={publication.id}
+          enabled={planHasCapability(context.workspace.plan.slug, "ai.publicationSummary")}
+          estimatedCredits={estimatePublicationSummaryCredits(publication.content ?? "")}
+        />
         {publication.sourceUrl ? <div><a href={publication.sourceUrl} target="_blank" rel="noopener noreferrer">Abrir link da fonte judicial</a></div> : null}
         <div><h3>Conteúdo integral</h3><div className={styles.content}>{publication.content || "Conteúdo não informado pelo DJeN."}</div></div>
       </div>

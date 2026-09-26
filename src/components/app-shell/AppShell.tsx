@@ -8,6 +8,7 @@ import { TopbarUserControls } from "./TopbarUserControls";
 import { ActivityGuard } from "@/components/team/ActivityGuard";
 import { ModuleGuide } from "@/components/help/ModuleGuide";
 import { DEFAULT_APP_THEME, THEME_EVENT, themeStorageKey, validAppTheme, type AppTheme } from "@/modules/appearance/domain/theme";
+import type { AiCreditBalance } from "@/modules/ai/domain/ai-credit-policy";
 import styles from "./AppShell.module.css";
 
 type Props = {
@@ -26,6 +27,7 @@ type Props = {
   processCount: number;
   processLimit: number | "unlimited";
   subscriptionStatus: string;
+  aiCreditBalance: AiCreditBalance;
 };
 
 const menu = [
@@ -39,6 +41,14 @@ const menu = [
   ["Modelos de petições", "/app/modelos", "▤"],
   ["Relatórios", "/app/relatorios", "≡"],
 ] as const;
+
+
+function CoinIcon() {
+  return <svg className={styles.creditCoinIcon} viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M8.7 9.2c.6-1 1.8-1.6 3.3-1.6 1.9 0 3.3.9 3.3 2.2 0 3-6.5 1.1-6.5 4.3 0 1.3 1.4 2.3 3.4 2.3 1.5 0 2.7-.5 3.5-1.5M12 5.8v12.4" />
+  </svg>;
+}
 
 function statusLabel(status: string) {
   if (status === "trialing") return "Período gratuito";
@@ -65,6 +75,7 @@ export function AppShell({
   processCount,
   processLimit,
   subscriptionStatus,
+  aiCreditBalance,
 }: Props) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -166,17 +177,29 @@ export function AppShell({
             <input placeholder="Buscar processo, cliente ou parte..." />
           </label>
 
-          <TopbarUserControls
-            userName={userName}
-            userEmail={userEmail}
-            userImage={userImage}
-            role={role}
-            organizationName={organizationName}
-            userOab={userOab}
-            jobTitle={jobTitle}
-            accessLevel={accessLevel}
-            sessionStartedAt={sessionStartedAt}
-          />
+          <div className={styles.topbarActions}>
+            {role === "owner" ? <Link
+              className={styles.creditPill}
+              href="/app/plano#creditos-ia"
+              title={`Créditos de IA: ${aiCreditBalance.available} disponíveis de ${aiCreditBalance.monthlyLimit} neste mês`}
+              aria-label={`Créditos de IA: ${aiCreditBalance.available} disponíveis de ${aiCreditBalance.monthlyLimit}`}
+            ><><span className={styles.creditCoin}><CoinIcon /></span><span className={styles.creditCopy}><small>Créditos IA</small><strong>{aiCreditBalance.available.toLocaleString("pt-BR")}</strong></span>{aiCreditBalance.monthlyLimit > 0 ? <span className={styles.creditLimit}>/{aiCreditBalance.monthlyLimit.toLocaleString("pt-BR")}</span> : null}</></Link> : <div
+              className={styles.creditPill}
+              title={`Créditos de IA do escritório: ${aiCreditBalance.available} disponíveis de ${aiCreditBalance.monthlyLimit} neste mês`}
+              aria-label={`Créditos de IA: ${aiCreditBalance.available} disponíveis de ${aiCreditBalance.monthlyLimit}`}
+            ><><span className={styles.creditCoin}><CoinIcon /></span><span className={styles.creditCopy}><small>Créditos IA</small><strong>{aiCreditBalance.available.toLocaleString("pt-BR")}</strong></span>{aiCreditBalance.monthlyLimit > 0 ? <span className={styles.creditLimit}>/{aiCreditBalance.monthlyLimit.toLocaleString("pt-BR")}</span> : null}</></div>}
+            <TopbarUserControls
+              userName={userName}
+              userEmail={userEmail}
+              userImage={userImage}
+              role={role}
+              organizationName={organizationName}
+              userOab={userOab}
+              jobTitle={jobTitle}
+              accessLevel={accessLevel}
+              sessionStartedAt={sessionStartedAt}
+            />
+          </div>
         </header>
 
         <main className={styles.content}>{children}</main>

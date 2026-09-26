@@ -78,6 +78,7 @@ export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, pl
   }
   const isFree = current.slug === "free";
   const fee = isFree ? 0 : currentCycle === "annual" ? getAnnualPrice(current) : getMonthlyPrice(current);
+  const aiUsedPercent = aiCreditBalance.monthlyLimit > 0 ? Math.min(100, Math.round(((aiCreditBalance.used + aiCreditBalance.reserved) / aiCreditBalance.monthlyLimit) * 100)) : 0;
   useEffect(() => {
     if (!modalOpen) return;
     const esc = (event: KeyboardEvent) => { if (event.key === "Escape") setModalOpen(false); };
@@ -127,13 +128,22 @@ export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, pl
     </section>
 
     <section className={styles.columns}>
-      <article className={styles.panel}>
-        <h2>Créditos de IA</h2>
-        <div className={styles.field}><span>Franquia mensal · {aiCreditBalance.periodKey}</span>
-          <strong>{credits(aiCreditBalance.monthlyLimit)} créditos</strong></div>
-        <div className={styles.field}><span>Saldo técnico disponível</span><strong>{credits(aiCreditBalance.available)}</strong></div>
-        <div className={styles.field}><span>Utilizados / reservados</span><strong>{credits(aiCreditBalance.used)} / {credits(aiCreditBalance.reserved)}</strong></div>
-        <p className={styles.help}>A contabilidade mensal já está preparada, mas os modelos e botões de IA ainda não estão ativados. Nenhuma cobrança ou compra é realizada aqui; pacotes extras serão definidos depois da homologação.</p>
+      <article className={`${styles.panel} ${styles.aiCreditPanel}`} id="creditos-ia">
+        <div className={styles.aiCreditHead}>
+          <div className={styles.aiCoinMark} aria-hidden="true"><span>J</span></div>
+          <div><span className={styles.eyebrow}>Inteligência assistiva</span><h2>Créditos de IA</h2><p>Seu saldo mensal para as ações de IA disponíveis no plano.</p></div>
+        </div>
+        <div className={styles.aiBalance}>
+          <div><span>Disponíveis agora</span><strong>{credits(aiCreditBalance.available)}</strong><small>de {credits(aiCreditBalance.monthlyLimit)} no mês</small></div>
+          <div className={styles.aiUsageBadge}><strong>{aiUsedPercent}%</strong><span>utilizado ou reservado</span></div>
+        </div>
+        <div className={styles.aiTrack} aria-label={`${aiUsedPercent}% dos créditos utilizados ou reservados`}><i style={{ width: `${aiUsedPercent}%` }} /></div>
+        <div className={styles.aiMiniStats}>
+          <span><b>{credits(aiCreditBalance.used)}</b> utilizados</span>
+          <span><b>{credits(aiCreditBalance.reserved)}</b> em processamento</span>
+          <span><b>{aiCreditBalance.periodKey}</b> competência</span>
+        </div>
+        <p className={styles.help}>O resumo assistido de publicações é a primeira ação preparada para homologação. Falhas do provedor liberam a reserva; nenhuma compra de créditos adicionais está ativa nesta fase.</p>
         <button type="button" className={styles.disabledButton} disabled>Comprar créditos (em breve)</button>
       </article>
       <article className={styles.panel}>

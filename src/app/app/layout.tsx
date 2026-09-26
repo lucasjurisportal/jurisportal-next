@@ -7,6 +7,7 @@ import { getCurrentWorkspace } from "@/modules/organizations/application/get-cur
 import { hasVerifiedSecondFactor } from "@/modules/security/application/session-guard";
 import { getUserSecurityState } from "@/modules/security/application/security-service";
 import { TRUSTED_DEVICE_COOKIE } from "@/modules/security/domain/security-policy";
+import { getAiCreditBalance } from "@/modules/ai/application/ai-credit-service";
 
 export default async function ProtectedAppLayout({ children }: { children: React.ReactNode }) {
   const requestHeaders = await headers();
@@ -39,7 +40,7 @@ export default async function ProtectedAppLayout({ children }: { children: React
 
   if (!workspace) redirect("/cadastro?retomar=1");
 
-  const [processCount, currentOab, currentSession] = await Promise.all([
+  const [processCount, currentOab, currentSession, aiCreditBalance] = await Promise.all([
     prisma.process.count({ where: { organizationId: workspace.organizationId } }),
     prisma.lawyerOab.findFirst({
       where: { organizationId: workspace.organizationId, userId: session.user.id, isActive: true },
@@ -47,6 +48,7 @@ export default async function ProtectedAppLayout({ children }: { children: React
       select: { rawNumber: true, state: true },
     }),
     prisma.session.findUnique({ where: { id: session.session.id }, select: { createdAt: true } }),
+    getAiCreditBalance(workspace.organizationId, workspace.plan.slug),
   ]);
 
   return (
@@ -65,6 +67,7 @@ export default async function ProtectedAppLayout({ children }: { children: React
       processCount={processCount}
       processLimit={workspace.plan.registeredProcessLimit}
       subscriptionStatus={workspace.subscription?.status ?? "unknown"}
+      aiCreditBalance={aiCreditBalance}
     >
       {children}
     </AppShell>

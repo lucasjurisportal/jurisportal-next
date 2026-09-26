@@ -99,7 +99,8 @@ export const ModelName = {
   PetitionGeneration: 'PetitionGeneration',
   OrganizationStorageUsage: 'OrganizationStorageUsage',
   ProcessDocument: 'ProcessDocument',
-  AiCreditUsage: 'AiCreditUsage'
+  AiCreditUsage: 'AiCreditUsage',
+  AiGeneration: 'AiGeneration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -983,6 +984,32 @@ export const AiCreditUsageScalarFieldEnum = {
 } as const
 
 export type AiCreditUsageScalarFieldEnum = (typeof AiCreditUsageScalarFieldEnum)[keyof typeof AiCreditUsageScalarFieldEnum]
+
+
+export const AiGenerationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  actorUserId: 'actorUserId',
+  publicationId: 'publicationId',
+  requestKey: 'requestKey',
+  action: 'action',
+  provider: 'provider',
+  model: 'model',
+  promptVersion: 'promptVersion',
+  status: 'status',
+  estimatedCredits: 'estimatedCredits',
+  chargedCredits: 'chargedCredits',
+  inputTokens: 'inputTokens',
+  outputTokens: 'outputTokens',
+  providerResponseId: 'providerResponseId',
+  output: 'output',
+  failureCode: 'failureCode',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AiGenerationScalarFieldEnum = (typeof AiGenerationScalarFieldEnum)[keyof typeof AiGenerationScalarFieldEnum]
 
 
 export const SortOrder = {

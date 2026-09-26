@@ -43,7 +43,9 @@
     "test:ai-credits": "tsx --test src/modules/ai/domain/ai-credit-policy.test.ts",
     "test:free-djen": "tsx --test src/modules/plans/domain/free-djen-policy.test.ts",
     "promo:issue:migration": "tsx scripts/promotions/issue-migration-code.ts",
-    "pilot:manage": "tsx scripts/promotions/manage-pilot.ts"
+    "pilot:manage": "tsx scripts/promotions/manage-pilot.ts",
+    "diagnose:ai": "tsx scripts/diagnostics/ai.ts",
+    "test:ai-publication": "tsx --test src/modules/ai/domain/publication-summary.test.ts"
   },
   "dependencies": {
     "next": "latest",

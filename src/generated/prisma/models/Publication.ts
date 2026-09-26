@@ -394,6 +394,7 @@ export type PublicationWhereInput = {
   recipients?: Prisma.PublicationRecipientListRelationFilter
   emailDeliveries?: Prisma.PublicationEmailDeliveryListRelationFilter
   deadlineReview?: Prisma.XOR<Prisma.DeadlineReviewNullableScalarRelationFilter, Prisma.DeadlineReviewWhereInput> | null
+  aiGenerations?: Prisma.AiGenerationListRelationFilter
 }
 
 export type PublicationOrderByWithRelationInput = {
@@ -436,6 +437,7 @@ export type PublicationOrderByWithRelationInput = {
   recipients?: Prisma.PublicationRecipientOrderByRelationAggregateInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryOrderByRelationAggregateInput
   deadlineReview?: Prisma.DeadlineReviewOrderByWithRelationInput
+  aiGenerations?: Prisma.AiGenerationOrderByRelationAggregateInput
 }
 
 export type PublicationWhereUniqueInput = Prisma.AtLeast<{
@@ -482,6 +484,7 @@ export type PublicationWhereUniqueInput = Prisma.AtLeast<{
   recipients?: Prisma.PublicationRecipientListRelationFilter
   emailDeliveries?: Prisma.PublicationEmailDeliveryListRelationFilter
   deadlineReview?: Prisma.XOR<Prisma.DeadlineReviewNullableScalarRelationFilter, Prisma.DeadlineReviewWhereInput> | null
+  aiGenerations?: Prisma.AiGenerationListRelationFilter
 }, "id" | "organizationId_source_externalKey">
 
 export type PublicationOrderByWithAggregationInput = {
@@ -596,6 +599,7 @@ export type PublicationCreateInput = {
   recipients?: Prisma.PublicationRecipientCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationUncheckedCreateInput = {
@@ -634,6 +638,7 @@ export type PublicationUncheckedCreateInput = {
   recipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationUpdateInput = {
@@ -672,6 +677,7 @@ export type PublicationUpdateInput = {
   recipients?: Prisma.PublicationRecipientUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateInput = {
@@ -710,6 +716,7 @@ export type PublicationUncheckedUpdateInput = {
   recipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationCreateManyInput = {
@@ -933,6 +940,11 @@ export type PublicationScalarRelationFilter = {
   isNot?: Prisma.PublicationWhereInput
 }
 
+export type PublicationNullableScalarRelationFilter = {
+  is?: Prisma.PublicationWhereInput | null
+  isNot?: Prisma.PublicationWhereInput | null
+}
+
 export type PublicationCreateNestedManyWithoutReadByInput = {
   create?: Prisma.XOR<Prisma.PublicationCreateWithoutReadByInput, Prisma.PublicationUncheckedCreateWithoutReadByInput> | Prisma.PublicationCreateWithoutReadByInput[] | Prisma.PublicationUncheckedCreateWithoutReadByInput[]
   connectOrCreate?: Prisma.PublicationCreateOrConnectWithoutReadByInput | Prisma.PublicationCreateOrConnectWithoutReadByInput[]
@@ -1143,6 +1155,22 @@ export type PublicationUpdateOneRequiredWithoutDeadlineReviewNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PublicationUpdateToOneWithWhereWithoutDeadlineReviewInput, Prisma.PublicationUpdateWithoutDeadlineReviewInput>, Prisma.PublicationUncheckedUpdateWithoutDeadlineReviewInput>
 }
 
+export type PublicationCreateNestedOneWithoutAiGenerationsInput = {
+  create?: Prisma.XOR<Prisma.PublicationCreateWithoutAiGenerationsInput, Prisma.PublicationUncheckedCreateWithoutAiGenerationsInput>
+  connectOrCreate?: Prisma.PublicationCreateOrConnectWithoutAiGenerationsInput
+  connect?: Prisma.PublicationWhereUniqueInput
+}
+
+export type PublicationUpdateOneWithoutAiGenerationsNestedInput = {
+  create?: Prisma.XOR<Prisma.PublicationCreateWithoutAiGenerationsInput, Prisma.PublicationUncheckedCreateWithoutAiGenerationsInput>
+  connectOrCreate?: Prisma.PublicationCreateOrConnectWithoutAiGenerationsInput
+  upsert?: Prisma.PublicationUpsertWithoutAiGenerationsInput
+  disconnect?: Prisma.PublicationWhereInput | boolean
+  delete?: Prisma.PublicationWhereInput | boolean
+  connect?: Prisma.PublicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PublicationUpdateToOneWithWhereWithoutAiGenerationsInput, Prisma.PublicationUpdateWithoutAiGenerationsInput>, Prisma.PublicationUncheckedUpdateWithoutAiGenerationsInput>
+}
+
 export type PublicationCreateWithoutReadByInput = {
   id?: string
   source?: string
@@ -1178,6 +1206,7 @@ export type PublicationCreateWithoutReadByInput = {
   recipients?: Prisma.PublicationRecipientCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationUncheckedCreateWithoutReadByInput = {
@@ -1215,6 +1244,7 @@ export type PublicationUncheckedCreateWithoutReadByInput = {
   recipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationCreateOrConnectWithoutReadByInput = {
@@ -1262,6 +1292,7 @@ export type PublicationCreateWithoutTreatedByInput = {
   recipients?: Prisma.PublicationRecipientCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationUncheckedCreateWithoutTreatedByInput = {
@@ -1299,6 +1330,7 @@ export type PublicationUncheckedCreateWithoutTreatedByInput = {
   recipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationCreateOrConnectWithoutTreatedByInput = {
@@ -1416,6 +1448,7 @@ export type PublicationCreateWithoutOrganizationInput = {
   recipients?: Prisma.PublicationRecipientCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationUncheckedCreateWithoutOrganizationInput = {
@@ -1453,6 +1486,7 @@ export type PublicationUncheckedCreateWithoutOrganizationInput = {
   recipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationCreateOrConnectWithoutOrganizationInput = {
@@ -1516,6 +1550,7 @@ export type PublicationCreateWithoutProcessInput = {
   recipients?: Prisma.PublicationRecipientCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationUncheckedCreateWithoutProcessInput = {
@@ -1553,6 +1588,7 @@ export type PublicationUncheckedCreateWithoutProcessInput = {
   recipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationCreateOrConnectWithoutProcessInput = {
@@ -1616,6 +1652,7 @@ export type PublicationCreateWithoutRecipientsInput = {
   treatedBy?: Prisma.UserCreateNestedOneWithoutPublicationsTreatedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationUncheckedCreateWithoutRecipientsInput = {
@@ -1653,6 +1690,7 @@ export type PublicationUncheckedCreateWithoutRecipientsInput = {
   updatedAt?: Date | string
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationCreateOrConnectWithoutRecipientsInput = {
@@ -1706,6 +1744,7 @@ export type PublicationUpdateWithoutRecipientsInput = {
   treatedBy?: Prisma.UserUpdateOneWithoutPublicationsTreatedNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateWithoutRecipientsInput = {
@@ -1743,6 +1782,7 @@ export type PublicationUncheckedUpdateWithoutRecipientsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationCreateWithoutEmailDeliveriesInput = {
@@ -1780,6 +1820,7 @@ export type PublicationCreateWithoutEmailDeliveriesInput = {
   treatedBy?: Prisma.UserCreateNestedOneWithoutPublicationsTreatedInput
   recipients?: Prisma.PublicationRecipientCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationUncheckedCreateWithoutEmailDeliveriesInput = {
@@ -1817,6 +1858,7 @@ export type PublicationUncheckedCreateWithoutEmailDeliveriesInput = {
   updatedAt?: Date | string
   recipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutPublicationInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedCreateNestedOneWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationCreateOrConnectWithoutEmailDeliveriesInput = {
@@ -1870,6 +1912,7 @@ export type PublicationUpdateWithoutEmailDeliveriesInput = {
   treatedBy?: Prisma.UserUpdateOneWithoutPublicationsTreatedNestedInput
   recipients?: Prisma.PublicationRecipientUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateWithoutEmailDeliveriesInput = {
@@ -1907,6 +1950,7 @@ export type PublicationUncheckedUpdateWithoutEmailDeliveriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationCreateWithoutDeadlineReviewInput = {
@@ -1944,6 +1988,7 @@ export type PublicationCreateWithoutDeadlineReviewInput = {
   treatedBy?: Prisma.UserCreateNestedOneWithoutPublicationsTreatedInput
   recipients?: Prisma.PublicationRecipientCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationUncheckedCreateWithoutDeadlineReviewInput = {
@@ -1981,6 +2026,7 @@ export type PublicationUncheckedCreateWithoutDeadlineReviewInput = {
   updatedAt?: Date | string
   recipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutPublicationInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutPublicationInput
+  aiGenerations?: Prisma.AiGenerationUncheckedCreateNestedManyWithoutPublicationInput
 }
 
 export type PublicationCreateOrConnectWithoutDeadlineReviewInput = {
@@ -2034,6 +2080,7 @@ export type PublicationUpdateWithoutDeadlineReviewInput = {
   treatedBy?: Prisma.UserUpdateOneWithoutPublicationsTreatedNestedInput
   recipients?: Prisma.PublicationRecipientUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateWithoutDeadlineReviewInput = {
@@ -2071,6 +2118,175 @@ export type PublicationUncheckedUpdateWithoutDeadlineReviewInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutPublicationNestedInput
+}
+
+export type PublicationCreateWithoutAiGenerationsInput = {
+  id?: string
+  source?: string
+  externalKey: string
+  externalId?: string | null
+  sourceHash?: string | null
+  kind: string
+  communicationType: string
+  documentType?: string | null
+  court?: string | null
+  judicialBody?: string | null
+  processNumberRaw?: string | null
+  processNumberNormalized?: string | null
+  processNumberFormatted?: string | null
+  publicationDate: Date | string
+  processMetadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  content: string
+  summary?: string | null
+  parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceUrl?: string | null
+  sourceStatus?: string
+  cancellationReason?: string | null
+  capturedAt?: Date | string
+  lastSeenAt?: Date | string
+  readAt?: Date | string | null
+  treatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutPublicationsInput
+  process?: Prisma.ProcessCreateNestedOneWithoutPublicationsInput
+  readBy?: Prisma.UserCreateNestedOneWithoutPublicationsReadInput
+  treatedBy?: Prisma.UserCreateNestedOneWithoutPublicationsTreatedInput
+  recipients?: Prisma.PublicationRecipientCreateNestedManyWithoutPublicationInput
+  emailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutPublicationInput
+  deadlineReview?: Prisma.DeadlineReviewCreateNestedOneWithoutPublicationInput
+}
+
+export type PublicationUncheckedCreateWithoutAiGenerationsInput = {
+  id?: string
+  organizationId: string
+  processId?: string | null
+  source?: string
+  externalKey: string
+  externalId?: string | null
+  sourceHash?: string | null
+  kind: string
+  communicationType: string
+  documentType?: string | null
+  court?: string | null
+  judicialBody?: string | null
+  processNumberRaw?: string | null
+  processNumberNormalized?: string | null
+  processNumberFormatted?: string | null
+  publicationDate: Date | string
+  processMetadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  content: string
+  summary?: string | null
+  parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceUrl?: string | null
+  sourceStatus?: string
+  cancellationReason?: string | null
+  capturedAt?: Date | string
+  lastSeenAt?: Date | string
+  readAt?: Date | string | null
+  readByUserId?: string | null
+  treatedAt?: Date | string | null
+  treatedByUserId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  recipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutPublicationInput
+  emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutPublicationInput
+  deadlineReview?: Prisma.DeadlineReviewUncheckedCreateNestedOneWithoutPublicationInput
+}
+
+export type PublicationCreateOrConnectWithoutAiGenerationsInput = {
+  where: Prisma.PublicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.PublicationCreateWithoutAiGenerationsInput, Prisma.PublicationUncheckedCreateWithoutAiGenerationsInput>
+}
+
+export type PublicationUpsertWithoutAiGenerationsInput = {
+  update: Prisma.XOR<Prisma.PublicationUpdateWithoutAiGenerationsInput, Prisma.PublicationUncheckedUpdateWithoutAiGenerationsInput>
+  create: Prisma.XOR<Prisma.PublicationCreateWithoutAiGenerationsInput, Prisma.PublicationUncheckedCreateWithoutAiGenerationsInput>
+  where?: Prisma.PublicationWhereInput
+}
+
+export type PublicationUpdateToOneWithWhereWithoutAiGenerationsInput = {
+  where?: Prisma.PublicationWhereInput
+  data: Prisma.XOR<Prisma.PublicationUpdateWithoutAiGenerationsInput, Prisma.PublicationUncheckedUpdateWithoutAiGenerationsInput>
+}
+
+export type PublicationUpdateWithoutAiGenerationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  externalKey?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
+  communicationType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  judicialBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processNumberRaw?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processNumberNormalized?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  processMetadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capturedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  treatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutPublicationsNestedInput
+  process?: Prisma.ProcessUpdateOneWithoutPublicationsNestedInput
+  readBy?: Prisma.UserUpdateOneWithoutPublicationsReadNestedInput
+  treatedBy?: Prisma.UserUpdateOneWithoutPublicationsTreatedNestedInput
+  recipients?: Prisma.PublicationRecipientUpdateManyWithoutPublicationNestedInput
+  emailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutPublicationNestedInput
+  deadlineReview?: Prisma.DeadlineReviewUpdateOneWithoutPublicationNestedInput
+}
+
+export type PublicationUncheckedUpdateWithoutAiGenerationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  processId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  externalKey?: Prisma.StringFieldUpdateOperationsInput | string
+  externalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kind?: Prisma.StringFieldUpdateOperationsInput | string
+  communicationType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  court?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  judicialBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processNumberRaw?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processNumberNormalized?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  processNumberFormatted?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicationDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  processMetadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parties?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  explicitDates?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  cancellationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capturedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  readByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  treatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  treatedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutPublicationNestedInput
+  emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutPublicationNestedInput
+  deadlineReview?: Prisma.DeadlineReviewUncheckedUpdateOneWithoutPublicationNestedInput
 }
 
 export type PublicationCreateManyReadByInput = {
@@ -2176,6 +2392,7 @@ export type PublicationUpdateWithoutReadByInput = {
   recipients?: Prisma.PublicationRecipientUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateWithoutReadByInput = {
@@ -2213,6 +2430,7 @@ export type PublicationUncheckedUpdateWithoutReadByInput = {
   recipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateManyWithoutReadByInput = {
@@ -2284,6 +2502,7 @@ export type PublicationUpdateWithoutTreatedByInput = {
   recipients?: Prisma.PublicationRecipientUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateWithoutTreatedByInput = {
@@ -2321,6 +2540,7 @@ export type PublicationUncheckedUpdateWithoutTreatedByInput = {
   recipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateManyWithoutTreatedByInput = {
@@ -2426,6 +2646,7 @@ export type PublicationUpdateWithoutOrganizationInput = {
   recipients?: Prisma.PublicationRecipientUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateWithoutOrganizationInput = {
@@ -2463,6 +2684,7 @@ export type PublicationUncheckedUpdateWithoutOrganizationInput = {
   recipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateManyWithoutOrganizationInput = {
@@ -2568,6 +2790,7 @@ export type PublicationUpdateWithoutProcessInput = {
   recipients?: Prisma.PublicationRecipientUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateWithoutProcessInput = {
@@ -2605,6 +2828,7 @@ export type PublicationUncheckedUpdateWithoutProcessInput = {
   recipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutPublicationNestedInput
   emailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutPublicationNestedInput
   deadlineReview?: Prisma.DeadlineReviewUncheckedUpdateOneWithoutPublicationNestedInput
+  aiGenerations?: Prisma.AiGenerationUncheckedUpdateManyWithoutPublicationNestedInput
 }
 
 export type PublicationUncheckedUpdateManyWithoutProcessInput = {
@@ -2649,11 +2873,13 @@ export type PublicationUncheckedUpdateManyWithoutProcessInput = {
 export type PublicationCountOutputType = {
   recipients: number
   emailDeliveries: number
+  aiGenerations: number
 }
 
 export type PublicationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recipients?: boolean | PublicationCountOutputTypeCountRecipientsArgs
   emailDeliveries?: boolean | PublicationCountOutputTypeCountEmailDeliveriesArgs
+  aiGenerations?: boolean | PublicationCountOutputTypeCountAiGenerationsArgs
 }
 
 /**
@@ -2678,6 +2904,13 @@ export type PublicationCountOutputTypeCountRecipientsArgs<ExtArgs extends runtim
  */
 export type PublicationCountOutputTypeCountEmailDeliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PublicationEmailDeliveryWhereInput
+}
+
+/**
+ * PublicationCountOutputType without action
+ */
+export type PublicationCountOutputTypeCountAiGenerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AiGenerationWhereInput
 }
 
 
@@ -2721,6 +2954,7 @@ export type PublicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   recipients?: boolean | Prisma.Publication$recipientsArgs<ExtArgs>
   emailDeliveries?: boolean | Prisma.Publication$emailDeliveriesArgs<ExtArgs>
   deadlineReview?: boolean | Prisma.Publication$deadlineReviewArgs<ExtArgs>
+  aiGenerations?: boolean | Prisma.Publication$aiGenerationsArgs<ExtArgs>
   _count?: boolean | Prisma.PublicationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["publication"]>
 
@@ -2846,6 +3080,7 @@ export type PublicationInclude<ExtArgs extends runtime.Types.Extensions.Internal
   recipients?: boolean | Prisma.Publication$recipientsArgs<ExtArgs>
   emailDeliveries?: boolean | Prisma.Publication$emailDeliveriesArgs<ExtArgs>
   deadlineReview?: boolean | Prisma.Publication$deadlineReviewArgs<ExtArgs>
+  aiGenerations?: boolean | Prisma.Publication$aiGenerationsArgs<ExtArgs>
   _count?: boolean | Prisma.PublicationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PublicationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2871,6 +3106,7 @@ export type $PublicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     recipients: Prisma.$PublicationRecipientPayload<ExtArgs>[]
     emailDeliveries: Prisma.$PublicationEmailDeliveryPayload<ExtArgs>[]
     deadlineReview: Prisma.$DeadlineReviewPayload<ExtArgs> | null
+    aiGenerations: Prisma.$AiGenerationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3306,6 +3542,7 @@ export interface Prisma__PublicationClient<T, Null = never, ExtArgs extends runt
   recipients<T extends Prisma.Publication$recipientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Publication$recipientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PublicationRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailDeliveries<T extends Prisma.Publication$emailDeliveriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Publication$emailDeliveriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PublicationEmailDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deadlineReview<T extends Prisma.Publication$deadlineReviewArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Publication$deadlineReviewArgs<ExtArgs>>): Prisma.Prisma__DeadlineReviewClient<runtime.Types.Result.GetResult<Prisma.$DeadlineReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  aiGenerations<T extends Prisma.Publication$aiGenerationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Publication$aiGenerationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AiGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3889,6 +4126,30 @@ export type Publication$deadlineReviewArgs<ExtArgs extends runtime.Types.Extensi
    */
   include?: Prisma.DeadlineReviewInclude<ExtArgs> | null
   where?: Prisma.DeadlineReviewWhereInput
+}
+
+/**
+ * Publication.aiGenerations
+ */
+export type Publication$aiGenerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AiGeneration
+   */
+  select?: Prisma.AiGenerationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AiGeneration
+   */
+  omit?: Prisma.AiGenerationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AiGenerationInclude<ExtArgs> | null
+  where?: Prisma.AiGenerationWhereInput
+  orderBy?: Prisma.AiGenerationOrderByWithRelationInput | Prisma.AiGenerationOrderByWithRelationInput[]
+  cursor?: Prisma.AiGenerationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AiGenerationScalarFieldEnum | Prisma.AiGenerationScalarFieldEnum[]
 }
 
 /**

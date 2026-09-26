@@ -307,3 +307,8 @@ export type ProcessDocument = Prisma.ProcessDocumentModel
  * Créditos mensais consumidos por organização. Não realiza chamada de modelo ou venda de pacote.
  */
 export type AiCreditUsage = Prisma.AiCreditUsageModel
+/**
+ * Model AiGeneration
+ * Resultado auditável de uma ação de IA. O conteúdo-fonte não é duplicado aqui.
+ */
+export type AiGeneration = Prisma.AiGenerationModel

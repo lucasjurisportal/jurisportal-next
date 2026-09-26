@@ -445,7 +445,8 @@ export const ModelName = {
   PetitionGeneration: 'PetitionGeneration',
   OrganizationStorageUsage: 'OrganizationStorageUsage',
   ProcessDocument: 'ProcessDocument',
-  AiCreditUsage: 'AiCreditUsage'
+  AiCreditUsage: 'AiCreditUsage',
+  AiGeneration: 'AiGeneration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -461,7 +462,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "promotionCode" | "referralProfile" | "referralAttribution" | "referralCommissionEntry" | "pilotAccess" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processExternalMovement" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "publicationEmailDelivery" | "djenReviewCandidate" | "djenCaptureCursor" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument" | "aiCreditUsage"
+    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "promotionCode" | "referralProfile" | "referralAttribution" | "referralCommissionEntry" | "pilotAccess" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processExternalMovement" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "publicationEmailDelivery" | "djenReviewCandidate" | "djenCaptureCursor" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument" | "aiCreditUsage" | "aiGeneration"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4091,6 +4092,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AiGeneration: {
+      payload: Prisma.$AiGenerationPayload<ExtArgs>
+      fields: Prisma.AiGenerationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AiGenerationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AiGenerationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload>
+        }
+        findFirst: {
+          args: Prisma.AiGenerationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AiGenerationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload>
+        }
+        findMany: {
+          args: Prisma.AiGenerationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload>[]
+        }
+        create: {
+          args: Prisma.AiGenerationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload>
+        }
+        createMany: {
+          args: Prisma.AiGenerationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AiGenerationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload>[]
+        }
+        delete: {
+          args: Prisma.AiGenerationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload>
+        }
+        update: {
+          args: Prisma.AiGenerationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload>
+        }
+        deleteMany: {
+          args: Prisma.AiGenerationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AiGenerationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AiGenerationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload>[]
+        }
+        upsert: {
+          args: Prisma.AiGenerationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiGenerationPayload>
+        }
+        aggregate: {
+          args: Prisma.AiGenerationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAiGeneration>
+        }
+        groupBy: {
+          args: Prisma.AiGenerationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AiGenerationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AiGenerationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AiGenerationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4997,6 +5072,32 @@ export const AiCreditUsageScalarFieldEnum = {
 export type AiCreditUsageScalarFieldEnum = (typeof AiCreditUsageScalarFieldEnum)[keyof typeof AiCreditUsageScalarFieldEnum]
 
 
+export const AiGenerationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  actorUserId: 'actorUserId',
+  publicationId: 'publicationId',
+  requestKey: 'requestKey',
+  action: 'action',
+  provider: 'provider',
+  model: 'model',
+  promptVersion: 'promptVersion',
+  status: 'status',
+  estimatedCredits: 'estimatedCredits',
+  chargedCredits: 'chargedCredits',
+  inputTokens: 'inputTokens',
+  outputTokens: 'outputTokens',
+  providerResponseId: 'providerResponseId',
+  output: 'output',
+  failureCode: 'failureCode',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AiGenerationScalarFieldEnum = (typeof AiGenerationScalarFieldEnum)[keyof typeof AiGenerationScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -5355,6 +5456,7 @@ export type GlobalOmitConfig = {
   organizationStorageUsage?: Prisma.OrganizationStorageUsageOmit
   processDocument?: Prisma.ProcessDocumentOmit
   aiCreditUsage?: Prisma.AiCreditUsageOmit
+  aiGeneration?: Prisma.AiGenerationOmit
 }
 
 /* Types for Logging */
