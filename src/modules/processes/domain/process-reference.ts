@@ -6,9 +6,44 @@ export function formatInternalProcessCode(year: number, sequence: number) {
 
 export function saoPauloYear(now = new Date()) {
   return Number(new Intl.DateTimeFormat("en", {
-    timeZone: "America/Sao_Paulo",
-    year: "numeric",
+    timeZone: "America/Sao_Paulo", year: "numeric",
   }).format(now));
+}
+
+export type ProcessDisplayParty = { name: string; role?: string | null };
+export type ProcessDisplayClient = { name: string; partyRole?: string | null };
+
+function normalized(value?: string | null) {
+  return (value ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+/** Classificação apenas para escolher um nome na CAPA, nunca para inferir o polo processual no banco. */
+function side(role?: string | null): "claimant" | "respondent" | null {
+  const value = normalized(role);
+  if (["autor", "autora", "requerente", "exequente", "reclamante", "apelante", "recorrente", "impetrante", "agravante"].includes(value)) return "claimant";
+  if (["reu", "re", "requerido", "requerida", "executado", "executada", "reclamado", "reclamada", "apelado", "apelada", "recorrido", "recorrida", "impetrado", "impetrada", "agravado", "agravada"].includes(value)) return "respondent";
+  return null;
+}
+
+/**
+ * Nunca pega cegamente parties[0]: a importação pode conter o próprio cliente e litisconsortes.
+ * Se os polos forem ambíguos e houver mais de um nome, não inventa qual é o adversário.
+ */
+export function selectOpposingPartyName(input: {
+  representedClients: ProcessDisplayClient[];
+  otherParties: ProcessDisplayParty[];
+}): string | null {
+  const represented = new Set(input.representedClients.map((client) => normalized(client.name)).filter(Boolean));
+  const candidates = input.otherParties.filter((party) => normalized(party.name) && !represented.has(normalized(party.name)));
+  if (!candidates.length) return null;
+  const primarySide = side(input.representedClients[0]?.partyRole);
+  if (primarySide) {
+    const matching = candidates.filter((party) => side(party.role) && side(party.role) !== primarySide);
+    if (matching.length) return matching[0].name.trim();
+    // Não apresentar um litisconsorte do mesmo polo como adversário.
+    if (candidates.some((party) => side(party.role) === primarySide)) return null;
+  }
+  return candidates.length === 1 ? candidates[0].name.trim() : null;
 }
 
 export function buildProcessDisplayReference(input: {
@@ -16,10 +51,7 @@ export function buildProcessDisplayReference(input: {
   primaryClientName?: string | null;
   opposingPartyName?: string | null;
 }) {
-  const primary = input.primaryClientName?.trim();
-  const opposing = input.opposingPartyName?.trim();
-  if (primary && opposing) return `${input.internalCode} - ${primary} x ${opposing}`;
-  if (primary) return `${input.internalCode} - ${primary}`;
-  if (opposing) return `${input.internalCode} - ${opposing}`;
-  return input.internalCode;
+  const primary = input.primaryClientName?.trim() || "Cliente não informado";
+  const opposing = input.opposingPartyName?.trim() || "Parte contrária não cadastrada";
+  return `${input.internalCode} - ${primary} X ${opposing}`;
 }

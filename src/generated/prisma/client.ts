@@ -88,6 +88,35 @@ export type TeamMemberProfile = Prisma.TeamMemberProfileModel
  */
 export type Subscription = Prisma.SubscriptionModel
 /**
+ * Model PromotionCode
+ * Cupom individual do programa de migração. Somente hash do código é persistido.
+ * Resgate apenas quando a PRIMEIRA cobrança for confirmada; preview não consome cupom.
+ */
+export type PromotionCode = Prisma.PromotionCodeModel
+/**
+ * Model ReferralProfile
+ * Código fixo de convite de cada usuário. Código público não autoriza acesso a dados.
+ */
+export type ReferralProfile = Prisma.ReferralProfileModel
+/**
+ * Model ReferralAttribution
+ * Um escritório convidado só pode possuir UM indicador de referência.
+ * Nenhuma API pública pode preencher firstPaidAt ou firstPaymentId.
+ */
+export type ReferralAttribution = Prisma.ReferralAttributionModel
+/**
+ * Model ReferralCommissionEntry
+ * Registro de cada mensalidade de indicado, separado da primeira indicação e imutável por competência.
+ * Somente o futuro conciliador financeiro poderá criar/qualificar/baixar um lançamento.
+ */
+export type ReferralCommissionEntry = Prisma.ReferralCommissionEntryModel
+/**
+ * Model PilotAccess
+ * Teste controlado: acesso gratuito temporário, isolado por organização.
+ * Não converte assinatura nem confirma pagamento.
+ */
+export type PilotAccess = Prisma.PilotAccessModel
+/**
  * Model AuditEvent
  * Registro append-only de eventos sensíveis e operacionais relevantes.
  */

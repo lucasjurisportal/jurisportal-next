@@ -1,0 +1,17 @@
+prisma/schema.prisma
+prisma/migrations/20260925233000_v60_referral_commission_ledger/migration.sql
+package.json
+src/modules/processes/domain/process-reference.ts
+src/modules/processes/domain/process-reference.test.ts
+src/modules/processes/application/process-service.ts
+src/app/app/processos/page.tsx
+src/app/app/processos/[id]/page.tsx
+src/modules/promotions/domain/referrals.ts
+src/modules/promotions/domain/referrals.test.ts
+src/modules/promotions/domain/referral-bonus.ts
+src/modules/promotions/domain/referral-bonus.test.ts
+src/app/api/referrals/me/route.ts
+src/components/promotions/ReferralCodeCard.tsx
+src/components/promotions/ReferralCodeCard.module.css
+docs/blocos/60-processos-bonus-mensal-indicacoes.md
+docs/blocos/60-arquivos-patch.txt

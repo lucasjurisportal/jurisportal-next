@@ -13,7 +13,7 @@ import { isPlatformMaster } from "@/modules/security/application/platform-admin"
 import { listProcessPublications } from "@/modules/publications/application/publication-service";
 import styles from "@/components/processes/Processes.module.css";
 import pubStyles from "@/components/publications/Publications.module.css";
-import { buildProcessDisplayReference } from "@/modules/processes/domain/process-reference";
+import { buildProcessDisplayReference, selectOpposingPartyName } from "@/modules/processes/domain/process-reference";
 import { auditActionLabel, auditCategoryLabel, operationalSourceLabel } from "@/shared/audit/audit-labels";
 import { listProcessDocuments } from "@/modules/documents/application/document-service";
 import { ProcessDocuments } from "@/components/documents/ProcessDocuments";
@@ -99,7 +99,10 @@ export default async function ProcessDetailPage({
   const processReference = buildProcessDisplayReference({
     internalCode: process.internalCode,
     primaryClientName: primaryClient?.tradeName || primaryClient?.name,
-    opposingPartyName: process.parties[0]?.name,
+    opposingPartyName: selectOpposingPartyName({
+      representedClients: process.clients.flatMap((link) => [{ name: link.client.tradeName || link.client.name, partyRole: link.partyRole }, ...(link.client.tradeName ? [{ name: link.client.name, partyRole: link.partyRole }] : [])]),
+      otherParties: process.parties,
+    }),
   });
 
   return (
@@ -166,7 +169,7 @@ export default async function ProcessDetailPage({
       {tab === "publicacoes" ? <section className={styles.panel}>
         <div className={styles.processPanelHead}><div><span className={styles.eyebrow}>DJeN</span><h2>Publicações e intimações</h2><p>Comunicações reais vinculadas a este CNJ.</p></div><Link className={styles.secondaryButton} href="/app/publicacoes">Abrir central de publicações</Link></div>
         {processPublications.length === 0 ? <div className={styles.empty}><p>Nenhuma publicação ou intimação vinculada a este processo.</p></div> : <div className={styles.workItemList}>{processPublications.map((publication) => <article key={publication.id} className={styles.workItem}>
-          <div><span className={publication.kind === "INTIMATION" ? pubStyles.badgeIntimation : pubStyles.badgePublication}>{publication.kind === "INTIMATION" ? "Intimação" : "Publicação"}</span><strong>{publication.communicationType}</strong><p>{dateOnly(publication.publicationDate)} · {publication.court || "Tribunal não informado"}{publication.judicialBody ? ` · ${publication.judicialBody}` : ""}</p><small>{publication.summary || publication.content.slice(0, 220)}</small></div>
+          <div><span className={publication.kind === "INTIMATION" ? pubStyles.badgeIntimation : pubStyles.badgePublication}>{publication.kind === "INTIMATION" ? "Intimação" : "Publicação"}</span><strong>{publication.communicationType}</strong><p>{dateOnly(publication.publicationDate)} · {publication.court || "Tribunal não informado"}{publication.judicialBody ? ` · ${publication.judicialBody}` : ""}</p><small>{context.workspace.plan.slug === "free" ? "Abra para ler a comunicação original" : publication.summary || publication.content.slice(0, 220)}</small></div>
           <div className={styles.workItemRight}>{publication.deadlineReview?.status === "PENDING_REVIEW" ? <span className={pubStyles.badgeReview}>Revisar prazo</span> : null}<Link className={styles.secondaryButton} href={`/app/publicacoes/${publication.id}`}>Abrir</Link></div>
         </article>)}</div>}
       </section> : null}

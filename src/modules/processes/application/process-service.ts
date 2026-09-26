@@ -100,7 +100,6 @@ const listInclude = {
   },
   parties: {
     orderBy: [{ createdAt: "asc" }],
-    take: 1,
     select: { id: true, name: true, role: true },
   },
   _count: { select: { parties: true, timeline: true } },

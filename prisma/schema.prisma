@@ -58,6 +58,9 @@ model User {
   petitionGenerationsCreated PetitionGeneration[] @relation("PetitionGenerationCreatedBy")
   documentsUploaded ProcessDocument[] @relation("ProcessDocumentUploadedBy")
   teamProfile TeamMemberProfile?
+  referralProfile ReferralProfile?
+  referralsGiven ReferralAttribution[] @relation("ReferralInviter")
+  referralCommissionEntries ReferralCommissionEntry[] @relation("ReferralCommissionRecipient")
 
   @@map("user")
 }
@@ -160,6 +163,10 @@ model Organization {
   teamMemberProfiles TeamMemberProfile[]
   processDocuments ProcessDocument[]
   storageUsage OrganizationStorageUsage?
+  promotionCodes PromotionCode[]
+  pilotAccess PilotAccess?
+  referralAttribution ReferralAttribution?
+  referralCommissionEntries ReferralCommissionEntry[] @relation("ReferralCommissionInvitedOrg")
 
   @@map("organization")
 }
@@ -246,6 +253,96 @@ model Subscription {
   @@index([planSlug])
   @@index([status])
   @@map("subscription")
+}
+
+/// Cupom individual do programa de migração. Somente hash do código é persistido.
+/// Resgate apenas quando a PRIMEIRA cobrança for confirmada; preview não consome cupom.
+model PromotionCode {
+  id                   String    @id @default(uuid()) @db.Uuid
+  organizationId       String    @db.Uuid
+  codeHash             String    @unique
+  campaign             String    @default("LEGACY_MIGRATION")
+  discountPercent      Int       @default(20)
+  expiresAt            DateTime
+  issuedAt             DateTime  @default(now())
+  redeemedAt           DateTime?
+  redeemedPaymentId    String?   @unique
+  revokedAt            DateTime?
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  @@unique([organizationId, campaign])
+  @@index([organizationId, expiresAt])
+  @@map("promotion_code")
+}
+
+/// Código fixo de convite de cada usuário. Código público não autoriza acesso a dados.
+model ReferralProfile {
+  userId    String   @id @db.Uuid
+  code      String   @unique
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("referral_profile")
+}
+
+/// Um escritório convidado só pode possuir UM indicador de referência.
+/// Nenhuma API pública pode preencher firstPaidAt ou firstPaymentId.
+model ReferralAttribution {
+  id                    String    @id @default(uuid()) @db.Uuid
+  invitedOrganizationId String    @unique @db.Uuid
+  referrerUserId        String    @db.Uuid
+  status                String    @default("AWAITING_PAYMENT")
+  discountPercent       Int       @default(10)
+  claimedAt             DateTime  @default(now())
+  firstPaidAt           DateTime?
+  firstPaymentId        String?   @unique
+  revokedAt             DateTime?
+
+  invitedOrganization Organization @relation(fields: [invitedOrganizationId], references: [id], onDelete: Cascade)
+  referrer User @relation("ReferralInviter", fields: [referrerUserId], references: [id], onDelete: Restrict)
+  @@index([referrerUserId, firstPaidAt])
+  @@map("referral_attribution")
+}
+
+/// Registro de cada mensalidade de indicado, separado da primeira indicação e imutável por competência.
+/// Somente o futuro conciliador financeiro poderá criar/qualificar/baixar um lançamento.
+model ReferralCommissionEntry {
+  id                     String    @id @default(uuid()) @db.Uuid
+  referrerUserId         String    @db.Uuid
+  invitedOrganizationId  String    @db.Uuid
+  externalPaymentId      String    @unique
+  competenceMonth        DateTime  @db.Date
+  paymentReceivedAt      DateTime
+  eligibleAt             DateTime?
+  amountCents            Int       @default(3000)
+  status                 String    @default("PENDING_REVIEW")
+  settledAt              DateTime?
+  transferReference      String?   @unique
+  reversedAt             DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  referrer User @relation("ReferralCommissionRecipient", fields: [referrerUserId], references: [id], onDelete: Restrict)
+  invitedOrganization Organization @relation("ReferralCommissionInvitedOrg", fields: [invitedOrganizationId], references: [id], onDelete: Restrict)
+
+  @@unique([invitedOrganizationId, competenceMonth])
+  @@index([referrerUserId, competenceMonth, status])
+  @@map("referral_commission_entry")
+}
+
+/// Teste controlado: acesso gratuito temporário, isolado por organização.
+/// Não converte assinatura nem confirma pagamento.
+model PilotAccess {
+  id             String   @id @default(uuid()) @db.Uuid
+  organizationId String   @unique @db.Uuid
+  planSlug       String
+  expiresAt      DateTime
+  grantedAt      DateTime @default(now())
+  revokedAt      DateTime?
+  note           String?
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  @@map("pilot_access")
 }
 
 /// Registro append-only de eventos sensíveis e operacionais relevantes.

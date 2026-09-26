@@ -38,7 +38,11 @@
     "audit:tenant-isolation": "tsx scripts/security/audit-tenant-isolation.ts",
     "test:publication-email": "tsx --test src/modules/publications/domain/publication-email-batches.test.ts src/modules/publications/domain/publication-digest.test.ts src/modules/publications/domain/publication-email-config.test.ts",
     "test:appearance": "tsx --test src/modules/appearance/domain/theme.test.ts",
-    "diagnose:publication-email": "tsx scripts/diagnostics/publication-email.ts"
+    "diagnose:publication-email": "tsx scripts/diagnostics/publication-email.ts",
+    "test:promotions": "tsx --test src/modules/promotions/domain/promotion.test.ts src/modules/promotions/domain/referrals.test.ts src/modules/promotions/domain/referral-bonus.test.ts",
+    "test:free-djen": "tsx --test src/modules/plans/domain/free-djen-policy.test.ts",
+    "promo:issue:migration": "tsx scripts/promotions/issue-migration-code.ts",
+    "pilot:manage": "tsx scripts/promotions/manage-pilot.ts"
   },
   "dependencies": {
     "next": "latest",

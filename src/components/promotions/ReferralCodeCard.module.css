@@ -1,0 +1,25 @@
+.card{--ref-accent:var(--brand-blue-dark,#1954c9);--ref-soft:var(--brand-soft,#eff5ff);display:grid;gap:17px;margin-top:22px;padding:22px;border:1px solid #dce5f1;border-radius:18px;background:linear-gradient(130deg,var(--ref-soft) 0,#fff 48%);color:#172941;min-width:0}
+.header,.progressHeader,.codeRow{display:flex;justify-content:space-between;align-items:center;gap:15px}
+.header{align-items:flex-start}.header h3{font-size:21px;margin:3px 0 7px;letter-spacing:-.025em}.header p{margin:0;color:#52657c;font-size:13px;line-height:1.5}.eyebrow,.progressEyebrow{font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.07em;color:var(--ref-accent)}
+.explain,.copy,.done,.close{border:1px solid #bdd0ee;border-radius:10px;min-height:42px;padding:8px 13px;font:inherit;font-size:12px;font-weight:800;cursor:pointer;background:#fff;color:#174c9f;flex-shrink:0}.explain:hover,.copy:hover{background:#f1f6ff}.explain:focus-visible,.copy:focus-visible,.done:focus-visible,.close:focus-visible{outline:3px solid var(--ref-accent);outline-offset:2px}
+.codeBox{padding:14px 16px;background:#fff;border:1px solid #dbe4f0;border-radius:13px;min-width:0}.codeBox>span{display:block;font-size:11px;font-weight:750;color:#52657c;margin-bottom:7px}.codeRow strong{font-size:15px;letter-spacing:.045em;overflow-wrap:anywhere;word-break:break-word}.copy,.done{background:var(--ref-accent);color:#fff;border-color:var(--ref-accent)}
+.progressCard{padding:18px;border:1px solid #d6e1ed;background:#fff;border-radius:13px}.progressHeader h4{font-size:16px;margin:5px 0 0}.counter{font-size:26px;color:var(--ref-accent)}.counter span{font-size:15px;color:#728198}.track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:15px 0}.track span{height:10px;border-radius:100px;background:#e6ebf2}.track .filled{background:var(--ref-accent)}.progressCard>p{font-size:12px;color:#52657c;margin:0 0 11px;line-height:1.5}.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{border-radius:999px;padding:6px 9px;background:#f2f6fb;color:#425774;font-size:11px;font-weight:700}.progressCard .planNote{margin:10px 0 0;color:#7e5527}
+.load,.error{font-size:13px;color:#4b5e75}.error{color:#9b2d2d}
+.modal{width:min(560px,calc(100vw - 30px));max-height:calc(100dvh - 32px);overflow:auto;border:0;border-radius:17px;padding:0;color:#172941;box-shadow:0 26px 85px #0d224b55}.modal::backdrop{background:#101b31aa}.modalContent{padding:23px}.modalTop{display:flex;justify-content:space-between;gap:12px;align-items:center}.modalTop h3{font-size:21px;margin:0}.close{font-size:25px;padding:0;width:42px;line-height:1}.steps{display:grid;gap:14px;padding-left:23px;font-size:13px;line-height:1.65}.steps li::marker{color:#174c9f;font-weight:900}.modalNote{background:#f1f6fd;border:1px solid #d2e0f2;padding:13px;border-radius:12px;font-size:12px;line-height:1.6}.modalNote p{margin:4px 0 0}.footnote{font-size:11px;line-height:1.6;color:#596b80}.done{width:100%;margin-top:8px}
+@media(max-width:640px){.card{padding:16px}.header{flex-direction:column}.explain{width:100%}.codeRow{align-items:stretch;flex-direction:column}.codeRow strong{font-size:13px}.modalContent{padding:17px}}
+
+/* v60: apuração mensal visível sem confundi-la com saldo pago */
+.bonusCard{display:grid;gap:10px;padding:18px;border:1px solid #d6e1ed;background:#fff;border-radius:13px;min-width:0}
+.bonusTop{display:flex;gap:12px;align-items:start;justify-content:space-between}
+.bonusTop h4{font-size:17px;margin:5px 0 0}
+.bonusAmount{font-size:25px;color:var(--ref-accent);white-space:nowrap}
+.bonusCard p{font-size:12px;line-height:1.6;color:#52657c;margin:0}
+.bonusCard .bonusHint{font-size:11px;color:#63748b}
+.bonusTrack{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.bonusTrack span{height:9px;border-radius:999px;background:#e6ebf2}
+.bonusTrack .bonusFilled{background:var(--ref-accent)}
+.bonusCard small{font-size:12px;color:#52657c}
+.bonusStats{display:flex;gap:12px;flex-wrap:wrap}
+.bonusStats span{border-radius:10px;background:var(--ref-soft);padding:9px 12px;font-size:12px;color:#425774}
+.bonusStats b{color:var(--ref-accent)}
+@media(max-width:640px){.bonusTop{flex-direction:column}.bonusAmount{font-size:22px}}

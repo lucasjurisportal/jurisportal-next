@@ -60,6 +60,11 @@ export const ModelName = {
   Invitation: 'Invitation',
   TeamMemberProfile: 'TeamMemberProfile',
   Subscription: 'Subscription',
+  PromotionCode: 'PromotionCode',
+  ReferralProfile: 'ReferralProfile',
+  ReferralAttribution: 'ReferralAttribution',
+  ReferralCommissionEntry: 'ReferralCommissionEntry',
+  PilotAccess: 'PilotAccess',
   AuditEvent: 'AuditEvent',
   UserProfile: 'UserProfile',
   OrganizationProfile: 'OrganizationProfile',
@@ -246,6 +251,79 @@ export const SubscriptionScalarFieldEnum = {
 } as const
 
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+export const PromotionCodeScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  codeHash: 'codeHash',
+  campaign: 'campaign',
+  discountPercent: 'discountPercent',
+  expiresAt: 'expiresAt',
+  issuedAt: 'issuedAt',
+  redeemedAt: 'redeemedAt',
+  redeemedPaymentId: 'redeemedPaymentId',
+  revokedAt: 'revokedAt'
+} as const
+
+export type PromotionCodeScalarFieldEnum = (typeof PromotionCodeScalarFieldEnum)[keyof typeof PromotionCodeScalarFieldEnum]
+
+
+export const ReferralProfileScalarFieldEnum = {
+  userId: 'userId',
+  code: 'code',
+  createdAt: 'createdAt'
+} as const
+
+export type ReferralProfileScalarFieldEnum = (typeof ReferralProfileScalarFieldEnum)[keyof typeof ReferralProfileScalarFieldEnum]
+
+
+export const ReferralAttributionScalarFieldEnum = {
+  id: 'id',
+  invitedOrganizationId: 'invitedOrganizationId',
+  referrerUserId: 'referrerUserId',
+  status: 'status',
+  discountPercent: 'discountPercent',
+  claimedAt: 'claimedAt',
+  firstPaidAt: 'firstPaidAt',
+  firstPaymentId: 'firstPaymentId',
+  revokedAt: 'revokedAt'
+} as const
+
+export type ReferralAttributionScalarFieldEnum = (typeof ReferralAttributionScalarFieldEnum)[keyof typeof ReferralAttributionScalarFieldEnum]
+
+
+export const ReferralCommissionEntryScalarFieldEnum = {
+  id: 'id',
+  referrerUserId: 'referrerUserId',
+  invitedOrganizationId: 'invitedOrganizationId',
+  externalPaymentId: 'externalPaymentId',
+  competenceMonth: 'competenceMonth',
+  paymentReceivedAt: 'paymentReceivedAt',
+  eligibleAt: 'eligibleAt',
+  amountCents: 'amountCents',
+  status: 'status',
+  settledAt: 'settledAt',
+  transferReference: 'transferReference',
+  reversedAt: 'reversedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReferralCommissionEntryScalarFieldEnum = (typeof ReferralCommissionEntryScalarFieldEnum)[keyof typeof ReferralCommissionEntryScalarFieldEnum]
+
+
+export const PilotAccessScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  planSlug: 'planSlug',
+  expiresAt: 'expiresAt',
+  grantedAt: 'grantedAt',
+  revokedAt: 'revokedAt',
+  note: 'note'
+} as const
+
+export type PilotAccessScalarFieldEnum = (typeof PilotAccessScalarFieldEnum)[keyof typeof PilotAccessScalarFieldEnum]
 
 
 export const AuditEventScalarFieldEnum = {
