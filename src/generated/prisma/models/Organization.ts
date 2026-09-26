@@ -234,6 +234,7 @@ export type OrganizationWhereInput = {
   pilotAccess?: Prisma.XOR<Prisma.PilotAccessNullableScalarRelationFilter, Prisma.PilotAccessWhereInput> | null
   referralAttribution?: Prisma.XOR<Prisma.ReferralAttributionNullableScalarRelationFilter, Prisma.ReferralAttributionWhereInput> | null
   referralCommissionEntries?: Prisma.ReferralCommissionEntryListRelationFilter
+  aiCreditUsages?: Prisma.AiCreditUsageListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -280,6 +281,7 @@ export type OrganizationOrderByWithRelationInput = {
   pilotAccess?: Prisma.PilotAccessOrderByWithRelationInput
   referralAttribution?: Prisma.ReferralAttributionOrderByWithRelationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryOrderByRelationAggregateInput
+  aiCreditUsages?: Prisma.AiCreditUsageOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -329,6 +331,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   pilotAccess?: Prisma.XOR<Prisma.PilotAccessNullableScalarRelationFilter, Prisma.PilotAccessWhereInput> | null
   referralAttribution?: Prisma.XOR<Prisma.ReferralAttributionNullableScalarRelationFilter, Prisma.ReferralAttributionWhereInput> | null
   referralCommissionEntries?: Prisma.ReferralCommissionEntryListRelationFilter
+  aiCreditUsages?: Prisma.AiCreditUsageListRelationFilter
 }, "id" | "slug">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -401,6 +404,7 @@ export type OrganizationCreateInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -447,6 +451,7 @@ export type OrganizationUncheckedCreateInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -493,6 +498,7 @@ export type OrganizationUpdateInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -539,6 +545,7 @@ export type OrganizationUncheckedUpdateInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -1110,6 +1117,20 @@ export type OrganizationUpdateOneRequiredWithoutProcessDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutProcessDocumentsInput, Prisma.OrganizationUpdateWithoutProcessDocumentsInput>, Prisma.OrganizationUncheckedUpdateWithoutProcessDocumentsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutAiCreditUsagesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutAiCreditUsagesInput, Prisma.OrganizationUncheckedCreateWithoutAiCreditUsagesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutAiCreditUsagesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutAiCreditUsagesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutAiCreditUsagesInput, Prisma.OrganizationUncheckedCreateWithoutAiCreditUsagesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutAiCreditUsagesInput
+  upsert?: Prisma.OrganizationUpsertWithoutAiCreditUsagesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutAiCreditUsagesInput, Prisma.OrganizationUpdateWithoutAiCreditUsagesInput>, Prisma.OrganizationUncheckedUpdateWithoutAiCreditUsagesInput>
+}
+
 export type OrganizationCreateWithoutMembersInput = {
   id?: string
   name: string
@@ -1153,6 +1174,7 @@ export type OrganizationCreateWithoutMembersInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutMembersInput = {
@@ -1198,6 +1220,7 @@ export type OrganizationUncheckedCreateWithoutMembersInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutMembersInput = {
@@ -1259,6 +1282,7 @@ export type OrganizationUpdateWithoutMembersInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutMembersInput = {
@@ -1304,6 +1328,7 @@ export type OrganizationUncheckedUpdateWithoutMembersInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutInvitationsInput = {
@@ -1349,6 +1374,7 @@ export type OrganizationCreateWithoutInvitationsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutInvitationsInput = {
@@ -1394,6 +1420,7 @@ export type OrganizationUncheckedCreateWithoutInvitationsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutInvitationsInput = {
@@ -1455,6 +1482,7 @@ export type OrganizationUpdateWithoutInvitationsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
@@ -1500,6 +1528,7 @@ export type OrganizationUncheckedUpdateWithoutInvitationsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTeamMemberProfilesInput = {
@@ -1545,6 +1574,7 @@ export type OrganizationCreateWithoutTeamMemberProfilesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTeamMemberProfilesInput = {
@@ -1590,6 +1620,7 @@ export type OrganizationUncheckedCreateWithoutTeamMemberProfilesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTeamMemberProfilesInput = {
@@ -1651,6 +1682,7 @@ export type OrganizationUpdateWithoutTeamMemberProfilesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTeamMemberProfilesInput = {
@@ -1696,6 +1728,7 @@ export type OrganizationUncheckedUpdateWithoutTeamMemberProfilesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSubscriptionInput = {
@@ -1741,6 +1774,7 @@ export type OrganizationCreateWithoutSubscriptionInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSubscriptionInput = {
@@ -1786,6 +1820,7 @@ export type OrganizationUncheckedCreateWithoutSubscriptionInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSubscriptionInput = {
@@ -1847,6 +1882,7 @@ export type OrganizationUpdateWithoutSubscriptionInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSubscriptionInput = {
@@ -1892,6 +1928,7 @@ export type OrganizationUncheckedUpdateWithoutSubscriptionInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPromotionCodesInput = {
@@ -1937,6 +1974,7 @@ export type OrganizationCreateWithoutPromotionCodesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPromotionCodesInput = {
@@ -1982,6 +2020,7 @@ export type OrganizationUncheckedCreateWithoutPromotionCodesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPromotionCodesInput = {
@@ -2043,6 +2082,7 @@ export type OrganizationUpdateWithoutPromotionCodesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPromotionCodesInput = {
@@ -2088,6 +2128,7 @@ export type OrganizationUncheckedUpdateWithoutPromotionCodesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutReferralAttributionInput = {
@@ -2133,6 +2174,7 @@ export type OrganizationCreateWithoutReferralAttributionInput = {
   promotionCodes?: Prisma.PromotionCodeCreateNestedManyWithoutOrganizationInput
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutReferralAttributionInput = {
@@ -2178,6 +2220,7 @@ export type OrganizationUncheckedCreateWithoutReferralAttributionInput = {
   promotionCodes?: Prisma.PromotionCodeUncheckedCreateNestedManyWithoutOrganizationInput
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutReferralAttributionInput = {
@@ -2239,6 +2282,7 @@ export type OrganizationUpdateWithoutReferralAttributionInput = {
   promotionCodes?: Prisma.PromotionCodeUpdateManyWithoutOrganizationNestedInput
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutReferralAttributionInput = {
@@ -2284,6 +2328,7 @@ export type OrganizationUncheckedUpdateWithoutReferralAttributionInput = {
   promotionCodes?: Prisma.PromotionCodeUncheckedUpdateManyWithoutOrganizationNestedInput
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutReferralCommissionEntriesInput = {
@@ -2329,6 +2374,7 @@ export type OrganizationCreateWithoutReferralCommissionEntriesInput = {
   promotionCodes?: Prisma.PromotionCodeCreateNestedManyWithoutOrganizationInput
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutReferralCommissionEntriesInput = {
@@ -2374,6 +2420,7 @@ export type OrganizationUncheckedCreateWithoutReferralCommissionEntriesInput = {
   promotionCodes?: Prisma.PromotionCodeUncheckedCreateNestedManyWithoutOrganizationInput
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutReferralCommissionEntriesInput = {
@@ -2435,6 +2482,7 @@ export type OrganizationUpdateWithoutReferralCommissionEntriesInput = {
   promotionCodes?: Prisma.PromotionCodeUpdateManyWithoutOrganizationNestedInput
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutReferralCommissionEntriesInput = {
@@ -2480,6 +2528,7 @@ export type OrganizationUncheckedUpdateWithoutReferralCommissionEntriesInput = {
   promotionCodes?: Prisma.PromotionCodeUncheckedUpdateManyWithoutOrganizationNestedInput
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPilotAccessInput = {
@@ -2525,6 +2574,7 @@ export type OrganizationCreateWithoutPilotAccessInput = {
   promotionCodes?: Prisma.PromotionCodeCreateNestedManyWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPilotAccessInput = {
@@ -2570,6 +2620,7 @@ export type OrganizationUncheckedCreateWithoutPilotAccessInput = {
   promotionCodes?: Prisma.PromotionCodeUncheckedCreateNestedManyWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPilotAccessInput = {
@@ -2631,6 +2682,7 @@ export type OrganizationUpdateWithoutPilotAccessInput = {
   promotionCodes?: Prisma.PromotionCodeUpdateManyWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPilotAccessInput = {
@@ -2676,6 +2728,7 @@ export type OrganizationUncheckedUpdateWithoutPilotAccessInput = {
   promotionCodes?: Prisma.PromotionCodeUncheckedUpdateManyWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAuditEventsInput = {
@@ -2721,6 +2774,7 @@ export type OrganizationCreateWithoutAuditEventsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
@@ -2766,6 +2820,7 @@ export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAuditEventsInput = {
@@ -2827,6 +2882,7 @@ export type OrganizationUpdateWithoutAuditEventsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
@@ -2872,6 +2928,7 @@ export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProfileInput = {
@@ -2917,6 +2974,7 @@ export type OrganizationCreateWithoutProfileInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProfileInput = {
@@ -2962,6 +3020,7 @@ export type OrganizationUncheckedCreateWithoutProfileInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProfileInput = {
@@ -3023,6 +3082,7 @@ export type OrganizationUpdateWithoutProfileInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProfileInput = {
@@ -3068,6 +3128,7 @@ export type OrganizationUncheckedUpdateWithoutProfileInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLawyerOabsInput = {
@@ -3113,6 +3174,7 @@ export type OrganizationCreateWithoutLawyerOabsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLawyerOabsInput = {
@@ -3158,6 +3220,7 @@ export type OrganizationUncheckedCreateWithoutLawyerOabsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLawyerOabsInput = {
@@ -3219,6 +3282,7 @@ export type OrganizationUpdateWithoutLawyerOabsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLawyerOabsInput = {
@@ -3264,6 +3328,7 @@ export type OrganizationUncheckedUpdateWithoutLawyerOabsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLegalAcceptancesInput = {
@@ -3309,6 +3374,7 @@ export type OrganizationCreateWithoutLegalAcceptancesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLegalAcceptancesInput = {
@@ -3354,6 +3420,7 @@ export type OrganizationUncheckedCreateWithoutLegalAcceptancesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLegalAcceptancesInput = {
@@ -3415,6 +3482,7 @@ export type OrganizationUpdateWithoutLegalAcceptancesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLegalAcceptancesInput = {
@@ -3460,6 +3528,7 @@ export type OrganizationUncheckedUpdateWithoutLegalAcceptancesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutClientsInput = {
@@ -3505,6 +3574,7 @@ export type OrganizationCreateWithoutClientsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutClientsInput = {
@@ -3550,6 +3620,7 @@ export type OrganizationUncheckedCreateWithoutClientsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutClientsInput = {
@@ -3611,6 +3682,7 @@ export type OrganizationUpdateWithoutClientsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutClientsInput = {
@@ -3656,6 +3728,7 @@ export type OrganizationUncheckedUpdateWithoutClientsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessesInput = {
@@ -3701,6 +3774,7 @@ export type OrganizationCreateWithoutProcessesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessesInput = {
@@ -3746,6 +3820,7 @@ export type OrganizationUncheckedCreateWithoutProcessesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessesInput = {
@@ -3807,6 +3882,7 @@ export type OrganizationUpdateWithoutProcessesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessesInput = {
@@ -3852,6 +3928,7 @@ export type OrganizationUncheckedUpdateWithoutProcessesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessNumberSequencesInput = {
@@ -3897,6 +3974,7 @@ export type OrganizationCreateWithoutProcessNumberSequencesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessNumberSequencesInput = {
@@ -3942,6 +4020,7 @@ export type OrganizationUncheckedCreateWithoutProcessNumberSequencesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessNumberSequencesInput = {
@@ -4003,6 +4082,7 @@ export type OrganizationUpdateWithoutProcessNumberSequencesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessNumberSequencesInput = {
@@ -4048,6 +4128,7 @@ export type OrganizationUncheckedUpdateWithoutProcessNumberSequencesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessClientsInput = {
@@ -4093,6 +4174,7 @@ export type OrganizationCreateWithoutProcessClientsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessClientsInput = {
@@ -4138,6 +4220,7 @@ export type OrganizationUncheckedCreateWithoutProcessClientsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessClientsInput = {
@@ -4199,6 +4282,7 @@ export type OrganizationUpdateWithoutProcessClientsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessClientsInput = {
@@ -4244,6 +4328,7 @@ export type OrganizationUncheckedUpdateWithoutProcessClientsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessPartiesInput = {
@@ -4289,6 +4374,7 @@ export type OrganizationCreateWithoutProcessPartiesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessPartiesInput = {
@@ -4334,6 +4420,7 @@ export type OrganizationUncheckedCreateWithoutProcessPartiesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessPartiesInput = {
@@ -4395,6 +4482,7 @@ export type OrganizationUpdateWithoutProcessPartiesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessPartiesInput = {
@@ -4440,6 +4528,7 @@ export type OrganizationUncheckedUpdateWithoutProcessPartiesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessTimelineEventsInput = {
@@ -4485,6 +4574,7 @@ export type OrganizationCreateWithoutProcessTimelineEventsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessTimelineEventsInput = {
@@ -4530,6 +4620,7 @@ export type OrganizationUncheckedCreateWithoutProcessTimelineEventsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessTimelineEventsInput = {
@@ -4591,6 +4682,7 @@ export type OrganizationUpdateWithoutProcessTimelineEventsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessTimelineEventsInput = {
@@ -4636,6 +4728,7 @@ export type OrganizationUncheckedUpdateWithoutProcessTimelineEventsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutExternalProcessMovementsInput = {
@@ -4681,6 +4774,7 @@ export type OrganizationCreateWithoutExternalProcessMovementsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutExternalProcessMovementsInput = {
@@ -4726,6 +4820,7 @@ export type OrganizationUncheckedCreateWithoutExternalProcessMovementsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutExternalProcessMovementsInput = {
@@ -4787,6 +4882,7 @@ export type OrganizationUpdateWithoutExternalProcessMovementsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutExternalProcessMovementsInput = {
@@ -4832,6 +4928,7 @@ export type OrganizationUncheckedUpdateWithoutExternalProcessMovementsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessWorkItemsInput = {
@@ -4877,6 +4974,7 @@ export type OrganizationCreateWithoutProcessWorkItemsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessWorkItemsInput = {
@@ -4922,6 +5020,7 @@ export type OrganizationUncheckedCreateWithoutProcessWorkItemsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessWorkItemsInput = {
@@ -4983,6 +5082,7 @@ export type OrganizationUpdateWithoutProcessWorkItemsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessWorkItemsInput = {
@@ -5028,6 +5128,7 @@ export type OrganizationUncheckedUpdateWithoutProcessWorkItemsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessFeeAgreementsInput = {
@@ -5073,6 +5174,7 @@ export type OrganizationCreateWithoutProcessFeeAgreementsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessFeeAgreementsInput = {
@@ -5118,6 +5220,7 @@ export type OrganizationUncheckedCreateWithoutProcessFeeAgreementsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessFeeAgreementsInput = {
@@ -5179,6 +5282,7 @@ export type OrganizationUpdateWithoutProcessFeeAgreementsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessFeeAgreementsInput = {
@@ -5224,6 +5328,7 @@ export type OrganizationUncheckedUpdateWithoutProcessFeeAgreementsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessFinanceEntriesInput = {
@@ -5269,6 +5374,7 @@ export type OrganizationCreateWithoutProcessFinanceEntriesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessFinanceEntriesInput = {
@@ -5314,6 +5420,7 @@ export type OrganizationUncheckedCreateWithoutProcessFinanceEntriesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessFinanceEntriesInput = {
@@ -5375,6 +5482,7 @@ export type OrganizationUpdateWithoutProcessFinanceEntriesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessFinanceEntriesInput = {
@@ -5420,6 +5528,7 @@ export type OrganizationUncheckedUpdateWithoutProcessFinanceEntriesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAgendaEventsInput = {
@@ -5465,6 +5574,7 @@ export type OrganizationCreateWithoutAgendaEventsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAgendaEventsInput = {
@@ -5510,6 +5620,7 @@ export type OrganizationUncheckedCreateWithoutAgendaEventsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAgendaEventsInput = {
@@ -5571,6 +5682,7 @@ export type OrganizationUpdateWithoutAgendaEventsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAgendaEventsInput = {
@@ -5616,6 +5728,7 @@ export type OrganizationUncheckedUpdateWithoutAgendaEventsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPublicationsInput = {
@@ -5661,6 +5774,7 @@ export type OrganizationCreateWithoutPublicationsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPublicationsInput = {
@@ -5706,6 +5820,7 @@ export type OrganizationUncheckedCreateWithoutPublicationsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPublicationsInput = {
@@ -5767,6 +5882,7 @@ export type OrganizationUpdateWithoutPublicationsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPublicationsInput = {
@@ -5812,6 +5928,7 @@ export type OrganizationUncheckedUpdateWithoutPublicationsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPublicationRecipientsInput = {
@@ -5857,6 +5974,7 @@ export type OrganizationCreateWithoutPublicationRecipientsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPublicationRecipientsInput = {
@@ -5902,6 +6020,7 @@ export type OrganizationUncheckedCreateWithoutPublicationRecipientsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPublicationRecipientsInput = {
@@ -5963,6 +6082,7 @@ export type OrganizationUpdateWithoutPublicationRecipientsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPublicationRecipientsInput = {
@@ -6008,6 +6128,7 @@ export type OrganizationUncheckedUpdateWithoutPublicationRecipientsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPublicationEmailDeliveriesInput = {
@@ -6053,6 +6174,7 @@ export type OrganizationCreateWithoutPublicationEmailDeliveriesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPublicationEmailDeliveriesInput = {
@@ -6098,6 +6220,7 @@ export type OrganizationUncheckedCreateWithoutPublicationEmailDeliveriesInput = 
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPublicationEmailDeliveriesInput = {
@@ -6159,6 +6282,7 @@ export type OrganizationUpdateWithoutPublicationEmailDeliveriesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPublicationEmailDeliveriesInput = {
@@ -6204,6 +6328,7 @@ export type OrganizationUncheckedUpdateWithoutPublicationEmailDeliveriesInput = 
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDjenCandidatesInput = {
@@ -6249,6 +6374,7 @@ export type OrganizationCreateWithoutDjenCandidatesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDjenCandidatesInput = {
@@ -6294,6 +6420,7 @@ export type OrganizationUncheckedCreateWithoutDjenCandidatesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDjenCandidatesInput = {
@@ -6355,6 +6482,7 @@ export type OrganizationUpdateWithoutDjenCandidatesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDjenCandidatesInput = {
@@ -6400,6 +6528,7 @@ export type OrganizationUncheckedUpdateWithoutDjenCandidatesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDjenCursorsInput = {
@@ -6445,6 +6574,7 @@ export type OrganizationCreateWithoutDjenCursorsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDjenCursorsInput = {
@@ -6490,6 +6620,7 @@ export type OrganizationUncheckedCreateWithoutDjenCursorsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDjenCursorsInput = {
@@ -6551,6 +6682,7 @@ export type OrganizationUpdateWithoutDjenCursorsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDjenCursorsInput = {
@@ -6596,6 +6728,7 @@ export type OrganizationUncheckedUpdateWithoutDjenCursorsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDeadlineReviewsInput = {
@@ -6641,6 +6774,7 @@ export type OrganizationCreateWithoutDeadlineReviewsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDeadlineReviewsInput = {
@@ -6686,6 +6820,7 @@ export type OrganizationUncheckedCreateWithoutDeadlineReviewsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDeadlineReviewsInput = {
@@ -6747,6 +6882,7 @@ export type OrganizationUpdateWithoutDeadlineReviewsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDeadlineReviewsInput = {
@@ -6792,6 +6928,7 @@ export type OrganizationUncheckedUpdateWithoutDeadlineReviewsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutGoogleCalendarConnectionsInput = {
@@ -6837,6 +6974,7 @@ export type OrganizationCreateWithoutGoogleCalendarConnectionsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
@@ -6882,6 +7020,7 @@ export type OrganizationUncheckedCreateWithoutGoogleCalendarConnectionsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutGoogleCalendarConnectionsInput = {
@@ -6943,6 +7082,7 @@ export type OrganizationUpdateWithoutGoogleCalendarConnectionsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
@@ -6988,6 +7128,7 @@ export type OrganizationUncheckedUpdateWithoutGoogleCalendarConnectionsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutExternalCalendarEventLinksInput = {
@@ -7033,6 +7174,7 @@ export type OrganizationCreateWithoutExternalCalendarEventLinksInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutExternalCalendarEventLinksInput = {
@@ -7078,6 +7220,7 @@ export type OrganizationUncheckedCreateWithoutExternalCalendarEventLinksInput = 
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutExternalCalendarEventLinksInput = {
@@ -7139,6 +7282,7 @@ export type OrganizationUpdateWithoutExternalCalendarEventLinksInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutExternalCalendarEventLinksInput = {
@@ -7184,6 +7328,7 @@ export type OrganizationUncheckedUpdateWithoutExternalCalendarEventLinksInput = 
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPetitionTemplatesInput = {
@@ -7229,6 +7374,7 @@ export type OrganizationCreateWithoutPetitionTemplatesInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPetitionTemplatesInput = {
@@ -7274,6 +7420,7 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplatesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPetitionTemplatesInput = {
@@ -7335,6 +7482,7 @@ export type OrganizationUpdateWithoutPetitionTemplatesInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPetitionTemplatesInput = {
@@ -7380,6 +7528,7 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplatesInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPetitionTemplateVersionsInput = {
@@ -7425,6 +7574,7 @@ export type OrganizationCreateWithoutPetitionTemplateVersionsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPetitionTemplateVersionsInput = {
@@ -7470,6 +7620,7 @@ export type OrganizationUncheckedCreateWithoutPetitionTemplateVersionsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPetitionTemplateVersionsInput = {
@@ -7531,6 +7682,7 @@ export type OrganizationUpdateWithoutPetitionTemplateVersionsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPetitionTemplateVersionsInput = {
@@ -7576,6 +7728,7 @@ export type OrganizationUncheckedUpdateWithoutPetitionTemplateVersionsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPetitionGenerationsInput = {
@@ -7621,6 +7774,7 @@ export type OrganizationCreateWithoutPetitionGenerationsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPetitionGenerationsInput = {
@@ -7666,6 +7820,7 @@ export type OrganizationUncheckedCreateWithoutPetitionGenerationsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPetitionGenerationsInput = {
@@ -7727,6 +7882,7 @@ export type OrganizationUpdateWithoutPetitionGenerationsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPetitionGenerationsInput = {
@@ -7772,6 +7928,7 @@ export type OrganizationUncheckedUpdateWithoutPetitionGenerationsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutStorageUsageInput = {
@@ -7817,6 +7974,7 @@ export type OrganizationCreateWithoutStorageUsageInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutStorageUsageInput = {
@@ -7862,6 +8020,7 @@ export type OrganizationUncheckedCreateWithoutStorageUsageInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutStorageUsageInput = {
@@ -7923,6 +8082,7 @@ export type OrganizationUpdateWithoutStorageUsageInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutStorageUsageInput = {
@@ -7968,6 +8128,7 @@ export type OrganizationUncheckedUpdateWithoutStorageUsageInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProcessDocumentsInput = {
@@ -8013,6 +8174,7 @@ export type OrganizationCreateWithoutProcessDocumentsInput = {
   pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProcessDocumentsInput = {
@@ -8058,6 +8220,7 @@ export type OrganizationUncheckedCreateWithoutProcessDocumentsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProcessDocumentsInput = {
@@ -8119,6 +8282,7 @@ export type OrganizationUpdateWithoutProcessDocumentsInput = {
   pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProcessDocumentsInput = {
@@ -8164,6 +8328,207 @@ export type OrganizationUncheckedUpdateWithoutProcessDocumentsInput = {
   pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
   referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
   referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
+  aiCreditUsages?: Prisma.AiCreditUsageUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutAiCreditUsagesInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageCreateNestedOneWithoutOrganizationInput
+  promotionCodes?: Prisma.PromotionCodeCreateNestedManyWithoutOrganizationInput
+  pilotAccess?: Prisma.PilotAccessCreateNestedOneWithoutOrganizationInput
+  referralAttribution?: Prisma.ReferralAttributionCreateNestedOneWithoutInvitedOrganizationInput
+  referralCommissionEntries?: Prisma.ReferralCommissionEntryCreateNestedManyWithoutInvitedOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutAiCreditUsagesInput = {
+  id?: string
+  name: string
+  slug: string
+  logo?: string | null
+  metadata?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutOrganizationInput
+  invitations?: Prisma.InvitationUncheckedCreateNestedManyWithoutOrganizationInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  profile?: Prisma.OrganizationProfileUncheckedCreateNestedOneWithoutOrganizationInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedCreateNestedManyWithoutOrganizationInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutOrganizationInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processes?: Prisma.ProcessUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedCreateNestedManyWithoutOrganizationInput
+  processClients?: Prisma.ProcessClientUncheckedCreateNestedManyWithoutOrganizationInput
+  processParties?: Prisma.ProcessPartyUncheckedCreateNestedManyWithoutOrganizationInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedCreateNestedManyWithoutOrganizationInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedCreateNestedManyWithoutOrganizationInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedCreateNestedManyWithoutOrganizationInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedCreateNestedManyWithoutOrganizationInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedCreateNestedManyWithoutOrganizationInput
+  agendaEvents?: Prisma.AgendaEventUncheckedCreateNestedManyWithoutOrganizationInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedCreateNestedManyWithoutOrganizationInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedCreateNestedManyWithoutOrganizationInput
+  publications?: Prisma.PublicationUncheckedCreateNestedManyWithoutOrganizationInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedCreateNestedManyWithoutOrganizationInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedCreateNestedManyWithoutOrganizationInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedCreateNestedManyWithoutOrganizationInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedCreateNestedManyWithoutOrganizationInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedCreateNestedManyWithoutOrganizationInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedCreateNestedManyWithoutOrganizationInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedCreateNestedManyWithoutOrganizationInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedCreateNestedOneWithoutOrganizationInput
+  promotionCodes?: Prisma.PromotionCodeUncheckedCreateNestedManyWithoutOrganizationInput
+  pilotAccess?: Prisma.PilotAccessUncheckedCreateNestedOneWithoutOrganizationInput
+  referralAttribution?: Prisma.ReferralAttributionUncheckedCreateNestedOneWithoutInvitedOrganizationInput
+  referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedCreateNestedManyWithoutInvitedOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutAiCreditUsagesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAiCreditUsagesInput, Prisma.OrganizationUncheckedCreateWithoutAiCreditUsagesInput>
+}
+
+export type OrganizationUpsertWithoutAiCreditUsagesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutAiCreditUsagesInput, Prisma.OrganizationUncheckedUpdateWithoutAiCreditUsagesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAiCreditUsagesInput, Prisma.OrganizationUncheckedCreateWithoutAiCreditUsagesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutAiCreditUsagesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutAiCreditUsagesInput, Prisma.OrganizationUncheckedUpdateWithoutAiCreditUsagesInput>
+}
+
+export type OrganizationUpdateWithoutAiCreditUsagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUpdateOneWithoutOrganizationNestedInput
+  promotionCodes?: Prisma.PromotionCodeUpdateManyWithoutOrganizationNestedInput
+  pilotAccess?: Prisma.PilotAccessUpdateOneWithoutOrganizationNestedInput
+  referralAttribution?: Prisma.ReferralAttributionUpdateOneWithoutInvitedOrganizationNestedInput
+  referralCommissionEntries?: Prisma.ReferralCommissionEntryUpdateManyWithoutInvitedOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutAiCreditUsagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.MemberUncheckedUpdateManyWithoutOrganizationNestedInput
+  invitations?: Prisma.InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  profile?: Prisma.OrganizationProfileUncheckedUpdateOneWithoutOrganizationNestedInput
+  lawyerOabs?: Prisma.LawyerOabUncheckedUpdateManyWithoutOrganizationNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutOrganizationNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processes?: Prisma.ProcessUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationEmailDeliveries?: Prisma.PublicationEmailDeliveryUncheckedUpdateManyWithoutOrganizationNestedInput
+  processClients?: Prisma.ProcessClientUncheckedUpdateManyWithoutOrganizationNestedInput
+  processParties?: Prisma.ProcessPartyUncheckedUpdateManyWithoutOrganizationNestedInput
+  processTimelineEvents?: Prisma.ProcessTimelineEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalProcessMovements?: Prisma.ProcessExternalMovementUncheckedUpdateManyWithoutOrganizationNestedInput
+  processWorkItems?: Prisma.ProcessWorkItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFeeAgreements?: Prisma.ProcessFeeAgreementUncheckedUpdateManyWithoutOrganizationNestedInput
+  processFinanceEntries?: Prisma.ProcessFinanceEntryUncheckedUpdateManyWithoutOrganizationNestedInput
+  agendaEvents?: Prisma.AgendaEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  googleCalendarConnections?: Prisma.GoogleCalendarConnectionUncheckedUpdateManyWithoutOrganizationNestedInput
+  externalCalendarEventLinks?: Prisma.ExternalCalendarEventLinkUncheckedUpdateManyWithoutOrganizationNestedInput
+  publications?: Prisma.PublicationUncheckedUpdateManyWithoutOrganizationNestedInput
+  publicationRecipients?: Prisma.PublicationRecipientUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCandidates?: Prisma.DjenReviewCandidateUncheckedUpdateManyWithoutOrganizationNestedInput
+  djenCursors?: Prisma.DjenCaptureCursorUncheckedUpdateManyWithoutOrganizationNestedInput
+  deadlineReviews?: Prisma.DeadlineReviewUncheckedUpdateManyWithoutOrganizationNestedInput
+  processNumberSequences?: Prisma.ProcessNumberSequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplates?: Prisma.PetitionTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionTemplateVersions?: Prisma.PetitionTemplateVersionUncheckedUpdateManyWithoutOrganizationNestedInput
+  petitionGenerations?: Prisma.PetitionGenerationUncheckedUpdateManyWithoutOrganizationNestedInput
+  teamMemberProfiles?: Prisma.TeamMemberProfileUncheckedUpdateManyWithoutOrganizationNestedInput
+  processDocuments?: Prisma.ProcessDocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+  storageUsage?: Prisma.OrganizationStorageUsageUncheckedUpdateOneWithoutOrganizationNestedInput
+  promotionCodes?: Prisma.PromotionCodeUncheckedUpdateManyWithoutOrganizationNestedInput
+  pilotAccess?: Prisma.PilotAccessUncheckedUpdateOneWithoutOrganizationNestedInput
+  referralAttribution?: Prisma.ReferralAttributionUncheckedUpdateOneWithoutInvitedOrganizationNestedInput
+  referralCommissionEntries?: Prisma.ReferralCommissionEntryUncheckedUpdateManyWithoutInvitedOrganizationNestedInput
 }
 
 
@@ -8203,6 +8568,7 @@ export type OrganizationCountOutputType = {
   processDocuments: number
   promotionCodes: number
   referralCommissionEntries: number
+  aiCreditUsages: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8237,6 +8603,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   processDocuments?: boolean | OrganizationCountOutputTypeCountProcessDocumentsArgs
   promotionCodes?: boolean | OrganizationCountOutputTypeCountPromotionCodesArgs
   referralCommissionEntries?: boolean | OrganizationCountOutputTypeCountReferralCommissionEntriesArgs
+  aiCreditUsages?: boolean | OrganizationCountOutputTypeCountAiCreditUsagesArgs
 }
 
 /**
@@ -8466,6 +8833,13 @@ export type OrganizationCountOutputTypeCountReferralCommissionEntriesArgs<ExtArg
   where?: Prisma.ReferralCommissionEntryWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountAiCreditUsagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AiCreditUsageWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -8511,6 +8885,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   pilotAccess?: boolean | Prisma.Organization$pilotAccessArgs<ExtArgs>
   referralAttribution?: boolean | Prisma.Organization$referralAttributionArgs<ExtArgs>
   referralCommissionEntries?: boolean | Prisma.Organization$referralCommissionEntriesArgs<ExtArgs>
+  aiCreditUsages?: boolean | Prisma.Organization$aiCreditUsagesArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -8582,6 +8957,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   pilotAccess?: boolean | Prisma.Organization$pilotAccessArgs<ExtArgs>
   referralAttribution?: boolean | Prisma.Organization$referralAttributionArgs<ExtArgs>
   referralCommissionEntries?: boolean | Prisma.Organization$referralCommissionEntriesArgs<ExtArgs>
+  aiCreditUsages?: boolean | Prisma.Organization$aiCreditUsagesArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -8626,6 +9002,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     pilotAccess: Prisma.$PilotAccessPayload<ExtArgs> | null
     referralAttribution: Prisma.$ReferralAttributionPayload<ExtArgs> | null
     referralCommissionEntries: Prisma.$ReferralCommissionEntryPayload<ExtArgs>[]
+    aiCreditUsages: Prisma.$AiCreditUsagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -9065,6 +9442,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   pilotAccess<T extends Prisma.Organization$pilotAccessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$pilotAccessArgs<ExtArgs>>): Prisma.Prisma__PilotAccessClient<runtime.Types.Result.GetResult<Prisma.$PilotAccessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   referralAttribution<T extends Prisma.Organization$referralAttributionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$referralAttributionArgs<ExtArgs>>): Prisma.Prisma__ReferralAttributionClient<runtime.Types.Result.GetResult<Prisma.$ReferralAttributionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   referralCommissionEntries<T extends Prisma.Organization$referralCommissionEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$referralCommissionEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralCommissionEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  aiCreditUsages<T extends Prisma.Organization$aiCreditUsagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$aiCreditUsagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AiCreditUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10330,6 +10708,30 @@ export type Organization$referralCommissionEntriesArgs<ExtArgs extends runtime.T
   take?: number
   skip?: number
   distinct?: Prisma.ReferralCommissionEntryScalarFieldEnum | Prisma.ReferralCommissionEntryScalarFieldEnum[]
+}
+
+/**
+ * Organization.aiCreditUsages
+ */
+export type Organization$aiCreditUsagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AiCreditUsage
+   */
+  select?: Prisma.AiCreditUsageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AiCreditUsage
+   */
+  omit?: Prisma.AiCreditUsageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AiCreditUsageInclude<ExtArgs> | null
+  where?: Prisma.AiCreditUsageWhereInput
+  orderBy?: Prisma.AiCreditUsageOrderByWithRelationInput | Prisma.AiCreditUsageOrderByWithRelationInput[]
+  cursor?: Prisma.AiCreditUsageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AiCreditUsageScalarFieldEnum | Prisma.AiCreditUsageScalarFieldEnum[]
 }
 
 /**

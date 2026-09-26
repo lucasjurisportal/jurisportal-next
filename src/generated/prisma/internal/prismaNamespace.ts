@@ -444,7 +444,8 @@ export const ModelName = {
   PetitionTemplateVersion: 'PetitionTemplateVersion',
   PetitionGeneration: 'PetitionGeneration',
   OrganizationStorageUsage: 'OrganizationStorageUsage',
-  ProcessDocument: 'ProcessDocument'
+  ProcessDocument: 'ProcessDocument',
+  AiCreditUsage: 'AiCreditUsage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -460,7 +461,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "promotionCode" | "referralProfile" | "referralAttribution" | "referralCommissionEntry" | "pilotAccess" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processExternalMovement" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "publicationEmailDelivery" | "djenReviewCandidate" | "djenCaptureCursor" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument"
+    modelProps: "user" | "session" | "account" | "verification" | "organization" | "member" | "invitation" | "teamMemberProfile" | "subscription" | "promotionCode" | "referralProfile" | "referralAttribution" | "referralCommissionEntry" | "pilotAccess" | "auditEvent" | "userProfile" | "organizationProfile" | "lawyerOab" | "legalAcceptance" | "userSecurityProfile" | "authChallenge" | "trustedDevice" | "platformAdmin" | "securityEvent" | "client" | "process" | "processNumberSequence" | "processClient" | "processParty" | "processTimelineEvent" | "processExternalMovement" | "processWorkItem" | "processFeeAgreement" | "processFinanceEntry" | "agendaEvent" | "publication" | "publicationRecipient" | "publicationEmailDelivery" | "djenReviewCandidate" | "djenCaptureCursor" | "deadlineReview" | "googleCalendarConnection" | "externalCalendarEventLink" | "petitionTemplate" | "petitionTemplateVersion" | "petitionGeneration" | "organizationStorageUsage" | "processDocument" | "aiCreditUsage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4016,6 +4017,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AiCreditUsage: {
+      payload: Prisma.$AiCreditUsagePayload<ExtArgs>
+      fields: Prisma.AiCreditUsageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AiCreditUsageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AiCreditUsageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload>
+        }
+        findFirst: {
+          args: Prisma.AiCreditUsageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AiCreditUsageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload>
+        }
+        findMany: {
+          args: Prisma.AiCreditUsageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload>[]
+        }
+        create: {
+          args: Prisma.AiCreditUsageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload>
+        }
+        createMany: {
+          args: Prisma.AiCreditUsageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AiCreditUsageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload>[]
+        }
+        delete: {
+          args: Prisma.AiCreditUsageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload>
+        }
+        update: {
+          args: Prisma.AiCreditUsageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload>
+        }
+        deleteMany: {
+          args: Prisma.AiCreditUsageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AiCreditUsageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AiCreditUsageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload>[]
+        }
+        upsert: {
+          args: Prisma.AiCreditUsageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AiCreditUsagePayload>
+        }
+        aggregate: {
+          args: Prisma.AiCreditUsageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAiCreditUsage>
+        }
+        groupBy: {
+          args: Prisma.AiCreditUsageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AiCreditUsageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AiCreditUsageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AiCreditUsageCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4901,6 +4976,27 @@ export const ProcessDocumentScalarFieldEnum = {
 export type ProcessDocumentScalarFieldEnum = (typeof ProcessDocumentScalarFieldEnum)[keyof typeof ProcessDocumentScalarFieldEnum]
 
 
+export const AiCreditUsageScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  actorUserId: 'actorUserId',
+  periodKey: 'periodKey',
+  requestKey: 'requestKey',
+  action: 'action',
+  reservedCredits: 'reservedCredits',
+  chargedCredits: 'chargedCredits',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  completedAt: 'completedAt',
+  refundedAt: 'refundedAt',
+  resolutionNote: 'resolutionNote',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AiCreditUsageScalarFieldEnum = (typeof AiCreditUsageScalarFieldEnum)[keyof typeof AiCreditUsageScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -5258,6 +5354,7 @@ export type GlobalOmitConfig = {
   petitionGeneration?: Prisma.PetitionGenerationOmit
   organizationStorageUsage?: Prisma.OrganizationStorageUsageOmit
   processDocument?: Prisma.ProcessDocumentOmit
+  aiCreditUsage?: Prisma.AiCreditUsageOmit
 }
 
 /* Types for Logging */

@@ -61,6 +61,7 @@ model User {
   referralProfile ReferralProfile?
   referralsGiven ReferralAttribution[] @relation("ReferralInviter")
   referralCommissionEntries ReferralCommissionEntry[] @relation("ReferralCommissionRecipient")
+  aiCreditUsages AiCreditUsage[]
 
   @@map("user")
 }
@@ -167,6 +168,7 @@ model Organization {
   pilotAccess PilotAccess?
   referralAttribution ReferralAttribution?
   referralCommissionEntries ReferralCommissionEntry[] @relation("ReferralCommissionInvitedOrg")
+  aiCreditUsages AiCreditUsage[]
 
   @@map("organization")
 }
@@ -1225,4 +1227,31 @@ model ProcessDocument {
   @@index([status, deletedAt])
   @@index([backupStatus, backupNextAttemptAt])
   @@map("process_document")
+}
+
+/// Créditos mensais consumidos por organização. Não realiza chamada de modelo ou venda de pacote.
+model AiCreditUsage {
+  id String @id @default(uuid()) @db.Uuid
+  organizationId String @db.Uuid
+  actorUserId String @db.Uuid
+  periodKey String // YYYY-MM no horário de São Paulo
+  requestKey String // idempotência por ação/tentativa, gerada pelo backend
+  action String
+  reservedCredits Int
+  chargedCredits Int @default(0)
+  status String @default("RESERVED") // RESERVED | SETTLED | RELEASED | EXPIRED | REFUNDED
+  expiresAt DateTime
+  completedAt DateTime?
+  refundedAt DateTime?
+  resolutionNote String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  actor User @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+
+  @@unique([organizationId, requestKey])
+  @@index([organizationId, periodKey, status])
+  @@index([organizationId, status, expiresAt])
+  @@map("ai_credit_usage")
 }

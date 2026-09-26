@@ -1,9 +1,8 @@
 import type { PlanDefinition, PlanSlug } from "./plan.types";
+import { AI_MONTHLY_UNIT_LIMIT } from "../../ai/domain/ai-policy";
 
 /** Apenas simulação visual: NÃO autoriza alteração de assinatura ou exclusão de processos. */
-export const PLANNED_AI_MONTHLY_CREDITS: Readonly<Record<PlanSlug, number>> = {
-  free: 0, essencial: 0, estrategico: 100, premium: 500, executivo: 2000, "alta-corte": 5000,
-};
+export const PLANNED_AI_MONTHLY_CREDITS: Readonly<Record<PlanSlug, number>> = AI_MONTHLY_UNIT_LIMIT;
 
 export function planChangePreview(plans: readonly PlanDefinition[], currentSlug: PlanSlug, targetSlug: PlanSlug, processCount: number) {
   const currentIndex = plans.findIndex((item) => item.slug === currentSlug);

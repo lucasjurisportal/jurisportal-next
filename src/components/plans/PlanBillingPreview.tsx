@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { currency, getAnnualPrice, getMonthlyPrice } from "@/modules/plans/application/plan-pricing";
-import { planChangePreview, PLANNED_AI_MONTHLY_CREDITS } from "@/modules/plans/domain/plan-change-preview";
+import { planChangePreview } from "@/modules/plans/domain/plan-change-preview";
+import type { AiCreditBalance } from "@/modules/ai/domain/ai-credit-policy";
 import type { BillingCycle, PlanDefinition, PlanSlug } from "@/modules/plans/domain/plan.types";
 import styles from "./PlanBilling.module.css";
 
@@ -18,6 +19,7 @@ type Props = {
   periodEnd: string | null;
   processCount: number;
   pilotEndsAt: string | null;
+  aiCreditBalance: AiCreditBalance;
 };
 const statusLabels: Record<string, string> = {
   active: "Ativo", trialing: "Período gratuito", pending_payment: "Pagamento pendente",
@@ -29,7 +31,7 @@ const dateBR = (iso: string | null): string | null => iso && !Number.isNaN(new D
 const credits = (value: number) => new Intl.NumberFormat("pt-BR").format(value);
 
 export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, plans, currentPlanSlug,
-  currentCycle, subscriptionStatus, periodEnd, processCount, pilotEndsAt }: Props) {
+  currentCycle, subscriptionStatus, periodEnd, processCount, pilotEndsAt, aiCreditBalance }: Props) {
   const [cycle, setCycle] = useState<BillingCycle>(currentCycle);
   const [selectedSlug, setSelectedSlug] = useState(currentPlanSlug);
   const [modalOpen, setModalOpen] = useState(false);
@@ -127,10 +129,11 @@ export function PlanBillingPreview({ organizationName, ownerName, ownerEmail, pl
     <section className={styles.columns}>
       <article className={styles.panel}>
         <h2>Créditos de IA</h2>
-        <div className={styles.field}><span>Previsão mensal no seu plano</span>
-          <strong>{credits(PLANNED_AI_MONTHLY_CREDITS[current.slug])} créditos</strong></div>
-        <div className={styles.field}><span>Saldo disponível</span><strong>Aguardando implantação</strong></div>
-        <p className={styles.help}>A distribuição prevista de créditos ainda não está ativada no código de IA. O saldo, o consumo e os pacotes extras serão exibidos após a implantação do controle de créditos.</p>
+        <div className={styles.field}><span>Franquia mensal · {aiCreditBalance.periodKey}</span>
+          <strong>{credits(aiCreditBalance.monthlyLimit)} créditos</strong></div>
+        <div className={styles.field}><span>Saldo técnico disponível</span><strong>{credits(aiCreditBalance.available)}</strong></div>
+        <div className={styles.field}><span>Utilizados / reservados</span><strong>{credits(aiCreditBalance.used)} / {credits(aiCreditBalance.reserved)}</strong></div>
+        <p className={styles.help}>A contabilidade mensal já está preparada, mas os modelos e botões de IA ainda não estão ativados. Nenhuma cobrança ou compra é realizada aqui; pacotes extras serão definidos depois da homologação.</p>
         <button type="button" className={styles.disabledButton} disabled>Comprar créditos (em breve)</button>
       </article>
       <article className={styles.panel}>

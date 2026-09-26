@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState, type FormEvent } from "react";
 import styles from "./Processes.module.css";
+import { isManualOpposingParty, opposingPartyMatchesRepresentedClient, withManualOpposingParty } from "@/modules/processes/domain/process-opposing-party";
 import { CUSTOM_PROCESS_AREA, PROCESS_AREA_OPTIONS, isSuggestedProcessArea } from "@/modules/processes/domain/process-area";
 
 type ClientOption = {
@@ -136,6 +137,7 @@ export function ProcessForm({
     notes: "",
     parties: [],
   });
+  const [opposingPartyName, setOpposingPartyName] = useState(() => initialValue?.parties.find(isManualOpposingParty)?.name ?? "");
   const [otherSubjectsText, setOtherSubjectsText] = useState(() => initialValue?.otherSubjects.join("\n") ?? "");
   const [customArea, setCustomArea] = useState(() => Boolean(initialValue?.caseType && !isSuggestedProcessArea(initialValue.caseType)));
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -251,6 +253,13 @@ export function ProcessForm({
     event.preventDefault();
     setError("");
     setFieldErrors({});
+    if (opposingPartyName.trim() && opposingPartyMatchesRepresentedClient(opposingPartyName, clients
+      .filter((client) => client.id === value.primaryClientId || value.additionalClientIds.includes(client.id))
+      .flatMap((client) => [client.name, client.tradeName ?? ""]))) {
+      setFieldErrors({ opposingPartyName: "A parte contrária não pode ser o próprio cliente representado." });
+      document.getElementById("process-opposingPartyName")?.focus();
+      return;
+    }
     if (customArea && !value.caseType.trim()) {
       setFieldErrors({ caseType: "Informe a área ou escolha uma das opções." });
       document.getElementById("process-caseTypeCustom")?.focus();
@@ -269,6 +278,7 @@ export function ProcessForm({
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           ...value,
+          parties: withManualOpposingParty(value.parties, opposingPartyName),
           caseValue: parseMoneyInput(value.caseValue),
           ...(initialValue?.id ? { cnjCorrectionReason } : { confirmCnj: cnjReviewed }),
         }),
@@ -437,9 +447,19 @@ export function ProcessForm({
         ))}
       </div>
 
-      <div className={styles.sectionTitle}><strong>Outras partes</strong><span>Cadastre autor, réu, reclamante, reclamado ou qualquer outro papel necessário.</span></div>
+      <div className={styles.sectionTitle}><strong>Parte contrária ao cliente</strong><span>Preencha manualmente quando a consulta não encontrar a outra parte, ou quando precisar corrigir a capa do processo.</span></div>
+      <div className={fieldClass("opposingPartyName")}>
+        <label htmlFor="process-opposingPartyName">Nome da parte contrária</label>
+        <input id="process-opposingPartyName" value={opposingPartyName} maxLength={180}
+          onChange={(event) => { setOpposingPartyName(event.target.value); setFieldErrors((current) => ({ ...current, opposingPartyName: "" })); }}
+          placeholder="Ex.: Banco Exemplo S.A." aria-invalid={Boolean(fieldErrors.opposingPartyName)} />
+        <small className={styles.muted}>Opcional. Aparece em “Cliente X Parte contrária” na lista e na ficha. Não depende do DJeN e não determina quem é autor ou réu.</small>
+        {fieldError("opposingPartyName")}
+      </div>
+
+      <div className={styles.sectionTitle}><strong>Outras partes</strong><span>Se houver mais pessoas ou empresas no processo, informe seus nomes e papéis separadamente.</span></div>
       <div className={styles.parties}>
-        {value.parties.map((party, index) => (
+        {value.parties.map((party, index) => isManualOpposingParty(party) ? null : (
           <div className={styles.partyRow} key={index}>
             <input value={party.name} onChange={(e) => updateParty(index, "name", e.target.value)} placeholder="Nome da parte" aria-label={`Nome da parte ${index + 1}`} />
             <input value={party.role} onChange={(e) => updateParty(index, "role", e.target.value)} placeholder="Papel: Autor, Réu..." aria-label={`Papel da parte ${index + 1}`} />

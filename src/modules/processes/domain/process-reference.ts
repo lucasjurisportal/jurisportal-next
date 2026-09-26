@@ -36,6 +36,9 @@ export function selectOpposingPartyName(input: {
   const represented = new Set(input.representedClients.map((client) => normalized(client.name)).filter(Boolean));
   const candidates = input.otherParties.filter((party) => normalized(party.name) && !represented.has(normalized(party.name)));
   if (!candidates.length) return null;
+  // Escolha revisada pelo advogado prevalece sobre inferência de posição/polo da importação.
+  const manual = candidates.find((party) => normalized(party.role) === "parte contraria");
+  if (manual) return manual.name.trim();
   const primarySide = side(input.representedClients[0]?.partyRole);
   if (primarySide) {
     const matching = candidates.filter((party) => side(party.role) && side(party.role) !== primarySide);

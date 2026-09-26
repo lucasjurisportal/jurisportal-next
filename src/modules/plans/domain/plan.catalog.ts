@@ -128,6 +128,8 @@ export const planCatalog: readonly PlanDefinition[] = [
       "team.activity",
       "audit.full",
       "communications.clientEmail",
+      "ai.publicationSummary",
+      "ai.explicitDateExtraction",
     ],
     publicLaunchFeatures: [
       "2 usuários, 2 OABs e até 250 processos",
@@ -136,9 +138,9 @@ export const planCatalog: readonly PlanDefinition[] = [
       "Relatório de atividade da equipe",
       "Auditoria completa",
       "Atualização manual ao cliente por e-mail",
-      "Sem recursos de IA",
+      "Franquia planejada de 100 créditos de IA (em implantação)",
     ],
-    internalAi: { monthlyUnits: 0 },
+    internalAi: { monthlyUnits: 100 },
   },
   {
     slug: "premium",
@@ -239,7 +241,7 @@ export const planCatalog: readonly PlanDefinition[] = [
       "Recursos avançados de gestão e relatórios",
       "Integrações de maior capacidade quando validadas",
     ],
-    internalAi: { monthlyUnits: 2500 },
+    internalAi: { monthlyUnits: 2000 },
   },
   {
     slug: "alta-corte",
@@ -294,6 +296,6 @@ export const planCatalog: readonly PlanDefinition[] = [
       "Prioridade de suporte e implantação",
       "Preparado para integrações judiciais avançadas",
     ],
-    internalAi: { monthlyUnits: 10000 },
+    internalAi: { monthlyUnits: 5000 },
   },
 ] as const;

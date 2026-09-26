@@ -37,3 +37,11 @@ test("não inventa o polo adversário com múltiplas partes sem papéis claros",
     { name: "Carlos", role: "Réu" },
   ] }), null);
 });
+
+test("prioriza contraparte digitada pelo escritório mesmo com outras partes da fonte", () => {
+  assert.equal(selectOpposingPartyName({ representedClients: [{ name: "Lucinéia Rosa", partyRole: "Ré" }], otherParties: [
+    { name: "Litisconsorte", role: "Autor" },
+    { name: "Banco revisado", role: "Parte contrária" },
+    { name: "Lucineia Rosa", role: "Parte contrária" },
+  ] }), "Banco revisado");
+});

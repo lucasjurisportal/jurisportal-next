@@ -19,7 +19,7 @@
     "test:clients": "tsx --test src/modules/clients/domain/tax-id.test.ts",
     "diagnose:datajud": "tsx scripts/diagnostics/datajud.ts",
     "test:process-lookup": "tsx --test src/modules/integrations/process-metadata/domain/process-metadata.test.ts src/modules/integrations/process-metadata/domain/movement-identity.test.ts src/modules/integrations/process-metadata/infrastructure/datajud-client.test.ts src/modules/security/domain/tenant-process-scope.test.ts",
-    "test:processes": "tsx --test src/modules/processes/domain/process-policy.test.ts src/modules/processes/domain/process-delete-policy.test.ts src/modules/processes/domain/process-reference.test.ts src/modules/processes/domain/process-identity-policy.test.ts src/modules/processes/domain/process-area.test.ts",
+    "test:processes": "tsx --test src/modules/processes/domain/process-opposing-party.test.ts src/modules/processes/domain/process-policy.test.ts src/modules/processes/domain/process-delete-policy.test.ts src/modules/processes/domain/process-reference.test.ts src/modules/processes/domain/process-identity-policy.test.ts src/modules/processes/domain/process-area.test.ts",
     "test:process-workspace": "tsx --test src/modules/processes/domain/process-workspace.schema.test.ts",
     "test:work-management": "tsx --test src/modules/processes/domain/fee-calculation.test.ts src/modules/work-items/domain/work-item-date.test.ts",
     "test:google-calendar": "tsx --test src/modules/integrations/google-calendar/domain/google-event.test.ts",
@@ -40,6 +40,7 @@
     "test:appearance": "tsx --test src/modules/appearance/domain/theme.test.ts",
     "diagnose:publication-email": "tsx scripts/diagnostics/publication-email.ts",
     "test:promotions": "tsx --test src/modules/promotions/domain/promotion.test.ts src/modules/promotions/domain/referrals.test.ts src/modules/promotions/domain/referral-bonus.test.ts",
+    "test:ai-credits": "tsx --test src/modules/ai/domain/ai-credit-policy.test.ts",
     "test:free-djen": "tsx --test src/modules/plans/domain/free-djen-policy.test.ts",
     "promo:issue:migration": "tsx scripts/promotions/issue-migration-code.ts",
     "pilot:manage": "tsx scripts/promotions/manage-pilot.ts"

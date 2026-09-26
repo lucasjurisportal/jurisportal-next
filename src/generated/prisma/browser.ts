@@ -278,3 +278,8 @@ export type OrganizationStorageUsage = Prisma.OrganizationStorageUsageModel
  * PDF privado: o PostgreSQL guarda apenas metadados, nunca o conteúdo do arquivo.
  */
 export type ProcessDocument = Prisma.ProcessDocumentModel
+/**
+ * Model AiCreditUsage
+ * Créditos mensais consumidos por organização. Não realiza chamada de modelo ou venda de pacote.
+ */
+export type AiCreditUsage = Prisma.AiCreditUsageModel
